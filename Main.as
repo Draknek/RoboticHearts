@@ -2,14 +2,20 @@ package
 {
 	import net.flashpunk.*;
 	
-	[SWF(width = "640", height = "480", backgroundColor="#202020")]
+	[SWF(width = "384", height = "384", backgroundColor="#202020")]
 	public class Main extends Engine
 	{
+		public static const PINK:uint = 0xff3366;
+		public static const BLACK:uint = 0x202020;
+		public static const GREY:uint = 0x787878;
+		public static const WHITE:uint = 0xEEEEEE;
+		
 		public function Main () 
 		{
-			super(640, 480, 60, true);
+			super(96, 96, 60, true);
 			FP.world = new Level();
 			FP.screen.color = 0x202020;
+			FP.screen.scale = 4;
 		}
 		
 		public override function init (): void
