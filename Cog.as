@@ -25,6 +25,8 @@ package
 			graphic = image;
 			
 			setHitbox(16, 16, 8, 8);
+			
+			type = "cog";
 		}
 		
 		public override function added (): void
@@ -34,6 +36,8 @@ package
 		
 		public override function update (): void
 		{
+			if (!world) return;
+			
 			var over:Boolean = collidePoint(x, y, world.mouseX, world.mouseY);
 			image.color = (over) ? Main.PINK : Main.WHITE;
 			
@@ -43,6 +47,8 @@ package
 				}
 				
 				rotating = this;
+				
+				Level(world).clicks++;
 				
 				var a:Array = [];
 				var img:Image;
@@ -55,6 +61,7 @@ package
 					img.originY = y - h.y + 4;
 					img.x = 0;
 					img.y = 0;
+					img.color = Main.WHITE;
 					
 					h.x = x;
 					h.y = y;
@@ -73,6 +80,8 @@ package
 						img.angle = 0;
 						
 						h.rot = (h.rot + 1) % 4;
+						
+						img.color = (h.rot == 0) ? Main.PINK : Main.WHITE;
 						
 						h.x = x + (img.originY - 4);
 						h.y = y - (img.originX - 4);

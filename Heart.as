@@ -15,16 +15,18 @@ package
 		
 		public var rot:int;
 		
-		public function Heart (_x:int = 0, _y:int = 0)
+		public function Heart (_x:int = 0, _y:int = 0, _rot:int = -1)
 		{
 			x = _x*8 + 4;
 			y = _y*8 + 4;
 			
 			sprite = new Spritemap(HEART, 8, 8);
 			image = sprite;
-			rot = FP.rand(4);
+			if (_rot < 0) _rot = FP.rand(4);
+			rot = _rot;
 			sprite.frame = rot;
 			image.centerOO();
+			image.color = (rot == 0) ? Main.PINK : Main.WHITE;
 			
 			graphic = image;
 			
@@ -36,7 +38,6 @@ package
 		public override function update (): void
 		{
 			sprite.frame = rot;
-			image.color = (rot == 0) ? Main.PINK : Main.WHITE;
 		}
 		
 		public override function render (): void
