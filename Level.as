@@ -115,6 +115,9 @@ package
 			if (id == 0) {
 				addGraphic(new Text("Click cogs\nto mend hearts", 0, 8, {align:"center", size:8, width: 96}));
 			}
+			else if (id == 1) {
+				addGraphic(new Text("R to reset", 0, 76, {align:"center", size:8, width: 96}));
+			}
 			
 			var _data:ByteArray = new (levels[id]);
 			
