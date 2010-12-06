@@ -23,6 +23,8 @@ package
 			sitelock("draknek.org");
 			
 			super.init();
+			
+			Logger.connect(this);
 		}
 		
 		public function sitelock (allowed:*):Boolean

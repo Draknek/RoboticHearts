@@ -112,6 +112,8 @@ package
 		{
 			id = _id;
 			
+			Logger.startLevel(id);
+			
 			if (id == 0) {
 				addGraphic(new Text("Click cogs\nto mend hearts", 0, 8, {align:"center", size:8, width: 96}));
 			}
@@ -210,6 +212,8 @@ package
 			
 			if (incorrectCount == 0) {
 				gameOver = true;
+				
+				Logger.endLevel(id);
 				
 				var t:Text = new Text("Level complete!", 0, 16, {align:"center", size:8, width: 95});
 				var t2:Text = new Text("Clicks: " + clicks, 0, 40, {align:"center", size:8, width: 95});

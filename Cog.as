@@ -50,6 +50,8 @@ package
 				
 				Level(world).clicks++;
 				
+				Logger.click();
+				
 				var a:Array = [];
 				var img:Image;
 				
