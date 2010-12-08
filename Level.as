@@ -41,10 +41,10 @@ package
 		[Embed(source="levels/level5.lvl", mimeType="application/octet-stream")]
 		public static const LEVEL5:Class;
 		
-		[Embed(source="levels/level6.lvl", mimeType="application/octet-stream")]
+		[Embed(source="levels/level7.lvl", mimeType="application/octet-stream")]
 		public static const LEVEL6:Class;
 		
-		[Embed(source="levels/level7.lvl", mimeType="application/octet-stream")]
+		[Embed(source="levels/level6.lvl", mimeType="application/octet-stream")]
 		public static const LEVEL7:Class;
 		
 		public static var levels:Array = [LEVEL, LEVEL2, LEVEL3, LEVEL4, LEVEL5, LEVEL6, LEVEL7];
@@ -221,7 +221,7 @@ package
 				
 				
 				
-				FP.tween(this, {}, 60, {complete: function ():void {
+				FP.tween(this, {}, 30, {complete: function ():void {
 					addGraphic(t);
 					addGraphic(t2);
 					addGraphic(t3);
@@ -234,11 +234,16 @@ package
 				}});
 				
 				for each (h in a) {
-					FP.tween(h.image, {scale: 40}, 60);
+					FP.tween(h, {x: 32, y:48}, 60, {tweener:this});
+					FP.tween(h.image, {scale: 32, originX: 4.5}, 60);
 				}
 			}
 			
 			if (Input.pressed(Key.R)) FP.world = new Level(id);
+			
+			for (var i:int = 0; i < levels.length; i++) {
+				if (Input.pressed(Key.DIGIT_1 + i)) FP.world = new Level(i);
+			}
 			
 			var e:Entity = collidePoint("cog", mouseX, mouseY);
 			
