@@ -1,4 +1,4 @@
-OUTPUT := cogs.swf
+OUTPUT := hearts.swf
 
 ifdef DEBUG
 DEBUG_FLAG := true
