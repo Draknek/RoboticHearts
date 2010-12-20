@@ -28,6 +28,12 @@ package
 		public var time:int = 0;
 		public var clicks:int = 0;
 		
+		public var undoStack:Array = [];
+		public var redoStack:Array = [];
+		
+		public var undoButton:Button;
+		public var redoButton:Button;
+		
 		[Embed(source="levels/simple.lvl", mimeType="application/octet-stream")]
 		public static const LEVEL:Class;
 		
@@ -117,8 +123,8 @@ package
 			Logger.startLevel(id);
 			
 			add(new Button(0, 0, Button.RESET, reset));
-			//add(new Button(8, 0, Button.UNDO, null));
-			//add(new Button(16, 0, Button.REDO, null));
+			add(undoButton = new Button(8, 0, Button.UNDO, undo, true));
+			add(redoButton = new Button(16, 0, Button.REDO, redo, true));
 			
 			if (id == 0) {
 				addGraphic(new Text("Click cogs\nto mend hearts", 0, 8, {align:"center", size:8, width: 96}));
@@ -184,6 +190,56 @@ package
 		public function reset ():void
 		{
 			FP.world = new Level(id);
+		}
+		
+		public function forgetPast (): void
+		{
+			undoStack.length = 0;
+			undoButton.disabled = true;
+		}
+		
+		public function forgetFuture (): void
+		{
+			redoStack.length = 0;
+			redoButton.disabled = true;
+		}
+		
+		public override function undo (): void
+		{
+			if (undoStack.length == 0) { return; }
+			
+			var cog:Cog = undoStack.pop();
+			
+			var success:Boolean = cog.undo();
+			
+			if (!success) {
+				undoStack.push(cog);
+				return;
+			}
+			
+			redoStack.push(cog);
+			
+			undoButton.disabled = (undoStack.length == 0);
+			redoButton.disabled = (redoStack.length == 0);
+		}
+		
+		public override function redo (): void
+		{
+			if (redoStack.length == 0) { return; }
+			
+			var cog:Cog = redoStack.pop();
+			
+			var success:Boolean = cog.redo();
+			
+			if (!success) {
+				redoStack.push(cog);
+				return;
+			}
+			
+			undoStack.push(cog);
+			
+			undoButton.disabled = (undoStack.length == 0);
+			redoButton.disabled = (redoStack.length == 0);
 		}
 		
 		public override function update (): void

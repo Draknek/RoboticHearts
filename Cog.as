@@ -49,53 +49,76 @@ package
 					return;
 				}
 				
-				rotating = this;
+				Level(world).undoStack.push(this);
+				Level(world).undoButton.disabled = false;
+				Level(world).forgetFuture();
 				
 				Level(world).clicks++;
 				
 				Logger.click();
 				
-				var a:Array = [];
-				var img:Image;
-				
-				world.collideRectInto("heart", x - 16, y - 16, 32, 32, a);
-				
-				for each (var h:Heart in a) {
-					img = h.image;
-					img.originX = x - h.x + 4;
-					img.originY = y - h.y + 4;
-					img.x = 0;
-					img.y = 0;
-					img.color = Main.WHITE;
-					
-					h.x = x;
-					h.y = y;
-					
-					FP.tween(img, {angle: img.angle-90}, 20, {tweener:this});
-				}
-				
-				function stoppedRotating ():void
-				{
-					clearTweens();
-					
-					rotating = null;
-					
-					for each (h in a) {
-						img = h.image;
-						img.angle = 0;
-						
-						h.rot = (h.rot + 1) % 4;
-						
-						img.color = (h.rot == 0) ? Main.PINK : Main.WHITE;
-						
-						h.x = x + (img.originY - 4);
-						h.y = y - (img.originX - 4);
-						img.centerOO();
-					}
-				}
-				
-				FP.tween(image, {angle: image.angle-90}, 20, {complete:stoppedRotating});
+				go();
 			}
+		}
+		
+		public function go (dir:int = 1, speed:Number = 1, callback:Function = null):Boolean
+		{
+			if (rotating) return false;
+			
+			rotating = this;
+			
+			var a:Array = [];
+			var img:Image;
+			
+			world.collideRectInto("heart", x - 16, y - 16, 32, 32, a);
+			
+			for each (var h:Heart in a) {
+				img = h.image;
+				img.originX = x - h.x + 4;
+				img.originY = y - h.y + 4;
+				img.x = 0;
+				img.y = 0;
+				img.color = Main.WHITE;
+				
+				h.x = x;
+				h.y = y;
+				
+				FP.tween(img, {angle: img.angle-90*dir}, 20/speed, {tweener:this});
+			}
+			
+			function stoppedRotating ():void
+			{
+				clearTweens();
+				
+				rotating = null;
+				
+				for each (h in a) {
+					img = h.image;
+					img.angle = 0;
+					
+					h.rot = (h.rot + dir + 4) % 4;
+					
+					img.color = (h.rot == 0) ? Main.PINK : Main.WHITE;
+					
+					h.x = x + dir*(img.originY - 4);
+					h.y = y - dir*(img.originX - 4);
+					img.centerOO();
+				}
+			}
+			
+			FP.tween(image, {angle: image.angle-90*dir}, 20/speed, {complete:stoppedRotating});
+			
+			return true;
+		}
+		
+		public function undo ():Boolean
+		{
+			return go(-1, 2);
+		}
+		
+		public function redo ():Boolean
+		{
+			return go(1, 2);
 		}
 	}
 }

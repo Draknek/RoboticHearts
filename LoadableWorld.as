@@ -20,6 +20,9 @@ package
 		
 		public function setWorldData (data: ByteArray): void {}
 		
+		public function undo (): void {}
+		public function redo (): void {}
+		
 		// Must be called even if overridden
 		
 		public override function begin (): void
@@ -45,6 +48,18 @@ package
 				else if (e.keyCode == Key.O)
 				{
 					load();
+				}
+				else if (e.keyCode == Key.Z)
+				{
+					if (e.ctrlKey && e.shiftKey) {
+						redo();
+					} else {
+						undo();
+					}
+				}
+				else if (e.keyCode == Key.Y)
+				{
+					redo();
 				}
 			}
 		}
