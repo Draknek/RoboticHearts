@@ -83,7 +83,7 @@ package
 				h.x = x;
 				h.y = y;
 				
-				FP.tween(img, {angle: img.angle-90*dir}, 20/speed, {tweener:this});
+				FP.tween(img, {angle: img.angle-90*dir}, 16/speed, {tweener:this});
 			}
 			
 			function stoppedRotating ():void
@@ -106,7 +106,7 @@ package
 				}
 			}
 			
-			FP.tween(image, {angle: image.angle-90*dir}, 20/speed, {complete:stoppedRotating});
+			FP.tween(image, {angle: image.angle-90*dir}, 16/speed, {complete:stoppedRotating});
 			
 			return true;
 		}
