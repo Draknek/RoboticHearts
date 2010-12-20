@@ -113,7 +113,8 @@ package
 		
 		public function undo ():Boolean
 		{
-			return go(-1, 2);
+			var speed:Number = Level(world).reseting ? 4 : 2;
+			return go(-1, speed);
 		}
 		
 		public function redo ():Boolean

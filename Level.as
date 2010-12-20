@@ -34,6 +34,8 @@ package
 		public var undoButton:Button;
 		public var redoButton:Button;
 		
+		public var reseting:Boolean = false;
+		
 		[Embed(source="levels/simple.lvl", mimeType="application/octet-stream")]
 		public static const LEVEL:Class;
 		
@@ -189,7 +191,7 @@ package
 		
 		public function reset ():void
 		{
-			FP.world = new Level(id);
+			reseting = true;
 		}
 		
 		public function forgetPast (): void
@@ -265,6 +267,30 @@ package
 				return;
 			}
 			
+			var a:Array;
+			
+			if (reseting) {
+				if (undoStack.length) {
+					undo();
+				} else if (! Cog.rotating) {
+					reseting = false;
+					
+					a = [];
+					getType("cog", a);
+				
+					Cog.rotating = a[0];
+				
+					var f:Function = function ():void {
+						Cog.rotating = null;
+					}
+				
+					for each (var cog:Cog in a) {
+						FP.tween(cog.image, {angle: cog.image.angle+180}, 12, {complete: f});
+						f = null;
+					}
+				}
+			}
+			
 			var i:int;
 			for (i = 0; i < 4; i++) {
 				var step:int = 50;
@@ -280,7 +306,7 @@ package
 				beating[i] = (modTime >= step*i && modTime < step*i+beatTime);
 			}
 			
-			var a:Array = [];
+			a = [];
 			
 			getType("heart", a);
 			
