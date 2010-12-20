@@ -1,0 +1,69 @@
+package
+{
+	import net.flashpunk.*;
+	import net.flashpunk.graphics.*;
+	import net.flashpunk.masks.*;
+	import net.flashpunk.utils.*;
+	
+	public class Button extends Entity
+	{
+		[Embed(source="r.png")]
+		public static const RESET: Class;
+		[Embed(source="undo.png")]
+		public static const UNDO: Class;
+		[Embed(source="redo.png")]
+		public static const REDO: Class;
+		
+		public var image:Image;
+		
+		private var _disabled:Boolean = false;
+		
+		public var callback:Function;
+		
+		public function Button (_x:int, _y:int, _gfx:Class, _callback:Function, __disabled:Boolean = false)
+		{
+			x = _x;
+			y = _y;
+			
+			image = new Image(_gfx);
+			
+			graphic = image;
+			
+			setHitbox(image.width, image.height);
+			
+			type = "button";
+			
+			callback = _callback;
+			
+			disabled = __disabled;
+		}
+		
+		public override function update (): void
+		{
+			if (!world) return;
+			
+			if (disabled) {
+				image.color = Main.GREY;
+				return;
+			}
+			
+			var over:Boolean = collidePoint(x, y, world.mouseX, world.mouseY);
+			image.color = (over) ? Main.PINK : Main.WHITE;
+			
+			if (over && Input.mousePressed && callback != null) {
+				callback();
+			}
+		}
+		
+		public function get disabled ():Boolean {
+			return _disabled;
+		}
+		
+		public function set disabled (b:Boolean):void {
+			_disabled = b;
+			
+			type = b ? null : "button";
+		}
+	}
+}
+

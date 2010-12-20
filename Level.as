@@ -116,6 +116,10 @@ package
 			
 			Logger.startLevel(id);
 			
+			add(new Button(0, 0, Button.RESET, reset));
+			//add(new Button(8, 0, Button.UNDO, null));
+			//add(new Button(16, 0, Button.REDO, null));
+			
 			if (id == 0) {
 				addGraphic(new Text("Click cogs\nto mend hearts", 0, 8, {align:"center", size:8, width: 96}));
 			}
@@ -175,6 +179,11 @@ package
 		
 		public function get (i:int, j:int):Entity {
 			return lookup[index(i, j)];
+		}
+		
+		public function reset ():void
+		{
+			FP.world = new Level(id);
 		}
 		
 		public override function update (): void
@@ -256,15 +265,13 @@ package
 				}
 			}
 			
-			if (Input.pressed(Key.R)) FP.world = new Level(id);
+			if (Input.pressed(Key.R)) reset();
 			
 			for (i = 0; i < levels.length; i++) {
 				if (Input.pressed(Key.DIGIT_1 + i)) FP.world = new Level(i);
 			}
 			
-			var e:Entity = collidePoint("cog", mouseX, mouseY);
-			
-			if (e) {
+			if (collidePoint("cog", mouseX, mouseY) || collidePoint("button", mouseX, mouseY)) {
 				Mouse.cursor = "button";
 			} else {
 				Mouse.cursor = "auto";
