@@ -11,6 +11,7 @@ package
 		public static const COG: Class;
 		
 		public var image:Image;
+		public var sprite:Spritemap;
 		
 		public static var rotating:Cog = null;
 		
@@ -19,7 +20,8 @@ package
 			x = _x*8 + 8;
 			y = _y*8 + 8;
 			
-			image = new Image(COG);
+			sprite = new Spritemap(COG, 32, 32);
+			image = sprite;//new Image(COG);
 			image.centerOO();
 			
 			graphic = image;
@@ -40,6 +42,7 @@ package
 			
 			var over:Boolean = collidePoint(x, y, world.mouseX, world.mouseY);
 			image.color = (over) ? Main.PINK : Main.WHITE;
+			sprite.frame = (over) ? 1 : 0;
 			
 			if (over && Input.mousePressed) {
 				if (rotating) {
