@@ -23,6 +23,8 @@ package
 		
 		public var id:int;
 		
+		public var beating:Array = [0,0,0,0];
+		
 		public var time:int = 0;
 		public var clicks:int = 0;
 		
@@ -198,6 +200,21 @@ package
 				return;
 			}
 			
+			var i:int;
+			for (i = 0; i < 4; i++) {
+				var step:int = 50;
+				var beatTime:int = 10;
+				var modTime:int = time % (step * 3);
+				
+				if (i == 0) {
+					modTime = (time - step*0.5) % step;
+				} else {
+					modTime += step;
+				}
+				
+				beating[i] = (modTime >= step*i && modTime < step*i+beatTime);
+			}
+			
 			var a:Array = [];
 			
 			getType("heart", a);
@@ -241,7 +258,7 @@ package
 			
 			if (Input.pressed(Key.R)) FP.world = new Level(id);
 			
-			for (var i:int = 0; i < levels.length; i++) {
+			for (i = 0; i < levels.length; i++) {
 				if (Input.pressed(Key.DIGIT_1 + i)) FP.world = new Level(i);
 			}
 			
