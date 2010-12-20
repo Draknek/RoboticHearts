@@ -38,7 +38,8 @@ package
 		public override function update (): void
 		{
 			var level:Level = Level(world);
-			sprite.frame = rot + level.beating[rot]*4;
+			var beating:int = level ? level.beating[rot] : 0;
+			sprite.frame = rot + beating*4;
 		}
 		
 		public override function render (): void
