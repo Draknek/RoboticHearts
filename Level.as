@@ -341,6 +341,7 @@ package
 			var incorrectCount:int = 0;
 			
 			for each (var h:Heart in a) {
+				h.highlight = false;
 				if (h.rot != 0) {
 					incorrectCount += 1;
 				}

@@ -14,6 +14,7 @@ package
 		public var image:Image;
 		
 		public var rot:int;
+		public var highlight:Boolean = false;
 		
 		public function Heart (_x:int = 0, _y:int = 0, _rot:int = -1)
 		{
@@ -44,7 +45,16 @@ package
 		
 		public override function render (): void
 		{
+			if (highlight) {
+				var c:uint = image.color;
+				image.color = 0xA0A0A0 & image.color;
+			}
+			
 			super.render();
+			
+			if (highlight) {
+				image.color = c;
+			}
 		}
 	}
 }

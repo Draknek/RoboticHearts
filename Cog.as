@@ -42,7 +42,17 @@ package
 			
 			var over:Boolean = collidePoint(x, y, world.mouseX, world.mouseY);
 			image.color = (over) ? Main.PINK : Main.WHITE;
-			sprite.frame = (over) ? 1 : 0;
+			//sprite.frame = (over) ? 1 : 0;
+			
+			if (over) {
+				var a:Array = [];
+			
+				world.collideRectInto("heart", x - 16, y - 16, 32, 32, a);
+				
+				for each (var h:Heart in a) {
+					h.highlight = true;
+				}
+			}
 			
 			if (over && Input.mousePressed) {
 				Level(world).actions.push(this);
