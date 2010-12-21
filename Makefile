@@ -7,8 +7,10 @@ DEBUG_FLAG := false
 endif
 
 all:
+	cd levels && python build.py
 	fcsh-wrap -optimize=true -output $(OUTPUT) -static-link-runtime-shared-libraries=true -compatibility-version=3.0.0 --target-player=10.0.0 -compiler.debug=$(DEBUG_FLAG) Main.as
 		# -frames.frame mainframe MainMenu
+
 
 clean:
 	rm -f *~ $(OUTPUT) .FW.*

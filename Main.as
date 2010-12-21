@@ -10,8 +10,10 @@ package
 		public static const GREY:uint = 0x787878;
 		public static const WHITE:uint = 0xEEEEEE;
 		
-		public function Main () 
+		public function Main ()
 		{
+			Level.loadLevels();
+			
 			super(96, 96, 60, true);
 			FP.world = new Level();
 			FP.screen.color = 0x202020;

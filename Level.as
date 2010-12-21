@@ -38,28 +38,31 @@ package
 		
 		public var reseting:Boolean = false;
 		
-		[Embed(source="levels/simple.lvl", mimeType="application/octet-stream")]
-		public static const LEVEL:Class;
+		[Embed(source="levels/all.lvl", mimeType="application/octet-stream")]
+		public static const LEVELS:Class;
 		
-		[Embed(source="levels/simple2.lvl", mimeType="application/octet-stream")]
-		public static const LEVEL2:Class;
+		public static var levels:Array;
 		
-		[Embed(source="levels/simple3.lvl", mimeType="application/octet-stream")]
-		public static const LEVEL3:Class;
-		
-		[Embed(source="levels/level4.lvl", mimeType="application/octet-stream")]
-		public static const LEVEL4:Class;
-		
-		[Embed(source="levels/level5.lvl", mimeType="application/octet-stream")]
-		public static const LEVEL5:Class;
-		
-		[Embed(source="levels/level7.lvl", mimeType="application/octet-stream")]
-		public static const LEVEL6:Class;
-		
-		[Embed(source="levels/level6.lvl", mimeType="application/octet-stream")]
-		public static const LEVEL7:Class;
-		
-		public static var levels:Array = [LEVEL, LEVEL2, LEVEL3, LEVEL4, LEVEL5, LEVEL6, LEVEL7];
+		public static function loadLevels():void
+		{
+			levels = [];
+			
+			var data:ByteArray = new LEVELS;
+			
+			data.position = 0;
+			
+			var levelCount:int = data.readInt();
+			
+			for (var i:int = 0; i < levelCount; i++) {
+				var levelSize:int = data.readInt();
+				
+				var levelData:ByteArray = new ByteArray;
+			
+				data.readBytes(levelData, 0, levelSize);
+				
+				levels.push(levelData);
+			}
+		}
 		
 		public override function getWorldData (): *
 		{
@@ -141,7 +144,7 @@ package
 				addGraphic(new Text("R to reset", 0, 76, {align:"center", size:8, width: 96}));
 			}
 			
-			var _data:ByteArray = new (levels[id]);
+			var _data:ByteArray = levels[id];
 			
 			if (_data) {
 				setWorldData(_data);
@@ -377,6 +380,8 @@ package
 			}
 			
 			if (Input.pressed(Key.R)) reset();
+			
+			if (Input.pressed(Key.N)) FP.world = new Level(id+1);
 			
 			for (i = 0; i < levels.length; i++) {
 				if (Input.pressed(Key.DIGIT_1 + i)) FP.world = new Level(i);
