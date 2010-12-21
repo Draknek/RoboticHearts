@@ -31,6 +31,8 @@ package
 		public var undoStack:Array = [];
 		public var redoStack:Array = [];
 		
+		public var actions:Array = [];
+		
 		public var undoButton:Button;
 		public var redoButton:Button;
 		
@@ -90,6 +92,10 @@ package
 		}
 		
 		public override function setWorldData (b: ByteArray): void {
+			forgetPast();
+			forgetFuture();
+			actions.length = 0;
+			
 			b.position = 0;
 			
 			data = b;
@@ -208,6 +214,11 @@ package
 		
 		public override function undo (): void
 		{
+			actions.push(actuallyUndo);
+		}
+		
+		public function actuallyUndo (): void
+		{
 			if (undoStack.length == 0) { return; }
 			
 			var cog:Cog = undoStack.pop();
@@ -226,6 +237,11 @@ package
 		}
 		
 		public override function redo (): void
+		{
+			actions.push(actuallyRedo);
+		}
+		
+		public function actuallyRedo (): void
 		{
 			if (redoStack.length == 0) { return; }
 			
@@ -271,7 +287,7 @@ package
 			
 			if (reseting) {
 				if (undoStack.length) {
-					undo();
+					actuallyUndo();
 				} else if (! Cog.rotating) {
 					reseting = false;
 					
@@ -288,6 +304,18 @@ package
 						FP.tween(cog.image, {angle: cog.image.angle+180}, 12, {complete: f});
 						f = null;
 					}
+				}
+			} else if (actions.length && ! Cog.rotating) {
+				var e:* = actions.shift();
+				
+				if (e is Cog) {
+					undoStack.push(e);
+					undoButton.disabled = false;
+					forgetFuture();
+					
+					Cog(e).go();
+				} else if (e is Function) {
+					e();
 				}
 			}
 			
@@ -334,7 +362,7 @@ package
 					addGraphic(t2);
 					addGraphic(t3);
 					
-					if (id+1 == levels.length) {
+					if (id+1 >= levels.length) {
 						t3.text = "Game over\nYou win!"
 					} else {
 						clickThrough = true;

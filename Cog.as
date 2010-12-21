@@ -45,19 +45,11 @@ package
 			sprite.frame = (over) ? 1 : 0;
 			
 			if (over && Input.mousePressed) {
-				if (rotating) {
-					return;
-				}
-				
-				Level(world).undoStack.push(this);
-				Level(world).undoButton.disabled = false;
-				Level(world).forgetFuture();
+				Level(world).actions.push(this);
 				
 				Level(world).clicks++;
 				
 				Logger.click();
-				
-				go();
 			}
 		}
 		
