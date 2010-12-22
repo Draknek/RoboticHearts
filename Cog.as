@@ -40,6 +40,12 @@ package
 		{
 			if (!world) return;
 			
+			if (Level(world).gameOver) {
+				image.color = Main.WHITE;
+				image.angle -= 45 / 4.0;
+				return;	
+			}
+			
 			var over:Boolean = collidePoint(x, y, world.mouseX, world.mouseY);
 			image.color = (over) ? Main.PINK : Main.WHITE;
 			//sprite.frame = (over) ? 1 : 0;

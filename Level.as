@@ -141,6 +141,9 @@ package
 				addGraphic(new Text("Click cogs\nto mend hearts", 0, 8, {align:"center", size:8, width: 96}));
 			}
 			else if (id == 1) {
+				addGraphic(new Text("Make all upright", 0, 76, {align:"center", size:8, width: 96}));
+			}
+			else if (id == 2) {
 				addGraphic(new Text("R to reset", 0, 76, {align:"center", size:8, width: 96}));
 			}
 			
@@ -277,18 +280,14 @@ package
 			}
 			
 			if (gameOver) {
-				Mouse.cursor = "auto";
-				
 				if (clickThrough && Input.mousePressed) {
 					FP.world = new Level(id+1);
 				}
-				
-				return;
 			}
 			
 			var a:Array;
 			
-			if (reseting) {
+			if (!gameOver && reseting) {
 				if (undoStack.length) {
 					actuallyUndo();
 				} else if (! Cog.rotating) {
@@ -324,8 +323,8 @@ package
 			
 			var i:int;
 			for (i = 0; i < 4; i++) {
-				var step:int = 50;
-				var beatTime:int = 10;
+				var step:int = gameOver ? 25 : 50;
+				var beatTime:int = gameOver ? 10 : 10;
 				var modTime:int = time % (step * 3);
 				
 				if (i == 0) {
@@ -350,8 +349,10 @@ package
 				}
 			}
 			
-			if (incorrectCount == 0) {
+			if (!gameOver && incorrectCount == 0) {
 				gameOver = true;
+				
+				time = -1;
 				
 				Logger.endLevel(id);
 				
@@ -359,27 +360,33 @@ package
 				var t2:Text = new Text("Clicks: " + clicks, 0, 40, {align:"center", size:8, width: 95});
 				var t3:Text = new Text("Click for next level", 0, 64, {align:"center", size:8, width: 95});
 				
+				var world:World = this;
 				
-				
-				FP.tween(this, {}, 30, {complete: function ():void {
-					addGraphic(t);
-					addGraphic(t2);
-					addGraphic(t3);
+				FP.tween(this, {}, 50, {complete: function ():void {
+					FP.tween(this, {}, 30, {complete: function ():void {
+						addGraphic(t);
+						addGraphic(t2);
+						addGraphic(t3);
 					
-					if (id+1 >= levels.length) {
-						t3.text = "Game over\nYou win!"
-					} else {
-						clickThrough = true;
+						if (id+1 >= levels.length) {
+							t3.text = "Game over\nYou win!"
+						} else {
+							clickThrough = true;
+						}
+					}});
+					
+					for each (h in a) {
+						h.active = false;
+						FP.tween(h, {x: 32, y:48}, 60, {tweener:world, ease: Ease.sineIn});
+						FP.tween(h.image, {scale: 32, originX: 4.5}, 60, {ease: Ease.sineIn});
 					}
 				}});
-				
-				for each (h in a) {
-					FP.tween(h, {x: 32, y:48}, 60, {tweener:this});
-					FP.tween(h.image, {scale: 32, originX: 4.5}, 60);
-				}
 			}
 			
-			if (Input.pressed(Key.R)) reset();
+			if (Input.pressed(Key.R)) {
+				if (gameOver) FP.world = new Level(id);
+				else reset();
+			}
 			
 			if (Input.pressed(Key.N)) FP.world = new Level(id+1);
 			
@@ -387,7 +394,7 @@ package
 				if (Input.pressed(Key.DIGIT_1 + i)) FP.world = new Level(i);
 			}
 			
-			if (collidePoint("cog", mouseX, mouseY) || collidePoint("button", mouseX, mouseY)) {
+			if (!gameOver && collidePoint("cog", mouseX, mouseY) || collidePoint("button", mouseX, mouseY)) {
 				Mouse.cursor = "button";
 			} else {
 				Mouse.cursor = "auto";
