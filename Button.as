@@ -20,6 +20,10 @@ package
 		
 		public var callback:Function;
 		
+		public var normalColor:uint = Main.WHITE;
+		public var hoverColor:uint = Main.PINK;
+		public var disabledColor:uint = Main.GREY;
+		
 		public function Button (_x:int, _y:int, _gfx:*, _callback:Function, __disabled:Boolean = false)
 		{
 			x = _x;
@@ -47,12 +51,12 @@ package
 			if (!world) return;
 			
 			if (disabled) {
-				image.color = Main.GREY;
+				image.color = disabledColor;
 				return;
 			}
 			
 			var over:Boolean = collidePoint(x, y, world.mouseX, world.mouseY);
-			image.color = (over) ? Main.PINK : Main.WHITE;
+			image.color = (over) ? hoverColor : normalColor;
 			
 			if (over && Input.mousePressed && callback != null) {
 				callback();
