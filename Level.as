@@ -195,10 +195,6 @@ package
 			data = getWorldData();
 		}
 		
-		/*public override function updateTweens ():void {
-			if (Input.pressed(Key.SPACE)) super.updateTweens();
-		}*/
-		
 		public static function index (i:int, j:int):int {
 			return j*W + i;
 		}
