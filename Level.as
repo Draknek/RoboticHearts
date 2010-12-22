@@ -8,6 +8,8 @@ package
 	import flash.utils.*;
 	import flash.ui.Mouse;
 	
+	import com.adobe.crypto.*;
+	
 	public class Level extends LoadableWorld
 	{
 		public var lookup:Vector.<Entity> = new Vector.<Entity>(W*H);
@@ -350,6 +352,14 @@ package
 			}
 			
 			if (!gameOver && incorrectCount == 0) {
+				var md5:String = MD5.hashBytes(data);
+				
+				if (! Main.so.data.levels[md5]) Main.so.data.levels[md5] = {};
+				
+				Main.so.data.levels[md5].completed = true;
+				
+				Main.so.flush();
+				
 				gameOver = true;
 				
 				time = -1;

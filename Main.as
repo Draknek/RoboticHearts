@@ -3,6 +3,8 @@ package
 	import net.flashpunk.*;
 	import net.flashpunk.graphics.*;
 	
+	import flash.net.*;
+	
 	[SWF(width = "384", height = "384", backgroundColor="#202020")]
 	public class Main extends Engine
 	{
@@ -11,8 +13,12 @@ package
 		public static const GREY:uint = 0x787878;
 		public static const WHITE:uint = 0xEEEEEE;
 		
+		public static const so:SharedObject = SharedObject.getLocal("hearts", "/");
+		
 		public function Main ()
 		{
+			if (! so.data.levels) so.data.levels = {};
+			
 			Text.size = 8;
 			
 			Level.loadLevels();
