@@ -20,12 +20,16 @@ package
 		
 		public var callback:Function;
 		
-		public function Button (_x:int, _y:int, _gfx:Class, _callback:Function, __disabled:Boolean = false)
+		public function Button (_x:int, _y:int, _gfx:*, _callback:Function, __disabled:Boolean = false)
 		{
 			x = _x;
 			y = _y;
 			
-			image = new Image(_gfx);
+			if (_gfx is Image) {
+				image = _gfx as Image;
+			} else {
+				image = new Image(_gfx);
+			}
 			
 			graphic = image;
 			

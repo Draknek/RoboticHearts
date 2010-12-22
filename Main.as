@@ -1,6 +1,7 @@
 package
 {
 	import net.flashpunk.*;
+	import net.flashpunk.graphics.*;
 	
 	[SWF(width = "384", height = "384", backgroundColor="#202020")]
 	public class Main extends Engine
@@ -12,10 +13,12 @@ package
 		
 		public function Main ()
 		{
+			Text.size = 8;
+			
 			Level.loadLevels();
 			
 			super(96, 96, 60, true);
-			FP.world = new Level();
+			FP.world = new Menu();
 			FP.screen.color = 0x202020;
 			FP.screen.scale = 4;
 		}

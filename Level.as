@@ -383,6 +383,10 @@ package
 				}});
 			}
 			
+			if (Input.pressed(Key.ESCAPE)) {
+				FP.world = new Menu;
+			}
+			
 			if (Input.pressed(Key.R)) {
 				if (gameOver) FP.world = new Level(id);
 				else reset();
