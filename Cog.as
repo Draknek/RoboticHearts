@@ -69,7 +69,7 @@ package
 			}
 		}
 		
-		public function go (dir:int = 1, speed:Number = 1, callback:Function = null):Boolean
+		public function go (change:int = 1, speed:Number = 1, callback:Function = null):Boolean
 		{
 			if (rotating) return false;
 			
@@ -91,7 +91,7 @@ package
 				h.x = x;
 				h.y = y;
 				
-				FP.tween(img, {angle: img.angle-90*dir}, 16/speed, {tweener:this});
+				FP.tween(img, {angle: img.angle-90*change}, 16/speed, {tweener:this});
 			}
 			
 			function stoppedRotating ():void
@@ -104,17 +104,23 @@ package
 					img = h.image;
 					img.angle = 0;
 					
-					h.rot = (h.rot + dir + 4) % 4;
+					h.rot = (h.rot + change + 4) % 4;
 					
 					img.color = (h.rot == 0) ? Main.PINK : Main.WHITE;
 					
-					h.x = x + dir*(img.originY - 4);
-					h.y = y - dir*(img.originX - 4);
+					if (change == 2 || change == -2) {
+						h.x = x + (img.originX - 4);
+						h.y = y + (img.originY - 4);
+					} else {
+						h.x = x + change*(img.originY - 4);
+						h.y = y - change*(img.originX - 4);
+					}
+					
 					img.centerOO();
 				}
 			}
 			
-			FP.tween(image, {angle: image.angle-90*dir}, 16/speed, {complete:stoppedRotating});
+			FP.tween(image, {angle: image.angle-90*change}, 16/speed, {complete:stoppedRotating});
 			
 			return true;
 		}
