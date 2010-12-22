@@ -139,6 +139,10 @@ package
 			add(undoButton = new Button(8, 0, Button.UNDO, undo, true));
 			add(redoButton = new Button(16, 0, Button.REDO, redo, true));
 			
+			var levelIDDisplay:Text = new Text((id+1)+"", 0, -1);
+			levelIDDisplay.x = 96 + 1 - levelIDDisplay.width;
+			addGraphic(levelIDDisplay);
+			
 			if (id == 0) {
 				addGraphic(new Text("Click cogs\nto mend hearts", 0, 8, {align:"center", size:8, width: 96}));
 			}
