@@ -70,6 +70,8 @@ package
 		public function set disabled (b:Boolean):void {
 			_disabled = b;
 			
+			if (_disabled) image.color = disabledColor;
+			
 			type = b ? null : "button";
 		}
 	}

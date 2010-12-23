@@ -97,9 +97,7 @@ package
 		}
 		
 		public override function setWorldData (b: ByteArray): void {
-			forgetPast();
-			forgetFuture();
-			actions.length = 0;
+			resetState();
 			
 			b.position = 0;
 			
@@ -208,6 +206,14 @@ package
 			reseting = true;
 		}
 		
+		public function resetState ():void
+		{
+			forgetPast();
+			forgetFuture();
+			actions.length = 0;
+			clicks = 0;
+		}
+		
 		public function forgetPast (): void
 		{
 			undoStack.length = 0;
@@ -238,6 +244,8 @@ package
 				return;
 			}
 			
+			clicks--;
+			
 			redoStack.push(cog);
 			
 			undoButton.disabled = (undoStack.length == 0);
@@ -262,6 +270,8 @@ package
 				return;
 			}
 			
+			clicks++;
+			
 			undoStack.push(cog);
 			
 			undoButton.disabled = (undoStack.length == 0);
@@ -270,7 +280,10 @@ package
 		
 		public override function update (): void
 		{
-			if (Input.pressed(Key.E)) editing = !editing;
+			if (Input.pressed(Key.E)) {
+				editing = !editing;
+				resetState();
+			}
 			
 			if (editing) {
 				if (Input.check(Key.DOWN)) { makeHeart(0); }
