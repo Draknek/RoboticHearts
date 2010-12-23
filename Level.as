@@ -291,6 +291,7 @@ package
 				if (Input.check(Key.UP))   { makeHeart(2); }
 				if (Input.check(Key.RIGHT)) { makeHeart(3); }
 				if (Input.check(Key.SPACE)) { makeCog(); }
+				if (Input.check(Key.BACKSPACE)) { removeUnderMouse(); }
 				return;
 			}
 			
@@ -435,6 +436,17 @@ package
 		public override function render (): void
 		{
 			super.render();
+		}
+		
+		public function removeUnderMouse (): void
+		{
+			var x:int = mouseX / 8;
+			var y:int = mouseY / 8;
+			
+			var e:Entity = collidePoint("heart", x*8+4, y*8+4);
+			if (e) remove(e);
+			e = collidePoint("cog", x*8+4, y*8+4);
+			if (e) remove(e);
 		}
 		
 		public function makeHeart (rot:int): void
