@@ -142,7 +142,7 @@ package
 			addGraphic(levelIDDisplay);
 			
 			if (id == 0) {
-				addGraphic(new Text("Click cogs\nto mend hearts", 0, 8, {align:"center", size:8, width: 96}));
+				addGraphic(new Text("Click cogs to\nbrighten hearts", 0, 68, {align:"center", size:8, width: 96}));
 			}
 			else if (id == 1) {
 				addGraphic(new Text("Make all upright", 0, 76, {align:"center", size:8, width: 96}));

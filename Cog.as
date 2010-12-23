@@ -81,7 +81,7 @@ package
 		private function getMirroredCogs ():Array {
 			var a:Array = [];
 			
-			if (Level(world).id < 13) return a;
+			if (Level(world).id < 17) return a;
 			
 			var other:Cog = world.collidePoint("cog", 96 - x, y) as Cog;
 			

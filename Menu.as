@@ -64,8 +64,8 @@ package
 					b.normalColor = 0x00FF00;
 				}
 				
-				b.x = 96 + 24 + (i%4)*12;
-				b.y = 36 + int(i / 4) * 12;
+				b.x = 96 + 18 + (i%5)*12;
+				b.y = 36 + int(i / 5) * 12;
 				
 				add(b);
 				
