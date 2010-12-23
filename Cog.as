@@ -55,6 +55,11 @@ package
 			
 				world.collideRectInto("heart", x - 16, y - 16, 32, 32, a);
 				
+				var other:Cog;
+				
+				for each (other in getLinkedCogs()) world.collideRectInto("heart", other.x - 16, other.y - 16, 32, 32, a);
+				for each (other in getMirroredCogs()) world.collideRectInto("heart", other.x - 16, other.y - 16, 32, 32, a);
+				
 				for each (var h:Heart in a) {
 					h.highlight = true;
 				}
@@ -65,13 +70,39 @@ package
 				
 				Level(world).clicks++;
 				
-				Logger.click();
+				//Logger.click();
 			}
 		}
 		
-		public function go (change:int = 1, speed:Number = 1, callback:Function = null):Boolean
+		private function getLinkedCogs ():Array {
+			return [];
+		}
+		
+		private function getMirroredCogs ():Array {
+			var a:Array = [];
+			
+			if (Level(world).id < 13) return a;
+			
+			var other:Cog = world.collidePoint("cog", 96 - x, y) as Cog;
+			
+			if (other && other != this && other.x == 96 - x && other.y == y && Math.abs(other.x - x) > 31) {
+				a.push(other);
+			}
+			
+			return a;
+		}
+		
+		public function go (change:int = 1, speed:Number = 1, canDelegate:Boolean = true):Boolean
 		{
 			if (rotating) return false;
+			
+			if (canDelegate) {
+				var other:Cog;
+				
+				for each (other in getLinkedCogs()) other.go(change, speed, false);
+				for each (other in getMirroredCogs()) other.go(-change, speed, false);
+				
+			}
 			
 			rotating = this;
 			
@@ -98,8 +129,6 @@ package
 			{
 				clearTweens();
 				
-				rotating = null;
-				
 				for each (h in a) {
 					img = h.image;
 					img.angle = 0;
@@ -118,9 +147,14 @@ package
 					
 					img.centerOO();
 				}
+				
+				if (canDelegate) {
+					rotating = null;
+				}
+				
 			}
 			
-			FP.tween(image, {angle: image.angle-90*change}, 16/speed, {complete:stoppedRotating});
+			FP.tween(image, {angle: image.angle-90*change}, 16/speed, {complete:stoppedRotating, tweener:this});
 			
 			return true;
 		}

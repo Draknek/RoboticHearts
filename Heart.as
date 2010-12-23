@@ -47,7 +47,7 @@ package
 		{
 			if (highlight) {
 				var c:uint = image.color;
-				image.color = 0xA0A0A0 & image.color;
+				image.color = (c == Main.PINK) ? 0xA0A0A0 & image.color : Main.GREY;
 			}
 			
 			super.render();
