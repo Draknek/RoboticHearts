@@ -5,6 +5,7 @@ package
 	import net.flashpunk.masks.*;
 	import net.flashpunk.utils.*;
 	
+	import flash.display.*;
 	import flash.utils.*;
 	import flash.ui.Mouse;
 	
@@ -150,6 +151,12 @@ package
 			else if (id == 2) {
 				addGraphic(new Text("R to reset", 0, 76, {align:"center", size:8, width: 96}));
 			}
+			
+			var oldScreen:Image = new Image(FP.buffer.clone());
+			
+			addGraphic(oldScreen, -10);
+			
+			FP.tween(oldScreen, {alpha: 0}, 30, {ease:Ease.sineOut, tweener:this});
 			
 			var _data:ByteArray = levels[id];
 			
@@ -420,6 +427,11 @@ package
 			
 			for (i = 0; i < 10; i++) {
 				if (Input.pressed(Key.DIGIT_1 + i)) FP.world = new Level(i);
+			}
+			
+			if (gameOver && clickThrough) {
+				Mouse.cursor = "auto";
+				return;
 			}
 			
 			if (!gameOver && collidePoint("cog", mouseX, mouseY) || collidePoint("button", mouseX, mouseY)) {
