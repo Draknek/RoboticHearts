@@ -14,7 +14,7 @@ for line in input:
 	filename = line.strip()
 	
 	if filename and not filename.startswith('#'):
-		filenames.append(filename)
+		filenames.append(filename + '.lvl')
 
 input.close()
 

@@ -418,7 +418,7 @@ package
 			
 			if (Input.pressed(Key.N)) FP.world = new Level(id+1);
 			
-			for (i = 0; i < levels.length; i++) {
+			for (i = 0; i < 10; i++) {
 				if (Input.pressed(Key.DIGIT_1 + i)) FP.world = new Level(i);
 			}
 			

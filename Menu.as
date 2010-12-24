@@ -54,7 +54,7 @@ package
 			
 			private function addLevelButton (i:int):Button
 			{
-				var b:Button = new Button(0, 0, new Text((i+1)+"", 0, 0, {width: 12, align:"center"}), function ():void {
+				var b:Button = new Button(0, 0, new Text((i+1)+"", 0, 0, {width: 14, align:"center"}), function ():void {
 					FP.world = new Level(i);
 				});
 				
@@ -64,8 +64,8 @@ package
 					b.normalColor = 0x00FF00;
 				}
 				
-				b.x = 96 + 18 + (i%5)*12;
-				b.y = 36 + int(i / 5) * 12;
+				b.x = 96 + 6 + (i%6)*14;
+				b.y = 30 + int(i / 6) * 12;
 				
 				add(b);
 				
