@@ -8,15 +8,39 @@ def bin (num):
 
 input = open('levels.list')
 
-filenames = []
+levels = input.read().split("\n\n")
 
-for line in input:
-	filename = line.strip()
+filenames = []
+story = []
+
+for info in levels:
+	info = info.strip()
 	
-	if filename and not filename.startswith('#'):
-		filenames.append(filename + '.lvl')
+	if not info or info.startswith('#'):
+		continue
+	
+	parts = info.split("\n")
+	
+	if (len(parts) > 1):
+		filename = parts[1]
+		story.append(parts[0])
+	else:
+		filename = parts[0]
+		story.append("")
+	
+	filename = filename.strip()
+	
+	filenames.append(filename + '.lvl')
 
 input.close()
+
+output = open('story.txt', 'w')
+
+for line in story:
+	output.write(line.strip())
+	output.write("\n")
+
+output.close()
 
 output = open('all.lvl', 'wb')
 
