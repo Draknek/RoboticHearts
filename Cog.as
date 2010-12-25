@@ -75,18 +75,40 @@ package
 		}
 		
 		private function getLinkedCogs ():Array {
-			return [];
+			var a:Array = [];
+			
+			var other:Cog;
+			
+			if (Level(world).mirrorX && Level(world).mirrorY) {
+				other = world.collidePoint("cog", 96 - x, 96 - y) as Cog;
+			
+				if (other && other != this && other.x == 96 - x && other.y == 96 - y && Math.abs(other.x - x) > 31 && Math.abs(other.y - y) > 31) {
+					a.push(other);
+				}
+			}
+			
+			return a;
 		}
 		
 		private function getMirroredCogs ():Array {
 			var a:Array = [];
 			
-			if (Level(world).id < 25) return a;
+			var other:Cog;
 			
-			var other:Cog = world.collidePoint("cog", 96 - x, y) as Cog;
+			if (Level(world).mirrorX) {
+				other = world.collidePoint("cog", 96 - x, y) as Cog;
 			
-			if (other && other != this && other.x == 96 - x && other.y == y && Math.abs(other.x - x) > 31) {
-				a.push(other);
+				if (other && other != this && other.x == 96 - x && other.y == y && Math.abs(other.x - x) > 31) {
+					a.push(other);
+				}
+			}
+			
+			if (Level(world).mirrorY) {
+				other = world.collidePoint("cog", x, 96 - y) as Cog;
+			
+				if (other && other != this && other.x == x && other.y == 96 - y && Math.abs(other.y - y) > 31) {
+					a.push(other);
+				}
 			}
 			
 			return a;
@@ -99,9 +121,15 @@ package
 			if (canDelegate) {
 				var other:Cog;
 				
-				for each (other in getLinkedCogs()) other.go(change, speed, false);
-				for each (other in getMirroredCogs()) other.go(-change, speed, false);
+				for each (other in getLinkedCogs()) {
+					other.go(change, speed, false);
+					rotating = null;
+				}
 				
+				for each (other in getMirroredCogs()) {
+					other.go(-change, speed, false);
+					rotating = null;
+				}
 			}
 			
 			rotating = this;

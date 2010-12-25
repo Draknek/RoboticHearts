@@ -49,14 +49,19 @@ package
 		
 		public static var levels:Array;
 		public static var story:Array;
+		public static var special:Array;
 		
 		public var storyText:Image;
+		
+		public var mirrorX:Boolean = false;
+		public var mirrorY:Boolean = false;
 		
 		public static function loadLevels():void
 		{
 			var storyText:String = new STORY;
 			story = storyText.split("\n");
 			levels = [];
+			special = [];
 			
 			var data:ByteArray = new LEVELS;
 			
@@ -65,6 +70,10 @@ package
 			var levelCount:int = data.readInt();
 			
 			for (var i:int = 0; i < levelCount; i++) {
+				var flags:int = data.readInt();
+				
+				special.push(flags);
+				
 				var levelSize:int = data.readInt();
 				
 				var levelData:ByteArray = new ByteArray;
@@ -182,6 +191,13 @@ package
 			addGraphic(oldScreen, -10);
 			
 			FP.tween(oldScreen, {alpha: 0}, 30, {ease:Ease.sineOut, tweener:this});
+			
+			if (special[id]) {
+				var flags:int = special[id];
+				
+				if (flags & 1) mirrorX = true;
+				if (flags & 2) mirrorY = true;
+			}
 			
 			var _data:ByteArray = levels[id];
 			

@@ -10,7 +10,10 @@ input = open('levels.list')
 
 levels = input.read().split("\n\n")
 
+input.close()
+
 filenames = []
+special = []
 story = []
 
 for info in levels:
@@ -22,31 +25,37 @@ for info in levels:
 	parts = info.split("\n")
 	
 	if (len(parts) > 1):
-		filename = parts[1]
+		leveldata = parts[1]
 		story.append(parts[0])
 	else:
-		filename = parts[0]
+		leveldata = parts[0]
 		story.append("")
 	
-	filename = filename.strip()
+	leveldata = leveldata.split("|")
+	
+	filename = leveldata[0].strip()
+	flags = 0
+	
+	if len(leveldata) > 1:
+		flags = int(leveldata[1])
 	
 	filenames.append(filename + '.lvl')
+	special.append(flags)
 
-input.close()
-
-output = open('story.txt', 'w')
-
-for line in story:
-	output.write(line.strip())
-	output.write("\n")
-
-output.close()
 
 output = open('all.lvl', 'wb')
 
 output.write(bin(len(filenames)))
 
+i = 0
+
 for filename in filenames:
+	flags = special[i]
+	
+	i+=1
+	
+	output.write(bin(flags))
+	
 	filesize = os.path.getsize(filename)
 	
 	output.write(bin(filesize));
@@ -56,6 +65,15 @@ for filename in filenames:
 	output.write(file.read())
 	
 	file.close()
+
+output.close()
+
+
+output = open('story.txt', 'w')
+
+for line in story:
+	output.write(line.strip())
+	output.write("\n")
 
 output.close()
 
