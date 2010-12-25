@@ -1,83 +1,83 @@
 Let me tell you a story...
-simple
+simple 2
 
 Once\nThere was a young boy\nand a young girl
-isolated
-
-And they played together
-outsider
+isolated 3
 
 And they danced together
-simple2
+simple2 4
+
+And they played together
+outsider 8
 
 And for a brief time, they knew love
-heart
+heart 6
 
 But nothing is simple forever
-simple3
+simple3 10
 
 And two is more complex than one
-eyes
+eyes 12
 
 One day they found a broken robot in the woods
-line
+line 9
 
-ellipsis
+ellipsis 10
 
-diagonals
+diagonals 12
 
-line3
+line3 6
 
-cross4
+cross4 9
 
-cross-simple
+cross-simple 16
 
 The robot urged them to fix his friends too
-sparse
+sparse 12
 
 The robots said "if you truly loved one another..."
-cross2
+cross2 11
 
 "... you would exchange a gift of true worth"
-line2
+line2 9
 
 So the boy gave his heart to the girl\nAnd she gave hers to him
-heart-swap
+heart-swap 8
 
 But over time the girl grew tired of the boy
-heart-break
+heart-break 3
 
 She said all the things she knew would hurt the most
-heart-break2
+heart-break2 5
 
 The robots worked hard to rebuild his broken heart
-heart-build
+heart-build 15
 
 But he was not quite the same after that
-squareish
+squareish 20
 
-chain
+chain 25
 
-bigsquare
+bigsquare 23
 
-level4
+level4 7
 
-corner
+corner 7
 
-level5
+level5 8
 
-square
+square 9
 
-cross
+cross 52
 
-diamond2
+diamond2 9
 
-diamond-large|3
+diamond-large 5 3
 
-level7|1
+level7 10 1
 
 And that is the story\nof these robotic hearts of mine
-level6|1
+level6 12 1
 #diamond
 #interesting
 #hearts2

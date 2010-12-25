@@ -50,9 +50,11 @@ package
 		public static var levels:Array;
 		public static var story:Array;
 		public static var special:Array;
+		public static var minClicksArray:Array;
 		
 		public var storyText:Image;
 		public var clickCounter:Text;
+		public var minClicks:int;
 		
 		public var mirrorX:Boolean = false;
 		public var mirrorY:Boolean = false;
@@ -63,6 +65,7 @@ package
 			story = storyText.split("\n");
 			levels = [];
 			special = [];
+			minClicksArray = [];
 			
 			var data:ByteArray = new LEVELS;
 			
@@ -71,8 +74,10 @@ package
 			var levelCount:int = data.readInt();
 			
 			for (var i:int = 0; i < levelCount; i++) {
+				var clickCount:int = data.readInt();
 				var flags:int = data.readInt();
 				
+				minClicksArray.push(clickCount);
 				special.push(flags);
 				
 				var levelSize:int = data.readInt();
@@ -202,6 +207,8 @@ package
 				if (flags & 1) mirrorX = true;
 				if (flags & 2) mirrorY = true;
 			}
+			
+			minClicks = minClicksArray[id];
 			
 			var _data:ByteArray = levels[id];
 			
@@ -499,7 +506,7 @@ package
 			
 			super.update();
 			
-			clickCounter.text = clicks+"";
+			clickCounter.text = clicks+"/"+minClicks;
 		}
 		
 		public override function render (): void
