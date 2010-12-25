@@ -52,6 +52,7 @@ package
 		public static var special:Array;
 		
 		public var storyText:Image;
+		public var clickCounter:Text;
 		
 		public var mirrorX:Boolean = false;
 		public var mirrorY:Boolean = false;
@@ -158,6 +159,9 @@ package
 			var levelIDDisplay:Text = new Text((id+1)+"", 0, -1);
 			levelIDDisplay.x = 96 + 1 - levelIDDisplay.width;
 			addGraphic(levelIDDisplay);
+			
+			clickCounter = new Text("0", 0, 86);
+			addGraphic(clickCounter);
 			
 			if (id == 0) {
 				addGraphic(new Text("Click cogs to\nbrighten hearts", 0, 68, {align:"center", size:8, width: 96}));
@@ -494,6 +498,8 @@ package
 			time++;
 			
 			super.update();
+			
+			clickCounter.text = clicks+"";
 		}
 		
 		public override function render (): void
