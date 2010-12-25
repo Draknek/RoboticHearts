@@ -44,10 +44,18 @@ package
 		[Embed(source="levels/all.lvl", mimeType="application/octet-stream")]
 		public static const LEVELS:Class;
 		
+		[Embed(source="levels/story.txt", mimeType="application/octet-stream")]
+		public static const STORY:Class;
+		
 		public static var levels:Array;
+		public static var story:Array;
+		
+		public var storyText:Image;
 		
 		public static function loadLevels():void
 		{
+			var storyText:String = new STORY;
+			story = storyText.split("\n");
 			levels = [];
 			
 			var data:ByteArray = new LEVELS;
@@ -150,6 +158,23 @@ package
 			}
 			else if (id == 2) {
 				addGraphic(new Text("R to reset", 0, 76, {align:"center", size:8, width: 96}));
+			}
+			
+			if (story[id] && story[id].length) {
+				var text:String = story[id];
+				text = text.split("\\n").join("\n\n");
+				
+				storyText = new Text(text, 1, 0, {width: 96, align:"center", wordWrap:true});
+				
+				storyText.y = (96 - storyText.height) * 0.5;
+				
+				var bitmap:BitmapData = new BitmapData(96, 96, false, Main.PINK);
+				
+				storyText.render(bitmap, FP.zero, camera);
+				
+				storyText = new Image(bitmap);
+				
+				addGraphic(storyText, -9);
 			}
 			
 			var oldScreen:Image = new Image(FP.buffer.clone());
@@ -287,6 +312,15 @@ package
 		
 		public override function update (): void
 		{
+			if (storyText) {
+				if (Input.mousePressed || Input.pressed(-1)) {
+					FP.tween(storyText, {alpha: 0}, 30, {ease:Ease.sineOut});
+					storyText = null;
+				}
+				Mouse.cursor = "auto";
+				return;
+			}
+			
 			if (Input.pressed(Key.E)) {
 				editing = !editing;
 				resetState();
@@ -299,6 +333,7 @@ package
 				if (Input.check(Key.RIGHT)) { makeHeart(3); }
 				if (Input.check(Key.SPACE)) { makeCog(); }
 				if (Input.check(Key.BACKSPACE)) { removeUnderMouse(); }
+				Mouse.cursor = "auto";
 				return;
 			}
 			
