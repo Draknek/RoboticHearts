@@ -40,8 +40,24 @@ package
 		{
 			if (!world) return;
 			
+			var a:Array;
+			var h:Heart;
+			
 			if (Level(world).gameOver) {
 				image.color = Main.WHITE;
+				
+				if (Level(world).stopSpinHack && x < 48) {
+					a = [];
+			
+					world.collideRectInto("heart", x - 16, y - 16, 32, 32, a);
+					
+					for each (h in a) {
+						world.remove(h);
+					}
+					
+					return;
+				}
+				
 				image.angle -= 45 / 4.0;
 				return;	
 			}
@@ -51,7 +67,7 @@ package
 			//sprite.frame = (over) ? 1 : 0;
 			
 			if (over) {
-				var a:Array = [];
+				a = [];
 			
 				world.collideRectInto("heart", x - 16, y - 16, 32, 32, a);
 				
@@ -60,7 +76,7 @@ package
 				for each (other in getLinkedCogs()) world.collideRectInto("heart", other.x - 16, other.y - 16, 32, 32, a);
 				for each (other in getMirroredCogs()) world.collideRectInto("heart", other.x - 16, other.y - 16, 32, 32, a);
 				
-				for each (var h:Heart in a) {
+				for each (h in a) {
 					h.highlight = true;
 				}
 			}

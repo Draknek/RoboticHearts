@@ -58,6 +58,7 @@ package
 		
 		public var mirrorX:Boolean = false;
 		public var mirrorY:Boolean = false;
+		public var stopSpinHack:Boolean = false;
 		
 		public static function loadLevels():void
 		{
@@ -206,6 +207,7 @@ package
 				
 				if (flags & 1) mirrorX = true;
 				if (flags & 2) mirrorY = true;
+				if (flags & 4) stopSpinHack = true;
 			}
 			
 			minClicks = minClicksArray[id];
