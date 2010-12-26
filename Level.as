@@ -128,7 +128,12 @@ package
 			
 			data = b;
 			
-			removeAll();
+			var a:Array = [];
+			
+			getType("cog", a);
+			getType("heart", a);
+			
+			removeList(a);
 			
 			var l:int = b.readInt();
 			var i:int;
