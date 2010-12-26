@@ -123,6 +123,7 @@ package
 		
 		public override function setWorldData (b: ByteArray): void {
 			resetState();
+			minClicks = 999;
 			
 			b.position = 0;
 			
@@ -215,12 +216,11 @@ package
 				if (flags & 4) stopSpinHack = true;
 			}
 			
-			minClicks = minClicksArray[id];
-			
 			var _data:ByteArray = levels[id];
 			
 			if (_data) {
 				setWorldData(_data);
+				minClicks = minClicksArray[id];
 				return;
 			}
 			
@@ -346,6 +346,10 @@ package
 		
 		public override function update (): void
 		{
+			if (Input.pressed(Key.ESCAPE)) {
+				FP.world = new Menu;
+			}
+			
 			if (storyText) {
 				if (Input.mousePressed || Input.pressed(-1)) {
 					FP.tween(storyText, {alpha: 0}, 30, {ease:Ease.sineOut});
@@ -379,55 +383,6 @@ package
 			
 			var a:Array;
 			
-			if (!gameOver && reseting) {
-				if (undoStack.length) {
-					actuallyUndo();
-				} else if (! Cog.rotating) {
-					reseting = false;
-					
-					a = [];
-					getType("cog", a);
-				
-					Cog.rotating = a[0];
-				
-					var f:Function = function ():void {
-						Cog.rotating = null;
-					}
-				
-					for each (var cog:Cog in a) {
-						FP.tween(cog.image, {angle: cog.image.angle+180}, 12, {complete: f});
-						f = null;
-					}
-				}
-			} else if (actions.length && ! Cog.rotating) {
-				var e:* = actions.shift();
-				
-				if (e is Cog) {
-					undoStack.push(e);
-					undoButton.disabled = false;
-					forgetFuture();
-					
-					Cog(e).go();
-				} else if (e is Function) {
-					e();
-				}
-			}
-			
-			var i:int;
-			for (i = 0; i < 4; i++) {
-				var step:int = gameOver ? 25 : 50;
-				var beatTime:int = gameOver ? 10 : 10;
-				var modTime:int = time % (step * 3);
-				
-				if (i == 0) {
-					modTime = (time - step*0.5) % step;
-				} else {
-					modTime += step;
-				}
-				
-				beating[i] = (modTime >= step*i && modTime < step*i+beatTime);
-			}
-			
 			a = [];
 			
 			getType("heart", a);
@@ -448,6 +403,14 @@ package
 				
 				Main.so.data.levels[md5].completed = true;
 				
+				var previousBest:int = Main.so.data.levels[md5].leastClicks;
+				
+				if (! Main.so.data.levels[md5].leastClicks
+					|| clicks < Main.so.data.levels[md5].leastClicks)
+				{
+					Main.so.data.levels[md5].leastClicks = clicks;
+				}
+				
 				Main.so.flush();
 				
 				gameOver = true;
@@ -456,9 +419,38 @@ package
 				
 				Logger.endLevel(id);
 				
-				var t:Text = new Text("Level complete!", 0, 16, {align:"center", size:8, width: 95});
-				var t2:Text = new Text("Clicks: " + clicks, 0, 40, {align:"center", size:8, width: 95});
-				var t3:Text = new Text("Click for next level", 0, 64, {align:"center", size:8, width: 95});
+				var t:Text = new Text("Clicks: " + clicks, 0, 24, {align:"center", size:8, width: 95});
+				var t2:Text = new Text("Previous best: " + previousBest, 0, 40, {align:"center", size:8, width: 95});
+				var t3:Text = new Text("Best possible: " + minClicks, 0, 56, {align:"center", size:8, width: 95});
+				var t4:Text = new Text("Click to continue", 0, 86, {align:"center", size:8, width: 95});
+				
+				if (! previousBest || previousBest == clicks) {
+					t2.text = "";
+					t.y += 8;
+					t3.y -= 8;
+				} else if (previousBest < clicks) {
+					t2.text = "Your best: " + previousBest;
+				}
+				
+				if (clicks <= minClicks) {
+					t.text += "\n(best possible)";
+					
+					t3.text = "";
+					
+					if (t2.text) {
+						t.y = 28;
+						t2.y = 52;
+					} else {
+						t.y = 36;
+					}
+				} else if (t2.text && previousBest <= minClicks) {
+					t2.text += "\n(best possible)";
+					
+					t3.text = "";
+					
+					t.y = 28;
+					t2.y = 44;
+				}
 				
 				var world:World = this;
 				
@@ -467,9 +459,11 @@ package
 						addGraphic(t);
 						addGraphic(t2);
 						addGraphic(t3);
+						addGraphic(t4);
 					
 						if (id+1 >= levels.length) {
-							t3.text = "Game over\nYou win!"
+							t4.text = "Game over\nYou win!"
+							t4.y -= 8;
 						} else {
 							clickThrough = true;
 						}
@@ -483,8 +477,54 @@ package
 				}});
 			}
 			
-			if (Input.pressed(Key.ESCAPE)) {
-				FP.world = new Menu;
+			if (!gameOver && reseting) {
+				if (undoStack.length) {
+					actuallyUndo();
+				} else if (! Cog.rotating) {
+					reseting = false;
+					
+					a = [];
+					getType("cog", a);
+				
+					Cog.rotating = a[0];
+				
+					var f:Function = function ():void {
+						Cog.rotating = null;
+					}
+				
+					for each (var cog:Cog in a) {
+						FP.tween(cog.image, {angle: cog.image.angle+180}, 12, {complete: f});
+						f = null;
+					}
+				}
+			} else if (actions.length && !gameOver && ! Cog.rotating) {
+				var e:* = actions.shift();
+				
+				if (e is Cog) {
+					undoStack.push(e);
+					undoButton.disabled = false;
+					forgetFuture();
+					clicks++;
+					
+					Cog(e).go();
+				} else if (e is Function) {
+					e();
+				}
+			}
+			
+			var i:int;
+			for (i = 0; i < 4; i++) {
+				var step:int = gameOver ? 25 : 50;
+				var beatTime:int = gameOver ? 10 : 10;
+				var modTime:int = time % (step * 3);
+				
+				if (i == 0) {
+					modTime = (time - step*0.5) % step;
+				} else {
+					modTime += step;
+				}
+				
+				beating[i] = (modTime >= step*i && modTime < step*i+beatTime);
 			}
 			
 			if (Input.pressed(Key.R)) {

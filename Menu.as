@@ -5,6 +5,7 @@ package
 	import net.flashpunk.masks.*;
 	import net.flashpunk.utils.*;
 	
+	import flash.display.*;
 	import flash.utils.*;
 	import flash.ui.Mouse;
 	
@@ -14,6 +15,7 @@ package
 	{
 		public var time:int = 0;
 		public var heart:Spritemap;
+		public var heart2:Spritemap;
 		
 		public function Menu ()
 		{
@@ -25,6 +27,9 @@ package
 			
 			addGraphic(heart, 0, 6, 12);
 			addGraphic(heart, 0, 81, 12);
+			
+			heart2 = new Spritemap(Heart.HEART2, 12, 10);
+			heart2.color = Main.PINK;
 			
 			var resumeLevel:int = -1;
 			
@@ -68,14 +73,29 @@ package
 				FP.world = new Level(i);
 			});
 			
+			b.x = 96 + 6 + (i%6)*14;
+			b.y = 30 + int(i / 6) * 12;
+			
 			var md5:String = MD5.hashBytes(Level.levels[i]);
 			
 			if (Main.so.data.levels[md5] && Main.so.data.levels[md5].completed) {
-				b.normalColor = 0x00FF00;
+				if (Main.so.data.levels[md5].leastClicks
+					&& Main.so.data.levels[md5].leastClicks <= Level.minClicksArray[i])
+				{
+					b.normalColor = 0xFFFF00;
+					b.hoverColor = Main.BLACK;
+					//addGraphic(heart2, 10, b.x, b.y);
+					
+					var bitmap:BitmapData = new BitmapData(11, 7, true, 0xFF000000 | Main.PINK);
+					bitmap.setPixel32(0, 0, 0x0);
+					bitmap.setPixel32(10, 0, 0x0);
+					bitmap.setPixel32(10, 6, 0x0);
+					bitmap.setPixel32(0, 6, 0x0);
+					addGraphic(new Stamp(bitmap), 10, b.x+1, b.y+2);
+				} else {
+					b.normalColor = 0x00FF00;
+				}
 			}
-			
-			b.x = 96 + 6 + (i%6)*14;
-			b.y = 30 + int(i / 6) * 12;
 			
 			add(b);
 			
@@ -99,6 +119,7 @@ package
 			var modTime:int = time % step;
 			
 			heart.frame = (modTime >= 0 && modTime < beatTime) ? 4 : 0;
+			heart2.frame = (modTime >= 0 && modTime < beatTime) ? 2 : 1;
 			
 			time++;
 			

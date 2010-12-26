@@ -83,10 +83,6 @@ package
 			
 			if (over && Input.mousePressed) {
 				Level(world).actions.push(this);
-				
-				Level(world).clicks++;
-				
-				//Logger.click();
 			}
 		}
 		
