@@ -2,39 +2,61 @@ package
 {
 	import flash.display.*;
 	import net.flashpunk.*;
-	import SWFStats.*;
+	import Playtomic.*;
 	import flash.system.Security;
+	import flash.net.*;
+	
+	import com.adobe.crypto.MD5;
 
 	public class Logger
 	{
+		public static var isLocal:Boolean = false;
+		
 		public static function connect (obj: DisplayObjectContainer): void
 		{
+			isLocal = (obj.stage.loaderInfo.loaderURL.substr(0, 7) == 'file://');
+			
+			if (isLocal) return;
+			
 			Log.View(1401, "0a6c8f42570e464e", obj.stage.loaderInfo.loaderURL);
 		}
 		
 		public static function startLevel (id:int): void
 		{
-			Log.CustomMetric("started"+id);
-			Log.LevelCounterMetric("started", id);
+			if (isLocal) return;
+			
+			Log.LevelCounterMetric("started", "l"+id, true);
+		}
+
+		public static function restartLevel (id:int): void
+		{
+			if (isLocal) return;
+			
+			Log.LevelCounterMetric("restarted", "l"+id);
 		}
 
 		public static function endLevel (id:int): void
 		{
-			Log.CustomMetric("completed"+id);
+			if (isLocal) return;
 			
-			Log.LevelCounterMetric("completed", id);
+			Log.LevelCounterMetric("completed", "l"+id, true);
 			
-			Log.LevelAverageMetric("time", id, Level(FP.world).time);
-			Log.LevelAverageMetric("clicks", id, Level(FP.world).clicks);
+			Log.LevelAverageMetric("time", "l"+id, Level(FP.world).time);
+			Log.LevelAverageMetric("clicks", "l"+id, Level(FP.world).clicks);
 		}
 
-		public static function click (): void
+		public static function alert (message:String): void
 		{
-			var id:int = Level(FP.world).id;
+			var hash:String = MD5.hash(message + Secret.SALT);
 			
-			Log.LevelCounterMetric("clickcounter", id);
+			var url:String = "http://www.draknek.org/include/alert.php?message=" + escape(message) + "&hash=" + escape(hash);
+			
+			var request:URLRequest = new URLRequest(url);
+			
+			var loader:URLLoader = new URLLoader(request);
+			
+			trace(message);
 		}
-		
 	}
 }
 

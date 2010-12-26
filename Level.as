@@ -270,6 +270,8 @@ package
 		public function reset ():void
 		{
 			reseting = true;
+			
+			Logger.restartLevel(id);
 		}
 		
 		public function resetState ():void
@@ -450,6 +452,19 @@ package
 					
 					t.y = 28;
 					t2.y = 44;
+				}
+				
+				if (clicks < minClicks) {
+					t2.text = ""
+					t3.text = ""
+					
+					t.text = "Clicks: " + clicks + "\n\nWell done! You used\n" + (minClicks - clicks) + "\nfewer clicks than I\nthought were needed!";
+					
+					t.y = (88 - t.height)*0.5;
+					
+					var alert:String = "Completed level " + id + " (" + md5 + ") in " + clicks + " clicks";
+					
+					Logger.alert(alert);
 				}
 				
 				var world:World = this;
