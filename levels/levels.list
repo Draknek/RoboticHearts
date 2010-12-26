@@ -1,7 +1,7 @@
 Let me tell you a story...
 simple 2
 
-Once\nThere was a young boy\nand a young girl
+Once\nwas a young boy\nand a young girl
 isolated 3
 
 And they danced together
@@ -16,49 +16,55 @@ heart 6
 But nothing is simple forever
 simple3 10
 
-And two is more complex than one
+And two lives are more complex than one
 eyes 12
 
 One day they found a broken robot in the woods
 line 9
 
-ellipsis 10
-
-diagonals 12
-
+They worked hard to fix the robot
 line3 6
 
-cross4 9
+Swapping its old rusty parts with gleaming new replacements
+diagonals 12
 
-cross-simple 16
+And when he was fixed the trio played together for a time
+ellipsis 10
 
-The robot urged them to fix his friends too
-sparse 12
-
-The robots said "if you truly loved one another..."
-cross2 11
-
-"... you would exchange a gift of true worth"
+And the robot marvelled at the love he saw between the boy and the girl
 line2 9
 
-So the boy gave his heart to the girl\nAnd she gave hers to him
+And watched as the boy gave his heart to the girl\nAnd she gave hers to him
 heart-swap 8
 
-But over time the girl grew tired of the boy
-heart-break 3 4
+Suddenly lonely, the robot led them to his old home
+cross-simple 16
 
-She said all the things she knew would hurt the most
+"Please," he said, "so few of these robots are still active"
+cross4 9
+
+"Cannot you fix them all?" he pleaded
+sparse 12
+
+For the robot hoped to find a love of his own
+cross2 11
+
+But over time the girl had grown tired of the boy and the robots
 heart-break2 5
 
-The robots worked hard to rebuild his broken heart
-heart-build 15
+And left him for another
+heart-break 3 4
 
-But he was not quite the same after that
+
+
+He fell into a deep depression
 squareish 20
 
-chain 25
-
+And he felt a gaping hole in his soul
 bigsquare 23
+
+The robots worked hard to rebuild the boy's broken heart
+heart-build 15
 
 level4 7
 
@@ -68,18 +74,23 @@ level5 8
 
 square 9
 
-cross 52
-
 diamond2 9
 
+Some say he is more robot than boy now
 diamond-large 5 3
 
 level7 10 1
 
 And that is the story\nof these robotic hearts of mine
 level6 12 1
+
 #diamond
 #interesting
 #hearts2
 #hearts
-#cross3 -- very similar to cross
+#cross 52
+#cross3 32
+#lonely 2
+#
+#The boy sent robots to talk to the girl but she would turn them away
+#chain 25
