@@ -406,6 +406,8 @@ package
 				
 				time = -1;
 				
+				Audio.play("complete");
+				
 				Logger.endLevel(id);
 				
 				var t:Text = new Text("Clicks: " + clicks, 0, 24, {align:"center", size:8, width: 95});

@@ -35,7 +35,16 @@ package
 			
 			super.init();
 			
+			Audio.init(this);
+			
 			Logger.connect(this);
+		}
+		
+		public override function update (): void
+		{
+			super.update();
+			
+			Audio.update();
 		}
 		
 		public function sitelock (allowed:*):Boolean

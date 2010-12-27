@@ -102,6 +102,16 @@ package
 			return b;
 		}
 		
+		public override function begin ():void
+		{
+			Audio.stopMusic();
+		}
+		
+		public override function end ():void
+		{
+			Audio.startMusic();
+		}
+		
 		public override function update ():void
 		{
 			if (collidePoint("button", mouseX, mouseY)) {

@@ -142,6 +142,8 @@ package
 					other.go(-change, speed, false);
 					rotating = null;
 				}
+				
+				Audio.play("rotate");
 			}
 			
 			rotating = this;
