@@ -123,7 +123,7 @@ package
 		
 		public override function setWorldData (b: ByteArray): void {
 			resetState();
-			minClicks = 999;
+			minClicks = 0;
 			
 			b.position = 0;
 			
@@ -224,39 +224,17 @@ package
 				return;
 			}
 			
-			var e:Entity;
-			var x:int = 5;
-			var y:int = 5;
-			
-			e = new Cog(x, y);
-			lookup[index(x,y)] = e;
-			lookup[index(x+1,y)] = e;
-			lookup[index(x,y+1)] = e;
-			lookup[index(x+1,y+1)] = e;
-			add(e);
-			
-			for (x = 0; x < W; x++) {
-				for (y = 0; y < H; y++) {
-					if (get(x, y)) { continue; }
-					
-					/*if (x != W-1 && y != H-1 && !get(x+1, y) && !get(x, y+1) && FP.rand(4)==0) {
-						e = new Cog(x, y);
-						lookup[index(x,y)] = e;
-						lookup[index(x+1,y)] = e;
-						lookup[index(x,y+1)] = e;
-						lookup[index(x+1,y+1)] = e;
-					} else*/ {
-						e = new Heart(x, y);
-						lookup[index(x,y)] = e;
-					}
-					
-					add(e);
-				}
-			}
-			
 			updateLists();
 			
-			data = getWorldData();
+			removeAll();
+			
+			addGraphic(Image.createRect(96, 96, Main.PINK));
+			
+			var t:Text = new Text("And that is the story\n\nOf these robotic hearts of mine\n\n\nThanks for playing!", 0, 0, {width: 96, wordWrap: true, align: "center"});
+			
+			t.y = (96 - t.height)*0.5;
+			
+			addGraphic(t);
 		}
 		
 		public static function index (i:int, j:int):int {
@@ -348,6 +326,15 @@ package
 		
 		public override function update (): void
 		{
+			if (! levels[id]) {
+				if (Input.mousePressed || Input.pressed(-1)) {
+					FP.world = new Menu;
+				}
+				
+				Mouse.cursor = "auto";
+				return;
+			}
+			
 			if (Input.pressed(Key.ESCAPE)) {
 				FP.world = new Menu;
 			}
@@ -378,7 +365,7 @@ package
 			}
 			
 			if (gameOver) {
-				if (clickThrough && Input.mousePressed) {
+				if (clickThrough && (Input.mousePressed || Input.pressed(-1))) {
 					FP.world = new Level(id+1);
 				}
 			}
@@ -476,12 +463,7 @@ package
 						addGraphic(t3);
 						addGraphic(t4);
 					
-						if (id+1 >= levels.length) {
-							t4.text = "Game over\nYou win!"
-							t4.y -= 8;
-						} else {
-							clickThrough = true;
-						}
+						clickThrough = true;
 					}});
 					
 					for each (h in a) {
@@ -547,7 +529,8 @@ package
 				else reset();
 			}
 			
-			if (Input.pressed(Key.N)) FP.world = new Level(id+1);
+			if (Input.pressed(Key.LEFT) && levels[id-1]) FP.world = new Level(id-1);
+			if (Input.pressed(Key.RIGHT) && levels[id+1]) FP.world = new Level(id+1);
 			
 			for (i = 0; i < 10; i++) {
 				if (Input.pressed(Key.DIGIT_1 + i)) FP.world = new Level(i);

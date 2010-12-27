@@ -37,7 +37,7 @@ line2 9
 And watched as the boy gave his heart to the girl\nAnd she gave hers to him
 heart-swap 8
 
-Suddenly lonely, the robot led them to his old home
+The robot became lonely and led them to his old home
 cross-simple 16
 
 "Please," he said, "so few of these robots are still active"
@@ -46,40 +46,46 @@ cross4 9
 "Cannot you fix them all?" he pleaded
 sparse 12
 
-For the robot hoped to find a love of his own
+And so they worked to repair the aging robots
 cross2 11
 
-But over time the girl had grown tired of the boy and the robots
+The task took weeks
+level4 7
+
+And then months
+corner 7
+
+And over time the girl found she had grown tired of the robots
+level5 8
+
+And she had also grown tired of the boy
 heart-break2 5
 
 And left him for another
 heart-break 3 4
 
-He fell into a deep depression
+In his depression he threw himself into his work
 squareish 20
 
-And he felt a gaping hole in his soul
-bigsquare 23
-
-The robots worked hard to rebuild the boy's broken heart
-heart-build 15
-
-level4 7
-
-corner 7
-
-level5 8
-
+He thought only of the robots to be saved
 square 9
 
+Until finally there were no more robots left
 diamond2 9
 
-Some say he is more robot than boy now
+And in return the robots worked hard to rebuild the boy's broken heart
+heart-build 15
+
+But something was missing
+bigsquare 23
+
+So they gifted him a heart of metal that would never fail
 diamond-large 5 3
 
+A mechanical heart made by machines
 level7 10 1
 
-And that is the story\nof these robotic hearts of mine
+A heartless heart that would not love
 level6 12 1
 
 #diamond
