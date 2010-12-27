@@ -25,7 +25,7 @@ package
 		{
 			if (isLocal) return;
 			
-			Log.LevelCounterMetric("started", id, true);
+			Log.LevelCounterMetric("started", id);
 		}
 
 		public static function restartLevel (id:int): void
@@ -39,7 +39,7 @@ package
 		{
 			if (isLocal) return;
 			
-			Log.LevelCounterMetric("completed", id, true);
+			Log.LevelCounterMetric("completed", id);
 			
 			Log.LevelAverageMetric("time", id, Level(FP.world).time);
 			Log.LevelAverageMetric("clicks", id, Level(FP.world).clicks);

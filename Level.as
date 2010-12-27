@@ -404,11 +404,11 @@ package
 				
 				gameOver = true;
 				
-				time = -1;
-				
 				Audio.play("complete");
 				
 				Logger.endLevel(id);
+				
+				time = -1;
 				
 				var t:Text = new Text("Clicks: " + clicks, 0, 24, {align:"center", size:8, width: 95});
 				var t2:Text = new Text("Previous best: " + previousBest, 0, 40, {align:"center", size:8, width: 95});
