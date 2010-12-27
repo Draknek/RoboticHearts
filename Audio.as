@@ -70,7 +70,10 @@ package
 		
 		public static function stopMusic ():void
 		{
-			if (channels.music) channels.music.stop();
+			if (channels.music) {
+				channels.music.stop();
+				channels.music = null;
+			}
 		}
 		
 		public static function update ():void
@@ -105,6 +108,17 @@ package
 			
 			so.data.mute = _mute;
 			so.flush();
+			
+			if (_mute) {
+				stopMusic();
+			} else if (! (FP.world is Menu)) {
+				startMusic();
+			}
+		}
+		
+		public static function toggleMute ():void
+		{
+			mute = ! _mute;
 		}
 		
 		// Implementation details

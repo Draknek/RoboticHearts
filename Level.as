@@ -36,6 +36,8 @@ package
 		
 		public var actions:Array = [];
 		
+		public var muteOverlay:Graphic;
+		public var muteButton:Button;
 		public var undoButton:Button;
 		public var redoButton:Button;
 		
@@ -164,9 +166,11 @@ package
 			
 			Logger.startLevel(id);
 			
-			add(new Button(0, 0, Button.RESET, reset));
-			add(undoButton = new Button(8, 0, Button.UNDO, undo, true));
-			add(redoButton = new Button(16, 0, Button.REDO, redo, true));
+			add(muteButton = new Button(0, 0, Button.AUDIO, Audio.toggleMute));
+			//addGraphic(muteOverlay = new Stamp(Button.AUDIO_MUTE));
+			add(new Button(8, 0, Button.RESET, reset));
+			add(undoButton = new Button(16, 0, Button.UNDO, undo, true));
+			add(redoButton = new Button(24, 0, Button.REDO, redo, true));
 			
 			var levelIDDisplay:Text = new Text((id+1)+"", 0, -1);
 			levelIDDisplay.x = 96 + 1 - levelIDDisplay.width;

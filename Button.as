@@ -13,6 +13,10 @@ package
 		public static const UNDO: Class;
 		[Embed(source="redo.png")]
 		public static const REDO: Class;
+		[Embed(source="audio.png")]
+		public static const AUDIO: Class;
+		[Embed(source="audio-mute.png")]
+		public static const AUDIO_MUTE: Class;
 		
 		public var image:Image;
 		
