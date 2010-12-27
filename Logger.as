@@ -25,24 +25,24 @@ package
 		{
 			if (isLocal) return;
 			
-			Log.LevelCounterMetric("started", "l"+id, true);
+			Log.LevelCounterMetric("started", id, true);
 		}
 
 		public static function restartLevel (id:int): void
 		{
 			if (isLocal) return;
 			
-			Log.LevelCounterMetric("restarted", "l"+id);
+			Log.LevelCounterMetric("restarted", id);
 		}
 
 		public static function endLevel (id:int): void
 		{
 			if (isLocal) return;
 			
-			Log.LevelCounterMetric("completed", "l"+id, true);
+			Log.LevelCounterMetric("completed", id, true);
 			
-			Log.LevelAverageMetric("time", "l"+id, Level(FP.world).time);
-			Log.LevelAverageMetric("clicks", "l"+id, Level(FP.world).clicks);
+			Log.LevelAverageMetric("time", id, Level(FP.world).time);
+			Log.LevelAverageMetric("clicks", id, Level(FP.world).clicks);
 		}
 
 		public static function alert (message:String): void
