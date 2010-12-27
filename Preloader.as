@@ -1,101 +1,136 @@
 
 package
 {
-	import net.flashpunk.*;
-	import net.flashpunk.graphics.*;
-	import net.flashpunk.utils.*;
-	
-	import flash.display.LoaderInfo;
+	import flash.display.*;
+	import flash.text.*;
+	import flash.events.*;
 	import flash.utils.getDefinitionByName;
 
-	public class Preloader extends World
+	[SWF(width = "384", height = "384")]
+	public class Preloader extends Sprite
 	{
-		private var text: Text;
+		// Change these values
+		private static const mustClick: Boolean = false;
+		private static const mainClassName: String = "Main";
 		
-		private var nextClassName: String;
+		private static const BG_COLOR:uint = 0x222222;
+		private static const FG_COLOR:uint = 0xff3366;
 		
-		private var mustClick: Boolean;
 		
-		public function Preloader (_next: String, _mustClick: Boolean = true)
+		
+		// Ignore everything else
+		
+		
+		
+		private var progressBar: Shape;
+		private var text: TextField;
+		
+		private var px:int;
+		private var py:int;
+		private var w:int;
+		private var h:int;
+		private var sw:int;
+		private var sh:int;
+		
+		[Embed(source = 'net/flashpunk/graphics/04B_03__.TTF', fontFamily = 'default')]
+		private static const FONT:Class;
+		
+		public function Preloader ()
 		{
-			nextClassName = _next;
+			sw = stage.stageWidth;
+			sh = stage.stageHeight;
 			
-			mustClick = _mustClick;
+			w = stage.stageWidth * 0.8;
+			h = 20;
 			
-			text = new Text("0%", 0, 0, 300);
+			px = (sw - w) * 0.5;
+			py = (sh - h) * 0.5;
 			
-			text.align = "center";
+			graphics.beginFill(BG_COLOR);
+			graphics.drawRect(0, 0, sw, sh);
+			graphics.endFill();
 			
-			text.x = (FP.width - text.width) * 0.5;
-			text.y = FP.height * 0.5 + 20;
+			graphics.beginFill(FG_COLOR);
+			graphics.drawRect(px - 2, py - 2, w + 4, h + 4);
+			graphics.endFill();
+			
+			progressBar = new Shape();
+			
+			addChild(progressBar);
+			
+			text = new TextField();
+			
+			text.textColor = FG_COLOR;
+			text.selectable = false;
+			text.mouseEnabled = false;
+			text.defaultTextFormat = new TextFormat("default", 16);
+			text.embedFonts = true;
+			text.autoSize = "left";
+			text.text = "0%";
+			text.x = (sw - text.width) * 0.5;
+			text.y = sh * 0.5 + h;
+			
+			addChild(text);
+			
+			stage.addEventListener(Event.ENTER_FRAME, onEnterFrame);
+			
+			if (mustClick) {
+				stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+			}
 		}
 
-		public override function update (): void
+		public function onEnterFrame (e:Event): void
 		{
 			if (hasLoaded())
 			{
-				if (mustClick)
-				{
-					if (Input.mousePressed)
-					{
-						startup();
-					}
-				}
-				else
-				{
+				graphics.clear();
+				graphics.beginFill(BG_COLOR);
+				graphics.drawRect(0, 0, sw, sh);
+				graphics.endFill();
+				
+				if (! mustClick) {
 					startup();
-				}
-			}
-		}
-		
-		public override function render (): void
-		{
-			if (mustClick && hasLoaded())
-			{
-				text.scale = 2;
+				} else {
+					text.scaleX = 2.0;
+					text.scaleY = 2.0;
 				
-				text.text = "Click to start";
+					text.text = "Click to start";
 			
-				text.x = (FP.width - text.width) * 0.5;
-				text.y = (FP.height - text.height) * 0.5;
-			}
-			else
-			{
-				var w: int = FP.width * 0.8;
+					text.y = (sh - text.height) * 0.5;
+				}
+			} else {
+				var p:Number = (loaderInfo.bytesLoaded / loaderInfo.bytesTotal);
 				
-				FP.rect.x = (FP.width - w - 4) * 0.5;
-				FP.rect.y = FP.height * 0.5 - 12;
-				FP.rect.width = w + 4;
-				FP.rect.height = 24;
-				
-				FP.buffer.fillRect(FP.rect, 0xFFFFFFFF);
-				
-				var p:Number = (FP.stage.loaderInfo.bytesLoaded / FP.stage.loaderInfo.bytesTotal);
-				
-				FP.rect.x = (FP.width - w) * 0.5;
-				FP.rect.y = FP.height * 0.5 - 10;
-				FP.rect.width = p * w;
-				FP.rect.height = 20;
-				
-				FP.buffer.fillRect(FP.rect, 0xFF000000);
+				progressBar.graphics.clear();
+				progressBar.graphics.beginFill(BG_COLOR);
+				progressBar.graphics.drawRect(px, py, p * w, h);
+				progressBar.graphics.endFill();
 				
 				text.text = int(p * 100) + "%";
 			}
 			
-			FP.point.x = 0;
-			FP.point.y = 0;
-			text.render(FP.point, FP.zero);
+			text.x = (sw - text.width) * 0.5;
+		}
+		
+		private function onMouseDown(e:MouseEvent):void {
+			if (hasLoaded())
+			{
+				stage.removeEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+				startup();
+			}
 		}
 		
 		private function hasLoaded (): Boolean {
-			return (FP.stage.loaderInfo.bytesLoaded >= FP.stage.loaderInfo.bytesTotal);
+			return (loaderInfo.bytesLoaded >= loaderInfo.bytesTotal);
 		}
 		
-		private function startup (): void
-		{
-			var worldClass:Class = getDefinitionByName(nextClassName) as Class;
+		private function startup (): void {
+			stage.removeEventListener(Event.ENTER_FRAME, onEnterFrame);
 			
-			FP.world = new worldClass() as World;
+			var mainClass:Class = getDefinitionByName(mainClassName) as Class;
+			parent.addChild(new mainClass as DisplayObject);
+			
+			parent.removeChild(this);
 		}
 	}
 }
