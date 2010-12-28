@@ -167,15 +167,17 @@ package
 			
 			Logger.startLevel(id);
 			
+			add(redoButton = new Button(24, 0, Button.REDO, redo, "Redo", true));
+			add(undoButton = new Button(16, 0, Button.UNDO, undo, "Undo", true));
+			add(resetButton = new Button(8, 0, Button.RESET, reset, "Reset"));
+			
 			add(muteButton = new Button(0, 0, Button.AUDIO, Audio.toggleMute));
 			add(muteOverlay = new Button(0, 0, Button.AUDIO_MUTE, null));
+			
 			muteOverlay.normalColor = Main.PINK;
 			muteOverlay.hoverColor = Main.WHITE;
 			muteOverlay.visible = Audio.mute;
-			muteButton.helpText = Audio.mute ? "Unmute" : "Mute";
-			add(resetButton = new Button(8, 0, Button.RESET, reset, "Reset"));
-			add(undoButton = new Button(16, 0, Button.UNDO, undo, "Undo", true));
-			add(redoButton = new Button(24, 0, Button.REDO, redo, "Redo", true));
+			muteOverlay.helpText = Audio.mute ? "Unmute" : "Mute";
 			
 			var levelIDDisplay:Text = new Text((id+1)+"", 0, -1);
 			levelIDDisplay.x = 96 + 1 - levelIDDisplay.width;
