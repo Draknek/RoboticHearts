@@ -111,7 +111,6 @@ package
 			
 			if (FP.world is Level) {
 				Level(FP.world).muteOverlay.visible = _mute;
-				Level(FP.world).muteOverlay.helpText = mute ? "Unmute" : "Mute";
 			}
 			
 			if (_mute) {
