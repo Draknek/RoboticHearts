@@ -36,8 +36,8 @@ package
 		
 		public var actions:Array = [];
 		
-		public var muteOverlay:Graphic;
 		public var muteButton:Button;
+		public var muteOverlay:Button;
 		public var undoButton:Button;
 		public var redoButton:Button;
 		
@@ -167,7 +167,10 @@ package
 			Logger.startLevel(id);
 			
 			add(muteButton = new Button(0, 0, Button.AUDIO, Audio.toggleMute));
-			//addGraphic(muteOverlay = new Stamp(Button.AUDIO_MUTE));
+			add(muteOverlay = new Button(0, 0, Button.AUDIO_MUTE, null));
+			muteOverlay.normalColor = Main.PINK;
+			muteOverlay.hoverColor = Main.WHITE;
+			muteOverlay.visible = Audio.mute;
 			add(new Button(8, 0, Button.RESET, reset));
 			add(undoButton = new Button(16, 0, Button.UNDO, undo, true));
 			add(redoButton = new Button(24, 0, Button.REDO, redo, true));

@@ -109,6 +109,10 @@ package
 			so.data.mute = _mute;
 			so.flush();
 			
+			if (FP.world is Level) {
+				Level(FP.world).muteOverlay.visible = _mute;
+			}
+			
 			if (_mute) {
 				stopMusic();
 			} else if (! (FP.world is Menu)) {
