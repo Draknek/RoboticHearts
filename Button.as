@@ -20,7 +20,8 @@ package
 		
 		public var image:Image;
 		
-		private var _disabled:Boolean = false;
+		private var _disabled:Boolean = false;		
+		private var _helpText:Text;
 		
 		public var callback:Function;
 		
@@ -28,7 +29,7 @@ package
 		public var hoverColor:uint = Main.PINK;
 		public var disabledColor:uint = Main.GREY;
 		
-		public function Button (_x:int, _y:int, _gfx:*, _callback:Function, __disabled:Boolean = false)
+		public function Button (_x:int, _y:int, _gfx:*, _callback:Function, __helpText:String = null, __disabled:Boolean = false)
 		{
 			x = _x;
 			y = _y;
@@ -48,6 +49,8 @@ package
 			callback = _callback;
 			
 			disabled = __disabled;
+			
+			helpText = __helpText;
 		}
 		
 		public override function update (): void
@@ -67,6 +70,26 @@ package
 			}
 		}
 		
+		public override function render (): void
+		{
+			super.render();
+			
+			var over:Boolean = collidePoint(x, y, world.mouseX, world.mouseY);
+			
+			if (over && _helpText) {
+				_helpText.x = world.mouseX;
+				_helpText.y = world.mouseY + 2;
+				
+				FP.rect.x = _helpText.x + 1;
+				FP.rect.y = _helpText.y + 2;
+				FP.rect.width = _helpText.textWidth - 3;
+				FP.rect.height = _helpText.textHeight - 5;
+				FP.buffer.fillRect(FP.rect, Main.GREY);
+				
+				_helpText.render(FP.buffer, FP.zero, FP.camera);
+			}
+		}
+		
 		public function get disabled ():Boolean {
 			return _disabled;
 		}
@@ -77,6 +100,23 @@ package
 			if (_disabled) image.color = disabledColor;
 			
 			type = b ? null : "button";
+		}
+		
+		public function get helpText ():String {
+			return _helpText ? _helpText.text : "";
+		}
+		
+		public function set helpText (s:String):void {
+			if (! s) {
+				_helpText = null;
+				return;
+			}
+			
+			if (! _helpText) {
+				_helpText = new Text(s);
+			} else {
+				_helpText.text = s;
+			}
 		}
 	}
 }

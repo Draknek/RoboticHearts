@@ -38,6 +38,7 @@ package
 		
 		public var muteButton:Button;
 		public var muteOverlay:Button;
+		public var resetButton:Button;
 		public var undoButton:Button;
 		public var redoButton:Button;
 		
@@ -171,9 +172,10 @@ package
 			muteOverlay.normalColor = Main.PINK;
 			muteOverlay.hoverColor = Main.WHITE;
 			muteOverlay.visible = Audio.mute;
-			add(new Button(8, 0, Button.RESET, reset));
-			add(undoButton = new Button(16, 0, Button.UNDO, undo, true));
-			add(redoButton = new Button(24, 0, Button.REDO, redo, true));
+			muteButton.helpText = Audio.mute ? "Unmute" : "Mute";
+			add(resetButton = new Button(8, 0, Button.RESET, reset, "Reset"));
+			add(undoButton = new Button(16, 0, Button.UNDO, undo, "Undo", true));
+			add(redoButton = new Button(24, 0, Button.REDO, redo, "Redo", true));
 			
 			var levelIDDisplay:Text = new Text((id+1)+"", 0, -1);
 			levelIDDisplay.x = 96 + 1 - levelIDDisplay.width;
