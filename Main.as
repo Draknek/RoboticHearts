@@ -4,6 +4,7 @@ package
 	import net.flashpunk.graphics.*;
 	
 	import flash.net.*;
+	import flash.display.*;
 	
 	[SWF(width = "384", height = "384", backgroundColor="#202020")]
 	public class Main extends Engine
@@ -45,6 +46,13 @@ package
 			super.update();
 			
 			Audio.update();
+		}
+		
+		public override function setStageProperties():void
+		{
+			super.setStageProperties();
+			stage.align = StageAlign.TOP;
+			stage.scaleMode = StageScaleMode.SHOW_ALL;
 		}
 		
 		public function sitelock (allowed:*):Boolean
