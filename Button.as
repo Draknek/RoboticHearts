@@ -22,6 +22,7 @@ package
 		
 		private var _disabled:Boolean = false;		
 		private var _helpText:Text;
+		private var hoverTimer:int = 0;
 		
 		public var callback:Function;
 		
@@ -57,12 +58,24 @@ package
 		{
 			if (!world) return;
 			
+			var over:Boolean = collidePoint(x, y, world.mouseX, world.mouseY);
+			
+			if (over && _helpText) {
+				hoverTimer++;
+				
+				if (hoverTimer <= 60) {
+					_helpText.x = world.mouseX;
+					_helpText.y = world.mouseY + 2;
+				}
+			} else {
+				hoverTimer = 0;
+			}
+			
 			if (disabled) {
 				image.color = disabledColor;
 				return;
 			}
 			
-			var over:Boolean = collidePoint(x, y, world.mouseX, world.mouseY);
 			image.color = (over) ? hoverColor : normalColor;
 			
 			if (over && Input.mousePressed && callback != null) {
@@ -74,11 +87,8 @@ package
 		{
 			super.render();
 			
-			var over:Boolean = collidePoint(x, y, world.mouseX, world.mouseY);
-			
-			if (over && _helpText) {
-				_helpText.x = world.mouseX;
-				_helpText.y = world.mouseY + 2;
+			if (_helpText && hoverTimer > 60) {
+				
 				
 				FP.rect.x = _helpText.x + 1;
 				FP.rect.y = _helpText.y + 2;
