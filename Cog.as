@@ -15,6 +15,8 @@ package
 		
 		public static var rotating:Cog = null;
 		
+		public var over:Boolean = false;
+		
 		public function Cog (_x:int = 0, _y:int = 0)
 		{
 			x = _x*8 + 8;
@@ -62,9 +64,9 @@ package
 				return;	
 			}
 			
-			var over:Boolean = collidePoint(x, y, world.mouseX, world.mouseY);
-			image.color = (over) ? Main.PINK : Main.WHITE;
-			//sprite.frame = (over) ? 1 : 0;
+			if (collidePoint(x, y, world.mouseX, world.mouseY)) {
+				over = true;
+			}
 			
 			if (over) {
 				a = [];
@@ -73,17 +75,31 @@ package
 				
 				var other:Cog;
 				
-				for each (other in getLinkedCogs()) world.collideRectInto("heart", other.x - 16, other.y - 16, 32, 32, a);
-				for each (other in getMirroredCogs()) world.collideRectInto("heart", other.x - 16, other.y - 16, 32, 32, a);
+				for each (other in getLinkedCogs()) {
+					world.collideRectInto("heart", other.x - 16, other.y - 16, 32, 32, a);
+					other.over = true;
+				}
+				
+				for each (other in getMirroredCogs()) {
+					world.collideRectInto("heart", other.x - 16, other.y - 16, 32, 32, a);
+					other.over = true;
+				}
 				
 				for each (h in a) {
 					h.highlight = true;
 				}
 			}
 			
-			if (over && Input.mousePressed) {
+			if (collidePoint(x, y, world.mouseX, world.mouseY) && Input.mousePressed) {
 				Level(world).actions.push(this);
 			}
+		}
+		
+		public override function render (): void
+		{
+			image.color = (over) ? Main.PINK : Main.WHITE;
+			//sprite.frame = (over) ? 1 : 0;
+			super.render();
 		}
 		
 		private function getLinkedCogs ():Array {

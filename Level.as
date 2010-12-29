@@ -380,7 +380,16 @@ package
 				}
 			}
 			
+			var cog:Cog;
+			
 			var a:Array;
+			
+			a = [];
+			getType("cog", a);
+			
+			for each (cog in a) {
+				cog.over = false;
+			}
 			
 			a = [];
 			
@@ -501,7 +510,7 @@ package
 						Cog.rotating = null;
 					}
 				
-					for each (var cog:Cog in a) {
+					for each (cog in a) {
 						FP.tween(cog.image, {angle: cog.image.angle+180}, 12, {complete: f});
 						f = null;
 					}
