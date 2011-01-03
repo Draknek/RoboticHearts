@@ -4,6 +4,9 @@ simple 2
 Once\nwas a young boy\nand a young girl
 isolated 3
 
+They were the best of friends
+reckoner 4
+
 And they danced together
 simple2 4
 
@@ -29,12 +32,11 @@ Swapping its old rusty parts with gleaming new replacements
 diagonals 12
 
 And when he was fixed the trio played together for a time
-ellipsis 10
-
-And the robot marvelled at the love he saw between the boy and the girl
 line2 9
 
-And watched as the boy gave his heart to the girl\nAnd she gave hers to him
+#And the robot marvelled at the love he saw between the boy and the girl
+
+And he watched as the boy gave his heart to the girl\nAnd she gave hers to him
 heart-swap 7
 
 The robot became lonely and led them to his old home
@@ -44,10 +46,10 @@ cross-simple 16
 cross4 9
 
 "Cannot you fix them all?" he pleaded
-sparse 12
+cross2 11
 
 And so they worked to repair the aging robots
-cross2 11
+ellipsis 10
 
 The task took weeks
 level4 7
@@ -94,6 +96,7 @@ level6 12 1
 #hearts
 #cross 52
 #cross3 32
+#sparse 12
 #lonely 2
 #
 #The boy sent robots to talk to the girl but she would turn them away
