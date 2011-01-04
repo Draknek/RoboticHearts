@@ -360,6 +360,7 @@ package
 			
 			if (Input.pressed(Key.E)) {
 				editing = !editing;
+				minClicks = 0;
 				resetState();
 			}
 			
