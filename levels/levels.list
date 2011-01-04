@@ -8,16 +8,16 @@ They were the best of friends
 reckoner 4
 
 And they danced together
-simple2 4
+simple2-simpler 4
 
 And they played together
 outsider 7
 
 And for a brief time, they knew love
-heart 6
+heart-simpler 6
 
 But nothing is simple forever
-simple3 10
+simple3-simpler 9
 
 And two lives are more complex than one
 eyes 11
@@ -32,7 +32,7 @@ Swapping its old rusty parts with gleaming new replacements
 diagonals 12
 
 And when he was fixed the trio played together for a time
-line2 9
+line2-simpler 9
 
 #And the robot marvelled at the love he saw between the boy and the girl
 
@@ -98,6 +98,12 @@ level6 12 1
 #cross3 32
 #sparse 12
 #lonely 2
+#
+# Created simpler versions:
+#simple2 4
+#heart 6
+#simple3 10
+#line2 9
 #
 #The boy sent robots to talk to the girl but she would turn them away
 #chain 25
