@@ -18,7 +18,7 @@ package
 			
 			if (isLocal) return;
 			
-			Log.View(1401, "0a6c8f42570e464e", obj.stage.loaderInfo.loaderURL);
+			Log.View(Secret.PLAYTOMIC_SWFID, Secret.PLAYTOMIC_GUID, obj.stage.loaderInfo.loaderURL);
 		}
 		
 		public static function startLevel (id:int): void
