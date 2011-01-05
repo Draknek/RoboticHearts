@@ -36,6 +36,7 @@ package
 		
 		public var actions:Array = [];
 		
+		public var menuButton:Button;
 		public var muteButton:Button;
 		public var muteOverlay:Button;
 		public var resetButton:Button;
@@ -167,12 +168,20 @@ package
 			
 			Logger.startLevel(id);
 			
-			add(redoButton = new Button(24, 0, Button.REDO, redo, "Redo", true));
-			add(undoButton = new Button(16, 0, Button.UNDO, undo, "Undo", true));
-			add(resetButton = new Button(8, 0, Button.RESET, reset, "Reset"));
+			add(redoButton = new Button(0, 0, Button.REDO, redo, "Redo", true));
+			add(undoButton = new Button(0, 0, Button.UNDO, undo, "Undo", true));
+			add(resetButton = new Button(0, 0, Button.RESET, reset, "Reset"));
 			
 			add(muteButton = new Button(0, 0, Button.AUDIO, Audio.toggleMute, "Mute"));
 			add(muteOverlay = new Button(0, 0, Button.AUDIO_MUTE, null, "Unmute"));
+			
+			add(menuButton = new Button(0, 0, Button.MENU, gotoMenu, "Menu"));
+			
+			muteButton.x = menuButton.x + menuButton.width;
+			resetButton.x = muteButton.x + muteButton.width;
+			undoButton.x = resetButton.x + resetButton.width;
+			redoButton.x = undoButton.x + undoButton.width;
+			muteOverlay.x = muteButton.x;
 			
 			muteOverlay.normalColor = Main.PINK;
 			muteOverlay.hoverColor = Main.WHITE;
@@ -253,6 +262,11 @@ package
 		
 		public function get (i:int, j:int):Entity {
 			return lookup[index(i, j)];
+		}
+		
+		public function gotoMenu ():void
+		{
+			FP.world = new Menu;
 		}
 		
 		public function reset ():void
@@ -346,7 +360,7 @@ package
 			}
 			
 			if (Input.pressed(Key.ESCAPE)) {
-				FP.world = new Menu;
+				gotoMenu();
 			}
 			
 			if (storyText) {

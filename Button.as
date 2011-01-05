@@ -17,6 +17,8 @@ package
 		public static const AUDIO: Class;
 		[Embed(source="audio-mute.png")]
 		public static const AUDIO_MUTE: Class;
+		[Embed(source="menu.png")]
+		public static const MENU: Class;
 		
 		public var image:Image;
 		
@@ -34,6 +36,8 @@ package
 		{
 			x = _x;
 			y = _y;
+			
+			layer = -5;
 			
 			if (_gfx is Image) {
 				image = _gfx as Image;
