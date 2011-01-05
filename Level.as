@@ -494,15 +494,16 @@ package
 				
 				FP.tween(this, {}, 50, {complete: function ():void {
 					FP.tween(this, {}, 30, {complete: function ():void {
-						addGraphic(t);
-						addGraphic(t2);
-						addGraphic(t3);
-						addGraphic(t4);
+						addGraphic(t, -15);
+						addGraphic(t2, -15);
+						addGraphic(t3, -15);
+						addGraphic(t4, -15);
 					
 						clickThrough = true;
 					}});
 					
 					for each (h in a) {
+						h.layer = -10;
 						h.active = false;
 						FP.tween(h, {x: 32, y:48}, 60, {tweener:world, ease: Ease.sineIn});
 						FP.tween(h.image, {scale: 32, originX: 4.5}, 60, {ease: Ease.sineIn});
