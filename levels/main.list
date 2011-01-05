@@ -51,14 +51,11 @@ cross4 9
 And so they worked to repair the aging robots
 ellipsis 10
 
-The task took weeks
-level4 7
+#The task took weeks
 
-And then months
-corner 7
+#And then months
 
-And over time the girl found she had grown tired of the robots
-level5 8
+#And over time the girl found she had grown tired of the robots
 
 And she had also grown tired of the boy
 heart-break2 5
@@ -69,8 +66,7 @@ heart-break 3 4
 In his depression he threw himself into his work
 squareish 13
 
-He thought only of the robots to be saved
-square 9
+#He thought only of the robots to be saved
 
 Until finally there were no more robots left
 diamond2 9
@@ -84,11 +80,9 @@ bigsquare 23
 So they gifted him a heart of metal that would never fail
 diamond-large 5 3
 
-A mechanical heart made by machines
-level7 10 1
+#A mechanical heart made by machines
 
-A heartless heart that would not love
-level6 12 1
+#A heartless heart that would not love
 
 #diamond
 #interesting
@@ -98,12 +92,6 @@ level6 12 1
 #cross3 32
 #sparse 12
 #lonely 2
-#
-# Created simpler versions:
-#simple2 4
-#heart 6
-#simple3 10
-#line2 9
 #
 #The boy sent robots to talk to the girl but she would turn them away
 #chain 25

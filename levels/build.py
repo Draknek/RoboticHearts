@@ -6,7 +6,7 @@ import os
 def bin (num): 
 	return pack('>i', num)
 
-input = open('levels.list')
+input = open('main.list')
 
 levels = input.read().split("\n\n")
 
@@ -46,7 +46,7 @@ for info in levels:
 	clicks.append(clickcount)
 
 
-output = open('all.lvl', 'wb')
+output = open('main.lvls', 'wb')
 
 output.write(bin(len(filenames)))
 
@@ -74,7 +74,7 @@ for filename in filenames:
 output.close()
 
 
-output = open('story.txt', 'w')
+output = open('main.story.txt', 'w')
 
 for line in story:
 	output.write(line.strip())

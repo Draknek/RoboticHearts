@@ -44,10 +44,10 @@ package
 		
 		public var reseting:Boolean = false;
 		
-		[Embed(source="levels/all.lvl", mimeType="application/octet-stream")]
+		[Embed(source="levels/main.lvls", mimeType="application/octet-stream")]
 		public static const LEVELS:Class;
 		
-		[Embed(source="levels/story.txt", mimeType="application/octet-stream")]
+		[Embed(source="levels/main.story.txt", mimeType="application/octet-stream")]
 		public static const STORY:Class;
 		
 		public static var levels:Array;

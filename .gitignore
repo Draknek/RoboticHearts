@@ -2,6 +2,6 @@
 .FW.*
 *.swf
 www
-levels/all.lvl
-levels/story.txt
+levels/*.lvls
+levels/*.story.txt
 Secret.as
