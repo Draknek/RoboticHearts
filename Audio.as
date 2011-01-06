@@ -8,7 +8,8 @@ package
 	import flash.ui.ContextMenu;
 	import flash.ui.ContextMenuItem;
 	import net.flashpunk.utils.Key;
-	import net.flashpunk.FP;
+	import net.flashpunk.*;
+	import net.flashpunk.tweens.misc.*;
 	
 	public class Audio
 	{
@@ -21,7 +22,10 @@ package
 		
 		public static var rotate:Sound = new rotateSfx;
 		public static var complete:Sound = new beatSfx;
-		public static var music:Sound = new musicSfx;
+		
+		public static var music:Sfx = new Sfx(musicSfx);
+		
+		public static var volTween:VarTween = new VarTween;
 		
 		public static var channels:Object = {};
 		
@@ -42,10 +46,12 @@ package
 			addContextMenu(o);
 			
 			if (o.stage) {
-				addKeyListener(o.stage);
+				addStageListeners(o.stage);
 			} else {
 				o.addEventListener(Event.ADDED_TO_STAGE, stageAdd);
 			}
+			
+			FP.tweener.addTween(volTween);
 		}
 		
 		public static function play (sound:String):void
@@ -65,15 +71,24 @@ package
 		
 		public static function startMusic ():void
 		{
-			if (! _mute) channels.music = music.play(0, int.MAX_VALUE);
+			if (_mute) return;
+			
+			music.loop(music.volume);
+			volTween.tween(music, "volume", 1.0, 30);
 		}
 		
 		public static function stopMusic ():void
 		{
-			if (channels.music) {
-				channels.music.stop();
-				channels.music = null;
-			}
+			volTween.tween(music, "volume", 0.0, 30);
+		}
+		
+		public static function resumeMusic ():void
+		{
+			if (_mute) return;
+			
+			if (! music.playing) music.loop(music.volume);
+			
+			volTween.tween(music, "volume", 1.0, 30);
 		}
 		
 		public static function update ():void
@@ -116,7 +131,7 @@ package
 			if (_mute) {
 				stopMusic();
 			} else if (! (FP.world is Menu)) {
-				startMusic();
+				resumeMusic();
 			}
 		}
 		
@@ -129,7 +144,7 @@ package
 		
 		private static function stageAdd (e:Event):void
 		{
-			addKeyListener(e.target.stage);
+			addStageListeners(e.target.stage);
 		}
 		
 		private static function addContextMenu (o:InteractiveObject):void
@@ -147,9 +162,11 @@ package
 			o.contextMenu = menu;
 		}
 		
-		private static function addKeyListener (stage:Stage):void
+		private static function addStageListeners (stage:Stage):void
 		{
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyListener);
+			stage.addEventListener(Event.ACTIVATE, focusGain);
+			stage.addEventListener(Event.DEACTIVATE, focusLost);
 		}
 		
 		private static function keyListener (e:KeyboardEvent):void
@@ -162,6 +179,18 @@ package
 		private static function menuListener (e:ContextMenuEvent):void
 		{
 			mute = ! mute;
+		}
+		
+		private static function focusGain (e:Event):void
+		{
+			if (! (FP.world is Menu)) {
+				resumeMusic();
+			}
+		}
+		
+		private static function focusLost (e:Event):void
+		{
+			stopMusic();
 		}
 	}
 }
