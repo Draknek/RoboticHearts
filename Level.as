@@ -63,6 +63,7 @@ package
 		public var mirrorX:Boolean = false;
 		public var mirrorY:Boolean = false;
 		public var stopSpinHack:Boolean = false;
+		public var wasUnfocused:Boolean = false;
 		
 		public static function loadLevels():void
 		{
@@ -356,6 +357,18 @@ package
 				}
 				
 				Mouse.cursor = "auto";
+				return;
+			}
+			
+			if (! FP.focused) {
+				Mouse.cursor = "auto";
+				wasUnfocused = true;
+				return;
+			}
+			
+			// Skip a frame on re-focusing so we don't handle mouse clicks
+			if (wasUnfocused) {
+				wasUnfocused = false;
 				return;
 			}
 			
