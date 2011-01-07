@@ -65,6 +65,12 @@ package
 			levelsButton.y = 60;
 			
 			add(levelsButton);
+			
+			var oldScreen:Image = new Image(FP.buffer.clone());
+			
+			addGraphic(oldScreen, -10);
+			
+			FP.tween(oldScreen, {alpha: 0}, 60, {ease:Ease.sineIn, tweener:this});
 		}
 		
 		private function addLevelButton (i:int):Button
@@ -100,16 +106,6 @@ package
 			add(b);
 			
 			return b;
-		}
-		
-		public override function begin ():void
-		{
-			Audio.stopMusic();
-		}
-		
-		public override function end ():void
-		{
-			Audio.startMusic();
 		}
 		
 		public override function update ():void

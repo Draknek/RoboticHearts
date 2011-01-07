@@ -84,7 +84,7 @@ package
 		
 		public static function resumeMusic ():void
 		{
-			if (_mute) return;
+			if (_mute || FP.world is Intro) return;
 			
 			if (! music.playing) music.loop(music.volume);
 			
@@ -183,9 +183,7 @@ package
 		
 		private static function focusGain (e:Event):void
 		{
-			if (! (FP.world is Menu)) {
-				resumeMusic();
-			}
+			resumeMusic();
 		}
 		
 		private static function focusLost (e:Event):void
