@@ -17,6 +17,9 @@ package
 		public var heart:Spritemap;
 		public var heart2:Spritemap;
 		
+		public var normalLevels:Array = [];
+		public var perfectionLevels:Array = [];
+		
 		public function Menu ()
 		{
 			addGraphic(new Text("These Robotic\nHearts of Mine", 1, 8, {align: "center", size:8, width:96, scrollX:0}));
@@ -36,10 +39,24 @@ package
 			for (var i:int = 0; i < Level.levels.length; i++) {
 				var b:Button = addLevelButton(i);
 				
+				normalLevels.push(b);
+				
 				if (resumeLevel < 0 && b.normalColor == Main.WHITE) {
 					resumeLevel = i;
 				}
 			}
+			
+			for (i = 0; i < Level.perfectionLevels.length; i++) {
+				b = addLevelButton(i, "perfection");
+				
+				perfectionLevels.push(b);
+				
+				if (resumeLevel < 0 && b.normalColor == Main.WHITE) {
+					resumeLevel = i;
+				}
+			}
+			
+			perfectionLevels.push(new Entity(96, 0, new Text("Perfection levels:", 1, 36, {width: 96, align: "center"})));
 			
 			var playText:String = (resumeLevel == 0) ? "Play" : "Resume";
 			
@@ -53,18 +70,29 @@ package
 			});
 			
 			playButton.x = 48 - playButton.width*0.5;
-			playButton.y = 44;
+			playButton.y = 36;
 			
 			add(playButton);
 			
-			var levelsButton:Button = new Button(0, 0, new Text("Levels"), function ():void {
+			var levelsButton:Button = new Button(0, 0, new Text("Level select"), function ():void {
+				addList(normalLevels);
 				FP.tween(FP.camera, {x: 96}, 30, {ease: Ease.sineIn});
 			});
 			
 			levelsButton.x = 48 - levelsButton.width*0.5;
-			levelsButton.y = 60;
+			levelsButton.y = 52;
 			
 			add(levelsButton);
+			
+			var bonusButton:Button = new Button(0, 0, new Text("Bonus levels"), function ():void {
+				addList(perfectionLevels);
+				FP.tween(FP.camera, {x: 96}, 30, {ease: Ease.sineIn});
+			});
+			
+			bonusButton.x = 48 - bonusButton.width*0.5;
+			bonusButton.y = 68;
+			
+			add(bonusButton);
 			
 			var oldScreen:Image = new Image(FP.buffer.clone());
 			
@@ -73,16 +101,23 @@ package
 			FP.tween(oldScreen, {alpha: 0}, 60, {ease:Ease.sineIn, tweener:this});
 		}
 		
-		private function addLevelButton (i:int):Button
+		private function addLevelButton (i:int, mode:String = null):Button
 		{
 			var b:Button = new Button(0, 0, new Text((i+1)+"", 0, 0, {width: 14, align:"center"}), function ():void {
-				FP.world = new Level(i);
+				FP.world = new Level(i, mode);
 			});
 			
-			b.x = 96 + 6 + (i%6)*14;
-			b.y = 30 + int(i / 6) * 12;
+			if (mode) {
+				b.x = 96 + 6 + 7 + (i%5)*14;
+				b.y = 48 + int(i / 5) * 12;
+			} else {
+				b.x = 96 + 6 + (i%6)*14;
+				b.y = 34 + int(i / 6) * 12;
+			}
 			
-			var md5:String = MD5.hashBytes(Level.levels[i]);
+			var md5:String = MD5.hashBytes(mode ? Level.perfectionLevels[i] : Level.levels[i]);
+			
+			if (mode) i += Level.levels.length;
 			
 			if (Main.so.data.levels[md5] && Main.so.data.levels[md5].completed) {
 				if (Main.so.data.levels[md5].leastClicks
@@ -97,13 +132,13 @@ package
 					bitmap.setPixel32(10, 0, 0x0);
 					bitmap.setPixel32(10, 6, 0x0);
 					bitmap.setPixel32(0, 6, 0x0);
-					addGraphic(new Stamp(bitmap), 10, b.x+1, b.y+2);
+					b.graphic = new Graphiclist(new Stamp(bitmap, 1, 2), b.graphic);
 				} else {
 					b.normalColor = 0x00FF00;
 				}
 			}
 			
-			add(b);
+			if (mode) i -= Level.levels.length;
 			
 			return b;
 		}
@@ -117,7 +152,10 @@ package
 			}
 			
 			if (Input.pressed(Key.ESCAPE)) {
-				FP.tween(FP.camera, {x: 0}, 30, {ease: Ease.sineIn});
+				FP.tween(FP.camera, {x: 0}, 30, {ease: Ease.sineIn, complete:function():void{
+					removeList(normalLevels);
+					removeList(perfectionLevels);
+				}});
 			}
 			
 			var step:int = 50;

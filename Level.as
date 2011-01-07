@@ -48,10 +48,14 @@ package
 		[Embed(source="levels/main.lvls", mimeType="application/octet-stream")]
 		public static const LEVELS:Class;
 		
+		[Embed(source="levels/perfection.lvls", mimeType="application/octet-stream")]
+		public static const PERFECTION_LEVELS:Class;
+		
 		[Embed(source="levels/main.story.txt", mimeType="application/octet-stream")]
 		public static const STORY:Class;
 		
 		public static var levels:Array;
+		public static var perfectionLevels:Array;
 		public static var story:Array;
 		public static var special:Array;
 		public static var minClicksArray:Array;
@@ -59,6 +63,8 @@ package
 		public var storyText:Image;
 		public var clickCounter:Text;
 		public var minClicks:int;
+		
+		public var mode:String;
 		
 		public var mirrorX:Boolean = false;
 		public var mirrorY:Boolean = false;
@@ -70,6 +76,7 @@ package
 			var storyText:String = new STORY;
 			story = storyText.split("\n");
 			levels = [];
+			perfectionLevels = [];
 			special = [];
 			minClicksArray = [];
 			
@@ -93,6 +100,28 @@ package
 				data.readBytes(levelData, 0, levelSize);
 				
 				levels.push(levelData);
+			}
+			
+			data = new PERFECTION_LEVELS;
+			
+			data.position = 0;
+			
+			levelCount = data.readInt();
+			
+			for (i = 0; i < levelCount; i++) {
+				clickCount = data.readInt();
+				flags = data.readInt();
+				
+				minClicksArray.push(clickCount);
+				special.push(flags);
+				
+				levelSize = data.readInt();
+				
+				levelData = new ByteArray;
+			
+				data.readBytes(levelData, 0, levelSize);
+				
+				perfectionLevels.push(levelData);
 			}
 		}
 		
@@ -163,9 +192,11 @@ package
 			}
 		}
 		
-		public function Level (_id:int = 0)
+		public function Level (_id:int = 0, _mode:String = null)
 		{
-			id = _id;
+			mode = _mode;
+			
+			id = _id + (mode ? levels.length : 0);
 			
 			Logger.startLevel(id);
 			
@@ -236,7 +267,7 @@ package
 				if (flags & 4) stopSpinHack = true;
 			}
 			
-			var _data:ByteArray = levels[id];
+			var _data:ByteArray = mode ? perfectionLevels[_id] : levels[id];
 			
 			if (_data) {
 				setWorldData(_data);
@@ -351,7 +382,7 @@ package
 		
 		public override function update (): void
 		{
-			if (! levels[id]) {
+			if (!mode && ! levels[id]) {
 				if (Input.mousePressed || Input.pressed(-1)) {
 					FP.world = new Menu;
 				}
