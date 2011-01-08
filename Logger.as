@@ -21,28 +21,28 @@ package
 			Log.View(Secret.PLAYTOMIC_SWFID, Secret.PLAYTOMIC_GUID, obj.stage.loaderInfo.loaderURL);
 		}
 		
-		public static function startLevel (id:int): void
+		public static function startLevel (id:int, mode:String): void
 		{
 			if (isLocal) return;
 			
-			Log.LevelCounterMetric("started", id);
+			Log.LevelCounterMetric("started", l(id, mode));
 		}
 
-		public static function restartLevel (id:int): void
+		public static function restartLevel (id:int, mode:String): void
 		{
 			if (isLocal) return;
 			
-			Log.LevelCounterMetric("restarted", id);
+			Log.LevelCounterMetric("restarted", l(id, mode));
 		}
 
-		public static function endLevel (id:int): void
+		public static function endLevel (id:int, mode:String): void
 		{
 			if (isLocal) return;
 			
-			Log.LevelCounterMetric("completed", id);
+			Log.LevelCounterMetric("completed", l(id, mode));
 			
-			Log.LevelAverageMetric("time", id, Level(FP.world).time);
-			Log.LevelAverageMetric("clicks", id, Level(FP.world).clicks);
+			Log.LevelAverageMetric("time", l(id, mode), Level(FP.world).time);
+			Log.LevelAverageMetric("clicks", l(id, mode), Level(FP.world).clicks);
 		}
 
 		public static function alert (message:String): void
@@ -56,6 +56,19 @@ package
 			var loader:URLLoader = new URLLoader(request);
 			
 			trace(message);
+		}
+		
+		private static function l (id:int, mode:String):String
+		{
+			var s:String = "b";
+			
+			if (mode == "perfection") s += "*";
+			
+			if (id < 10) s += "0";
+			
+			s += id;
+			
+			return s;
 		}
 	}
 }

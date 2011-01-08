@@ -54,11 +54,7 @@ package
 		[Embed(source="levels/main.story.txt", mimeType="application/octet-stream")]
 		public static const STORY:Class;
 		
-		public static var levels:Array;
-		public static var perfectionLevels:Array;
-		public static var story:Array;
-		public static var special:Array;
-		public static var minClicksArray:Array;
+		public static var levelPacks:Object = {};
 		
 		public var storyText:Image;
 		public var clickCounter:Text;
@@ -71,16 +67,23 @@ package
 		public var stopSpinHack:Boolean = false;
 		public var wasUnfocused:Boolean = false;
 		
-		public static function loadLevels():void
+		public static function loadLevels ():void
 		{
-			var storyText:String = new STORY;
-			story = storyText.split("\n");
-			levels = [];
-			perfectionLevels = [];
-			special = [];
-			minClicksArray = [];
+			loadLevels2("normal", new LEVELS, new STORY);
+			loadLevels2("perfection", new PERFECTION_LEVELS);
+		}
+		
+		private static function loadLevels2(mode:String, data:ByteArray, storyText:String = null):void
+		{
+			levelPacks[mode] = {};
 			
-			var data:ByteArray = new LEVELS;
+			if (storyText) {
+				levelPacks[mode].story = storyText.split("\n");
+			}
+			
+			levelPacks[mode].levels = [];
+			levelPacks[mode].special = [];
+			levelPacks[mode].minClicksArray = [];
 			
 			data.position = 0;
 			
@@ -90,8 +93,8 @@ package
 				var clickCount:int = data.readInt();
 				var flags:int = data.readInt();
 				
-				minClicksArray.push(clickCount);
-				special.push(flags);
+				levelPacks[mode].minClicksArray.push(clickCount);
+				levelPacks[mode].special.push(flags);
 				
 				var levelSize:int = data.readInt();
 				
@@ -99,29 +102,7 @@ package
 			
 				data.readBytes(levelData, 0, levelSize);
 				
-				levels.push(levelData);
-			}
-			
-			data = new PERFECTION_LEVELS;
-			
-			data.position = 0;
-			
-			levelCount = data.readInt();
-			
-			for (i = 0; i < levelCount; i++) {
-				clickCount = data.readInt();
-				flags = data.readInt();
-				
-				minClicksArray.push(clickCount);
-				special.push(flags);
-				
-				levelSize = data.readInt();
-				
-				levelData = new ByteArray;
-			
-				data.readBytes(levelData, 0, levelSize);
-				
-				perfectionLevels.push(levelData);
+				levelPacks[mode].levels.push(levelData);
 			}
 		}
 		
@@ -192,13 +173,13 @@ package
 			}
 		}
 		
-		public function Level (_id:int = 0, _mode:String = null)
+		public function Level (_id:int, _mode:String)
 		{
 			mode = _mode;
 			
-			id = _id + (mode ? levels.length : 0);
+			id = _id;
 			
-			Logger.startLevel(id);
+			Logger.startLevel(id, mode);
 			
 			add(redoButton = new Button(0, 0, Button.REDO, redo, "Redo", true));
 			add(undoButton = new Button(0, 0, Button.UNDO, undo, "Undo", true));
@@ -226,18 +207,20 @@ package
 			clickCounter = new Text("0", 0, 86);
 			addGraphic(clickCounter);
 			
-			if (id == 0) {
-				addGraphic(new Text("Click cogs to\nbrighten hearts", 0, 68, {align:"center", size:8, width: 96}));
-			}
-			else if (id == 1) {
-				addGraphic(new Text("Make all upright", 0, 76, {align:"center", size:8, width: 96}));
-			}
-			else if (id == 2) {
-				addGraphic(new Text("R to reset", 0, 76, {align:"center", size:8, width: 96}));
+			if (mode == "normal") {
+				if (id == 0) {
+					addGraphic(new Text("Click cogs to\nbrighten hearts", 0, 68, {align:"center", size:8, width: 96}));
+				}
+				else if (id == 1) {
+					addGraphic(new Text("Make all upright", 0, 76, {align:"center", size:8, width: 96}));
+				}
+				else if (id == 2) {
+					addGraphic(new Text("R to reset", 0, 76, {align:"center", size:8, width: 96}));
+				}
 			}
 			
-			if (story[id] && story[id].length) {
-				var text:String = story[id];
+			if (levelPacks[mode].story && levelPacks[mode].story[id] && levelPacks[mode].story[id].length) {
+				var text:String = levelPacks[mode].story[id];
 				text = text.split("\\n").join("\n\n");
 				
 				storyText = new Text(text, 1, 0, {width: 96, align:"center", wordWrap:true});
@@ -259,19 +242,19 @@ package
 			
 			FP.tween(oldScreen, {alpha: 0}, 30, {ease:Ease.sineOut, tweener:this});
 			
-			if (special[id]) {
-				var flags:int = special[id];
+			if (levelPacks[mode].special[id]) {
+				var flags:int = levelPacks[mode].special[id];
 				
 				if (flags & 1) mirrorX = true;
 				if (flags & 2) mirrorY = true;
 				if (flags & 4) stopSpinHack = true;
 			}
 			
-			var _data:ByteArray = mode ? perfectionLevels[_id] : levels[id];
+			var _data:ByteArray = levelPacks[mode].levels[id];
 			
 			if (_data) {
 				setWorldData(_data);
-				minClicks = minClicksArray[id];
+				minClicks = levelPacks[mode].minClicksArray[id];
 				return;
 			}
 			
@@ -305,7 +288,7 @@ package
 		{
 			reseting = true;
 			
-			Logger.restartLevel(id);
+			Logger.restartLevel(id, mode);
 		}
 		
 		public function resetState ():void
@@ -382,7 +365,7 @@ package
 		
 		public override function update (): void
 		{
-			if (!mode && ! levels[id]) {
+			if (! levelPacks[mode].levels[id]) {
 				if (Input.mousePressed || Input.pressed(-1)) {
 					FP.world = new Menu;
 				}
@@ -435,7 +418,7 @@ package
 			
 			if (gameOver) {
 				if (clickThrough && (Input.mousePressed || Input.pressed(-1))) {
-					FP.world = new Level(id+1);
+					FP.world = new Level(id+1, mode);
 				}
 			}
 			
@@ -484,7 +467,7 @@ package
 				
 				Audio.play("complete");
 				
-				Logger.endLevel(id);
+				Logger.endLevel(id, mode);
 				
 				time = -1;
 				
@@ -529,7 +512,7 @@ package
 					
 					t.y = (88 - t.height)*0.5;
 					
-					var alert:String = "Completed level " + id + " (" + md5 + ") in " + clicks + " clicks";
+					var alert:String = "Completed " + mode + " level " + id + " (" + md5 + ") in " + clicks + " clicks";
 					
 					Logger.alert(alert);
 				}
@@ -606,15 +589,15 @@ package
 			}
 			
 			if (Input.pressed(Key.R)) {
-				if (gameOver) FP.world = new Level(id);
+				if (gameOver) FP.world = new Level(id, mode);
 				else reset();
 			}
 			
-			if (Input.pressed(Key.LEFT) && levels[id-1]) FP.world = new Level(id-1);
-			if (Input.pressed(Key.RIGHT) && levels[id+1]) FP.world = new Level(id+1);
+			if (Input.pressed(Key.LEFT) && levelPacks[mode].levels[id-1]) FP.world = new Level(id-1, mode);
+			if (Input.pressed(Key.RIGHT) && levelPacks[mode].levels[id+1]) FP.world = new Level(id+1, mode);
 			
 			for (i = 0; i < 10; i++) {
-				if (Input.pressed(Key.DIGIT_1 + i)) FP.world = new Level(i);
+				if (Input.pressed(Key.DIGIT_1 + i)) FP.world = new Level(i, mode);
 			}
 			
 			if (gameOver && clickThrough) {

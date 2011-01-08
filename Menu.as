@@ -35,24 +35,27 @@ package
 			heart2.color = Main.PINK;
 			
 			var resumeLevel:int = -1;
+			var resumeMode:String;
 			
-			for (var i:int = 0; i < Level.levels.length; i++) {
+			for (var i:int = 0; i < Level.levelPacks["normal"].levels.length; i++) {
 				var b:Button = addLevelButton(i);
 				
 				normalLevels.push(b);
 				
 				if (resumeLevel < 0 && b.normalColor == Main.WHITE) {
 					resumeLevel = i;
+					resumeMode = "normal";
 				}
 			}
 			
-			for (i = 0; i < Level.perfectionLevels.length; i++) {
+			for (i = 0; i < Level.levelPacks["perfection"].levels.length; i++) {
 				b = addLevelButton(i, "perfection");
 				
 				perfectionLevels.push(b);
 				
 				if (resumeLevel < 0 && b.normalColor == Main.WHITE) {
 					resumeLevel = i;
+					resumeMode = "perfection";
 				}
 			}
 			
@@ -63,10 +66,11 @@ package
 			if (resumeLevel < 0) {
 				playText = "Play again";
 				resumeLevel = 0;
+				resumeMode = "normal";
 			}
 			
 			var playButton:Button = new Button(0, 0, new Text(playText), function ():void {
-				FP.world = new Level(resumeLevel);
+				FP.world = new Level(resumeLevel, resumeMode);
 			});
 			
 			playButton.x = 48 - playButton.width*0.5;
@@ -98,30 +102,28 @@ package
 			
 			addGraphic(oldScreen, -10);
 			
-			FP.tween(oldScreen, {alpha: 0}, 60, {ease:Ease.sineIn, tweener:this});
+			FP.tween(oldScreen, {alpha: 0}, 30, {ease:Ease.sineOut, tweener:this});
 		}
 		
-		private function addLevelButton (i:int, mode:String = null):Button
+		private function addLevelButton (i:int, mode:String = "normal"):Button
 		{
 			var b:Button = new Button(0, 0, new Text((i+1)+"", 0, 0, {width: 14, align:"center"}), function ():void {
 				FP.world = new Level(i, mode);
 			});
 			
-			if (mode) {
-				b.x = 96 + 6 + 7 + (i%5)*14;
-				b.y = 48 + int(i / 5) * 12;
+			if (mode == "perfection") {
+				b.x = 96 + 6 + 14 + (i%4)*14;
+				b.y = 48 + int(i / 4) * 12;
 			} else {
 				b.x = 96 + 6 + (i%6)*14;
 				b.y = 34 + int(i / 6) * 12;
 			}
 			
-			var md5:String = MD5.hashBytes(mode ? Level.perfectionLevels[i] : Level.levels[i]);
-			
-			if (mode) i += Level.levels.length;
+			var md5:String = MD5.hashBytes(Level.levelPacks[mode].levels[i]);
 			
 			if (Main.so.data.levels[md5] && Main.so.data.levels[md5].completed) {
 				if (Main.so.data.levels[md5].leastClicks
-					&& Main.so.data.levels[md5].leastClicks <= Level.minClicksArray[i])
+					&& Main.so.data.levels[md5].leastClicks <= Level.levelPacks[mode].minClicksArray[i])
 				{
 					b.normalColor = 0xFFFF00;
 					b.hoverColor = Main.BLACK;
@@ -137,8 +139,6 @@ package
 					b.normalColor = 0x00FF00;
 				}
 			}
-			
-			if (mode) i -= Level.levels.length;
 			
 			return b;
 		}
