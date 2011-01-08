@@ -22,7 +22,7 @@ package
 		
 		public function Menu ()
 		{
-			addGraphic(new Text("These Robotic\nHearts of Mine", 1, 8, {align: "center", size:8, width:96, scrollX:0}));
+			addGraphic(new Text("This Mechanical\nHeart of Mine", 1, 8, {align: "center", size:8, width:96, scrollX:0}));
 			
 			heart = new Spritemap(Heart.HEART, 8, 8);
 			heart.color = Main.PINK;
