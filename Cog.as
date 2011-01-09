@@ -146,6 +146,8 @@ package
 		{
 			if (rotating) return false;
 			
+			if (Level(world).hasEdited) change *= -1;
+			
 			if (canDelegate) {
 				var other:Cog;
 				

@@ -23,6 +23,7 @@ package
 		public var editing:Boolean = false;
 		public var gameOver:Boolean = false;
 		public var clickThrough:Boolean = false;
+		public var hasEdited:Boolean = false;
 		
 		public var id:int;
 		
@@ -139,6 +140,7 @@ package
 		public override function setWorldData (b: ByteArray): void {
 			resetState();
 			minClicks = 0;
+			hasEdited = false;
 			
 			b.position = 0;
 			
@@ -401,6 +403,7 @@ package
 			
 			if (Input.pressed(Key.E)) {
 				editing = !editing;
+				hasEdited = true;
 				minClicks = 0;
 				resetState();
 			}
@@ -446,7 +449,7 @@ package
 				}
 			}
 			
-			if (!gameOver && incorrectCount == 0) {
+			if (!hasEdited && !gameOver && incorrectCount == 0) {
 				var md5:String = MD5.hashBytes(data);
 				
 				if (! Main.so.data.levels[md5]) Main.so.data.levels[md5] = {};
