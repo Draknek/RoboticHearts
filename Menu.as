@@ -112,8 +112,8 @@ package
 			});
 			
 			if (mode == "perfection") {
-				b.x = 96 + 6 + 14 + (i%4)*14;
-				b.y = 48 + int(i / 4) * 12;
+				b.x = 96 + 6 + 7 + (i%5)*14;
+				b.y = 48 + int(i / 5) * 12;
 			} else {
 				b.x = 96 + 6 + (i%6)*14;
 				b.y = 34 + int(i / 6) * 12;
