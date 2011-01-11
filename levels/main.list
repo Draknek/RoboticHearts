@@ -34,68 +34,73 @@ diagonals 12
 And when he was fixed the trio played together for a time
 line2-simpler 9
 
-#And the robot marvelled at the love he saw between the boy and the girl
+And the robot marvelled at the love he saw between the boy and the girl
+triangle 11
 
-And he watched as the boy gave his heart to the girl\nAnd she gave hers to him
+Watching as the boy gave his heart to the girl\nAnd she gave hers to him
 heart-swap 7
 
 The robot became lonely and led them to his old home
 cross-simple 16
 
 "Please," he said, "so few of these robots are still active"
-cross2 11
+cross7 7
 
 "Cannot you fix them all?" he pleaded
-cross4 9
+square2 12
 
 And so they worked to repair the aging robots
+cross2 11
+
+The task took weeks
 ellipsis 10
 
-#The task took weeks
-
-#And then months
-
-But over time the girl found she had grown tired of the robots
+And as the boy worked late into the nights, the girl grew lonely
 corner2 13
 
-And she had also grown tired of the boy
+And then weeks turned to months
+cross4 9
+
+And she felt lonelier still
 heart-break2 5
 
 And left him for another
 heart-break 3 4
 
-So the boy in his foolish aching rage\nMade a demand of the machines
-squareish 13
+And suddenly the boy noticed her absence and found he was lonely too
+bigsquare 23
+
+In his foolish aching rage\nHe made a demand of the machines
+diamond2 9
+
+"You who have not abandoned me\nI wish to become one of you"
+cross8 15
 
 "Tear out this broken heart of mine\nAnd build for me a heart of metal that will never fail"
-diamond2 9
+triangle2 12
 
 And so those loyal robots did as they were told
 heart-build 15
 
-But something was missing
-bigsquare 23
-
-And gifted him 
-sparse 12
-
-A heartless heart that would not feel, or love
+And gifted him a heartless heart that could not feel, or love
 diamond-large 5 3
 
-#diamond 23
-#interesting
-#hearts2
-#hearts
-#cross 52
-#cross3 32
-#lonely 2
-#cross7 7
-#cross8 15
-#combo 16
-#triangle 11
-#triangle2 12
-#funk 14
-#square2 12
+And now he was alone\nbut did not know it.
+sparse 12
+
+#squareish 13 -- sidelined
+#lonely 2 -- story end?
+#funk 14 -- funky connections
+#
+# And grew lonely, as the boy toiled late into the nights, repairing robots
+#
+#diamond 18 -- hard
+#cross 52 -- hard
+#cross3 32 -- hard
+#hearts2 -- not complete
+#hearts -- not complete
+#interesting -- not aesthetically pleasing
+#combo 16 -- too much potential for screwing up
 #
 #The boy sent robots to talk to the girl but she would turn them away
-#chain 25
+#chain 25 -- too boring?

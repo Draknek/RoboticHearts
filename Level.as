@@ -202,7 +202,11 @@ package
 			muteOverlay.hoverColor = Main.WHITE;
 			muteOverlay.visible = Audio.mute;
 			
-			var levelIDDisplay:Text = new Text((id+1)+"", 0, -1);
+			var modeCode:String = "";
+			
+			if (mode == "perfection") modeCode = "P";
+			
+			var levelIDDisplay:Text = new Text(modeCode+(id+1), 0, -1);
 			levelIDDisplay.x = 96 + 1 - levelIDDisplay.width;
 			addGraphic(levelIDDisplay);
 			
