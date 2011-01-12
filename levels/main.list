@@ -34,20 +34,19 @@ diagonals 12
 And when he was fixed the trio played together for a time
 line2-simpler 9
 
-And the robot marvelled at the love he saw between the boy and the girl
-triangle 11
+#And the robot marvelled at the love he saw between the boy and the girl
 
-Watching as the boy gave his heart to the girl\nAnd she gave hers to him
+And he watched as the boy gave his heart to the girl\nAnd she gave hers to him
 heart-swap 7
 
 The robot became lonely and led them to his old home
 cross-simple 16
 
 "Please," he said, "so few of these robots are still active"
-cross7 7
+square2 12
 
 "Cannot you fix them all?" he pleaded
-square2 12
+cross7 7
 
 And so they worked to repair the aging robots
 cross2 11
@@ -89,6 +88,7 @@ And now he was alone\nbut did not know it.
 sparse 12
 
 #squareish 13 -- sidelined
+#triangle 11 -- sidelined -- too hard for the boy/girl/robot section
 #lonely 2 -- story end?
 #funk 14 -- funky connections
 #
