@@ -202,6 +202,10 @@ package
 			muteOverlay.hoverColor = Main.WHITE;
 			muteOverlay.visible = Audio.mute;
 			
+			if (levelPacks[mode].levels[id+1]) {
+				add(new Button(96-8, 96-10, Button.SKIP, skip, "Skip level"));
+			}
+			
 			var modeCode:String = "";
 			
 			if (mode == "perfection") modeCode = "P";
@@ -288,6 +292,11 @@ package
 		public function gotoMenu ():void
 		{
 			FP.world = new Menu;
+		}
+		
+		public function skip ():void
+		{
+			FP.world = new Level(id+1, mode);
 		}
 		
 		public function reset ():void
