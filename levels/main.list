@@ -95,6 +95,13 @@ sparse 12
 #sides 8
 #befriend 8
 #eyes2 8
+#line-short 6
+#line-short2 12
+#gap 16
+#hole 8
+#bond 10
+#spirals 18
+#sizes 6 -- wants a more interesting puzzle
 #
 # And grew lonely, as the boy toiled late into the nights, repairing robots
 #
