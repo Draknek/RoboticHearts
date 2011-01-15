@@ -202,6 +202,8 @@ package
 			muteOverlay.hoverColor = Main.WHITE;
 			muteOverlay.visible = Audio.mute;
 			
+			Audio.muteOverlay = muteOverlay;
+			
 			if (levelPacks[mode].levels[id+1]) {
 				add(new Button(96-8, 96-10, Button.SKIP, skip, "Skip level"));
 			}

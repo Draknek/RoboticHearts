@@ -20,6 +20,8 @@ package
 		[Embed(source="audio/music.mp3")]
 		public static var musicSfx:Class;
 		
+		public static var muteOverlay:Button;
+		
 		public static var rotate:Sound = new rotateSfx;
 		public static var complete:Sound = new beatSfx;
 		
@@ -104,9 +106,6 @@ package
 			channels["rotate"].soundTransform = transform;
 			
 			v -= 0.04;
-			
-			trace(v);
-			trace(":"+transform.volume);
 		}
 		
 		// Getter and setter for mute property
@@ -124,8 +123,8 @@ package
 			so.data.mute = _mute;
 			so.flush();
 			
-			if (FP.world is Level) {
-				Level(FP.world).muteOverlay.visible = _mute;
+			if (muteOverlay) {
+				muteOverlay.visible = _mute;
 			}
 			
 			if (_mute) {
