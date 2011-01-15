@@ -25,7 +25,6 @@ package
 			Level.loadLevels();
 			
 			super(96, 96, 60, true);
-			FP.world = new Intro();
 			FP.screen.color = 0x202020;
 			FP.screen.scale = 4;
 		}
@@ -39,6 +38,8 @@ package
 			Audio.init(this);
 			
 			Logger.connect(this);
+			
+			FP.world = Logger.isLocal ? new Menu : new Intro;
 		}
 		
 		public override function update (): void
