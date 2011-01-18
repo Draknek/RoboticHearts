@@ -148,6 +148,8 @@ package
 			
 			if (Level(world).hasEdited) change *= -1;
 			
+			//if (Level(world).stopSpinHack) speed *= 0.25;
+			
 			if (canDelegate) {
 				var other:Cog;
 				
