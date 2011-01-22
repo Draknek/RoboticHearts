@@ -7,7 +7,6 @@ package
 	
 	import flash.display.*;
 	import flash.utils.*;
-	import flash.ui.Mouse;
 	
 	import com.adobe.crypto.*;
 	
@@ -19,6 +18,12 @@ package
 		
 		public var normalLevels:Array = [];
 		public var perfectionLevels:Array = [];
+		
+		public var backButton:Button;
+		public var muteButton:Button;
+		public var muteOverlay:Button;
+		
+		private var tween:Tween;
 		
 		public function Menu ()
 		{
@@ -80,7 +85,9 @@ package
 			
 			var levelsButton:Button = new Button(0, 0, new Text("Level select"), function ():void {
 				addList(normalLevels);
-				FP.tween(FP.camera, {x: 96}, 30, {ease: Ease.sineIn});
+				tween = FP.tween(FP.camera, {x: 96}, 30, {ease: Ease.sineIn});
+				backButton.disabled = false;
+				backButton.visible = true;
 			});
 			
 			levelsButton.x = 48 - levelsButton.width*0.5;
@@ -90,7 +97,9 @@ package
 			
 			var bonusButton:Button = new Button(0, 0, new Text("Bonus levels"), function ():void {
 				addList(perfectionLevels);
-				FP.tween(FP.camera, {x: 96}, 30, {ease: Ease.sineIn});
+				tween = FP.tween(FP.camera, {x: 96}, 30, {ease: Ease.sineIn});
+				backButton.disabled = false;
+				backButton.visible = true;
 			});
 			
 			bonusButton.x = 48 - bonusButton.width*0.5;
@@ -103,6 +112,25 @@ package
 			addGraphic(oldScreen, -10);
 			
 			FP.tween(oldScreen, {alpha: 0}, 30, {ease:Ease.sineOut, tweener:this});
+			
+			add(muteButton = new Button(0, 0, Button.AUDIO, Audio.toggleMute, "Mute"));
+			add(muteOverlay = new Button(0, 0, Button.AUDIO_MUTE, null, "Unmute"));
+			
+			add(backButton = new Button(0, 0, Button.MENU, back, "Back"));
+			
+			backButton.disabled = true;
+			backButton.visible = false;
+			
+			backButton.noCamera = muteButton.noCamera = muteOverlay.noCamera = true;
+			
+			muteButton.x = backButton.x + backButton.width;
+			muteOverlay.x = muteButton.x;
+			
+			muteOverlay.normalColor = Main.PINK;
+			muteOverlay.hoverColor = Main.WHITE;
+			muteOverlay.visible = Audio.mute;
+			
+			Audio.muteOverlay = muteOverlay;
 		}
 		
 		private function addLevelButton (i:int, mode:String = "normal"):Button
@@ -145,18 +173,7 @@ package
 		
 		public override function update ():void
 		{
-			if (collidePoint("button", mouseX, mouseY)) {
-				Mouse.cursor = "button";
-			} else {
-				Mouse.cursor = "auto";
-			}
-			
-			if (Input.pressed(Key.ESCAPE)) {
-				FP.tween(FP.camera, {x: 0}, 30, {ease: Ease.sineIn, complete:function():void{
-					removeList(normalLevels);
-					removeList(perfectionLevels);
-				}});
-			}
+			Input.mouseCursor = "auto";
 			
 			var step:int = 50;
 			var beatTime:int = 10;
@@ -167,7 +184,27 @@ package
 			
 			time++;
 			
+			if (Input.pressed(Key.ESCAPE)) {
+				back();
+				return;
+			}
+			
 			super.update();
+		}
+		
+		private function back ():void
+		{
+			if (backButton.disabled) return;
+			
+			if (tween) tween.cancel();
+			
+			backButton.disabled = true;
+			backButton.visible = false;
+			
+			tween = FP.tween(FP.camera, {x: 0}, 30, {ease: Ease.sineIn, complete:function():void{
+				removeList(normalLevels);
+				removeList(perfectionLevels);
+			}});
 		}
 	}
 }

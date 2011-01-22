@@ -69,6 +69,8 @@ package
 			}
 			
 			if (over) {
+				Input.mouseCursor = "button";
+				
 				a = [];
 			
 				world.collideRectInto("heart", x - 16, y - 16, 32, 32, a);

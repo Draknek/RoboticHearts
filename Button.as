@@ -24,10 +24,11 @@ package
 		
 		public var image:Image;
 		
-		private var _disabled:Boolean = false;		
+		private var _disabled:Boolean = false;
 		private var _helpText:Text;
 		private var hoverTimer:int = 0;
 		
+		public var noCamera:Boolean = false;
 		public var callback:Function;
 		
 		public var normalColor:uint = Main.WHITE;
@@ -64,14 +65,22 @@ package
 		{
 			if (!world) return;
 			
-			var over:Boolean = collidePoint(x, y, world.mouseX, world.mouseY);
+			var _x:Number = x;
+			
+			if (noCamera) _x += FP.camera.x;
+			
+			var over:Boolean = collidePoint(_x, y, world.mouseX, world.mouseY);
+			
+			if (over) {
+				Input.mouseCursor = "button";
+			}
 			
 			if (over && _helpText) {
 				hoverTimer++;
 				
 				if (hoverTimer <= 60) {
-					_helpText.x = world.mouseX;
-					_helpText.y = world.mouseY + 2;
+					_helpText.x = Input.mouseX;
+					_helpText.y = Input.mouseY + 2;
 				}
 			} else {
 				hoverTimer = 0;
@@ -91,6 +100,8 @@ package
 		
 		public override function render (): void
 		{
+			graphic.scrollX = noCamera ? 0 : 1;
+			
 			super.render();
 			
 			if (_helpText && hoverTimer > 60) {
@@ -114,8 +125,9 @@ package
 				
 				FP.buffer.fillRect(FP.rect, Main.GREY);
 				
-				_helpText.render(FP.buffer, FP.zero, FP.camera);
+				_helpText.render(FP.buffer, FP.zero, FP.zero);
 			}
+			
 		}
 		
 		public function get disabled ():Boolean {

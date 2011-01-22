@@ -7,7 +7,6 @@ package
 	
 	import flash.display.*;
 	import flash.utils.*;
-	import flash.ui.Mouse;
 	
 	import com.adobe.crypto.*;
 	
@@ -382,17 +381,17 @@ package
 		
 		public override function update (): void
 		{
+			Input.mouseCursor = "auto";
+			
 			if (! levelPacks[mode].levels[id]) {
 				if (Input.mousePressed || Input.pressed(-1)) {
 					FP.world = new Menu;
 				}
 				
-				Mouse.cursor = "auto";
 				return;
 			}
 			
 			if (! FP.focused) {
-				Mouse.cursor = "auto";
 				wasUnfocused = true;
 				return;
 			}
@@ -412,7 +411,6 @@ package
 					FP.tween(storyText, {alpha: 0}, 30, {ease:Ease.sineOut});
 					storyText = null;
 				}
-				Mouse.cursor = "auto";
 				return;
 			}
 			
@@ -430,7 +428,6 @@ package
 				if (Input.check(Key.RIGHT)) { makeHeart(3); }
 				if (Input.check(Key.SPACE)) { makeCog(); }
 				if (Input.check(Key.BACKSPACE)) { removeUnderMouse(); }
-				Mouse.cursor = "auto";
 				return;
 			}
 			
@@ -619,19 +616,16 @@ package
 			}
 			
 			if (gameOver && clickThrough) {
-				Mouse.cursor = "auto";
 				return;
-			}
-			
-			if (!gameOver && collidePoint("cog", mouseX, mouseY) || collidePoint("button", mouseX, mouseY)) {
-				Mouse.cursor = "button";
-			} else {
-				Mouse.cursor = "auto";
 			}
 			
 			time++;
 			
 			super.update();
+			
+			if (gameOver) {
+				Input.mouseCursor = "auto";
+			}
 			
 			clickCounter.text = clicks+"/"+minClicks;
 		}
