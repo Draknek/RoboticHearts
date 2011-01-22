@@ -14,7 +14,6 @@ package
 	{
 		public var time:int = 0;
 		public var heart:Spritemap;
-		public var heart2:Spritemap;
 		
 		public var normalLevels:Array = [];
 		public var perfectionLevels:Array = [];
@@ -35,9 +34,6 @@ package
 			
 			addGraphic(heart, 0, 6, 12);
 			addGraphic(heart, 0, 81, 12);
-			
-			heart2 = new Spritemap(Heart.HEART2, 12, 10);
-			heart2.color = Main.PINK;
 			
 			var resumeLevel:int = -1;
 			var resumeMode:String;
@@ -155,7 +151,6 @@ package
 				{
 					b.normalColor = 0xFFFF00;
 					b.hoverColor = Main.BLACK;
-					//addGraphic(heart2, 10, b.x, b.y);
 					
 					var bitmap:BitmapData = new BitmapData(11, 7, true, 0xFF000000 | Main.PINK);
 					bitmap.setPixel32(0, 0, 0x0);
@@ -180,7 +175,6 @@ package
 			var modTime:int = time % step;
 			
 			heart.frame = (modTime >= 0 && modTime < beatTime) ? 4 : 0;
-			heart2.frame = (modTime >= 0 && modTime < beatTime) ? 2 : 1;
 			
 			time++;
 			

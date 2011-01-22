@@ -10,9 +10,6 @@ package
 		[Embed(source="heart.png")]
 		public static const HEART: Class;
 		
-		[Embed(source="heart-large.png")]
-		public static const HEART2: Class;
-		
 		public var sprite:Spritemap;
 		public var image:Image;
 		
