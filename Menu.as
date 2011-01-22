@@ -18,6 +18,8 @@ package
 		public var normalLevels:Array = [];
 		public var perfectionLevels:Array = [];
 		
+		public var heartChoices:Array = [];
+		
 		public var backButton:Button;
 		public var muteButton:Button;
 		public var muteOverlay:Button;
@@ -127,6 +129,14 @@ package
 			muteOverlay.visible = Audio.mute;
 			
 			Audio.muteOverlay = muteOverlay;
+			
+			if (heart.frameCount > 8) {
+				var choices:int = heart.frameCount / 8;
+				
+				for (i = 0; i < choices; i++) {
+					heartChoices.push(addHeartChoiceButton(i, (FP.width - choices*8)*0.5 + i*8));
+				}
+			}
 		}
 		
 		private function addLevelButton (i:int, mode:String = "normal"):Button
@@ -166,6 +176,21 @@ package
 			return b;
 		}
 		
+		private function addHeartChoiceButton (i:int, x:int):Button
+		{
+			var s:Spritemap = new Spritemap(Heart.HEART, 8, 8);
+			
+			s.frame = i*8;
+			
+			var b:Button = new Button(x, FP.height - 8, s, function ():void {
+				Heart.heartChoice = i;
+			});
+			
+			add(b);
+			
+			return b;
+		}
+		
 		public override function update ():void
 		{
 			Input.mouseCursor = "auto";
@@ -174,7 +199,15 @@ package
 			var beatTime:int = 10;
 			var modTime:int = time % step;
 			
-			heart.frame = (modTime >= 0 && modTime < beatTime) ? 4 : 0;
+			heart.frame = ((modTime >= 0 && modTime < beatTime) ? 4 : 0);
+			
+			var i:int = 0;
+			for each (var b:* in heartChoices) {
+				Spritemap(b.graphic).frame = i*8 + ((modTime >= 0 && modTime < beatTime) ? 4 : 0);
+				i++;
+			}
+			
+			heart.frame += Heart.heartChoice*8;
 			
 			time++;
 			

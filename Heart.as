@@ -16,6 +16,8 @@ package
 		public var rot:int;
 		public var highlight:Boolean = false;
 		
+		public static var heartChoice:int = 1;
+		
 		public function Heart (_x:int = 0, _y:int = 0, _rot:int = -1)
 		{
 			x = _x*8 + 4;
@@ -25,7 +27,7 @@ package
 			image = sprite;
 			if (_rot < 0) _rot = FP.rand(4);
 			rot = _rot;
-			sprite.frame = rot;
+			sprite.frame = rot + heartChoice*8;
 			image.centerOO();
 			image.color = (rot == 0) ? Main.PINK : Main.WHITE;
 			
@@ -40,7 +42,7 @@ package
 		{
 			var level:Level = Level(world);
 			var beating:int = level ? level.beating[rot] : 0;
-			sprite.frame = rot + beating*4;
+			sprite.frame = rot + beating*4 + heartChoice*8;
 		}
 		
 		public override function render (): void
