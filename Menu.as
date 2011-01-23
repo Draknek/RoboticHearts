@@ -19,6 +19,7 @@ package
 		public var perfectionLevels:Array = [];
 		
 		public var heartChoices:Array = [];
+		public var cogChoices:Array = [];
 		
 		public var backButton:Button;
 		public var muteButton:Button;
@@ -141,7 +142,7 @@ package
 			var cogSpritemap:Spritemap = new Spritemap(Cog.COG, 16, 16);
 			
 			for (i = 0; i < cogSpritemap.frameCount; i++) {
-					/*heartChoices.push*/(addCogChoiceButton(i, cogSpritemap.frameCount));
+					cogChoices.push(addCogChoiceButton(i, cogSpritemap.frameCount));
 				}
 		}
 		
@@ -206,6 +207,11 @@ package
 		{
 			var s:Spritemap = new Spritemap(Cog.COG, 16, 16);
 			
+			s.x = 8;
+			s.y = 8;
+			s.originX = 8;
+			s.originY = 8;
+			
 			s.frame = i;
 			
 			var x:int = FP.width - 16;
@@ -213,6 +219,11 @@ package
 			
 			var b:Button = new Button(x, y, s, function ():void {
 				Cog.cogChoice = i;
+				s.angle = 0;
+				
+				FP.tween(s, {angle: s.angle-90}, 16, {complete: function ():void {
+					s.angle = 0;
+				}});
 			});
 			
 			b.helpText = "Change cog image";
@@ -233,6 +244,16 @@ package
 			var modTime:int = time % step;
 			
 			heart.frame = ((modTime >= 0 && modTime < beatTime) ? 4 : 0);
+			
+			if (time % (step*2) == 0) {
+				var g:Spritemap = cogChoices[Cog.cogChoice].graphic;
+				
+				if (g.angle == 0) {
+					FP.tween(g, {angle: g.angle-90}, 16, {complete: function ():void {
+						g.angle = 0;
+					}});
+				}
+			}
 			
 			var i:int = 0;
 			for each (var b:Button in heartChoices) {
