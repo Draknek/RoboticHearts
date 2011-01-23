@@ -547,6 +547,7 @@ package
 					for each (h in a) {
 						h.layer = -10;
 						h.active = false;
+						Spritemap(h.graphic).frame = 0;
 						FP.tween(h, {x: 32, y:48}, 60, {tweener:world, ease: Ease.sineIn});
 						FP.tween(h.image, {scale: 32, originX: 4.5}, 60, {ease: Ease.sineIn});
 					}
