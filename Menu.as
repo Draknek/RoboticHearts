@@ -186,6 +186,8 @@ package
 				Heart.heartChoice = i;
 			});
 			
+			b.helpText = "Change heart image";
+			
 			add(b);
 			
 			return b;
@@ -202,8 +204,14 @@ package
 			heart.frame = ((modTime >= 0 && modTime < beatTime) ? 4 : 0);
 			
 			var i:int = 0;
-			for each (var b:* in heartChoices) {
-				Spritemap(b.graphic).frame = i*8 + ((modTime >= 0 && modTime < beatTime) ? 4 : 0);
+			for each (var b:Button in heartChoices) {
+				b.layer = 0;
+				
+				if (b.collidePoint(b.x, b.y, mouseX, mouseY)) b.layer = -1;
+				
+				Spritemap(b.graphic).frame = i*8;
+				
+				if (i == Heart.heartChoice) Spritemap(b.graphic).frame += heart.frame;
 				i++;
 			}
 			
