@@ -71,7 +71,7 @@ package
 			
 			var over:Boolean = collidePoint(_x, y, world.mouseX, world.mouseY);
 			
-			if (over) {
+			if (over && ! disabled) {
 				Input.mouseCursor = "button";
 			}
 			
