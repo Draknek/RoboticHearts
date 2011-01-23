@@ -29,11 +29,12 @@ package
 		
 		public function Menu ()
 		{
-			addGraphic(new Text("This Mechanical\nHeart of Mine", 1, 8, {align: "center", size:8, width:96, scrollX:0}));
+			addGraphic(new Text("This Mechanical\nHeart of Mine", 1, 8, {align: "center", size:8, width:96, scrollX:0, scrollY:0}));
 			
 			heart = new Spritemap(Heart.HEART, 8, 8);
 			heart.color = Main.PINK;
 			heart.scrollX = 0;
+			heart.scrollY = 0;
 			
 			addGraphic(heart, 0, 6, 12);
 			addGraphic(heart, 0, 81, 12);
@@ -77,22 +78,12 @@ package
 				FP.world = new Level(resumeLevel, resumeMode);
 			});
 			
-			playButton.x = 48 - playButton.width*0.5;
-			playButton.y = 36;
-			
-			add(playButton);
-			
 			var levelsButton:Button = new Button(0, 0, new Text("Level select"), function ():void {
 				addList(normalLevels);
 				tween = FP.tween(FP.camera, {x: 96}, 30, {ease: Ease.sineIn});
 				backButton.disabled = false;
 				backButton.visible = true;
 			});
-			
-			levelsButton.x = 48 - levelsButton.width*0.5;
-			levelsButton.y = 52;
-			
-			add(levelsButton);
 			
 			var bonusButton:Button = new Button(0, 0, new Text("Bonus levels"), function ():void {
 				addList(perfectionLevels);
@@ -101,10 +92,13 @@ package
 				backButton.visible = true;
 			});
 			
-			bonusButton.x = 48 - bonusButton.width*0.5;
-			bonusButton.y = 68;
+			var graphicsButton:Button = new Button(0, 0, new Text("Change graphics"), function ():void {
+				tween = FP.tween(FP.camera, {y: 96}, 30, {ease: Ease.sineIn});
+				backButton.disabled = false;
+				backButton.visible = true;
+			});
 			
-			add(bonusButton);
+			addElements([playButton, levelsButton, bonusButton, graphicsButton]);
 			
 			var oldScreen:Image = new Image(FP.buffer.clone());
 			
@@ -142,8 +136,33 @@ package
 			var cogSpritemap:Spritemap = new Spritemap(Cog.COG, 16, 16);
 			
 			for (i = 0; i < cogSpritemap.frameCount; i++) {
-					cogChoices.push(addCogChoiceButton(i, cogSpritemap.frameCount));
-				}
+				cogChoices.push(addCogChoiceButton(i, cogSpritemap.frameCount));
+			}
+			
+			addGraphic(new Text("Heart image:", 1, 36 + 96, {width: 96, align: "center"}));
+			addGraphic(new Text("Cog image:", 1, 60 + 96, {width: 96, align: "center"}));
+		}
+		
+		private function addElements(list:Array):void
+		{
+			var h:int = 0;
+			
+			for each (var o:* in list) {
+				h += o.height;
+			}
+			
+			var start:int = 24 + 4;
+			
+			var padding:int = Number(FP.height - start - h) / (list.length + 1);
+			
+			var y:int = start + padding;
+			
+			for each (o in list) {
+				o.x = (FP.width - o.width) * 0.5;
+				o.y = y;
+				add(o);
+				y += padding + o.height;
+			}
 		}
 		
 		private function addLevelButton (i:int, mode:String = "normal"):Button
@@ -189,14 +208,12 @@ package
 			
 			s.frame = i*8;
 			
-			var x:int = 0;
-			var y:int = FP.height + (i-l)*8;
+			var x:int = (FP.width - l*8) * 0.5 + i*8;
+			var y:int = 96+48;
 			
 			var b:Button = new Button(x, y, s, function ():void {
 				Heart.heartChoice = i;
 			});
-			
-			b.helpText = "Change heart image";
 			
 			add(b);
 			
@@ -214,8 +231,8 @@ package
 			
 			s.frame = i;
 			
-			var x:int = FP.width - 16;
-			var y:int = FP.height + (i-l)*16;
+			var x:int = (FP.width - l*16) * 0.5 + i*16;
+			var y:int = 96+48+24;
 			
 			var b:Button = new Button(x, y, s, function ():void {
 				Cog.cogChoice = i;
@@ -225,8 +242,6 @@ package
 					s.angle = 0;
 				}});
 			});
-			
-			b.helpText = "Change cog image";
 			
 			b.layer = -2 - l + i;
 			
@@ -288,7 +303,7 @@ package
 			backButton.disabled = true;
 			backButton.visible = false;
 			
-			tween = FP.tween(FP.camera, {x: 0}, 30, {ease: Ease.sineIn, complete:function():void{
+			tween = FP.tween(FP.camera, {x: 0, y: 0}, 30, {ease: Ease.sineIn, complete:function():void{
 				removeList(normalLevels);
 				removeList(perfectionLevels);
 			}});

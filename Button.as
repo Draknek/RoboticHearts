@@ -66,10 +66,14 @@ package
 			if (!world) return;
 			
 			var _x:Number = x;
+			var _y:Number = y;
 			
-			if (noCamera) _x += FP.camera.x;
+			if (noCamera) {
+				_x += FP.camera.x;
+				_y += FP.camera.y;
+			}
 			
-			var over:Boolean = collidePoint(_x, y, world.mouseX, world.mouseY);
+			var over:Boolean = collidePoint(_x, _y, world.mouseX, world.mouseY);
 			
 			if (over && ! disabled) {
 				Input.mouseCursor = "button";
@@ -101,6 +105,7 @@ package
 		public override function render (): void
 		{
 			graphic.scrollX = noCamera ? 0 : 1;
+			graphic.scrollY = noCamera ? 0 : 1;
 			
 			super.render();
 			
