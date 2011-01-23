@@ -134,9 +134,15 @@ package
 				var choices:int = heart.frameCount / 8;
 				
 				for (i = 0; i < choices; i++) {
-					heartChoices.push(addHeartChoiceButton(i, (FP.width - choices*8)*0.5 + i*8));
+					heartChoices.push(addHeartChoiceButton(i, choices));
 				}
 			}
+			
+			var cogSpritemap:Spritemap = new Spritemap(Cog.COG, 16, 16);
+			
+			for (i = 0; i < cogSpritemap.frameCount; i++) {
+					/*heartChoices.push*/(addCogChoiceButton(i, cogSpritemap.frameCount));
+				}
 		}
 		
 		private function addLevelButton (i:int, mode:String = "normal"):Button
@@ -176,17 +182,42 @@ package
 			return b;
 		}
 		
-		private function addHeartChoiceButton (i:int, x:int):Button
+		private function addHeartChoiceButton (i:int, l:int):Button
 		{
 			var s:Spritemap = new Spritemap(Heart.HEART, 8, 8);
 			
 			s.frame = i*8;
 			
-			var b:Button = new Button(x, FP.height - 8, s, function ():void {
+			var x:int = 0;
+			var y:int = FP.height + (i-l)*8;
+			
+			var b:Button = new Button(x, y, s, function ():void {
 				Heart.heartChoice = i;
 			});
 			
 			b.helpText = "Change heart image";
+			
+			add(b);
+			
+			return b;
+		}
+		
+		private function addCogChoiceButton (i:int, l:int):Button
+		{
+			var s:Spritemap = new Spritemap(Cog.COG, 16, 16);
+			
+			s.frame = i;
+			
+			var x:int = FP.width - 16;
+			var y:int = FP.height + (i-l)*16;
+			
+			var b:Button = new Button(x, y, s, function ():void {
+				Cog.cogChoice = i;
+			});
+			
+			b.helpText = "Change cog image";
+			
+			b.layer = -2 - l + i;
 			
 			add(b);
 			
@@ -205,9 +236,9 @@ package
 			
 			var i:int = 0;
 			for each (var b:Button in heartChoices) {
-				b.layer = 0;
+				b.layer = 10;
 				
-				if (b.collidePoint(b.x, b.y, mouseX, mouseY)) b.layer = -1;
+				if (b.collidePoint(b.x, b.y, mouseX, mouseY)) b.layer = -11;
 				
 				Spritemap(b.graphic).frame = i*8;
 				

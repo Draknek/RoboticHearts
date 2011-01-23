@@ -17,12 +17,15 @@ package
 		
 		public var over:Boolean = false;
 		
+		public static var cogChoice:int = 2;
+		
 		public function Cog (_x:int = 0, _y:int = 0)
 		{
 			x = _x*8 + 8;
 			y = _y*8 + 8;
 			
-			sprite = new Spritemap(COG, 32, 32);
+			sprite = new Spritemap(COG, 16, 16);
+			sprite.frame = cogChoice;
 			image = sprite;//new Image(COG);
 			image.centerOO();
 			
