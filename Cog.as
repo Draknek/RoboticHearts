@@ -151,7 +151,7 @@ package
 		{
 			if (rotating) return false;
 			
-			if (Level(world).hasEdited) change *= -1;
+			//if (Level(world).hasEdited) change *= -1;
 			
 			//if (Level(world).stopSpinHack) speed *= 0.25;
 			
