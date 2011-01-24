@@ -22,6 +22,7 @@ package
 		public var cogChoices:Array = [];
 		
 		public var backButton:Button;
+		public var backButton2:Button;
 		public var muteButton:Button;
 		public var muteOverlay:Button;
 		
@@ -139,8 +140,11 @@ package
 				cogChoices.push(addCogChoiceButton(i, cogSpritemap.frameCount));
 			}
 			
-			addGraphic(new Text("Heart image:", 1, 36 + 96, {width: 96, align: "center"}));
-			addGraphic(new Text("Cog image:", 1, 60 + 96, {width: 96, align: "center"}));
+			addGraphic(new Text("Heart image:", 1, 38 + 96 - 8, {width: 96, align: "center"}));
+			addGraphic(new Text("Cog image:", 1, 62 + 96 - 10, {width: 96, align: "center"}));
+			
+			add(backButton2 = new Button(0, 96*2 - 14, new Text("Back to menu"), back));
+			backButton2.x = (FP.width - backButton2.width) * 0.5;
 		}
 		
 		private function addElements(list:Array):void
@@ -209,7 +213,7 @@ package
 			s.frame = i*8;
 			
 			var x:int = (FP.width - l*8) * 0.5 + i*8;
-			var y:int = 96+48;
+			var y:int = 96+42;
 			
 			var b:Button = new Button(x, y, s, function ():void {
 				Heart.heartChoice = i;
@@ -232,7 +236,7 @@ package
 			s.frame = i;
 			
 			var x:int = (FP.width - l*16) * 0.5 + i*16;
-			var y:int = 96+48+24;
+			var y:int = 96+48+16;
 			
 			var b:Button = new Button(x, y, s, function ():void {
 				Cog.cogChoice = i;
