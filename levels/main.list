@@ -8,7 +8,7 @@ They were the best of friends
 reckoner 4
 
 And they danced together
-simple2-simpler 4
+simple2-horizontal 4
 
 And they played together
 outsider 7
@@ -101,6 +101,8 @@ sparse 12
 #hole 8
 #bond 10
 #spirals 18
+#sharing 7
+#sharing2 5
 #sizes 6 -- wants a more interesting puzzle
 #
 # And grew lonely, as the boy toiled late into the nights, repairing robots
