@@ -228,6 +228,9 @@ package
 				else if (id == 2) {
 					addGraphic(new Text("R to reset", 0, 76, {align:"center", size:8, width: 96}));
 				}
+				/*else if (id == 3) {
+					addGraphic(new Text("Hint: try to keep\nsame-aligned\nhearts together", 0, 60, {align:"center", size:8, width: 96}));
+				}*/
 			}
 			
 			if (levelPacks[mode].story && levelPacks[mode].story[id] && levelPacks[mode].story[id].length) {
