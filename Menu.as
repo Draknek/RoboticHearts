@@ -81,6 +81,7 @@ package
 			
 			var levelsButton:Button = new Button(0, 0, new Text("Level select"), function ():void {
 				addList(normalLevels);
+				if (tween) tween.cancel();
 				tween = FP.tween(FP.camera, {x: 96}, 30, {ease: Ease.sineIn});
 				backButton.disabled = false;
 				backButton.visible = true;
@@ -88,12 +89,14 @@ package
 			
 			var bonusButton:Button = new Button(0, 0, new Text("Bonus levels"), function ():void {
 				addList(perfectionLevels);
+				if (tween) tween.cancel();
 				tween = FP.tween(FP.camera, {x: 96}, 30, {ease: Ease.sineIn});
 				backButton.disabled = false;
 				backButton.visible = true;
 			});
 			
 			var graphicsButton:Button = new Button(0, 0, new Text("Change graphics"), function ():void {
+				if (tween) tween.cancel();
 				tween = FP.tween(FP.camera, {y: 96}, 30, {ease: Ease.sineIn});
 				backButton.disabled = false;
 				backButton.visible = true;
