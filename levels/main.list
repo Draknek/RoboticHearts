@@ -7,20 +7,38 @@ isolated 3
 They were the best of friends
 reckoner 4
 
-And they danced together
-simple2-horizontal 4
+Their love filling a hole that neither knew existed
+hole 8
 
-And they played together
+They shared everything
+gift 7
+
+They danced together
 outsider 7
 
-And for a brief time, they knew love
-heart-simpler 6
+And they played together
+eyes3 10
+
+And helped one another when in need
+sides 8
+
+Their love bound them together
+string-short 9
 
 But nothing is simple forever
-simple3-simpler 8
+eyes2 8
+
+#And for a brief time, they knew love
+#heart-simpler 6 -- not interesting
+
+#And two lives are more complex than one
+#eyes 11 -- too much too soon?
+
+For different people will pull in different directions
+separated 10
 
 And two lives are more complex than one
-eyes 11
+simple3-simpler 8
 
 One day they found a broken robot in the woods
 line 9
@@ -91,29 +109,27 @@ sparse 12
 #triangle 11 -- sidelined -- too hard for the boy/girl/robot section
 #lonely 2 -- story end?
 #funk 14 -- funky connections
-#gift 7
-#sides 8
-#befriend 8
-#eyes2 8
-#line-short 6
-#line-short2 12
-#gap 16
-#hole 8
-#bond 10
-#spirals 18
-#sharing 7
-#sharing2 5
+#sharing2 7 -- same end as sides
+#line-short2 12 -- boring solution?
+#gap 16 -- boring solution?
+#bond 10 -- kinda funky connections
+#spirals 18 -- cool but hard to place
+#simple2-horizontal 3 -- too easy to do by accident
 #sizes 6 -- wants a more interesting puzzle
+#
+#string 11
 #
 # And grew lonely, as the boy toiled late into the nights, repairing robots
 #
+#corners 42 -- hard! 42 is my best but that's clearly not optimal
 #diamond 18 -- hard
 #cross 52 -- hard
 #cross3 32 -- hard
-#hearts2 -- not complete
-#hearts -- not complete
-#interesting -- not aesthetically pleasing
-#combo 16 -- too much potential for screwing up
+#interesting 23 -- not aesthetically pleasing
 #
 #The boy sent robots to talk to the girl but she would turn them away
 #chain 25 -- too boring?
+
+#These might be interesting as perfection levels but they don't actually have to be perfect:
+#line-short 6
+#combo 16
