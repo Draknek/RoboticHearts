@@ -636,6 +636,19 @@ package
 		
 		public override function render (): void
 		{
+			if (editing) {
+				for (var x:int = 4; x < FP.width; x += 8) {
+					for (var y:int = 4; y < FP.width; y += 8) {
+						Draw.rect(x-1, y-1, 2, 2, Main.GREY);
+					}
+				}
+				
+				x = mouseX - ((mouseX + 2) % 4) + 2;
+				y = mouseY - ((mouseY + 2) % 4) + 2;
+				
+				Draw.rect(x-1, y-1, 2, 2, Main.PINK);
+			}
+			
 			super.render();
 		}
 		
