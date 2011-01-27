@@ -202,6 +202,8 @@ package
 					
 					h.rot = (h.rot + change + 4) % 4;
 					
+					h.update(); // sets the correct animation frame
+					
 					img.color = (h.rot == 0) ? Main.PINK : Main.WHITE;
 					
 					if (change == 2 || change == -2) {
