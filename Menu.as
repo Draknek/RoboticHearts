@@ -102,7 +102,15 @@ package
 				backButton.visible = true;
 			});
 			
-			addElements([playButton, levelsButton, bonusButton, graphicsButton]);
+			var resetData:Button = new Button(0, 0, new Text("Delete saved data"), function ():void {
+				Main.so.data.levels = {};
+				Main.so.flush();
+				FP.world = new Menu;
+			});
+			
+			if (! Logger.isLocal) resetData = null;
+			
+			addElements([playButton, levelsButton, bonusButton, graphicsButton, resetData]);
 			
 			var oldScreen:Image = new Image(FP.buffer.clone());
 			
@@ -155,6 +163,7 @@ package
 			var h:int = 0;
 			
 			for each (var o:* in list) {
+				if (! o) continue;
 				h += o.height;
 			}
 			
@@ -165,6 +174,7 @@ package
 			var y:int = start + padding;
 			
 			for each (o in list) {
+				if (! o) continue;
 				o.x = (FP.width - o.width) * 0.5;
 				o.y = y;
 				add(o);
