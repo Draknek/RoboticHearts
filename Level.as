@@ -110,6 +110,8 @@ package
 		{
 			var b:ByteArray = new ByteArray;
 			
+			b.writeShort(Main.SAVEFILE_VERSION);
+			
 			var cogs:Array = [];
 			var hearts:Array = [];
 			
@@ -121,15 +123,15 @@ package
 			b.writeInt(cogs.length);
 			
 			for each (e in cogs) {
-				b.writeInt((e.x - 4) / 8);
-				b.writeInt((e.y - 4) / 8);
+				b.writeInt(e.x);
+				b.writeInt(e.y);
 			}
 			
 			b.writeInt(hearts.length);
 			
 			for each (e in hearts) {
-				b.writeInt((e.x) / 8);
-				b.writeInt((e.y) / 8);
+				b.writeInt(e.x);
+				b.writeInt(e.y);
 				b.writeInt(Heart(e).rot);
 			}
 			
@@ -142,6 +144,12 @@ package
 			hasEdited = false;
 			
 			b.position = 0;
+			
+			var version:int = b.readShort();
+			
+			if (version == 0) {
+				b.position = 0;
+			}
 			
 			data = b;
 			
@@ -161,6 +169,12 @@ package
 			for (i = 0; i < l; i++) {
 				x = b.readInt();
 				y = b.readInt();
+				
+				if (version == 0) {
+					x = x*8 + 8;
+					y = y*8 + 8;
+				}
+				
 				add(new Cog(x, y));
 			}
 			
@@ -170,6 +184,12 @@ package
 				x = b.readInt();
 				y = b.readInt();
 				rot = b.readInt();
+				
+				if (version == 0) {
+					x = x*8 + 4;
+					y = y*8 + 4;
+				}
+				
 				add(new Heart(x, y, rot));
 			}
 		}
@@ -654,49 +674,49 @@ package
 		
 		public function removeUnderMouse (): void
 		{
-			var x:int = mouseX / 8;
-			var y:int = mouseY / 8;
+			var x:int = mouseX - ((mouseX + 2) % 4) + 2;
+			var y:int = mouseY - ((mouseY + 2) % 4) + 2;
 			
-			var e:Entity = collidePoint("heart", x*8+4, y*8+4);
-			if (e) remove(e);
-			e = collidePoint("cog", x*8+4, y*8+4);
-			if (e) remove(e);
+			var a:Array = [];
+			
+			collideRectInto("heart", x - 1, y - 1, 2, 2, a);
+			collideRectInto("cog", x - 1, y - 1, 2, 2, a);
+			
+			for each (var e:Entity in a) {
+				remove(e);
+			}
 		}
 		
 		public function makeHeart (rot:int): void
 		{
-			var x:int = mouseX / 8;
-			var y:int = mouseY / 8;
+			var x:int = mouseX - ((mouseX + 2) % 4) + 2;
+			var y:int = mouseY - ((mouseY + 2) % 4) + 2;
 			
-			var e:Entity = collidePoint("heart", x*8+4, y*8+4);
-			if (e) remove(e);
-			e = collidePoint("cog", x*8+4, y*8+4);
-			if (e) remove(e);
+			var a:Array = [];
+			
+			collideRectInto("heart", x - 3, y - 3, 6, 6, a);
+			collideRectInto("cog", x - 3, y - 3, 6, 6, a);
+			
+			for each (var e:Entity in a) {
+				remove(e);
+			}
 			
 			add(new Heart(x, y, rot));
 		}
 		
 		public function makeCog (): void
 		{
-			var x:int = (mouseX - 4) / 8;
-			var y:int = (mouseY - 4) / 8;
+			var x:int = mouseX - ((mouseX + 2) % 4) + 2;
+			var y:int = mouseY - ((mouseY + 2) % 4) + 2;
 			
-			var e:Entity = collidePoint("heart", x*8+4, y*8+4);
-			if (e) remove(e);
-			e = collidePoint("heart", x*8+12, y*8+4);
-			if (e) remove(e);
-			e = collidePoint("heart", x*8+4, y*8+12);
-			if (e) remove(e);
-			e = collidePoint("heart", x*8+12, y*8+12);
-			if (e) remove(e);
-			e = collidePoint("cog", x*8+4, y*8+4);
-			if (e) remove(e);
-			e = collidePoint("cog", x*8+12, y*8+4);
-			if (e) remove(e);
-			e = collidePoint("cog", x*8+4, y*8+12);
-			if (e) remove(e);
-			e = collidePoint("cog", x*8+12, y*8+12);
-			if (e) remove(e);
+			var a:Array = [];
+			
+			collideRectInto("heart", x - 7, y - 7, 14, 14, a);
+			collideRectInto("cog", x - 7, y - 7, 14, 14, a);
+			
+			for each (var e:Entity in a) {
+				remove(e);
+			}
 			
 			add(new Cog(x, y));
 		}

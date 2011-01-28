@@ -14,6 +14,8 @@ package
 		public static const GREY:uint = 0x787878;
 		public static const WHITE:uint = 0xEEEEEE;
 		
+		public static const SAVEFILE_VERSION:uint = 1;
+		
 		public static const so:SharedObject = SharedObject.getLocal("hearts", "/");
 		
 		public function Main ()

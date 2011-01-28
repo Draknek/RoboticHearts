@@ -20,8 +20,8 @@ package
 		
 		public function Heart (_x:int = 0, _y:int = 0, _rot:int = -1)
 		{
-			x = _x*8 + 4;
-			y = _y*8 + 4;
+			x = _x;
+			y = _y;
 			
 			sprite = new Spritemap(HEART, 8, 8);
 			image = sprite;

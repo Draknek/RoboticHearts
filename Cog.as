@@ -21,8 +21,8 @@ package
 		
 		public function Cog (_x:int = 0, _y:int = 0)
 		{
-			x = _x*8 + 8;
-			y = _y*8 + 8;
+			x = _x;
+			y = _y;
 			
 			sprite = new Spritemap(COG, 16, 16);
 			sprite.frame = cogChoice;
