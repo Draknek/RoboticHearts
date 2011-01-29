@@ -319,7 +319,13 @@ package
 		
 		private function back ():void
 		{
-			if (backButton.disabled) return;
+			if (backButton.disabled) {
+				if (Logger.isLocal) {
+					FP.world = new Intro;
+				} else {
+					return;
+				}
+			}
 			
 			if (tween) tween.cancel();
 			
