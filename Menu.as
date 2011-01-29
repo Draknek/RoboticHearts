@@ -102,13 +102,19 @@ package
 				backButton.visible = true;
 			});
 			
-			var resetData:Button = new Button(0, 0, new Text("Delete saved data"), function ():void {
-				Main.so.data.levels = {};
-				Main.so.flush();
-				FP.world = new Menu;
-			});
+			var resetData:Button = null;
 			
-			if (! Logger.isLocal) resetData = null;
+			if (Logger.isLocal) {
+				for each (var l:* in Main.so.data.levels) {
+					resetData = new Button(0, 0, new Text("Delete saved data"), function ():void {
+						Main.so.data.levels = {};
+						Main.so.flush();
+						Input.mouseCursor = "auto";
+						FP.world = new Intro;
+					});
+					break;
+				}
+			}
 			
 			addElements([playButton, levelsButton, bonusButton, graphicsButton, resetData]);
 			
