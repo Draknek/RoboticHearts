@@ -243,16 +243,16 @@ package
 					addGraphic(new Text("Click cogs to\nbrighten hearts", 0, 64, {align:"center", size:8, width: 96}));
 				}
 				else if (id == 1) {
-					addGraphic(new Text("Make all upright", 0, 76, {align:"center", size:8, width: 96}));
+					addGraphic(new Text("Make all upright", 0, 74, {align:"center", size:8, width: 96}));
 				}
 				else if (id == 2) {
-					addGraphic(new Text("R to reset", 0, 76, {align:"center", size:8, width: 96}));
+					addGraphic(new Text("R to reset", 0, 74, {align:"center", size:8, width: 96}));
 				}
 				else if (id == 3) {
-					addGraphic(new Text("Ctrl+Z to undo", 0, 76, {align:"center", size:8, width: 96}));
+					addGraphic(new Text("Ctrl+Z to undo", 0, 74, {align:"center", size:8, width: 96}));
 				}
 				/*else if (id == 4) {
-					addGraphic(new Text("Hint: try to keep\nsame-aligned\nhearts together", 0, 60, {align:"center", size:8, width: 96}));
+					addGraphic(new Text("Hint: try to keep\nsame-aligned\nhearts together", 0, 58, {align:"center", size:8, width: 96}));
 				}*/
 			}
 			
