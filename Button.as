@@ -35,12 +35,15 @@ package
 		public var hoverColor:uint = Main.PINK;
 		public var disabledColor:uint = Main.GREY;
 		
+		public var normalLayer:int = -5;
+		public var hoverLayer:int = -6;
+		
 		public function Button (_x:int, _y:int, _gfx:*, _callback:Function, __helpText:String = null, __disabled:Boolean = false)
 		{
 			x = _x;
 			y = _y;
 			
-			layer = -5;
+			layer = normalLayer;
 			
 			if (_gfx is Image) {
 				image = _gfx as Image;
@@ -77,6 +80,9 @@ package
 			
 			if (over && ! disabled) {
 				Input.mouseCursor = "button";
+				layer = hoverLayer;
+			} else {
+				layer = normalLayer;
 			}
 			
 			if (over && _helpText) {

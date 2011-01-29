@@ -220,6 +220,9 @@ package
 				} else {
 					b.normalColor = 0x00FF00;
 				}
+				b.helpText = "Completed\n" + Main.so.data.levels[md5].leastClicks + "/" + Level.levelPacks[mode].minClicksArray[i] + " clicks";
+			} else {
+				b.helpText = "Not completed";
 			}
 			
 			return b;
@@ -295,10 +298,6 @@ package
 			
 			var i:int = 0;
 			for each (var b:Button in heartChoices) {
-				b.layer = 10;
-				
-				if (b.collidePoint(b.x, b.y, mouseX, mouseY)) b.layer = -11;
-				
 				Spritemap(b.graphic).frame = i*8;
 				
 				if (i == Heart.heartChoice) Spritemap(b.graphic).frame += heart.frame;
