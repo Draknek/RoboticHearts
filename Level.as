@@ -231,16 +231,16 @@ package
 			
 			if (mode == "perfection") modeCode = "P";
 			
-			var levelIDDisplay:Text = new Text(modeCode+(id+1), 0, -1);
+			var levelIDDisplay:Text = new Text("Level " + modeCode+(id+1), 0, -1);
 			levelIDDisplay.x = 96 + 1 - levelIDDisplay.width;
 			addGraphic(levelIDDisplay);
 			
-			clickCounter = new Text("0", 0, 86);
+			clickCounter = new Text("Clicks: 0", 0, 86);
 			addGraphic(clickCounter);
 			
 			if (mode == "normal") {
 				if (id == 0) {
-					addGraphic(new Text("Click cogs to\nbrighten hearts", 0, 68, {align:"center", size:8, width: 96}));
+					addGraphic(new Text("Click cogs to\nbrighten hearts", 0, 64, {align:"center", size:8, width: 96}));
 				}
 				else if (id == 1) {
 					addGraphic(new Text("Make all upright", 0, 76, {align:"center", size:8, width: 96}));
@@ -654,7 +654,7 @@ package
 				Input.mouseCursor = "auto";
 			}
 			
-			clickCounter.text = clicks+"/"+minClicks;
+			clickCounter.text = "Clicks: " + clicks+"/"+minClicks;
 		}
 		
 		public override function render (): void
