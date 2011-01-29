@@ -116,25 +116,32 @@ package
 			super.render();
 			
 			if (_helpText && hoverTimer > 60) {
-				FP.rect.x = _helpText.x + 1;
-				FP.rect.y = _helpText.y + 2;
+				FP.rect.x = _helpText.x;
+				FP.rect.y = _helpText.y + 1;
 				
-				FP.rect.width = _helpText.textWidth - 3;
-				FP.rect.height = _helpText.textHeight - 5;
+				FP.rect.width = _helpText.textWidth - 1;
+				FP.rect.height = _helpText.textHeight - 3;
 				
 				if (FP.width <= FP.rect.x + FP.rect.width) {
 					_helpText.x -= 2 + FP.rect.width;
 					
 					if (_helpText.x < 0) _helpText.x = (FP.width - FP.rect.width)*0.5;
 					
-					FP.rect.x = _helpText.x + 1;
+					FP.rect.x = _helpText.x;
 				}
 				
 				if (FP.height <= FP.rect.y + FP.rect.height) {
 					_helpText.y -= 4 + FP.rect.height;
 					
-					FP.rect.y = _helpText.y + 2;
+					FP.rect.y = _helpText.y + 1;
 				}
+				
+				FP.buffer.fillRect(FP.rect, Main.BLACK);
+				
+				FP.rect.x += 1;
+				FP.rect.y += 1;
+				FP.rect.width -= 2;
+				FP.rect.height -= 2;
 				
 				FP.buffer.fillRect(FP.rect, Main.GREY);
 				
