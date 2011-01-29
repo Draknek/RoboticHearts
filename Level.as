@@ -430,6 +430,7 @@ package
 			
 			if (Input.pressed(Key.ESCAPE)) {
 				gotoMenu();
+				return;
 			}
 			
 			if (storyText) {
