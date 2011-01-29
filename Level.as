@@ -561,7 +561,7 @@ package
 				var world:World = this;
 				
 				FP.tween(this, {}, 50, {complete: function ():void {
-					FP.tween(this, {}, 30, {complete: function ():void {
+					FP.tween(this, {}, 50, {complete: function ():void {
 						addGraphic(t, -15);
 						addGraphic(t2, -15);
 						addGraphic(t3, -15);
