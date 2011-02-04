@@ -19,6 +19,8 @@ package
 		
 		public static var cogChoice:int = 2;
 		
+		private var hack:Boolean = false;
+		
 		public function Cog (_x:int = 0, _y:int = 0)
 		{
 			x = _x;
@@ -43,7 +45,7 @@ package
 		
 		public override function update (): void
 		{
-			if (!world) return;
+			if (hack || !world) return;
 			
 			var a:Array;
 			var h:Heart;
@@ -59,6 +61,8 @@ package
 					for each (h in a) {
 						world.remove(h);
 					}
+					
+					hack = true;
 					
 					return;
 				}
