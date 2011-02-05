@@ -17,7 +17,7 @@ package
 		
 		public var over:Boolean = false;
 		
-		public static var cogChoice:int = 2;
+		public static var cogChoice:int = 4;
 		
 		private var hack:Boolean = false;
 		
