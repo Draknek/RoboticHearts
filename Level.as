@@ -561,15 +561,15 @@ package
 				
 				var world:World = this;
 				
-				FP.tween(this, {}, 50, {complete: function ():void {
-					FP.tween(this, {}, 50, {complete: function ():void {
+				FP.alarm(50, function ():void {
+					FP.alarm(50, function ():void {
 						addGraphic(t, -15);
 						addGraphic(t2, -15);
 						addGraphic(t3, -15);
 						addGraphic(t4, -15);
 					
 						clickThrough = true;
-					}});
+					});
 					
 					for each (h in a) {
 						h.layer = -10;
@@ -578,7 +578,7 @@ package
 						FP.tween(h, {x: 32, y:48}, 60, {tweener:world, ease: Ease.sineIn});
 						FP.tween(h.image, {scale: 32, originX: 4.5}, 60, {ease: Ease.sineIn});
 					}
-				}});
+				});
 			}
 			
 			if (!gameOver && reseting) {
