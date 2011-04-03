@@ -4,14 +4,14 @@ simple 2
 Once\nwas a young boy\nand a young girl
 isolated 3
 
+They did not own much
+two 5
+
+But everything they had was shared between them
+gift 7
+
 They were the best of friends
 reckoner 4
-
-Their love filling a hole that neither knew existed
-hole 8
-
-They shared everything
-gift 7
 
 They danced together
 outsider 7
@@ -22,10 +22,16 @@ eyes3 10
 And helped one another when in need
 sides 8
 
-Their love bound them together
+Their friendship bound them together stronger than any rope
 string-short 9
 
-But nothing is simple forever
+Their love filling a hole that neither knew existed
+hole 8
+
+But different people will pull in different directions
+separated 10
+
+And nothing is simple forever
 eyes2 8
 
 #And for a brief time, they knew love
@@ -34,14 +40,14 @@ eyes2 8
 #And two lives are more complex than one
 #eyes 11 -- too much too soon?
 
-For different people will pull in different directions
-separated 10
-
 And two lives are more complex than one
 simple3-simpler 8
 
 One day they found a broken robot in the woods
-line 9
+line-simpler 3
+
+#One day they found a broken robot in the woods
+#line 8
 
 They worked hard to fix the robot
 line3 6
@@ -60,8 +66,8 @@ heart-swap 7
 The robot became lonely and led them to his old home
 cross-simple 16
 
-"Please," he said, "so few of these robots are still active"
-square2 12
+#"Please," he said, "so few of these robots are still active"
+
 
 "Cannot you fix them all?" he pleaded
 cross7 7
@@ -105,8 +111,8 @@ diamond-large 5 3
 And now he was alone\nbut did not know it.
 sparse 12
 
-#squareish 13 -- sidelined
-#triangle 11 -- sidelined -- too hard for the boy/girl/robot section
+#squareish 13 -- sidelined -- maybe patience-lite?
+#triangle 11 -- sidelined -- too hard for the boy/girl/robot section -- maybe perfection?
 #lonely 2 -- story end?
 #funk 14 -- funky connections
 #sharing2 7 -- same end as sides
@@ -125,6 +131,7 @@ sparse 12
 #diamond 18 -- hard
 #cross 52 -- hard
 #cross3 32 -- hard
+#square2 12 -- hard!!!
 #interesting 23 -- not aesthetically pleasing
 #
 #The boy sent robots to talk to the girl but she would turn them away
