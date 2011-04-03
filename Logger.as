@@ -60,7 +60,7 @@ package
 		
 		private static function l (id:int, mode:String):String
 		{
-			var s:String = "b";
+			var s:String = "c";
 			
 			if (mode == "perfection") s += "*";
 			
