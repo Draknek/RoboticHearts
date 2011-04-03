@@ -16,7 +16,7 @@ package
 		public var rot:int;
 		public var highlight:Boolean = false;
 		
-		public static var heartChoice:int = 2;
+		public static var heartChoice:int = 0;
 		
 		public function Heart (_x:int = 0, _y:int = 0, _rot:int = -1)
 		{
