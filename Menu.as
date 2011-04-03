@@ -203,7 +203,7 @@ package
 				b.y = 48 + int(i / 5) * 12;
 			} else {
 				b.x = 96 + 6 + (i%6)*14;
-				b.y = 30 + int(i / 6) * 12;
+				b.y = 30 + int(i / 6) * 12 - 4; // magic constant 4 is because I have too many levels now
 			}
 			
 			var md5:String = MD5.hashBytes(Level.levelPacks[mode].levels[i]);
