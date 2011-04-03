@@ -68,7 +68,6 @@ cross-simple 16
 
 #"Please," he said, "so few of these robots are still active"
 
-
 "Cannot you fix them all?" he pleaded
 cross7 7
 
@@ -78,25 +77,29 @@ cross2 7
 The task took weeks
 ellipsis 10
 
-And as the boy worked late into the nights, the girl grew lonely
-corner2 13
+#And as the boy worked late into the nights, the girl grew lonely
+#corner2 13
 
-And then weeks turned to months
+#And then weeks turned to months
+
+And as the boy worked late into the nights, the girl grew lonely
 cross4 9
 
-And she felt lonelier still
+The boy's neglect of the girl broke her heart
 heart-break2 5
 
-And left him for another
+And she left him for another
 heart-break 3 4
 
 And suddenly the boy noticed her absence and found he was lonely too
 bigsquare 16
 
-In his foolish aching rage\nHe made a demand of the machines
-diamond2 9
+#In his foolish aching rage\nHe made a demand of the machines
+#diamond2 9
 
-"You who have not abandoned me\nI wish to become one of you"
+#"You who have not abandoned me\nI wish to become one of you"
+
+In his foolish aching rage\nHe made a demand of the machines
 cross8 15
 
 "Tear out this broken heart of mine\nAnd build for me a heart of metal that will never fail"
