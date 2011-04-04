@@ -29,6 +29,8 @@ package
 			super(96, 96, 60, true);
 			FP.screen.color = 0x202020;
 			FP.screen.scale = 4;
+			
+			//FP.console.enable();
 		}
 		
 		public override function init (): void

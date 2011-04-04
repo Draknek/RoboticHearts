@@ -438,6 +438,7 @@ package
 					FP.tween(storyText, {alpha: 0}, 30, {ease:Ease.sineOut});
 					storyText = null;
 				}
+				
 				return;
 			}
 			
@@ -459,7 +460,7 @@ package
 			}
 			
 			if (gameOver) {
-				if (clickThrough && (Input.mousePressed || Input.pressed(-1))) {
+				if (clickThrough && Input.pressed(-1)) {
 					FP.world = new Level(id+1, mode);
 				}
 			}
@@ -516,6 +517,25 @@ package
 				var t:Text = new Text("Clicks: " + clicks, 0, 24, {align:"center", size:8, width: 95});
 				var t2:Text = new Text("Previous best: " + previousBest, 0, 40, {align:"center", size:8, width: 95});
 				var t3:Text = new Text("Best possible: " + minClicks, 0, 56, {align:"center", size:8, width: 95});
+				
+				var next:Button = new Button(0, 0, new Text("Next level", 0, 0, {size: 8}), function ():void {
+					FP.world = new Level(id+1, mode);
+				});
+				
+				var retry:Button = new Button(0, 0, new Text("Retry", 0, 0, {size: 8}), function ():void {
+					FP.world = new Level(id, mode);
+				});
+				
+				next.x = (FP.width - next.width)*0.5;
+				retry.x = (FP.width - retry.width)*0.5;
+				
+				retry.y = FP.height - 4 - retry.height;
+				next.y = retry.y - 4 - next.height;
+				
+				next.hoverColor = retry.hoverColor = Main.BLACK;
+				next.normalColor = retry.normalColor = Main.WHITE;
+				next.normalLayer = next.hoverLayer = next.layer = retry.normalLayer = retry.hoverLayer = retry.layer = -15;
+				
 				var t4:Text = new Text("Click to continue", 0, 86, {align:"center", size:8, width: 95});
 				
 				if (! previousBest || previousBest == clicks) {
@@ -563,10 +583,17 @@ package
 				
 				FP.alarm(50, function ():void {
 					FP.alarm(50, function ():void {
+						var buttons:Array = [];
+						
+						world.getClass(Button, buttons);
+						
+						world.removeList(buttons);
+						
 						addGraphic(t, -15);
 						addGraphic(t2, -15);
 						addGraphic(t3, -15);
-						addGraphic(t4, -15);
+						add(next);
+						add(retry);
 					
 						clickThrough = true;
 					});
@@ -644,6 +671,7 @@ package
 			}
 			
 			if (gameOver && clickThrough) {
+				super.update();
 				return;
 			}
 			
