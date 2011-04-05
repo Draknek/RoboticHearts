@@ -88,7 +88,7 @@ package
 			if (over && _helpText) {
 				hoverTimer++;
 				
-				if (hoverTimer <= 60) {
+				if (hoverTimer <= 20) {
 					_helpText.x = Input.mouseX;
 					_helpText.y = Input.mouseY + 2;
 				}
@@ -115,7 +115,7 @@ package
 			
 			super.render();
 			
-			if (_helpText && hoverTimer > 60) {
+			if (_helpText && hoverTimer > 20) {
 				FP.rect.x = _helpText.x;
 				FP.rect.y = _helpText.y + 1;
 				
