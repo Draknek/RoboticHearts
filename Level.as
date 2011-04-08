@@ -514,71 +514,6 @@ package
 				
 				time = -1;
 				
-				var t:Text = new Text("Clicks: " + clicks, 0, 24, {align:"center", size:8, width: 95});
-				var t2:Text = new Text("Previous best: " + previousBest, 0, 40, {align:"center", size:8, width: 95});
-				var t3:Text = new Text("Best possible: " + minClicks, 0, 56, {align:"center", size:8, width: 95});
-				
-				var next:Button = new Button(0, 0, new Text("Next level", 0, 0, {size: 8}), function ():void {
-					FP.world = new Level(id+1, mode);
-				});
-				
-				var retry:Button = new Button(0, 0, new Text("Retry", 0, 0, {size: 8}), function ():void {
-					FP.world = new Level(id, mode);
-				});
-				
-				next.x = (FP.width - next.width)*0.5;
-				retry.x = (FP.width - retry.width)*0.5;
-				
-				retry.y = FP.height - 4 - retry.height;
-				next.y = retry.y - 4 - next.height;
-				
-				next.hoverColor = retry.hoverColor = Main.BLACK;
-				next.normalColor = retry.normalColor = Main.WHITE;
-				next.normalLayer = next.hoverLayer = next.layer = retry.normalLayer = retry.hoverLayer = retry.layer = -15;
-				
-				var t4:Text = new Text("Click to continue", 0, 86, {align:"center", size:8, width: 95});
-				
-				if (! previousBest || previousBest == clicks) {
-					t2.text = "";
-					t.y += 8;
-					t3.y -= 8;
-				} else if (previousBest < clicks) {
-					t2.text = "Your best: " + previousBest;
-				}
-				
-				if (clicks <= minClicks) {
-					t.text += "\n(best possible)";
-					
-					t3.text = "";
-					
-					if (t2.text) {
-						t.y = 28;
-						t2.y = 52;
-					} else {
-						t.y = 36;
-					}
-				} else if (t2.text && previousBest <= minClicks) {
-					t2.text += "\n(best possible)";
-					
-					t3.text = "";
-					
-					t.y = 28;
-					t2.y = 44;
-				}
-				
-				if (clicks < minClicks) {
-					t2.text = ""
-					t3.text = ""
-					
-					t.text = "Clicks: " + clicks + "\n\nWell done! You used\n" + (minClicks - clicks) + "\nfewer clicks than I\nthought were needed!";
-					
-					t.y = (88 - t.height)*0.5;
-					
-					var alert:String = "Completed " + mode + " level " + id + " (" + md5 + ") in " + clicks + " clicks";
-					
-					Logger.alert(alert);
-				}
-				
 				var world:World = this;
 				
 				FP.alarm(50, function ():void {
@@ -589,12 +524,8 @@ package
 						
 						world.removeList(buttons);
 						
-						addGraphic(t, -15);
-						addGraphic(t2, -15);
-						addGraphic(t3, -15);
-						add(next);
-						add(retry);
-					
+						addCompletionUI(previousBest);
+						
 						clickThrough = true;
 					});
 					
@@ -702,6 +633,73 @@ package
 			}
 			
 			super.render();
+		}
+		
+		private function addCompletionUI (previousBest:int): void
+		{
+			var md5:String = MD5.hashBytes(data);
+			
+			var next:Button = new Button(0, 0, new Text("Next level", 0, 0, {size: 8}), function ():void {
+				FP.world = new Level(id+1, mode);
+			});
+			
+			var retry:Button = new Button(0, 0, new Text("Retry", 0, 0, {size: 8}), function ():void {
+				FP.world = new Level(id, mode);
+			});
+			
+			next.x = (FP.width - next.width)*0.5;
+			retry.x = (FP.width - retry.width)*0.5;
+			
+			retry.y = FP.height - 4 - retry.height;
+			next.y = retry.y - 4 - next.height;
+			
+			next.hoverColor = retry.hoverColor = Main.BLACK;
+			next.normalColor = retry.normalColor = Main.WHITE;
+			next.normalLayer = next.hoverLayer = next.layer = retry.normalLayer = retry.hoverLayer = retry.layer = -15;
+			
+			// first score OR same score OR better score OR worse score
+			// optimal score OR non-optimal OR beaten optimal
+			
+			var clickText:String = "Clicks: " + clicks;
+			var previousBestText:String;
+			var bestPossibleText:String;
+			
+			if (! previousBest || previousBest == clicks) {
+				previousBestText = null;
+			} else if (previousBest < clicks) {
+				previousBestText = "Your best: " + previousBest;
+			} else {
+				previousBestText = "Previous best: " + previousBest;
+			}
+			
+			if (clicks <= minClicks) {
+				clickText += "\n(best possible)";
+			} else if (previousBestText && previousBest <= minClicks) {
+				previousBestText += "\n(best possible)";
+			} else {
+				bestPossibleText = "Best possible: " + minClicks;
+			}
+			
+			var t:Text = new Text(clickText, 0, 0, {align:"center", size:8, width: 95});
+			
+			if (previousBestText) t.text += "\n\n" + previousBestText;
+			if (bestPossibleText) t.text += "\n\n" + bestPossibleText;
+			
+			if (clicks < minClicks) {
+				t.text = "Clicks: " + clicks + "\n\nWell done! You used\n" + (minClicks - clicks) + "\nfewer clicks than I\nthought were needed!";
+				
+				var alert:String = "Completed " + mode + " level " + id + " (" + md5 + ") in " + clicks + " clicks (prev best: " + minClicks + ")";
+				
+				Logger.alert(alert);
+			}
+			
+			var space:Number = next.y - t.height;
+			
+			t.y = space * 0.5;
+			
+			addGraphic(t, -15);
+			add(next);
+			add(retry);
 		}
 		
 		public function removeUnderMouse (): void
