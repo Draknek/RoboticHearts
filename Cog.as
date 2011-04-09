@@ -117,9 +117,9 @@ package
 			var other:Cog;
 			
 			if (Level(world).mirrorX && Level(world).mirrorY) {
-				other = world.collidePoint("cog", 96 - x, 96 - y) as Cog;
+				other = world.collidePoint("cog", FP.width - x, FP.height - y) as Cog;
 			
-				if (other && other != this && other.x == 96 - x && other.y == 96 - y && Math.abs(other.x - x) > 31 && Math.abs(other.y - y) > 31) {
+				if (other && other != this && other.x == FP.width - x && other.y == FP.height - y && Math.abs(other.x - x) > 31 && Math.abs(other.y - y) > 31) {
 					a.push(other);
 				}
 			}
@@ -133,17 +133,17 @@ package
 			var other:Cog;
 			
 			if (Level(world).mirrorX) {
-				other = world.collidePoint("cog", 96 - x, y) as Cog;
+				other = world.collidePoint("cog", FP.width - x, y) as Cog;
 			
-				if (other && other != this && other.x == 96 - x && other.y == y && Math.abs(other.x - x) > 31) {
+				if (other && other != this && other.x == FP.width - x && other.y == y && Math.abs(other.x - x) > 31) {
 					a.push(other);
 				}
 			}
 			
 			if (Level(world).mirrorY) {
-				other = world.collidePoint("cog", x, 96 - y) as Cog;
+				other = world.collidePoint("cog", x, FP.height - y) as Cog;
 			
-				if (other && other != this && other.x == x && other.y == 96 - y && Math.abs(other.y - y) > 31) {
+				if (other && other != this && other.x == x && other.y == FP.height - y && Math.abs(other.y - y) > 31) {
 					a.push(other);
 				}
 			}

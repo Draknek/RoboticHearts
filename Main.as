@@ -6,7 +6,6 @@ package
 	import flash.net.*;
 	import flash.display.*;
 	
-	[SWF(width = "384", height = "384", backgroundColor="#202020")]
 	public class Main extends Engine
 	{
 		public static const PINK:uint = 0xff3366;

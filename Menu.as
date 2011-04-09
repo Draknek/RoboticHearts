@@ -69,7 +69,7 @@ package
 				}
 			}
 			
-			perfectionLevels.push(new Entity(96, 0, new Text("Perfection levels:", 1, 36, {width: 96, align: "center"})));
+			perfectionLevels.push(new Entity(FP.width, 0, new Text("Perfection levels:", 1, 36, {width: FP.width, align: "center"})));
 			
 			var playText:String = (resumeLevel == 0) ? "Play" : "Resume";
 			
@@ -86,7 +86,7 @@ package
 			var levelsButton:Button = new Button(0, 0, new Text("Level select"), function ():void {
 				addList(normalLevels);
 				if (tween) tween.cancel();
-				tween = FP.tween(FP.camera, {x: 96}, 30, {ease: Ease.sineIn});
+				tween = FP.tween(FP.camera, {x: FP.width}, 30, {ease: Ease.sineIn});
 				backButton.disabled = false;
 				backButton.visible = true;
 			});
@@ -94,14 +94,14 @@ package
 			var bonusButton:Button = new Button(0, 0, new Text("Bonus levels"), function ():void {
 				addList(perfectionLevels);
 				if (tween) tween.cancel();
-				tween = FP.tween(FP.camera, {x: 96}, 30, {ease: Ease.sineIn});
+				tween = FP.tween(FP.camera, {x: FP.width}, 30, {ease: Ease.sineIn});
 				backButton.disabled = false;
 				backButton.visible = true;
 			});
 			
 			var graphicsButton:Button = new Button(0, 0, new Text("Change graphics"), function ():void {
 				if (tween) tween.cancel();
-				tween = FP.tween(FP.camera, {y: 96}, 30, {ease: Ease.sineIn});
+				tween = FP.tween(FP.camera, {y: FP.height}, 30, {ease: Ease.sineIn});
 				backButton.disabled = false;
 				backButton.visible = true;
 			});
@@ -161,10 +161,10 @@ package
 				cogChoices.push(addCogChoiceButton(i, cogSpritemap.frameCount));
 			}
 			
-			addGraphic(new Text("Heart image:", 1, 38 + 96 - 8, {width: 96, align: "center"}));
-			addGraphic(new Text("Cog image:", 1, 62 + 96 - 10, {width: 96, align: "center"}));
+			addGraphic(new Text("Heart image:", 1, 38 + FP.height - 8, {width: FP.width, align: "center"}));
+			addGraphic(new Text("Cog image:", 1, 62 + FP.height - 10, {width: FP.width, align: "center"}));
 			
-			add(backButton2 = new Button(0, 96*2 - 14, new Text("Back to menu"), back));
+			add(backButton2 = new Button(0, FP.height*2 - 14, new Text("Back to menu"), back));
 			backButton2.x = (FP.width - backButton2.width) * 0.5;
 		}
 		
@@ -198,13 +198,21 @@ package
 				FP.world = new Level(i, mode);
 			});
 			
+			var xSpacing:int = 0 + b.width;
+			var ySpacing:int = 0 + b.height;
+			
+			var levelsPerRow:int = 6;
+			var startY:int = 30 - 4; // magic constant 4 is because I have too many levels now
+			
 			if (mode == "perfection") {
-				b.x = 96 + 6 + 7 + (i%5)*14;
-				b.y = 48 + int(i / 5) * 12;
-			} else {
-				b.x = 96 + 6 + (i%6)*14;
-				b.y = 30 + int(i / 6) * 12 - 4; // magic constant 4 is because I have too many levels now
+				levelsPerRow = 5;
+				startY = 48;
 			}
+			
+			var startX:int = FP.width*1.5 - xSpacing*levelsPerRow*0.5;
+			
+			b.x = startX +    (i % levelsPerRow) * xSpacing;
+			b.y = startY + int(i / levelsPerRow) * ySpacing;
 			
 			var md5:String = MD5.hashBytes(Level.levelPacks[mode].levels[i]);
 			
@@ -239,7 +247,7 @@ package
 			s.frame = i*8;
 			
 			var x:int = (FP.width - l*8) * 0.5 + i*8;
-			var y:int = 96+42;
+			var y:int = FP.height+42;
 			
 			var b:Button = new Button(x, y, s, function ():void {
 				Heart.heartChoice = i;
@@ -262,7 +270,7 @@ package
 			s.frame = i;
 			
 			var x:int = (FP.width - l*16) * 0.5 + i*16;
-			var y:int = 96+48+16;
+			var y:int = FP.height+48+16;
 			
 			var b:Button = new Button(x, y, s, function ():void {
 				Cog.cogChoice = i;

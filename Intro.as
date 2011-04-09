@@ -27,12 +27,13 @@ package
 				y+= 20;
 			}
 			
-			var t:Text = new Text("- Anonymous", 0, 80);
-			t.x = 96 - t.width;
+			var t:Text = new Text("- Anonymous", 0, 0);
+			t.x = FP.width - t.width;
+			t.y = FP.height - 16;
 			
 			addGraphic(t);
 			
-			overlay = Image.createRect(96, 96, Main.BLACK);
+			overlay = Image.createRect(FP.width, FP.height, Main.BLACK);
 			overlay.alpha = 0;
 			
 			addGraphic(overlay);

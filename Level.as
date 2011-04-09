@@ -224,7 +224,7 @@ package
 			Audio.muteOverlay = muteOverlay;
 			
 			if (levelPacks[mode].levels[id+1]) {
-				add(new Button(96-8, 96-10, Button.SKIP, skip, "Skip level"));
+				add(new Button(FP.width-8, FP.height-10, Button.SKIP, skip, "Skip level"));
 			}
 			
 			var modeCode:String = "";
@@ -232,27 +232,27 @@ package
 			if (mode == "perfection") modeCode = "P";
 			
 			var levelIDDisplay:Text = new Text("Level " + modeCode+(id+1), 0, -1);
-			levelIDDisplay.x = 96 + 1 - levelIDDisplay.width;
+			levelIDDisplay.x = FP.width + 1 - levelIDDisplay.width;
 			addGraphic(levelIDDisplay);
 			
-			clickCounter = new Text("Clicks: 0", 0, 86);
+			clickCounter = new Text("Clicks: 0", 0, FP.height - 10);
 			addGraphic(clickCounter);
 			
 			if (mode == "normal") {
 				if (id == 0) {
-					addGraphic(new Text("Click cogs to\nbrighten hearts", 0, 64, {align:"center", size:8, width: 96}));
+					addGraphic(new Text("Click cogs to\nbrighten hearts", 0, 64, {align:"center", size:8, width: FP.width}));
 				}
 				else if (id == 1) {
-					addGraphic(new Text("Make all upright", 0, 74, {align:"center", size:8, width: 96}));
+					addGraphic(new Text("Make all upright", 0, 74, {align:"center", size:8, width: FP.width}));
 				}
 				else if (id == 2) {
-					addGraphic(new Text("R to reset", 0, 74, {align:"center", size:8, width: 96}));
+					addGraphic(new Text("R to reset", 0, 74, {align:"center", size:8, width: FP.width}));
 				}
 				else if (id == 3) {
-					addGraphic(new Text("Ctrl+Z to undo", 0, 74, {align:"center", size:8, width: 96}));
+					addGraphic(new Text("Ctrl+Z to undo", 0, 74, {align:"center", size:8, width: FP.width}));
 				}
 				/*else if (id == 4) {
-					addGraphic(new Text("Hint: try to keep\nsame-aligned\nhearts together", 0, 58, {align:"center", size:8, width: 96}));
+					addGraphic(new Text("Hint: try to keep\nsame-aligned\nhearts together", 0, 58, {align:"center", size:8, width: FP.width}));
 				}*/
 			}
 			
@@ -260,11 +260,11 @@ package
 				var text:String = levelPacks[mode].story[id];
 				text = text.split("\\n").join("\n\n");
 				
-				storyText = new Text(text, 1, 0, {width: 96, align:"center", wordWrap:true});
+				storyText = new Text(text, 1, 0, {width: FP.width, align:"center", wordWrap:true});
 				
-				storyText.y = (96 - storyText.height) * 0.5;
+				storyText.y = (FP.height - storyText.height) * 0.5;
 				
-				var bitmap:BitmapData = new BitmapData(96, 96, false, Main.PINK);
+				var bitmap:BitmapData = new BitmapData(FP.width, FP.height, false, Main.PINK);
 				
 				storyText.render(bitmap, FP.zero, camera);
 				
@@ -299,11 +299,11 @@ package
 			
 			removeAll();
 			
-			addGraphic(Image.createRect(96, 96, Main.PINK));
+			addGraphic(Image.createRect(FP.width, FP.height, Main.PINK));
 			
-			var t:Text = new Text("And that is the story\n\nOf these robotic hearts of mine\n\n\nThanks for playing!", 0, 0, {width: 96, wordWrap: true, align: "center"});
+			var t:Text = new Text("And that is the story\n\nOf these robotic hearts of mine\n\n\nThanks for playing!", 0, 0, {width: FP.width, wordWrap: true, align: "center"});
 			
-			t.y = (96 - t.height)*0.5;
+			t.y = (FP.height - t.height)*0.5;
 			
 			addGraphic(t);
 		}
@@ -680,7 +680,7 @@ package
 				bestPossibleText = "Best possible: " + minClicks;
 			}
 			
-			var t:Text = new Text(clickText, 0, 0, {align:"center", size:8, width: 95});
+			var t:Text = new Text(clickText, 0, 0, {align:"center", size:8, width: FP.width - 1});
 			
 			if (previousBestText) t.text += "\n\n" + previousBestText;
 			if (bestPossibleText) t.text += "\n\n" + bestPossibleText;
