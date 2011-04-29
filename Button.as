@@ -38,7 +38,7 @@ package
 		public var normalLayer:int = -5;
 		public var hoverLayer:int = -6;
 		
-		public function Button (_x:int, _y:int, _gfx:*, _callback:Function, __helpText:String = null, __disabled:Boolean = false)
+		public function Button (_x:int, _y:int, _gfx:*, _callback:Function, __helpText:String = null, __disabled:Boolean = false, _noCamera:Boolean = false)
 		{
 			x = _x;
 			y = _y;
@@ -62,6 +62,8 @@ package
 			disabled = __disabled;
 			
 			helpText = __helpText;
+			
+			noCamera = _noCamera;
 		}
 		
 		public override function update (): void

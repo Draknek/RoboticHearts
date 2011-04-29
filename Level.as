@@ -202,14 +202,14 @@ package
 			
 			Logger.startLevel(id, mode);
 			
-			add(redoButton = new Button(0, 0, Button.REDO, redo, "Redo", true));
-			add(undoButton = new Button(0, 0, Button.UNDO, undo, "Undo", true));
-			add(resetButton = new Button(0, 0, Button.RESET, reset, "Reset"));
+			add(redoButton = new Button(0, 0, Button.REDO, redo, "Redo", true, true));
+			add(undoButton = new Button(0, 0, Button.UNDO, undo, "Undo", true, true));
+			add(resetButton = new Button(0, 0, Button.RESET, reset, "Reset", false, true));
 			
-			add(muteButton = new Button(0, 0, Button.AUDIO, Audio.toggleMute, "Mute"));
-			add(muteOverlay = new Button(0, 0, Button.AUDIO_MUTE, null, "Unmute"));
+			add(muteButton = new Button(0, 0, Button.AUDIO, Audio.toggleMute, "Mute", false, true));
+			add(muteOverlay = new Button(0, 0, Button.AUDIO_MUTE, null, "Unmute", false, true));
 			
-			add(menuButton = new Button(0, 0, Button.MENU, gotoMenu, "Menu"));
+			add(menuButton = new Button(0, 0, Button.MENU, gotoMenu, "Menu", false, true));
 			
 			muteButton.x = menuButton.x + menuButton.width;
 			resetButton.x = muteButton.x + muteButton.width;
@@ -224,7 +224,7 @@ package
 			Audio.muteOverlay = muteOverlay;
 			
 			if (levelPacks[mode].levels[id+1]) {
-				add(new Button(FP.width-8, FP.height-10, Button.SKIP, skip, "Skip level"));
+				add(new Button(FP.width-8, FP.height-10, Button.SKIP, skip, "Skip level", false, true));
 			}
 			
 			var modeCode:String = "";
@@ -233,26 +233,28 @@ package
 			
 			var levelIDDisplay:Text = new Text("Level " + modeCode+(id+1), 0, -1);
 			levelIDDisplay.x = FP.width + 1 - levelIDDisplay.width;
+			levelIDDisplay.scrollX = levelIDDisplay.scrollY = 0;
 			addGraphic(levelIDDisplay);
 			
 			clickCounter = new Text("Clicks: 0", 0, FP.height - 10);
+			clickCounter.scrollX = clickCounter.scrollY = 0;
 			addGraphic(clickCounter);
 			
 			if (mode == "normal") {
 				if (id == 0) {
-					addGraphic(new Text("Click cogs to\nbrighten hearts", 0, 64, {align:"center", size:8, width: FP.width}));
+					addGraphic(new Text("Click cogs to\nbrighten hearts", 0, 64, {align:"center", size:8, width: 96}));
 				}
 				else if (id == 1) {
-					addGraphic(new Text("Make all upright", 0, 74, {align:"center", size:8, width: FP.width}));
+					addGraphic(new Text("Make all upright", 0, 74, {align:"center", size:8, width: 96}));
 				}
 				else if (id == 2) {
-					addGraphic(new Text("R to reset", 0, 74, {align:"center", size:8, width: FP.width}));
+					addGraphic(new Text("R to reset", 0, 74, {align:"center", size:8, width: 96}));
 				}
 				else if (id == 3) {
-					addGraphic(new Text("Ctrl+Z to undo", 0, 74, {align:"center", size:8, width: FP.width}));
+					addGraphic(new Text("Ctrl+Z to undo", 0, 74, {align:"center", size:8, width: 96}));
 				}
 				/*else if (id == 4) {
-					addGraphic(new Text("Hint: try to keep\nsame-aligned\nhearts together", 0, 58, {align:"center", size:8, width: FP.width}));
+					addGraphic(new Text("Hint: try to keep\nsame-aligned\nhearts together", 0, 58, {align:"center", size:8, width: 96}));
 				}*/
 			}
 			
@@ -270,10 +272,14 @@ package
 				
 				storyText = new Image(bitmap);
 				
+				storyText.scrollX = storyText.scrollY = 0;
+				
 				addGraphic(storyText, -9);
 			}
 			
 			var oldScreen:Image = new Image(FP.buffer.clone());
+			
+			oldScreen.scrollX = oldScreen.scrollY = 0;
 			
 			addGraphic(oldScreen, -10);
 			
@@ -407,6 +413,9 @@ package
 		
 		public override function update (): void
 		{
+			camera.x = -(FP.width - 96)*0.5;
+			camera.y = -(FP.height - 96)*0.5;
+			
 			Input.mouseCursor = "auto";
 			
 			if (! levelPacks[mode].levels[id]) {
@@ -533,8 +542,8 @@ package
 						h.layer = -10;
 						h.active = false;
 						Spritemap(h.graphic).frame = 0;
-						FP.tween(h, {x: 32, y:48}, 60, {tweener:world, ease: Ease.sineIn});
-						FP.tween(h.image, {scale: 32, originX: 4.5}, 60, {ease: Ease.sineIn});
+						FP.tween(h, {x: 48, y: 48}, 60, {tweener:world, ease: Ease.sineIn});
+						FP.tween(h.image, {scale: FP.width/3.0, originX: 4.5}, 60, {ease: Ease.sineIn});
 					}
 				});
 			}
@@ -641,11 +650,11 @@ package
 			
 			var next:Button = new Button(0, 0, new Text("Next level", 0, 0, {size: 8}), function ():void {
 				FP.world = new Level(id+1, mode);
-			});
+			}, null, false, true);
 			
 			var retry:Button = new Button(0, 0, new Text("Retry", 0, 0, {size: 8}), function ():void {
 				FP.world = new Level(id, mode);
-			});
+			}, null, false, true);
 			
 			next.x = (FP.width - next.width)*0.5;
 			retry.x = (FP.width - retry.width)*0.5;
@@ -681,6 +690,7 @@ package
 			}
 			
 			var t:Text = new Text(clickText, 0, 0, {align:"center", size:8, width: FP.width - 1});
+			t.scrollX = t.scrollY = 0;
 			
 			if (previousBestText) t.text += "\n\n" + previousBestText;
 			if (bestPossibleText) t.text += "\n\n" + bestPossibleText;

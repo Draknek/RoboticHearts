@@ -21,6 +21,8 @@ package
 		public var heartChoices:Array = [];
 		public var cogChoices:Array = [];
 		
+		public var title:Text;
+		
 		public var backButton:Button;
 		public var backButton2:Button;
 		public var muteButton:Button;
@@ -30,7 +32,7 @@ package
 		
 		public function Menu ()
 		{
-			var title:Text = new Text("These Mechanical\nHearts of Mine", 0, 8, {align: "center", size:8, scrollX:0, scrollY:0});
+			title = new Text("These Mechanical\nHearts of Mine", 0, 8, {align: "center", size:8, scrollX:0, scrollY:0});
 			addGraphic(title);
 			title.x = (FP.width - title.width)*0.5 + 1;
 			
@@ -177,7 +179,7 @@ package
 				h += o.height;
 			}
 			
-			var start:int = 24 + 4;
+			var start:int = title.y + title.height + 4;
 			
 			var padding:int = Number(FP.height - start - h) / (list.length + 1);
 			
