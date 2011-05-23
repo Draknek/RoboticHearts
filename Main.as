@@ -17,10 +17,17 @@ package
 		
 		public static const so:SharedObject = SharedObject.getLocal("hearts", "/");
 		
+		
+		[Embed(source = 'fonts/romance_fatal_pix.ttf', embedAsCFF="false", fontFamily = 'romance')]
+		public static const ROMANCE_FONT:Class;
+		[Embed(source = 'fonts/7x5.ttf', embedAsCFF="false", fontFamily = '7x5')]
+		public static const FONT:Class;
+		
 		public function Main ()
 		{
 			if (! so.data.levels) so.data.levels = {};
 			
+			//Text.font = "7x5";
 			Text.size = 8;
 			
 			Level.loadLevels();

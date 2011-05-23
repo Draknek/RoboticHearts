@@ -32,19 +32,32 @@ package
 		
 		public function Menu ()
 		{
-			title = new Text("These Mechanical\nHearts of Mine", 0, 8, {align: "center", size:8, scrollX:0, scrollY:0});
+			title = new Text("These Mechanical\nHearts of Mine", 0, 0, {align: "center", scrollX:0, scrollY:0, font:"romance", size: 16, color: Main.PINK});
 			addGraphic(title);
-			title.x = (FP.width - title.width)*0.5 + 1;
+			title.x = (FP.width - title.width)*0.5;
 			
 			heart = new Spritemap(Heart.HEART, 8, 8);
 			heart.color = Main.PINK;
 			heart.scrollX = 0;
 			heart.scrollY = 0;
 			
-			var titleXSpacing:int = (title.x - 8)*0.5;
+			heart.centerOO();
 			
-			addGraphic(heart, 0, titleXSpacing + 1, 12);
-			addGraphic(heart, 0, FP.width - titleXSpacing - 2 - 8, 12);
+			var titleXSpacing:int = (title.x)*0.5;
+			var titleY:int = (title.height)*0.5;
+			
+			//addGraphic(heart, 0, titleXSpacing + 1, titleY);
+			//addGraphic(heart, 0, FP.width - titleXSpacing - 2, titleY);
+			
+			var cog:Spritemap = new Spritemap(Cog.COG, 16, 16);
+			cog.frame = Cog.cogChoice;
+			cog.scrollX = 0;
+			cog.scrollY = 0;
+			cog.centerOO();
+			//cog.alpha = 0.5;
+			
+			//addGraphic(cog, 10, titleXSpacing, title.height*0.5);
+			//addGraphic(cog, 10, FP.width - titleXSpacing, title.height*0.5);
 			
 			var resumeLevel:int = -1;
 			var resumeMode:String;
@@ -179,7 +192,7 @@ package
 				h += o.height;
 			}
 			
-			var start:int = title.y + title.height + 4;
+			var start:int = title.y + title.height;
 			
 			var padding:int = Number(FP.height - start - h) / (list.length + 1);
 			
@@ -204,7 +217,7 @@ package
 			var ySpacing:int = 0 + b.height;
 			
 			var levelsPerRow:int = 6;
-			var startY:int = 30 - 4; // magic constant 4 is because I have too many levels now
+			var startY:int = title.y + title.height + 8;
 			
 			if (mode == "perfection") {
 				levelsPerRow = 5;
