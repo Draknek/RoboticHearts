@@ -160,6 +160,11 @@ package
 			muteOverlay.hoverColor = Main.WHITE;
 			muteOverlay.visible = Audio.mute;
 			
+			muteButton.normalLayer = -5;
+			muteButton.hoverLayer = -5;
+			muteOverlay.normalLayer = -6;
+			muteOverlay.hoverLayer = -6;
+			
 			Audio.muteOverlay = muteOverlay;
 			
 			if (heart.frameCount > 8) {
