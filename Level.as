@@ -648,6 +648,8 @@ package
 		{
 			var md5:String = MD5.hashBytes(data);
 			
+			//Logger.getScores(0, null, addGraph);
+			
 			var next:Button = new Button(0, 0, new Text("Next level", 0, 0, {size: 8}), function ():void {
 				FP.world = new Level(id+1, mode);
 			}, null, false, true);
@@ -703,9 +705,11 @@ package
 				Logger.alert(alert);
 			}
 			
-			var space:Number = next.y - t.height;
+			var graphStop:int = 0;//27+8;
 			
-			t.y = space * 0.5;
+			var space:Number = next.y - t.height - graphStop;
+			
+			t.y = space * 0.5 + graphStop;
 			
 			addGraphic(t, -15);
 			add(next);
@@ -759,6 +763,65 @@ package
 			}
 			
 			add(new Cog(x, y));
+		}
+		
+		public function addGraph (data:Object): void
+		{
+			var yourClicks:int = clicks;
+			
+			if (data[yourClicks]) data[yourClicks]++;
+			else data[yourClicks] = 1;
+			
+			var maxClicks:int = 0;
+			var maxHeight:int = 1;
+			
+			for (var key:String in data) {
+				if (int(key) > maxClicks) maxClicks = int(key);
+				if (data[key] > maxHeight) maxHeight = data[key];
+			}
+			
+			var width:int = Math.ceil(maxClicks/10)*10;
+			if (width < 30) width = 30;
+			var height:int = 16;
+			
+			FP.rect.x = 1;
+			FP.rect.y = 1;
+			FP.rect.width = width + 2;
+			FP.rect.height = height + 2 + 7;
+			
+			var bitmap:BitmapData = new BitmapData(FP.rect.width + 2, FP.rect.height + 2, false, Main.GREY);
+			
+			bitmap.fillRect(FP.rect, Main.BLACK);
+			
+			FP.rect.width = 1;
+			
+			for (var i:int = 1; i <= maxClicks; i++) {
+				FP.rect.height = data[i] * height / maxHeight;
+				FP.rect.x = i + 1;
+				FP.rect.y = height + 2 - FP.rect.height;
+				
+				var c:uint = Main.WHITE;
+				
+				if (i == yourClicks) c = Main.PINK;
+				
+				bitmap.fillRect(FP.rect, c);
+			}
+			
+			for (i = 10; i <= width; i += 10) {
+				bitmap.setPixel32(i + 1, height + 2, Main.PINK);
+			}
+			
+			var text:Text = new Text("Clicks", 0, height + 1);
+			
+			text.x = (bitmap.width - text.width)*0.5 + 1;
+			
+			text.render(bitmap, FP.zero, FP.zero);
+			
+			var g:Graphic = new Stamp(bitmap);
+			g.scrollX = 0;
+			g.scrollY = 0;
+			
+			addGraphic(g, -15, (FP.width - bitmap.width)*0.5, 8);
 		}
 	}
 }
