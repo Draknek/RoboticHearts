@@ -29,7 +29,7 @@ package
 			
 			var t:Text = new Text("- Anonymous", 0, 0);
 			t.x = FP.width - t.width;
-			t.y = FP.height - 16;
+			t.y = FP.height - t.height;
 			
 			addGraphic(t);
 			

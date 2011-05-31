@@ -27,7 +27,7 @@ package
 		{
 			if (! so.data.levels) so.data.levels = {};
 			
-			//Text.font = "7x5";
+			Text.font = "7x5";
 			Text.size = 8;
 			
 			Level.loadLevels();

@@ -14,6 +14,7 @@ package
 	{
 		public var time:int = 0;
 		public var heart:Spritemap;
+		public var cog:Spritemap;
 		
 		public var normalLevels:Array = [];
 		public var perfectionLevels:Array = [];
@@ -32,7 +33,7 @@ package
 		
 		public function Menu ()
 		{
-			title = new Text("These Mechanical\nHearts of Mine", 0, 0, {align: "center", scrollX:0, scrollY:0, font:"romance", size: 16, color: Main.PINK});
+			title = new Text("These Robotic\nHearts of Mine", 0, 0, {align: "center", scrollX:0, scrollY:0, font:"romance", size: 16, color: Main.PINK});
 			addGraphic(title);
 			title.x = (FP.width - title.width)*0.5;
 			
@@ -49,15 +50,16 @@ package
 			//addGraphic(heart, 0, titleXSpacing + 1, titleY);
 			//addGraphic(heart, 0, FP.width - titleXSpacing - 2, titleY);
 			
-			var cog:Spritemap = new Spritemap(Cog.COG, 16, 16);
+			cog = new Spritemap(Cog.COG, 16, 16);
 			cog.frame = Cog.cogChoice;
 			cog.scrollX = 0;
 			cog.scrollY = 0;
 			cog.centerOO();
-			//cog.alpha = 0.5;
+			cog.alpha = 0.5;
 			
 			//addGraphic(cog, 10, titleXSpacing, title.height*0.5);
 			//addGraphic(cog, 10, FP.width - titleXSpacing, title.height*0.5);
+			addGraphic(cog, 10, FP.width*0.5, title.height*0.5 + 3);
 			
 			var resumeLevel:int = -1;
 			var resumeMode:String;
@@ -104,6 +106,7 @@ package
 				tween = FP.tween(FP.camera, {x: FP.width}, 30, {ease: Ease.sineIn});
 				backButton.disabled = false;
 				backButton.visible = true;
+				switchScreen();
 			});
 			
 			var bonusButton:Button = new Button(0, 0, new Text("Bonus levels"), function ():void {
@@ -112,6 +115,7 @@ package
 				tween = FP.tween(FP.camera, {x: FP.width}, 30, {ease: Ease.sineIn});
 				backButton.disabled = false;
 				backButton.visible = true;
+				switchScreen();
 			});
 			
 			var graphicsButton:Button = new Button(0, 0, new Text("Change graphics"), function ():void {
@@ -119,6 +123,7 @@ package
 				tween = FP.tween(FP.camera, {y: FP.height}, 30, {ease: Ease.sineIn});
 				backButton.disabled = false;
 				backButton.visible = true;
+				switchScreen();
 			});
 			
 			var resetData:Button = null;
@@ -135,7 +140,7 @@ package
 				}
 			}
 			
-			addElements([playButton, levelsButton, bonusButton, graphicsButton, resetData]);
+			addElements([playButton, levelsButton, resetData]);
 			
 			var oldScreen:Image = new Image(FP.buffer.clone());
 			
@@ -214,7 +219,7 @@ package
 		
 		private function addLevelButton (i:int, mode:String = "normal"):Button
 		{
-			var b:Button = new Button(0, 0, new Text((i+1)+"", 0, 0, {width: 14, align:"center"}), function ():void {
+			var b:Button = new Button(0, 0, new Text((i+1)+"", 0, 0, {width: 17, align:"center"}), function ():void {
 				FP.world = new Level(i, mode);
 			});
 			
@@ -243,12 +248,12 @@ package
 					b.normalColor = 0xFFFF00;
 					b.hoverColor = Main.BLACK;
 					
-					var bitmap:BitmapData = new BitmapData(11, 7, true, 0xFF000000 | Main.PINK);
+					var bitmap:BitmapData = new BitmapData(b.width - 2, b.height - 3, true, 0xFF000000 | Main.PINK);
 					bitmap.setPixel32(0, 0, 0x0);
-					bitmap.setPixel32(10, 0, 0x0);
-					bitmap.setPixel32(10, 6, 0x0);
-					bitmap.setPixel32(0, 6, 0x0);
-					b.graphic = new Graphiclist(new Stamp(bitmap, 1, 2), b.graphic);
+					bitmap.setPixel32(bitmap.width-1, 0, 0x0);
+					bitmap.setPixel32(bitmap.width-1, bitmap.height-1, 0x0);
+					bitmap.setPixel32(0, bitmap.height-1, 0x0);
+					b.graphic = new Graphiclist(new Stamp(bitmap, 0, 1), b.graphic);
 				} else {
 					b.normalColor = 0x00FF00;
 				}
@@ -367,6 +372,14 @@ package
 				removeList(normalLevels);
 				removeList(perfectionLevels);
 			}});
+			
+			switchScreen(-1);
+		}
+		
+		private function switchScreen (dir:int = 1):void
+		{
+			Audio.play("rotate");
+			FP.tween(cog, {angle: cog.angle-dir*180}, 32, {complete: function ():void {cog.angle = 0;}});
 		}
 	}
 }

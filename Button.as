@@ -119,10 +119,10 @@ package
 			
 			if (_helpText && hoverTimer > 20) {
 				FP.rect.x = _helpText.x;
-				FP.rect.y = _helpText.y + 1;
+				FP.rect.y = _helpText.y;
 				
 				FP.rect.width = _helpText.textWidth - 1;
-				FP.rect.height = _helpText.textHeight - 3;
+				FP.rect.height = _helpText.textHeight - 1;
 				
 				if (FP.width <= FP.rect.x + FP.rect.width) {
 					_helpText.x -= 2 + FP.rect.width;
