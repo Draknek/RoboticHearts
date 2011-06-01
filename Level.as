@@ -242,7 +242,7 @@ package
 			
 			if (mode == "normal") {
 				if (id == 0) {
-					addGraphic(new Text("Click cogs to\nbrighten hearts", 0, 64, {align:"center", size:8, width: 96}));
+					addGraphic(new Text("Click cogs to\nbrighten hearts", 0, 64, {align:"center", size:8, width: 96, leading: 3}));
 				}
 				else if (id == 1) {
 					addGraphic(new Text("Make all upright", 0, 74, {align:"center", size:8, width: 96}));
@@ -262,7 +262,7 @@ package
 				var text:String = levelPacks[mode].story[id];
 				text = text.split("\\n").join("\n\n");
 				
-				storyText = new Text(text, 1, 0, {width: FP.width, align:"center", wordWrap:true});
+				storyText = new Text(text, 1, 0, {width: FP.width, align:"center", wordWrap:true, leading: 3});
 				
 				storyText.y = (FP.height - storyText.height) * 0.5;
 				
@@ -307,7 +307,7 @@ package
 			
 			addGraphic(Image.createRect(FP.width, FP.height, Main.PINK));
 			
-			var t:Text = new Text("And that is the story\n\nOf these robotic hearts of mine\n\n\nThanks for playing!", 0, 0, {width: FP.width, wordWrap: true, align: "center"});
+			var t:Text = new Text("And that is the story\n\nOf these robotic hearts of mine\n\n\nThanks for playing!", 0, 0, {width: FP.width, wordWrap: true, align: "center", leading: 3});
 			
 			t.y = (FP.height - t.height)*0.5;
 			
