@@ -165,6 +165,8 @@ package
 			
 			backButton.disabled = true;
 			backButton.visible = false;
+			backButton.normalLayer = -17;
+			backButton.hoverLayer = -18;
 			
 			backButton.noCamera = muteButton.noCamera = muteOverlay.noCamera = true;
 			
