@@ -34,8 +34,10 @@ package
 		public function Menu ()
 		{
 			title = new Text("These Robotic\nHearts of Mine", 0, 0, {align: "center", scrollX:0, scrollY:0, font:"romance", size: 16, color: Main.PINK});
-			addGraphic(title);
+			addGraphic(title, -12);
 			title.x = (FP.width - title.width)*0.5;
+			
+			addFader(-10);
 			
 			heart = new Spritemap(Heart.HEART, 8, 8);
 			heart.color = Main.PINK;
@@ -59,7 +61,7 @@ package
 			
 			//addGraphic(cog, 10, titleXSpacing, title.height*0.5);
 			//addGraphic(cog, 10, FP.width - titleXSpacing, title.height*0.5);
-			addGraphic(cog, 10, FP.width*0.5, title.height*0.5 + 3);
+			addGraphic(cog, -11, FP.width*0.5, title.height*0.5 + 3);
 			
 			var resumeLevel:int = -1;
 			var resumeMode:String;
@@ -126,6 +128,14 @@ package
 				switchScreen();
 			});
 			
+			var creditsButton:Button = new Button(0, 0, new Text("Credits"), function ():void {
+				if (tween) tween.cancel();
+				tween = FP.tween(FP.camera, {y: FP.height}, 30, {ease: Ease.sineIn});
+				backButton.disabled = false;
+				backButton.visible = true;
+				switchScreen();
+			});
+			
 			var resetData:Button = null;
 			
 			if (Logger.isLocal) {
@@ -140,11 +150,11 @@ package
 				}
 			}
 			
-			addElements([playButton, levelsButton, resetData]);
+			addElements([playButton, levelsButton, creditsButton, resetData]);
 			
 			var oldScreen:Image = new Image(FP.buffer.clone());
 			
-			addGraphic(oldScreen, -10);
+			addGraphic(oldScreen, -20);
 			
 			FP.tween(oldScreen, {alpha: 0}, 30, {ease:Ease.sineOut, tweener:this});
 			
@@ -165,56 +175,111 @@ package
 			muteOverlay.hoverColor = Main.WHITE;
 			muteOverlay.visible = Audio.mute;
 			
-			muteButton.normalLayer = -5;
-			muteButton.hoverLayer = -5;
-			muteOverlay.normalLayer = -6;
-			muteOverlay.hoverLayer = -6;
+			muteButton.normalLayer = -15;
+			muteButton.hoverLayer = -15;
+			muteOverlay.normalLayer = -16;
+			muteOverlay.hoverLayer = -16;
 			
 			Audio.muteOverlay = muteOverlay;
 			
-			if (heart.frameCount > 8) {
-				var choices:int = heart.frameCount / 8;
-				
-				for (i = 0; i < choices; i++) {
-					heartChoices.push(addHeartChoiceButton(i, choices));
-				}
-			}
-			
-			var cogSpritemap:Spritemap = new Spritemap(Cog.COG, 16, 16);
-			
-			for (i = 0; i < cogSpritemap.frameCount; i++) {
-				cogChoices.push(addCogChoiceButton(i, cogSpritemap.frameCount));
-			}
-			
-			addGraphic(new Text("Heart image:", 1, 38 + FP.height - 8, {width: FP.width, align: "center"}));
-			addGraphic(new Text("Cog image:", 1, 62 + FP.height - 10, {width: FP.width, align: "center"}));
-			
 			add(backButton2 = new Button(0, FP.height*2 - 14, new Text("Back to menu"), back));
 			backButton2.x = (FP.width - backButton2.width) * 0.5;
+			
+			//addGraphicChoices();
+			addCredits();
 		}
 		
-		private function addElements(list:Array):void
+		private function addElements(list:Array, offset:int = 0, bottom_padding:Number = 0):void
 		{
 			var h:int = 0;
 			
 			for each (var o:* in list) {
 				if (! o) continue;
-				h += o.height;
+				if (o is Number) {
+					h += o;
+				} else {
+					h += o.height;
+				}
 			}
 			
 			var start:int = title.y + title.height;
 			
-			var padding:int = Number(FP.height - start - h) / (list.length + 1);
+			var padding:int = Number(FP.height - start - h - bottom_padding) / (list.length + 1);
 			
 			var y:int = start + padding;
 			
 			for each (o in list) {
 				if (! o) continue;
+				
+				if (o is Number) {
+					y += padding + o;
+					continue;
+				}
+				
 				o.x = (FP.width - o.width) * 0.5;
-				o.y = y;
-				add(o);
+				o.y = y + offset;
+				
 				y += padding + o.height;
+				
+				if (o is Graphic) o = new Entity(0, 0, o);
+				
+				add(o);
 			}
+		}
+		
+		private function addFader(layer:int):void
+		{
+			var b:BitmapData = new BitmapData(FP.width, title.height, true, 0x0);
+			
+			FP.rect.x = 0;
+			FP.rect.width = FP.width;
+			FP.rect.height = 1;
+			
+			for (var j:int = 0; j < b.height; j++) {
+				FP.rect.y = j;
+				var t:Number = 0;
+				
+				if (j > b.height * 0.5) {
+					t = (j - b.height * 0.5) / (b.height * 0.5);
+				}
+				
+				var c:uint = FP.colorLerp(0xFF000000 | Main.BLACK, Main.BLACK, t);
+				
+				b.fillRect(FP.rect, c);
+			}
+			
+			var g:Stamp = new Stamp(b);
+			g.scrollX = 0;
+			g.scrollY = 0;
+			
+			addGraphic(g, layer);
+		}
+		
+		private function addCredits ():void
+		{
+			var t:Text;
+			var l:Array = [];
+			
+			t = new Text("Created by");
+			l.push(t);
+			
+			t = new Text("Alan Hazelden");
+			l.push(t);
+			
+			l.push(1);
+			
+			t = new Text("Thanks to");
+			l.push(t);
+			
+			t = new Text("ChevyRay & FlashPunk");
+			l.push(t);
+			
+			t = new Text("Alistair Aitcheson");
+			l.push(t);
+			
+			l.push(1);
+			
+			addElements(l, FP.height, FP.height * 2 - backButton2.y);
 		}
 		
 		private function addLevelButton (i:int, mode:String = "normal"):Button
@@ -263,6 +328,28 @@ package
 			}
 			
 			return b;
+		}
+		
+		private function addGraphicChoices ():void
+		{
+			var i:int;
+			
+			if (heart.frameCount > 8) {
+				var choices:int = heart.frameCount / 8;
+				
+				for (i = 0; i < choices; i++) {
+					heartChoices.push(addHeartChoiceButton(i, choices));
+				}
+			}
+			
+			var cogSpritemap:Spritemap = new Spritemap(Cog.COG, 16, 16);
+			
+			for (i = 0; i < cogSpritemap.frameCount; i++) {
+				cogChoices.push(addCogChoiceButton(i, cogSpritemap.frameCount));
+			}
+			
+			addGraphic(new Text("Heart image:", 1, 38 + FP.height - 8, {width: FP.width, align: "center"}));
+			addGraphic(new Text("Cog image:", 1, 62 + FP.height - 10, {width: FP.width, align: "center"}));
 		}
 		
 		private function addHeartChoiceButton (i:int, l:int):Button
@@ -323,22 +410,26 @@ package
 			
 			heart.frame = ((modTime >= 0 && modTime < beatTime) ? 4 : 0);
 			
-			if (time % (step*2) == 0) {
-				var g:Spritemap = cogChoices[Cog.cogChoice].graphic;
+			if (cogChoices.length) {
+				if (time % (step*2) == 0) {
+					var g:Spritemap = cogChoices[Cog.cogChoice].graphic;
 				
-				if (g.angle == 0) {
-					FP.tween(g, {angle: g.angle-90}, 16, {complete: function ():void {
-						g.angle = 0;
-					}});
+					if (g.angle == 0) {
+						FP.tween(g, {angle: g.angle-90}, 16, {complete: function ():void {
+							g.angle = 0;
+						}});
+					}
 				}
 			}
 			
 			var i:int = 0;
-			for each (var b:Button in heartChoices) {
-				Spritemap(b.graphic).frame = i*8;
+			if (heartChoices.length) {
+				for each (var b:Button in heartChoices) {
+					Spritemap(b.graphic).frame = i*8;
 				
-				if (i == Heart.heartChoice) Spritemap(b.graphic).frame += heart.frame;
-				i++;
+					if (i == Heart.heartChoice) Spritemap(b.graphic).frame += heart.frame;
+					i++;
+				}
 			}
 			
 			heart.frame += Heart.heartChoice*8;
