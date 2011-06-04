@@ -41,7 +41,7 @@ package
 		
 		public override function init (): void
 		{
-			sitelock("draknek.org");
+			sitelock(["draknek.org", "192.168.1.2"]);
 			
 			super.init();
 			
