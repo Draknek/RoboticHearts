@@ -297,7 +297,7 @@ package
 			
 			var md5:String = MD5.hashBytes(_data);
 			
-			//addGraph(Logger.clickStats[md5]);
+			addGraph(Logger.clickStats[md5]);
 			
 			if (_data) {
 				setWorldData(_data);
@@ -773,6 +773,8 @@ package
 		
 		public function addGraph (data:Object): Boolean
 		{
+			return false;
+			
 			if (! data) return false;
 			
 			var yourClicks:int = clicks;
@@ -780,10 +782,20 @@ package
 			if (data[yourClicks]) data[yourClicks]++;
 			else data[yourClicks] = 1;
 			
+			var i:int
+			
+			const MAX_WIDTH:int = 60;
+			
 			var maxClicks:int = 0;
 			var maxHeight:int = 1;
 			
 			for (var key:String in data) {
+				if (int(key) > MAX_WIDTH) {
+					data[MAX_WIDTH] = int(data[key]) + int(data[MAX_WIDTH]);
+					delete data[key];
+					key = String(MAX_WIDTH);
+				}
+				
 				if (int(key) > maxClicks) maxClicks = int(key);
 				if (data[key] > maxHeight) maxHeight = data[key];
 			}
@@ -803,7 +815,7 @@ package
 			
 			FP.rect.width = 1;
 			
-			for (var i:int = 1; i <= maxClicks; i++) {
+			for (i = 1; i <= maxClicks; i++) {
 				FP.rect.height = data[i] * height / maxHeight;
 				FP.rect.x = i + 1;
 				FP.rect.y = height + 2 - FP.rect.height;
@@ -816,7 +828,7 @@ package
 			}
 			
 			for (i = 10; i <= width; i += 10) {
-				bitmap.setPixel32(i + 1, height + 2, Main.PINK);
+				bitmap.setPixel32(i + 1, height + 2, Main.GREY);
 			}
 			
 			var text:Text = new Text("Clicks", 0, height + 1);
