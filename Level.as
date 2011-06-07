@@ -815,8 +815,12 @@ package
 			
 			FP.rect.width = 1;
 			
+			var scale:Number = height / maxHeight;
+			
+			if (scale > 4) scale = 4;
+			
 			for (i = 1; i <= maxClicks; i++) {
-				FP.rect.height = data[i] * height / maxHeight;
+				FP.rect.height = data[i] * scale;
 				FP.rect.x = i + 1;
 				FP.rect.y = height + 2 - FP.rect.height;
 				
