@@ -12,13 +12,17 @@ package
 
 	public class Logger
 	{
-		public static const DB:String = "http://www.draknek.org/games/hearts/db/";
+		public static const HOST:String = "www.draknek.org";
+		
+		public static const DB:String = "http://" + HOST + "/games/hearts/db/";
 		
 		public static var isLocal:Boolean = false;
 		
 		public static var uid:String;
 		
-		private static function magic (query:String, f:Function = null): void
+		public static var clickStats:Object = {};
+		
+		public static function magic (query:String, f:Function = null): void
 		{
 			var request:URLRequest = new URLRequest(DB + query);
 			
@@ -27,7 +31,7 @@ package
 				f(loader.data);
 			}
 			
-			function errorHandler ():void {}
+			function nullErrorHandler ():void {}
 
 			var loader:URLLoader = new URLLoader();
 			
@@ -35,7 +39,9 @@ package
 				loader.addEventListener(Event.COMPLETE, doComplete);
 			}
 			
-			loader.addEventListener(IOErrorEvent.IO_ERROR, errorHandler);
+			if (! isLocal) {
+				loader.addEventListener(IOErrorEvent.IO_ERROR, nullErrorHandler);
+			}
 			
 			loader.load(request);
 		}
@@ -51,13 +57,11 @@ package
 			magic("get.php?newuser=1", setUID);
 		}
 		
-		public static function getScores (id:int, mode:String, f:Function): void
+		public static function getScores (): void
 		{
 			function unJSON (dataString:*):void
 			{
-				var dataObj:Object = JSON.decode(dataString);
-				
-				f(dataObj);
+				clickStats = JSON.decode(dataString);
 			}
 			
 			magic("get.php", unJSON);
@@ -70,6 +74,8 @@ package
 			} else {
 				getUID();
 			}
+			
+			getScores();
 			
 			isLocal = (obj.stage.loaderInfo.loaderURL.substr(0, 7) == 'file://');
 			

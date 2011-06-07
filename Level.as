@@ -295,6 +295,10 @@ package
 			
 			var _data:ByteArray = levelPacks[mode].levels[id];
 			
+			var md5:String = MD5.hashBytes(_data);
+			
+			//addGraph(Logger.clickStats[md5]);
+			
 			if (_data) {
 				setWorldData(_data);
 				minClicks = levelPacks[mode].minClicksArray[id];
@@ -652,8 +656,6 @@ package
 		{
 			var md5:String = MD5.hashBytes(data);
 			
-			//Logger.getScores(0, null, addGraph);
-			
 			var next:Button = new Button(0, 0, new Text("Next level", 0, 0, {size: 8}), function ():void {
 				FP.world = new Level(id+1, mode);
 			}, null, false, true);
@@ -769,8 +771,10 @@ package
 			add(new Cog(x, y));
 		}
 		
-		public function addGraph (data:Object): void
+		public function addGraph (data:Object): Boolean
 		{
+			if (! data) return false;
+			
 			var yourClicks:int = clicks;
 			
 			if (data[yourClicks]) data[yourClicks]++;
@@ -826,6 +830,8 @@ package
 			g.scrollY = 0;
 			
 			addGraphic(g, -15, (FP.width - bitmap.width)*0.5, 8);
+			
+			return true;
 		}
 	}
 }
