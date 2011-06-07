@@ -295,10 +295,6 @@ package
 			
 			var _data:ByteArray = levelPacks[mode].levels[id];
 			
-			var md5:String = MD5.hashBytes(_data);
-			
-			addGraph(Logger.clickStats[md5]);
-			
 			if (_data) {
 				setWorldData(_data);
 				minClicks = levelPacks[mode].minClicksArray[id];
@@ -424,6 +420,8 @@ package
 			camera.x = -(FP.width - 96)*0.5;
 			camera.y = -(FP.height - 96)*0.5;
 			
+			var md5:String = MD5.hashBytes(data);
+			
 			Input.mouseCursor = "auto";
 			
 			if (! levelPacks[mode].levels[id]) {
@@ -464,6 +462,10 @@ package
 				hasEdited = true;
 				minClicks = 0;
 				resetState();
+			}
+			
+			if (Input.pressed(Key.G)) {
+				addGraph(Logger.clickStats[md5]);
 			}
 			
 			if (editing) {
@@ -507,8 +509,6 @@ package
 			}
 			
 			if (!hasEdited && !gameOver && incorrectCount == 0) {
-				var md5:String = MD5.hashBytes(data);
-				
 				if (! Main.so.data.levels[md5]) Main.so.data.levels[md5] = {};
 				
 				Main.so.data.levels[md5].completed = true;
@@ -773,8 +773,6 @@ package
 		
 		public function addGraph (data:Object): Boolean
 		{
-			return false;
-			
 			if (! data) return false;
 			
 			var yourClicks:int = clicks;
