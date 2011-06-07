@@ -305,9 +305,13 @@ package
 			
 			removeAll();
 			
-			addGraphic(Image.createRect(FP.width, FP.height, Main.PINK));
+			var bg:Image = Image.createRect(FP.width, FP.height, Main.PINK);
+			bg.scrollX = 0;
+			bg.scrollY = 0;
 			
-			var t:Text = new Text("And that is the story\n\nOf these robotic hearts of mine\n\n\nThanks for playing!", 0, 0, {width: FP.width, wordWrap: true, align: "center", leading: 3});
+			addGraphic(bg);
+			
+			var t:Text = new Text("And that is the story\n\nOf these robotic hearts of mine\n\n\nThanks for playing!", 0, 0, {width: FP.width, wordWrap: true, align: "center", leading: 3, scrollX:0, scrollY:0});
 			
 			t.y = (FP.height - t.height)*0.5;
 			
