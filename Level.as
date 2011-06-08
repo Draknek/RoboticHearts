@@ -805,7 +805,7 @@ package
 			FP.rect.x = 1;
 			FP.rect.y = 1;
 			FP.rect.width = width + 2;
-			FP.rect.height = height + 2 + 7;
+			FP.rect.height = height + 2 + 10;
 			
 			var bitmap:BitmapData = new BitmapData(FP.rect.width + 2, FP.rect.height + 2, false, Main.GREY);
 			
@@ -818,7 +818,7 @@ package
 			if (scale > 4) scale = 4;
 			
 			for (i = 1; i <= maxClicks; i++) {
-				FP.rect.height = data[i] * scale;
+				FP.rect.height = Math.ceil(data[i] * scale);
 				FP.rect.x = i + 1;
 				FP.rect.y = height + 2 - FP.rect.height;
 				
@@ -829,11 +829,18 @@ package
 				bitmap.fillRect(FP.rect, c);
 			}
 			
+			FP.rect.x = 2;
+			FP.rect.width = width;
+			FP.rect.y = height + 2;
+			FP.rect.height = 1;
+			
+			bitmap.fillRect(FP.rect, Main.GREY);
+			
 			for (i = 10; i <= width; i += 10) {
-				bitmap.setPixel32(i + 1, height + 2, Main.GREY);
+				bitmap.setPixel32(i + 1, height + 3, Main.GREY);
 			}
 			
-			var text:Text = new Text("Clicks", 0, height + 1);
+			var text:Text = new Text("Clicks", 0, height + 3);
 			
 			text.x = (bitmap.width - text.width)*0.5 + 1;
 			
