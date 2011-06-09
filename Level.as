@@ -614,10 +614,6 @@ package
 			if (Input.pressed(Key.LEFT) && levelPacks[mode].levels[id-1]) FP.world = new Level(id-1, mode);
 			if (Input.pressed(Key.RIGHT) && levelPacks[mode].levels[id+1]) FP.world = new Level(id+1, mode);
 			
-			for (i = 0; i < 10; i++) {
-				if (Input.pressed(Key.DIGIT_1 + i)) FP.world = new Level(i, mode);
-			}
-			
 			if (gameOver && clickThrough) {
 				super.update();
 				return;
