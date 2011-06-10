@@ -217,6 +217,11 @@ package
 			redoButton.x = undoButton.x + undoButton.width;
 			muteOverlay.x = muteButton.x;
 			
+			menuButton.normalLayer = muteButton.normalLayer = -20;
+			menuButton.hoverLayer = muteButton.hoverLayer = -21;
+			muteOverlay.normalLayer = -21;
+			muteOverlay.hoverLayer = -22;
+			
 			muteOverlay.normalColor = Main.PINK;
 			muteOverlay.hoverColor = Main.WHITE;
 			muteOverlay.visible = Audio.mute;
@@ -420,7 +425,9 @@ package
 			camera.x = -(FP.width - 96)*0.5;
 			camera.y = -(FP.height - 96)*0.5;
 			
-			var md5:String = MD5.hashBytes(data);
+			if (data) {
+				var md5:String = MD5.hashBytes(data);
+			}
 			
 			Input.mouseCursor = "auto";
 			
@@ -448,11 +455,25 @@ package
 				return;
 			}
 			
+			if (storyText || (gameOver && clickThrough)) {
+				menuButton.hoverColor = Main.BLACK;
+				muteButton.hoverColor = Main.BLACK;
+				muteOverlay.normalColor = Main.BLACK;
+			} else {
+				menuButton.hoverColor = Main.PINK;
+				muteButton.hoverColor = Main.PINK;
+				muteOverlay.normalColor = Main.PINK;
+			}
+			
 			if (storyText) {
 				if (Input.mousePressed || Input.pressed(-1)) {
 					FP.tween(storyText, {alpha: 0}, 30, {ease:Ease.sineOut});
 					storyText = null;
 				}
+				
+				menuButton.update();
+				muteButton.update();
+				muteOverlay.update();
 				
 				return;
 			}
@@ -531,16 +552,14 @@ package
 				
 				time = -1;
 				
+				redoButton.disabled = true;
+				undoButton.disabled = true;
+				resetButton.disabled = true;
+				
 				var world:World = this;
 				
 				FP.alarm(50, function ():void {
 					FP.alarm(50, function ():void {
-						var buttons:Array = [];
-						
-						world.getClass(Button, buttons);
-						
-						world.removeList(buttons);
-						
 						addCompletionUI(previousBest);
 						
 						clickThrough = true;
@@ -622,10 +641,6 @@ package
 			time++;
 			
 			super.update();
-			
-			if (gameOver) {
-				Input.mouseCursor = "auto";
-			}
 			
 			clickCounter.text = "Clicks: " + clicks+"/"+minClicks;
 		}
