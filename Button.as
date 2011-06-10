@@ -47,6 +47,8 @@ package
 			
 			if (_gfx is Image) {
 				image = _gfx as Image;
+			} else if (_gfx is String) {
+				image = new Text(_gfx);
 			} else {
 				image = new Image(_gfx);
 			}

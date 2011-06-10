@@ -6,6 +6,7 @@ package
 	import net.flashpunk.utils.*;
 	
 	import flash.display.*;
+	import flash.net.*;
 	import flash.utils.*;
 	
 	import com.adobe.crypto.*;
@@ -260,24 +261,33 @@ package
 		private function addCredits ():void
 		{
 			var t:Text;
+			var b:Button;
 			var l:Array = [];
 			
-			t = new Text("Created by");
+			function makeFunc (url:String): Function
+			{
+				return function ():void {
+					var request:URLRequest = new URLRequest(url);
+					navigateToURL(request, "_blank");
+				}
+			}
+			
+			t = new Text("Created by", 0, 0, {color: Main.GREY});
 			l.push(t);
 			
-			t = new Text("Alan Hazelden");
-			l.push(t);
+			b = new Button(0, 0, "Alan Hazelden", makeFunc("http://www.draknek.org/?ref=trhom"));
+			l.push(b);
 			
 			l.push(1);
 			
-			t = new Text("Thanks to");
+			t = new Text("Thanks to", 0, 0, {color: Main.GREY});
 			l.push(t);
 			
-			t = new Text("ChevyRay & FlashPunk");
-			l.push(t);
+			b = new Button(0, 0, "ChevyRay & FlashPunk", makeFunc("http://flashpunk.net/"));
+			l.push(b);
 			
-			t = new Text("Alistair Aitcheson");
-			l.push(t);
+			b = new Button(0, 0, "Alistair Aitcheson", makeFunc("http://www.alistairaitcheson.com/"));
+			l.push(b);
 			
 			l.push(1);
 			
