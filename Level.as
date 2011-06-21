@@ -240,11 +240,11 @@ package
 			if (mode == "perfection") modeCode = "P";
 			
 			var levelIDDisplay:Text = new Text("Level " + modeCode+(id+1), 0, -1);
-			levelIDDisplay.x = FP.width + 1 - levelIDDisplay.width;
+			levelIDDisplay.x = FP.width + 2 - levelIDDisplay.width;
 			levelIDDisplay.scrollX = levelIDDisplay.scrollY = 0;
-			addGraphic(levelIDDisplay);
+			addGraphic(levelIDDisplay, -15);
 			
-			clickCounter = new Text("Clicks: 0", 0, FP.height - 10);
+			clickCounter = new Text("Clicks: 0", -1, FP.height - 10);
 			clickCounter.scrollX = clickCounter.scrollY = 0;
 			addGraphic(clickCounter);
 			
