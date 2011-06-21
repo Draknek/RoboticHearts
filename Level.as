@@ -54,6 +54,9 @@ package
 		[Embed(source="levels/main.story.txt", mimeType="application/octet-stream")]
 		public static const STORY:Class;
 		
+		[Embed(source="fonts/3x5.png")]
+		public static const NUMBER_FONT:Class;
+		
 		public static var levelPacks:Object = {};
 		
 		public var storyText:Image;
@@ -722,7 +725,13 @@ package
 				Logger.alert(alert);
 			}
 			
-			var graphStop:int = 0;//27+8;
+			var graph:Stamp = addGraph(md5);
+			
+			var graphStop:int = 0;
+			
+			if (graph) {
+				graphStop = graph.y + graph.height;
+			}
 			
 			var space:Number = next.y - t.height - graphStop;
 			
@@ -782,9 +791,15 @@ package
 			add(new Cog(x, y));
 		}
 		
-		public function addGraph (data:Object): Boolean
+		public function addGraph (data:Object): Stamp
 		{
-			if (! data) return false;
+			if (data is String) {
+				data = Logger.clickStats[data];
+			}
+			
+			if (! data) return null;
+			
+			var numbers:Spritemap = new Spritemap(NUMBER_FONT, 3, 5);
 			
 			var yourClicks:int = clicks;
 			
@@ -793,7 +808,9 @@ package
 			
 			var i:int
 			
-			const MAX_WIDTH:int = 60;
+			const MAX_WIDTH:int = 50;
+			
+			var overMax:Boolean = false;
 			
 			var maxClicks:int = 0;
 			var maxHeight:int = 1;
@@ -803,6 +820,7 @@ package
 					data[MAX_WIDTH] = int(data[key]) + int(data[MAX_WIDTH]);
 					delete data[key];
 					key = String(MAX_WIDTH);
+					overMax = true;
 				}
 				
 				if (int(key) > maxClicks) maxClicks = int(key);
@@ -815,8 +833,10 @@ package
 			
 			FP.rect.x = 1;
 			FP.rect.y = 1;
-			FP.rect.width = width + 2;
-			FP.rect.height = height + 2 + 10;
+			FP.rect.width = width + 5;
+			FP.rect.height = height + 2 + 8;
+			
+			if (overMax) FP.rect.width += 4;
 			
 			var bitmap:BitmapData = new BitmapData(FP.rect.width + 2, FP.rect.height + 2, false, Main.GREY);
 			
@@ -849,21 +869,41 @@ package
 			
 			for (i = 10; i <= width; i += 10) {
 				bitmap.setPixel32(i + 1, height + 3, Main.GREY);
+				
+				FP.point.x = i - 2;
+				FP.point.y = height + 5;
+				
+				numbers.frame = i/10;
+				numbers.render(bitmap, FP.point, FP.zero);
+				
+				FP.point.x += 4;
+				
+				numbers.frame = 0;
+				numbers.render(bitmap, FP.point, FP.zero);
+				
+				if (overMax && i == MAX_WIDTH) {
+					FP.point.x += 4;
+					numbers.frame = 10;
+					numbers.render(bitmap, FP.point, FP.zero);
+				}
 			}
 			
 			var text:Text = new Text("Clicks", 0, height + 3);
 			
 			text.x = (bitmap.width - text.width)*0.5 + 1;
 			
-			text.render(bitmap, FP.zero, FP.zero);
+			//text.render(bitmap, FP.zero, FP.zero);
 			
-			var g:Graphic = new Stamp(bitmap);
+			var g:Stamp = new Stamp(bitmap);
 			g.scrollX = 0;
 			g.scrollY = 0;
 			
-			addGraphic(g, -15, (FP.width - bitmap.width)*0.5, 8);
+			g.x = (FP.width - bitmap.width)*0.5;
+			g.y = 9;
 			
-			return true;
+			addGraphic(g, -15);
+			
+			return g;
 		}
 	}
 }
