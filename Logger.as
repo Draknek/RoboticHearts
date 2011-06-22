@@ -12,6 +12,9 @@ package
 
 	public class Logger
 	{
+		[Embed(source="levels/stats.json", mimeType="application/octet-stream")]
+		public static const STATS:Class;
+		
 		public static const HOST:String = "www.draknek.org";
 		
 		public static const DB:String = "http://" + HOST + "/games/hearts/db/";
@@ -62,6 +65,8 @@ package
 			function unJSON (dataString:*):void
 			{
 				clickStats = JSON.decode(dataString);
+				Main.so.data.stats = clickStats;
+				Main.so.data.lastStatsDownload = (new Date()).getTime();
 			}
 			
 			magic("get.php", unJSON);
@@ -69,13 +74,26 @@ package
 		
 		public static function connect (obj: DisplayObjectContainer): void
 		{
+			if (Main.so.data.stats) {
+				clickStats = Main.so.data.stats;
+			} else {
+				clickStats = JSON.decode(new STATS);
+			}
+			
 			if (Main.so.data.uid) {
 				uid = Main.so.data.uid;
 			} else {
 				getUID();
 			}
 			
-			getScores();
+			var now:Number = (new Date()).getTime();
+			
+			var lastStatsDownload:Number = Main.so.data.lastStatsDownload;
+			if (! lastStatsDownload) lastStatsDownload = 0;
+			
+			if (now - lastStatsDownload > 1000 * 60 * 60 * 24) {			
+				getScores();
+			}
 			
 			isLocal = (obj.stage.loaderInfo.loaderURL.substr(0, 7) == 'file://');
 			
