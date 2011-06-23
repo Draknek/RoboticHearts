@@ -54,9 +54,6 @@ package
 		[Embed(source="levels/main.story.txt", mimeType="application/octet-stream")]
 		public static const STORY:Class;
 		
-		[Embed(source="fonts/3x5.png")]
-		public static const NUMBER_FONT:Class;
-		
 		public static var levelPacks:Object = {};
 		
 		public var storyText:Image;
@@ -797,102 +794,14 @@ package
 				data = Logger.clickStats[data];
 			}
 			
-			if (! data) return null;
+			var params:Object = {
+				highlight: clicks,
+				minX: 30,
+				maxX: 50,
+				height: 16
+			};
 			
-			var numbers:Spritemap = new Spritemap(NUMBER_FONT, 3, 5);
-			
-			var yourClicks:int = clicks;
-			
-			if (data[yourClicks]) data[yourClicks]++;
-			else data[yourClicks] = 1;
-			
-			var i:int
-			
-			const MAX_WIDTH:int = 50;
-			
-			var overMax:Boolean = false;
-			
-			var maxClicks:int = 0;
-			var maxHeight:int = 1;
-			
-			for (var key:String in data) {
-				if (int(key) > MAX_WIDTH) {
-					data[MAX_WIDTH] = int(data[key]) + int(data[MAX_WIDTH]);
-					delete data[key];
-					key = String(MAX_WIDTH);
-					overMax = true;
-				}
-				
-				if (int(key) > maxClicks) maxClicks = int(key);
-				if (data[key] > maxHeight) maxHeight = data[key];
-			}
-			
-			var width:int = Math.ceil(maxClicks/10)*10;
-			if (width < 30) width = 30;
-			var height:int = 16;
-			
-			FP.rect.x = 1;
-			FP.rect.y = 1;
-			FP.rect.width = width + 5;
-			FP.rect.height = height + 2 + 8;
-			
-			if (overMax) FP.rect.width += 4;
-			
-			var bitmap:BitmapData = new BitmapData(FP.rect.width + 2, FP.rect.height + 2, false, Main.GREY);
-			
-			bitmap.fillRect(FP.rect, Main.BLACK);
-			
-			FP.rect.width = 1;
-			
-			var scale:Number = height / maxHeight;
-			
-			if (scale > 4) scale = 4;
-			
-			for (i = 1; i <= maxClicks; i++) {
-				FP.rect.height = Math.ceil(data[i] * scale);
-				FP.rect.x = i + 1;
-				FP.rect.y = height + 2 - FP.rect.height;
-				
-				var c:uint = Main.WHITE;
-				
-				if (i == yourClicks) c = Main.PINK;
-				
-				bitmap.fillRect(FP.rect, c);
-			}
-			
-			FP.rect.x = 2;
-			FP.rect.width = width;
-			FP.rect.y = height + 2;
-			FP.rect.height = 1;
-			
-			bitmap.fillRect(FP.rect, Main.GREY);
-			
-			for (i = 10; i <= width; i += 10) {
-				bitmap.setPixel32(i + 1, height + 3, Main.GREY);
-				
-				FP.point.x = i - 2;
-				FP.point.y = height + 5;
-				
-				numbers.frame = i/10;
-				numbers.render(bitmap, FP.point, FP.zero);
-				
-				FP.point.x += 4;
-				
-				numbers.frame = 0;
-				numbers.render(bitmap, FP.point, FP.zero);
-				
-				if (overMax && i == MAX_WIDTH) {
-					FP.point.x += 4;
-					numbers.frame = 10;
-					numbers.render(bitmap, FP.point, FP.zero);
-				}
-			}
-			
-			var text:Text = new Text("Clicks", 0, height + 3);
-			
-			text.x = (bitmap.width - text.width)*0.5 + 1;
-			
-			//text.render(bitmap, FP.zero, FP.zero);
+			var bitmap:BitmapData = Graph.makeGraph(data, params);
 			
 			var g:Stamp = new Stamp(bitmap);
 			g.scrollX = 0;
