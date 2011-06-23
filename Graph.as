@@ -57,7 +57,7 @@ package
 			
 			FP.rect.x = 1;
 			FP.rect.y = 1;
-			FP.rect.width = width + 5;
+			FP.rect.width = width + params.extraWidth + 4;
 			FP.rect.height = height + 2 + 8;
 			
 			if (overMax) FP.rect.width += 4;
@@ -73,13 +73,21 @@ package
 			if (scale > 4) scale = 4;
 			
 			for (i = 1; i <= maxClicks; i++) {
+				var c:uint = Main.WHITE;
+				
+				if (i == yourClicks) {
+					/*FP.rect.height = height;
+					FP.rect.x = i + 1;
+					FP.rect.y = 2;
+				
+					bitmap.fillRect(FP.rect, Main.GREY);*/
+					
+					c = Main.PINK;
+				}
+				
 				FP.rect.height = Math.ceil(data[i] * scale);
 				FP.rect.x = i + 1;
 				FP.rect.y = height + 2 - FP.rect.height;
-				
-				var c:uint = Main.WHITE;
-				
-				if (i == yourClicks) c = Main.PINK;
 				
 				bitmap.fillRect(FP.rect, c);
 			}

@@ -798,7 +798,8 @@ package
 				highlight: clicks,
 				minX: 30,
 				maxX: 50,
-				height: 16
+				height: 16,
+				extraWidth: 1
 			};
 			
 			var bitmap:BitmapData = Graph.makeGraph(data, params);

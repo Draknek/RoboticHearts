@@ -99,11 +99,15 @@ package
 				resumeMode = "normal";
 			}
 			
+			add(backButton2 = new Button(0, 0, new Text("Back to menu"), back));
+			backButton2.x = (FP.width - backButton2.width) * 0.5;
+			backButton2.y = FP.height*2 - 14;
+			
 			var playButton:Button = new Button(0, 0, new Text(playText), function ():void {
 				FP.world = new Level(resumeLevel, resumeMode);
 			});
 			
-			var levelsButton:Button = new Button(0, 0, new Text("Level select"), function ():void {
+			var levelsButton:Button = new Button(0, 0, new Text("Level Select"), function ():void {
 				addList(normalLevels);
 				if (tween) tween.cancel();
 				tween = FP.tween(FP.camera, {x: FP.width}, 30, {ease: Ease.sineIn});
@@ -121,6 +125,17 @@ package
 				switchScreen();
 			});
 			
+			var highScoresButton:Button = new Button(0, 0, new Text("High Scores"), function ():void {
+				backButton2.x = -FP.width + (FP.width - backButton2.width) * 0.5;
+				backButton2.y = FP.height - 14;
+				
+				if (tween) tween.cancel();
+				tween = FP.tween(FP.camera, {x: -FP.width}, 30, {ease: Ease.sineIn});
+				backButton.disabled = false;
+				backButton.visible = true;
+				switchScreen();
+			});
+			
 			var graphicsButton:Button = new Button(0, 0, new Text("Change graphics"), function ():void {
 				if (tween) tween.cancel();
 				tween = FP.tween(FP.camera, {y: FP.height}, 30, {ease: Ease.sineIn});
@@ -130,6 +145,9 @@ package
 			});
 			
 			var creditsButton:Button = new Button(0, 0, new Text("Credits"), function ():void {
+				backButton2.x = (FP.width - backButton2.width) * 0.5;
+				backButton2.y = FP.height*2 - 14;
+				
 				if (tween) tween.cancel();
 				tween = FP.tween(FP.camera, {y: FP.height}, 30, {ease: Ease.sineIn});
 				backButton.disabled = false;
@@ -151,7 +169,49 @@ package
 				}
 			}
 			
-			addElements([playButton, levelsButton, creditsButton, resetData]);
+			var moreGames:Button = new Button(0, 0, new Text("More Games"), makeURLFunction("http://www.draknek.org/games/"));
+			
+			addElements([playButton, levelsButton, highScoresButton, creditsButton, moreGames]);
+			
+			var yourScore:Text = new Text("Your score: 1499\nPosition: #1", 0, 0, {color: Main.GREY, leading: 2});
+			var top10:Button = new Button(0, 0, new Text("Top 10"), function():void{});
+			var nearYou:Button = new Button(0, 0, new Text("Near You"), function():void{});
+			var graphs:Button = new Button(0, 0, new Text("Graphs"), function():void{
+				var params:Object = {
+					highlight: 1499/25,
+					height: 25,
+					scale: 25,
+					markers: 500,
+					extraWidth: 5
+				};
+				
+				var graph:BitmapData = Graph.makeGraph(Logger.scoreStats, params);
+				
+				var g:Stamp = new Stamp(graph);
+				
+				g.x = FP.width*0.5 - g.width*0.5;
+				g.y = FP.height*0.5;
+				
+				addGraphic(g);
+				
+				FP.tween(g, {x: g.x - FP.width}, 30, {ease: Ease.sineIn});
+				FP.tween(top10, {x: top10.x - FP.width}, 30, {ease: Ease.sineIn});
+				FP.tween(nearYou, {x: nearYou.x - FP.width}, 30, {ease: Ease.sineIn});
+				FP.tween(graphs, {x: graphs.x - FP.width}, 30, {ease: Ease.sineIn});
+				graphs.callback = null;
+				switchScreen();
+			});
+			
+			addElements([yourScore, top10, nearYou, graphs], -FP.width, 0, 14);
+			
+			yourScore.text = "Your score:";
+			
+			var yourPosition:Text = new Text("Position:", yourScore.x + 16, yourScore.y + 10, {color: Main.GREY});
+			var yourActualScore:Text = new Text("1499", yourScore.x + yourScore.textWidth + 2, yourScore.y, {});
+			var yourActualPosition:Text = new Text("#1", yourScore.x + yourScore.textWidth + 2, yourPosition.y, {});
+			addGraphic(yourPosition);
+			addGraphic(yourActualScore);
+			addGraphic(yourActualPosition);
 			
 			var oldScreen:Image = new Image(FP.buffer.clone());
 			
@@ -185,14 +245,11 @@ package
 			
 			Audio.muteOverlay = muteOverlay;
 			
-			add(backButton2 = new Button(0, FP.height*2 - 14, new Text("Back to menu"), back));
-			backButton2.x = (FP.width - backButton2.width) * 0.5;
-			
 			//addGraphicChoices();
 			addCredits();
 		}
 		
-		private function addElements(list:Array, offset:int = 0, bottom_padding:Number = 0):void
+		private function addElements(list:Array, offsetX:int = 0, offsetY:int = 0, bottom_padding:Number = 0):void
 		{
 			var h:int = 0;
 			
@@ -219,8 +276,8 @@ package
 					continue;
 				}
 				
-				o.x = (FP.width - o.width) * 0.5;
-				o.y = y + offset;
+				o.x = (FP.width - o.width) * 0.5 + offsetX;
+				o.y = y + offsetY;
 				
 				y += padding + o.height;
 				
@@ -258,24 +315,24 @@ package
 			addGraphic(g, layer);
 		}
 		
+		private function makeURLFunction (url:String): Function
+		{
+			return function ():void {
+				var request:URLRequest = new URLRequest(url);
+				navigateToURL(request, "_blank");
+			}
+		}
+		
 		private function addCredits ():void
 		{
 			var t:Text;
 			var b:Button;
 			var l:Array = [];
 			
-			function makeFunc (url:String): Function
-			{
-				return function ():void {
-					var request:URLRequest = new URLRequest(url);
-					navigateToURL(request, "_blank");
-				}
-			}
-			
 			t = new Text("Created by", 0, 0, {color: Main.GREY});
 			l.push(t);
 			
-			b = new Button(0, 0, "Alan Hazelden", makeFunc("http://www.draknek.org/?ref=trhom"));
+			b = new Button(0, 0, "Alan Hazelden", makeURLFunction("http://www.draknek.org/?ref=trhom"));
 			l.push(b);
 			
 			l.push(1);
@@ -283,15 +340,15 @@ package
 			t = new Text("Thanks to", 0, 0, {color: Main.GREY});
 			l.push(t);
 			
-			b = new Button(0, 0, "ChevyRay & FlashPunk", makeFunc("http://flashpunk.net/"));
+			b = new Button(0, 0, "ChevyRay & FlashPunk", makeURLFunction("http://flashpunk.net/"));
 			l.push(b);
 			
-			b = new Button(0, 0, "Alistair Aitcheson", makeFunc("http://www.alistairaitcheson.com/"));
+			b = new Button(0, 0, "Alistair Aitcheson", makeURLFunction("http://www.alistairaitcheson.com/"));
 			l.push(b);
 			
 			l.push(1);
 			
-			addElements(l, FP.height, FP.height * 2 - backButton2.y);
+			addElements(l, 0, FP.height, FP.height * 2 - backButton2.y);
 		}
 		
 		private function addLevelButton (i:int, mode:String = "normal"):Button

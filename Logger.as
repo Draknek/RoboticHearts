@@ -15,7 +15,7 @@ package
 		[Embed(source="levels/stats.json", mimeType="application/octet-stream")]
 		public static const STATS:Class;
 		
-		public static const HOST:String = "www.draknek.org";
+		public static const HOST:String = "draknek.dev";
 		
 		public static const DB:String = "http://" + HOST + "/games/hearts/db/";
 		
@@ -24,6 +24,7 @@ package
 		public static var uid:String;
 		
 		public static var clickStats:Object = {};
+		public static var scoreStats:Object = {};
 		
 		public static function magic (query:String, f:Function = null): void
 		{
@@ -72,6 +73,16 @@ package
 			magic("get.php", unJSON);
 		}
 		
+		public static function getScoreStats (): void
+		{
+			function unJSON (dataString:*):void
+			{
+				scoreStats = JSON.decode(dataString);
+			}
+			
+			magic("get.php?scorestats=1", unJSON);
+		}
+		
 		public static function connect (obj: DisplayObjectContainer): void
 		{
 			if (Main.so.data.stats) {
@@ -85,6 +96,8 @@ package
 			} else {
 				getUID();
 			}
+			
+			getScoreStats();
 			
 			var now:Number = (new Date()).getTime();
 			
