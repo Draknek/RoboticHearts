@@ -82,6 +82,7 @@ package
 			}
 			
 			levelPacks[mode].levels = [];
+			levelPacks[mode].md5 = [];
 			levelPacks[mode].special = [];
 			levelPacks[mode].minClicksArray = [];
 			
@@ -103,6 +104,7 @@ package
 				data.readBytes(levelData, 0, levelSize);
 				
 				levelPacks[mode].levels.push(levelData);
+				levelPacks[mode].md5.push(MD5.hashBytes(levelData));
 			}
 		}
 		
@@ -420,6 +422,19 @@ package
 			redoButton.disabled = (redoStack.length == 0);
 		}
 		
+		public override function begin (): void
+		{
+			super.begin();
+			
+			if (data) {
+				var md5:String = MD5.hashBytes(data);
+			
+				Main.so.data.lastPlayed = md5;
+			} else {
+				Main.so.data.lastPlayed = "gameover";
+			}
+		}
+		
 		public override function update (): void
 		{
 			camera.x = -(FP.width - 96)*0.5;
@@ -666,6 +681,8 @@ package
 		private function addCompletionUI (previousBest:int): void
 		{
 			var md5:String = MD5.hashBytes(data);
+			
+			Main.so.data.lastPlayed = levelPacks[mode].md5[id+1];
 			
 			var next:Button = new Button(0, 0, new Text("Next level", 0, 0, {size: 8}), function ():void {
 				FP.world = new Level(id+1, mode);

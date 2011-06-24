@@ -72,6 +72,11 @@ package
 				
 				normalLevels.push(b);
 				
+				if (Main.so.data.lastPlayed == Level.levelPacks["normal"].md5[i]) {
+					resumeLevel = i;
+					resumeMode = "normal";
+				}
+				
 				if (resumeLevel < 0 && b.normalColor == Main.WHITE) {
 					resumeLevel = i;
 					resumeMode = "normal";
@@ -93,7 +98,7 @@ package
 			
 			var playText:String = (resumeLevel == 0) ? "Play" : "Resume";
 			
-			if (resumeLevel < 0) {
+			if (resumeLevel < 0 || Main.so.data.lastPlayed == "gameover") {
 				playText = "Play again";
 				resumeLevel = 0;
 				resumeMode = "normal";
@@ -171,7 +176,7 @@ package
 			
 			var moreGames:Button = new Button(0, 0, new Text("More Games"), makeURLFunction("http://www.draknek.org/games/"));
 			
-			addElements([playButton, levelsButton, highScoresButton, creditsButton, moreGames]);
+			addElements([playButton, levelsButton, highScoresButton, creditsButton, moreGames, resetData]);
 			
 			var yourScore:Text = new Text("Your score: 1499\nPosition: #1", 0, 0, {color: Main.GREY, leading: 2});
 			var top10:Button = new Button(0, 0, new Text("Top 10"), function():void{});
