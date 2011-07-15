@@ -692,15 +692,27 @@ package
 				FP.world = new Level(id, mode);
 			}, null, false, true);
 			
-			next.x = (FP.width - next.width)*0.5;
-			retry.x = (FP.width - retry.width)*0.5;
+			var submit:Button = new Button(0, 0, new Text("Submit", 0, 0, {size: 8}), function ():void {
+				//
+			}, null, true, true);
 			
-			retry.y = FP.height - 4 - retry.height;
-			next.y = retry.y - 4 - next.height;
+			var menu:Button = new Button(0, 0, new Text("Main menu", 0, 0, {size: 8}), function ():void {
+				FP.world = new Menu;
+			}, null, false, true);
 			
-			next.hoverColor = retry.hoverColor = Main.BLACK;
-			next.normalColor = retry.normalColor = Main.WHITE;
+			next.x = FP.width*0.75 - next.width*0.5;
+			retry.x = FP.width*0.25 - retry.width*0.5;
+			submit.x = FP.width*0.75 - submit.width*0.5;
+			menu.x = FP.width*0.25 - menu.width*0.5;
+			
+			menu.y = submit.y = FP.height - 2 - retry.height;
+			next.y = retry.y = menu.y - 2 - next.height;
+			
+			next.hoverColor = retry.hoverColor = submit.hoverColor = menu.hoverColor = Main.BLACK;
+			next.normalColor = retry.normalColor = submit.normalColor = menu.normalColor = Main.WHITE;
+			
 			next.normalLayer = next.hoverLayer = next.layer = retry.normalLayer = retry.hoverLayer = retry.layer = -15;
+			submit.normalLayer = submit.hoverLayer = submit.layer = menu.normalLayer = menu.hoverLayer = menu.layer = -15;
 			
 			// first score OR same score OR better score OR worse score
 			// optimal score OR non-optimal OR beaten optimal
@@ -725,7 +737,7 @@ package
 				bestPossibleText = "Best possible: " + minClicks;
 			}
 			
-			var t:Text = new Text(clickText, 0, 0, {align:"center", size:8, width: FP.width - 1, leading: 1});
+			var t:Text = new Text(clickText, 0, 0, {align:"center", size:8, width: FP.width - 1, leading: 2, color: Main.BLACK});
 			t.scrollX = t.scrollY = 0;
 			
 			if (previousBestText) t.text += "\n" + previousBestText;
@@ -791,6 +803,8 @@ package
 			addGraphic(t, -15);
 			add(next);
 			add(retry);
+			add(submit);
+			add(menu);
 		}
 		
 		public function getScore (n:int):int
