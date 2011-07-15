@@ -129,7 +129,7 @@ package
 				if (FP.width <= FP.rect.x + FP.rect.width) {
 					_helpText.x -= 2 + FP.rect.width;
 					
-					if (_helpText.x < 0) _helpText.x = (FP.width - FP.rect.width)*0.5;
+					if (_helpText.x < 0) _helpText.x = int((FP.width - FP.rect.width)*0.5);
 					
 					FP.rect.x = _helpText.x;
 				}
