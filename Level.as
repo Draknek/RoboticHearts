@@ -757,18 +757,19 @@ package
 			var totalScore:int = Main.so.data.totalScore || 0;
 			var totalScoreIncrease:int = 0;
 			
-			t.text += "\n\n";
+			var t2:Text = new Text("", 0, 0, {align:"center", size:8, width: FP.width - 1, leading: 2, color: Main.BLACK});
+			t2.scrollX = t2.scrollY = 0;
 			
-			t.text += "Score: " + score;
+			t2.text = "Score: " + score;
 			
 			if (prevBestScore) {
 				if (prevBestScore > score) {
-					t.text += " (your best: " + prevBestScore + ")";
+					t2.text += " (your best: " + prevBestScore + ")";
 				} else if (prevBestScore < score) {
 					totalScoreIncrease = score - prevBestScore;
-					t.text += " (+" + totalScoreIncrease + ")";
+					t2.text += " (+" + totalScoreIncrease + ")";
 				} else {
-					t.text += " (your best)";
+					t2.text += " (your best)";
 				}
 			} else {
 				totalScoreIncrease = score;
@@ -780,12 +781,12 @@ package
 				Main.so.flush();
 			}
 			
-			t.text += "\n";
+			t2.text += "\n";
 			
-			t.text += "Total score: " + totalScore;
+			t2.text += "Total score: " + totalScore;
 			
 			if (totalScoreIncrease && totalScore != totalScoreIncrease) {
-				t.text += " (+" + totalScoreIncrease + ")";
+				t2.text += " (+" + totalScoreIncrease + ")";
 			}
 			
 			var graph:Stamp = addGraph(md5);
@@ -796,11 +797,14 @@ package
 				graphStop = graph.y + graph.height;
 			}
 			
-			var space:Number = next.y - t.height - graphStop;
+			var space:Number = next.y - t.height - t2.height - graphStop;
 			
-			t.y = space * 0.5 + graphStop;
+			t.y = graphStop + space / 3.0;
+			
+			t2.y = t.y + t.height + space / 3.0;
 			
 			addGraphic(t, -15);
+			addGraphic(t2, -15);
 			add(next);
 			add(retry);
 			add(submit);
