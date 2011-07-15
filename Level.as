@@ -709,13 +709,13 @@ package
 			var previousBestText:String;
 			var bestPossibleText:String;
 			
-			if (! previousBest || previousBest == clicks) {
+			/*if (! previousBest || previousBest == clicks) {
 				previousBestText = null;
 			} else if (previousBest < clicks) {
 				previousBestText = "Your best: " + previousBest;
 			} else {
 				previousBestText = "Previous best: " + previousBest;
-			}
+			}*/
 			
 			if (clicks <= minClicks) {
 				clickText += "\n(best possible)";
@@ -725,11 +725,11 @@ package
 				bestPossibleText = "Best possible: " + minClicks;
 			}
 			
-			var t:Text = new Text(clickText, 0, 0, {align:"center", size:8, width: FP.width - 1});
+			var t:Text = new Text(clickText, 0, 0, {align:"center", size:8, width: FP.width - 1, leading: 1});
 			t.scrollX = t.scrollY = 0;
 			
-			if (previousBestText) t.text += "\n\n" + previousBestText;
-			if (bestPossibleText) t.text += "\n\n" + bestPossibleText;
+			if (previousBestText) t.text += "\n" + previousBestText;
+			if (bestPossibleText) t.text += "\n" + bestPossibleText;
 			
 			if (clicks < minClicks) {
 				t.text = "Clicks: " + clicks + "\n\nWell done! You used\n" + (minClicks - clicks) + "\nfewer clicks than I\nthought were needed!";
@@ -737,6 +737,43 @@ package
 				var alert:String = "Completed " + mode + " level " + id + " (" + md5 + ") in " + clicks + " clicks (prev best: " + minClicks + ")";
 				
 				Logger.alert(alert);
+			}
+			
+			var score:int = getScore(clicks);
+			var prevBestScore:int = (previousBest) ? getScore(previousBest) : 0;
+			
+			var totalScore:int = Main.so.data.totalScore || 0;
+			var totalScoreIncrease:int = 0;
+			
+			t.text += "\n\n";
+			
+			t.text += "Score: " + score;
+			
+			if (prevBestScore) {
+				if (prevBestScore > score) {
+					t.text += " (your best: " + prevBestScore + ")";
+				} else if (prevBestScore < score) {
+					totalScoreIncrease = score - prevBestScore;
+					t.text += " (+" + totalScoreIncrease + ")";
+				} else {
+					t.text += " (your best)";
+				}
+			} else {
+				totalScoreIncrease = score;
+			}
+			
+			if (totalScoreIncrease) {
+				totalScore += totalScoreIncrease;
+				Main.so.data.totalScore = totalScore;
+				Main.so.flush();
+			}
+			
+			t.text += "\n";
+			
+			t.text += "Total score: " + totalScore;
+			
+			if (totalScoreIncrease && totalScore != totalScoreIncrease) {
+				t.text += " (+" + totalScoreIncrease + ")";
 			}
 			
 			var graph:Stamp = addGraph(md5);
@@ -754,6 +791,11 @@ package
 			addGraphic(t, -15);
 			add(next);
 			add(retry);
+		}
+		
+		public function getScore (n:int):int
+		{
+			return 50 - (n - minClicks);
 		}
 		
 		public function removeUnderMouse (): void
