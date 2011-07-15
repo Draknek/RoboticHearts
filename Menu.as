@@ -166,6 +166,8 @@ package
 				for each (var l:* in Main.so.data.levels) {
 					resetData = new Button(0, 0, new Text("Delete saved data"), function ():void {
 						Main.so.data.levels = {};
+						Main.so.data.lastPlayed = null;
+						Main.so.data.totalScore = 0;
 						Main.so.flush();
 						Input.mouseCursor = "auto";
 						FP.world = new Intro;
