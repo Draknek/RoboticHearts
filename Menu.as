@@ -180,12 +180,12 @@ package
 			
 			addElements([playButton, levelsButton, highScoresButton, creditsButton, moreGames, resetData]);
 			
-			var yourScore:Text = new Text("Your score: 1499\nPosition: #1", 0, 0, {color: Main.GREY, leading: 2});
+			var yourScore:Text = new Text("Your score: #", 0, 0, {color: Main.GREY, leading: 2});
 			var top10:Button = new Button(0, 0, new Text("Top 10"), function():void{});
 			var nearYou:Button = new Button(0, 0, new Text("Near You"), function():void{});
 			var graphs:Button = new Button(0, 0, new Text("Graphs"), function():void{
 				var params:Object = {
-					highlight: 1499/25,
+					highlight: Main.so.data.totalScore/25,
 					height: 25,
 					scale: 25,
 					markers: 500,
@@ -214,11 +214,11 @@ package
 			yourScore.text = "Your score:";
 			
 			var yourPosition:Text = new Text("Position:", yourScore.x + 16, yourScore.y + 10, {color: Main.GREY});
-			var yourActualScore:Text = new Text("1499", yourScore.x + yourScore.textWidth + 2, yourScore.y, {});
+			var yourActualScore:Text = new Text(Main.so.data.totalScore, yourScore.x + yourScore.textWidth + 2, yourScore.y, {});
 			var yourActualPosition:Text = new Text("#1", yourScore.x + yourScore.textWidth + 2, yourPosition.y, {});
-			addGraphic(yourPosition);
+			//addGraphic(yourPosition);
 			addGraphic(yourActualScore);
-			addGraphic(yourActualPosition);
+			//addGraphic(yourActualPosition);
 			
 			var oldScreen:Image = new Image(FP.buffer.clone());
 			

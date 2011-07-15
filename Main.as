@@ -26,6 +26,7 @@ package
 		public function Main ()
 		{
 			if (! so.data.levels) so.data.levels = {};
+			if (! so.data.totalScore) so.data.totalScore = 0;
 			
 			Text.font = "7x5";
 			Text.size = 8;
