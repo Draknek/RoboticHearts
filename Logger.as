@@ -2,6 +2,7 @@ package
 {
 	import flash.display.*;
 	import net.flashpunk.*;
+	import FGL.GameTracker.*;
 	import Playtomic.*;
 	import flash.system.Security;
 	import flash.events.*;
@@ -25,6 +26,8 @@ package
 		
 		public static var clickStats:Object = {};
 		public static var scoreStats:Object = {};
+		
+		private static var FGL:GameTracker;
 		
 		public static function magic (query:String, f:Function = null): void
 		{
@@ -112,6 +115,10 @@ package
 			
 			if (isLocal) return;
 			
+			FGL = new GameTracker();
+			
+			FGL.beginGame();
+			
 			Log.View(Secret.PLAYTOMIC_SWFID, Secret.PLAYTOMIC_GUID, obj.stage.loaderInfo.loaderURL);
 		}
 		
@@ -120,6 +127,8 @@ package
 			if (isLocal) return;
 			
 			Log.LevelCounterMetric("started", l(id, mode));
+			
+			FGL.beginLevel(id, Main.so.data.totalScore);
 		}
 
 		public static function restartLevel (id:int, mode:String): void
@@ -139,6 +148,10 @@ package
 			
 			Log.LevelAverageMetric("time", l(id, mode), Level(FP.world).time);
 			Log.LevelAverageMetric("clicks", l(id, mode), Level(FP.world).clicks);
+			
+			FGL.endLevel(Main.so.data.totalScore, null, Level(FP.world).clicks + " clicks (" + Level(FP.world).minClicks + " min)");
+			
+			FGL.alert(Main.so.data.totalScore, null, "Completed level " + (id + 1) + ": " + Level(FP.world).clicks + " clicks (" + Level(FP.world).minClicks + " min)");
 		}
 		
 		public static function submitScore (id:int, mode:String): void
@@ -167,6 +180,8 @@ package
 			var loader:URLLoader = new URLLoader(request);
 			
 			trace(message);
+			
+			FGL.alert(Main.so.data.totalScore, null, message);
 		}
 		
 		private static function l (id:int, mode:String):String

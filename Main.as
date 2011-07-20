@@ -42,7 +42,7 @@ package
 		
 		public override function init (): void
 		{
-			sitelock(["draknek.org", "192.168.1.2"]);
+			sitelock(["draknek.org", "flashgamelicense.com"]);
 			
 			super.init();
 			
