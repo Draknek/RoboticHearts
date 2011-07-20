@@ -181,8 +181,8 @@ package
 			addElements([playButton, levelsButton, highScoresButton, creditsButton, moreGames, resetData]);
 			
 			var yourScore:Text = new Text("Your score: #", 0, 0, {color: Main.GREY, leading: 2});
-			var top10:Button = new Button(0, 0, new Text("Top 10"), function():void{});
-			var nearYou:Button = new Button(0, 0, new Text("Near You"), function():void{});
+			var submit:Button = new Button(0, 0, new Text("Submit [todo]"), function():void{});
+			var highscores:Button = new Button(0, 0, new Text("High scores [todo]"), function():void{});
 			var graphs:Button = new Button(0, 0, new Text("Graphs"), function():void{
 				var params:Object = {
 					highlight: Main.so.data.totalScore/25,
@@ -202,14 +202,14 @@ package
 				addGraphic(g);
 				
 				FP.tween(g, {x: g.x - FP.width}, 30, {ease: Ease.sineIn});
-				FP.tween(top10, {x: top10.x - FP.width}, 30, {ease: Ease.sineIn});
-				FP.tween(nearYou, {x: nearYou.x - FP.width}, 30, {ease: Ease.sineIn});
+				FP.tween(submit, {x: submit.x - FP.width}, 30, {ease: Ease.sineIn});
+				FP.tween(highscores, {x: highscores.x - FP.width}, 30, {ease: Ease.sineIn});
 				FP.tween(graphs, {x: graphs.x - FP.width}, 30, {ease: Ease.sineIn});
 				graphs.callback = null;
 				switchScreen();
 			});
 			
-			addElements([yourScore, top10, nearYou, graphs], -FP.width, 0, 14);
+			addElements([yourScore, submit, highscores, graphs], -FP.width, 0, 14);
 			
 			yourScore.text = "Your score:";
 			
