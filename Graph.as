@@ -55,9 +55,15 @@ package
 			if (width < params.minX) width = params.minX;
 			var height:int = params.height;
 			
+			var offsetX:int = 0;
+			
+			if (params.show0) {
+				offsetX = 2;
+			}
+			
 			FP.rect.x = 1;
 			FP.rect.y = 1;
-			FP.rect.width = width + params.extraWidth + 4;
+			FP.rect.width = width + params.extraWidth + 4 + offsetX;
 			FP.rect.height = height + 2 + 8;
 			
 			if (overMax) FP.rect.width += 4;
@@ -72,12 +78,12 @@ package
 			
 			if (scale > 4) scale = 4;
 			
-			for (i = 1; i <= maxClicks; i++) {
+			for (i = params.show0 ? 0 : 1; i <= maxClicks; i++) {
 				var c:uint = Main.WHITE;
 				
 				if (i == yourClicks) {
 					/*FP.rect.height = height;
-					FP.rect.x = i + 1;
+					FP.rect.x = i + 1 + offsetX;
 					FP.rect.y = 2;
 				
 					bitmap.fillRect(FP.rect, Main.GREY);*/
@@ -86,14 +92,14 @@ package
 				}
 				
 				FP.rect.height = Math.ceil(data[i] * scale);
-				FP.rect.x = i + 1;
+				FP.rect.x = i + 1 + offsetX;
 				FP.rect.y = height + 2 - FP.rect.height;
 				
 				bitmap.fillRect(FP.rect, c);
 			}
 			
-			FP.rect.x = 2;
-			FP.rect.width = width;
+			FP.rect.x = (params.show0 ? 1 : 2) + offsetX;
+			FP.rect.width = width + (params.show0 ? 1 : 0);
 			FP.rect.y = height + 2;
 			FP.rect.height = 1;
 			
@@ -104,10 +110,10 @@ package
 			
 			var numbers:Spritemap = new Spritemap(NUMBER_FONT, 3, 5);
 			
-			for (i = markerX/scaleX; i <= width; i += markerX/scaleX) {
-				bitmap.setPixel32(i + 1, height + 3, Main.GREY);
+			for (i = params.show0 ? 0 : markerX/scaleX; i <= width; i += markerX/scaleX) {
+				bitmap.setPixel32(i + 1 + offsetX, height + 3, Main.GREY);
 				
-				FP.point.x = i;
+				FP.point.x = i + offsetX;
 				FP.point.y = height + 5;
 				
 				var val:int = i * scaleX;
@@ -115,7 +121,7 @@ package
 				drawNumber(val, bitmap, FP.point);
 				
 				if (overMax && i == MAX_WIDTH) {
-					FP.point.x = i + 6;
+					FP.point.x = i + 6 + offsetX;
 					numbers.frame = 10;
 					numbers.render(bitmap, FP.point, FP.zero);
 				}
