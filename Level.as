@@ -871,6 +871,8 @@ package
 				data = Logger.clickStats[data];
 			}
 			
+			if (! data) return null;
+			
 			var params:Object = {
 				highlight: clicks,
 				minX: 30,

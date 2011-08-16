@@ -16,9 +16,7 @@ package
 		[Embed(source="levels/stats.json", mimeType="application/octet-stream")]
 		public static const STATS:Class;
 		
-		public static const HOST:String = "draknek.dev";
-		
-		public static const DB:String = "http://" + HOST + "/games/hearts/db/";
+		public static var DB:String;
 		
 		public static var isLocal:Boolean = false;
 		
@@ -26,6 +24,8 @@ package
 		
 		public static var clickStats:Object = {};
 		public static var scoreStats:Object = {};
+		
+		public static const VERSION:String = "c";
 		
 		private static var FGL:GameTracker;
 		
@@ -88,6 +88,12 @@ package
 		
 		public static function connect (obj: DisplayObjectContainer): void
 		{
+			isLocal = (obj.stage.loaderInfo.loaderURL.substr(0, 7) == 'file://');
+			
+			var host:String = isLocal ? "draknek.dev" : "www.draknek.org";
+			
+			DB = "http://" + host + "/games/hearts/db/";
+			
 			if (Main.so.data.stats) {
 				clickStats = Main.so.data.stats;
 			} else {
@@ -110,8 +116,6 @@ package
 			if (now - lastStatsDownload > 1000 * 60 * 60 * 24) {			
 				getScores();
 			}
-			
-			isLocal = (obj.stage.loaderInfo.loaderURL.substr(0, 7) == 'file://');
 			
 			if (isLocal) return;
 			
@@ -186,7 +190,7 @@ package
 		
 		private static function l (id:int, mode:String):String
 		{
-			var s:String = "c";
+			var s:String = VERSION;
 			
 			if (mode == "perfection") s += "*";
 			
