@@ -61,7 +61,7 @@ package
 				Main.so.flush();
 			}
 			
-			magic("get.php?newuser=1", setUID);
+			magic("get.php?newuser=1&version=" + VERSION, setUID);
 		}
 		
 		public static function getScores (): void
@@ -73,7 +73,7 @@ package
 				Main.so.data.lastStatsDownload = (new Date()).getTime();
 			}
 			
-			magic("get.php", unJSON);
+			magic("get.php?version=" + VERSION, unJSON);
 		}
 		
 		public static function getScoreStats (): void
@@ -83,7 +83,7 @@ package
 				scoreStats = JSON.decode(dataString);
 			}
 			
-			magic("get.php?scorestats=1", unJSON);
+			magic("get.php?scorestats=1&version=" + VERSION, unJSON);
 		}
 		
 		public static function connect (obj: DisplayObjectContainer): void
@@ -170,7 +170,7 @@ package
 			
 			var solution:String = Secret.encodeSolution(Level(FP.world).undoStack);
 			
-			magic("submit.php?uid=" + uid + "&lvl=" + levelMD5 + "&clicks=" + clicks + "&cogs=" + solution);
+			magic("submit.php?uid=" + uid + "&lvl=" + levelMD5 + "&clicks=" + clicks + "&cogs=" + solution + "&version=" + VERSION);
 		}
 		
 		public static function alert (message:String): void
