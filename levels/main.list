@@ -13,57 +13,37 @@ gift 7
 They were the best of friends
 reckoner 4
 
-They danced together
-outsider 7
+Always playing together, dancing through the trees
+outsider-trees 7
 
-And they played together
-eyes3 9
-
-And helped one another when in need
-sides 8
-
-Their friendship bound them together stronger than any rope
-string-short 9
-
-Their love filling a hole that neither knew existed
+Their friendship filling a hole that neither knew existed
 hole 8
-
-But different people will pull in different directions
-separated 10
-
-And nothing is simple forever
-eyes2 8
-
-#And for a brief time, they knew love
-#heart-simpler 6 -- not interesting
-
-#And two lives are more complex than one
-#eyes 11 -- too much too soon?
-
-And two lives are more complex than one
-simple3-simpler 8
 
 One day they found a broken robot in the woods
 line-simpler 3
 
-#One day they found a broken robot in the woods
-#line 8
-
 They worked hard to fix the robot
-line3 6
+line 8
 
 Swapping its old rusty parts with gleaming new replacements
 diagonals 12
 
 And when he was fixed the trio played together for a time
-line2-simpler 8
+triangle4 6
 
-#And the robot marvelled at the love he saw between the boy and the girl
+And the robot marvelled at the love he saw blossom between the boy and the girl
+bond 9
 
-And he watched as the boy gave his heart to the girl\nAnd she gave hers to him
+And watched the boy give his heart to the girl\nAs she gave hers to him
 heart-swap 7
 
-The robot became lonely and led them to his old home
+If only the story could have ended there...
+triangle3 10
+
+But the robot grew lonely, and one day the boy and the girl woke to find him gone
+eyes3 9
+
+They followed him back to an abandoned factory
 cross-simple 16
 
 #"Please," he said, "so few of these robots are still active"
@@ -121,12 +101,24 @@ sparse 10
 #sharing2 7 -- same end as sides
 #line-short2 12 -- boring solution?
 #gap 16 -- boring solution?
-#bond 10 -- kinda funky connections
 #spirals 18 -- cool but hard to place
 #simple2-horizontal 3 -- too easy to do by accident
 #sizes 6 -- wants a more interesting puzzle
 #
 #string 11
+#
+#line2-simpler 8
+#
+#line3 6
+#
+#eyes3 9
+#sides 8
+#string-short 9
+#separated 10
+#eyes2 8
+#heart-simpler 6 -- not interesting
+#eyes 11 -- too much too soon?
+#simple3-simpler 8
 #
 # And grew lonely, as the boy toiled late into the nights, repairing robots
 #
@@ -143,3 +135,8 @@ sparse 10
 #These might be interesting as perfection levels but they don't actually have to be perfect:
 #line-short 6
 #combo 16
+#
+#New
+#cross9
+#forced
+#quad
