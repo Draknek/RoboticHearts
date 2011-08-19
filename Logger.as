@@ -185,6 +185,8 @@ package
 			
 			trace(message);
 			
+			if (isLocal) return;
+			
 			FGL.alert(Main.so.data.totalScore, null, message);
 		}
 		
