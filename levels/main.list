@@ -51,7 +51,7 @@ They searched for any tracks he might have made
 string-short 9
 
 And followed him to the entrance of an abandoned factory
-string 11
+opensesame 10
 
 Filled with broken down robots gathering dust
 cross-simple 9
@@ -125,6 +125,7 @@ sparse 10
 #heart-simpler 6 -- not interesting
 #eyes 11 -- too much too soon?
 #simple3-simpler 8
+#string 11
 #
 # And grew lonely, as the boy toiled late into the nights, repairing robots
 #
