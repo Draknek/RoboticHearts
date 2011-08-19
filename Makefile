@@ -9,7 +9,10 @@ endif
 all:
 	cd levels && python build.py
 	fcsh-wrap -optimize=true -output $(OUTPUT) -static-link-runtime-shared-libraries=true -compatibility-version=3.0.0 --target-player=10.0.0 -compiler.debug=$(DEBUG_FLAG) Preloader.as -frames.frame mainframe Main
+
+update-db:
 	fcsh-wrap -optimize=true -output update-db.swf -static-link-runtime-shared-libraries=true -compatibility-version=3.0.0 --target-player=10.0.0 -compiler.debug=true UpdateDB.as
+	flashplayer update-db.swf
 
 
 clean:
