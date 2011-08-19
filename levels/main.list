@@ -43,13 +43,20 @@ triangle3 10
 But the robot grew lonely, and one day the boy and the girl woke to find him gone
 eyes3 9
 
-They followed him back to an abandoned factory
+They searched for any tracks he might have made
+string-short 9
+
+And found him at the entrance to an abandoned factory
+string 11
+
+Filled with broken down robots gathering dust
 cross-simple 16
 
-#"Please," he said, "so few of these robots are still active"
+"Please," he said, "so few of these robots are still active"
+cross7 7
 
 "Cannot you fix them all?" he pleaded
-cross7 7
+cross7-harder 9
 
 And so they worked to repair the aging robots
 cross2 7
@@ -105,15 +112,13 @@ sparse 10
 #simple2-horizontal 3 -- too easy to do by accident
 #sizes 6 -- wants a more interesting puzzle
 #
-#string 11
-#
 #line2-simpler 8
 #
 #line3 6
 #
 #eyes3 9
 #sides 8
-#string-short 9
+
 #separated 10
 #eyes2 8
 #heart-simpler 6 -- not interesting
