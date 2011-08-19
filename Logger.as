@@ -25,7 +25,7 @@ package
 		public static var clickStats:Object = {};
 		public static var scoreStats:Object = {};
 		
-		public static const VERSION:String = "d";
+		public static const VERSION:String = "e";
 		
 		private static var FGL:GameTracker;
 		
