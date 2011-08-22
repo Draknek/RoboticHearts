@@ -40,6 +40,8 @@ package
 			var maxHeight:int = 1;
 			
 			for (key in data) {
+				if (! params.show0 && key == "0") continue;
+				
 				if (int(key) > MAX_WIDTH) {
 					data[MAX_WIDTH] = int(data[key]) + int(data[MAX_WIDTH]);
 					delete data[key];
