@@ -744,7 +744,7 @@ package
 			if (bestPossibleText) t.text += "\n" + bestPossibleText;
 			
 			if (clicks < minClicks) {
-				t.text = "Clicks: " + clicks + "\n\nWell done! You used\n" + (minClicks - clicks) + "\nfewer clicks than I\nthought were needed!";
+				t.text = "Clicks: " + clicks + "\nNew record!";
 				
 				var alert:String = "Completed " + mode + " level " + id + " (" + md5 + ") in " + clicks + " clicks (prev best: " + minClicks + ")";
 				
@@ -764,7 +764,8 @@ package
 			
 			if (prevBestScore) {
 				if (prevBestScore > score) {
-					t2.text += " (your best: " + prevBestScore + ")";
+					//t2.text += " (your best: " + prevBestScore + ")";
+					t2.text += " (-" + (prevBestScore-score) + ")";
 				} else if (prevBestScore < score) {
 					totalScoreIncrease = score - prevBestScore;
 					t2.text += " (+" + totalScoreIncrease + ")";
@@ -783,11 +784,17 @@ package
 			
 			t2.text += "\n";
 			
-			t2.text += "Total score: " + totalScore;
+			t2.text += "Total score: "// + totalScore;
 			
-			if (totalScoreIncrease && totalScore != totalScoreIncrease) {
+			/*if (totalScoreIncrease && totalScore != totalScoreIncrease) {
 				t2.text += " (+" + totalScoreIncrease + ")";
-			}
+			}*/
+			
+			var numberString:NumberString = new NumberString(totalScore-totalScoreIncrease, t2.text);
+			
+			numberString.bind(t2, "text");
+			
+			FP.tween(numberString, {value:totalScore}, 30);
 			
 			var graph:Stamp = addGraph(md5);
 			
