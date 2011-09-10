@@ -77,26 +77,50 @@ placeholder 1
 The boy's neglect of the girl broke her heart
 heart-break2 5
 
-And she left him for another
-heart-break 3 4
-
-And suddenly the boy noticed her absence and found he was lonely too
-bigsquare 16
-
-In his foolish aching rage / He made a demand of the machines
+And in her foolish aching rage / She made a demand of the machines
 cross8 13
 
 "Tear out this broken heart of mine / And build for me a heart of metal that will never fail"
 triangle2 12
 
+"His heart is for metal so metal I'll become"
+placeholder 1
+
 And so those loyal robots did as they were told
 heart-build 17
 
-And gifted him a heartless heart that could not feel, or love
+And gifted her a heartless heart too hard for human love
 diamond-large 5 3
 
-And now he was alone / but did not know it.
+Over to the boy she went / And he looked up from his work
 sparse 10
+
+With horror in his eyes he said "My love, what's this you've done?"
+placeholder 1
+
+"This I did for you," she said
+placeholder 1
+
+He reached for her frozen face but she did not even smile
+placeholder 1
+
+He turned around and stalked off mad / Smashing robots who once had been friends
+placeholder 1
+
+Gutting their wires and gears and springs / His purpose now was clear, his love was the stake
+placeholder 1
+
+He worked on for years / Making heart after heart
+placeholder 1
+
+But nothing he made could give back what was lost
+placeholder 1
+
+Now he's an old man with her young by his side
+heart-break 3 4
+
+Without hope for the future / Making hearts to this day
+placeholder 1
 
 #squareish 13 -- sidelined -- maybe patience-lite?
 #triangle 11 -- sidelined -- too hard for the boy/girl/robot section -- maybe perfection?
@@ -121,6 +145,7 @@ sparse 10
 #string 11
 #corner2 13
 #diamond2 9
+#bigsquare 16
 #
 # And grew lonely, as the boy toiled late into the nights, repairing robots
 #
