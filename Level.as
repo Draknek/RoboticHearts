@@ -267,7 +267,7 @@ package
 			
 			if (levelPacks[mode].story && levelPacks[mode].story[id] && levelPacks[mode].story[id].length) {
 				var text:String = levelPacks[mode].story[id];
-				text = text.split("\\n").join("\n\n");
+				text = text.split(" / ").join("\n\n");
 				
 				storyText = new Text(text, 1, 0, {width: FP.width, align:"center", wordWrap:true, leading: 3});
 				

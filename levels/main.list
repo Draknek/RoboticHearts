@@ -1,7 +1,7 @@
 Let me tell you a story...
 simple 2
 
-Once\nwas a young boy\nand a young girl
+Once / was a young boy / and a young girl
 isolated 3
 
 They did not own much
@@ -38,7 +38,7 @@ triangle4 6
 And the robot marvelled at the love he saw blossom between the boy and the girl
 bond 10
 
-And watched the boy give his heart to the girl\nAs she gave hers to him
+And watched the boy give his heart to the girl / As she gave hers to him
 heart-swap 7
 
 If only the story could have ended there...
@@ -68,13 +68,11 @@ cross2 7
 The task took weeks
 ellipsis 10
 
-#And as the boy worked late into the nights, the girl grew lonely
-#corner2 13
-
-#And then weeks turned to months
-
 And as the boy worked late into the nights, the girl grew lonely
 cross4 9
+
+And then weeks turned to months
+placeholder 1
 
 The boy's neglect of the girl broke her heart
 heart-break2 5
@@ -85,15 +83,10 @@ heart-break 3 4
 And suddenly the boy noticed her absence and found he was lonely too
 bigsquare 16
 
-#In his foolish aching rage\nHe made a demand of the machines
-#diamond2 9
-
-#"You who have not abandoned me\nI wish to become one of you"
-
-In his foolish aching rage\nHe made a demand of the machines
+In his foolish aching rage / He made a demand of the machines
 cross8 13
 
-"Tear out this broken heart of mine\nAnd build for me a heart of metal that will never fail"
+"Tear out this broken heart of mine / And build for me a heart of metal that will never fail"
 triangle2 12
 
 And so those loyal robots did as they were told
@@ -102,7 +95,7 @@ heart-build 17
 And gifted him a heartless heart that could not feel, or love
 diamond-large 5 3
 
-And now he was alone\nbut did not know it.
+And now he was alone / but did not know it.
 sparse 10
 
 #squareish 13 -- sidelined -- maybe patience-lite?
@@ -126,6 +119,8 @@ sparse 10
 #eyes 11 -- too much too soon?
 #simple3-simpler 8
 #string 11
+#corner2 13
+#diamond2 9
 #
 # And grew lonely, as the boy toiled late into the nights, repairing robots
 #
