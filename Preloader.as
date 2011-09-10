@@ -6,14 +6,14 @@ package
 	import flash.events.*;
 	import flash.utils.getDefinitionByName;
 
-	[SWF(width = "480", height = "480")]
+	[SWF(width = "480", height = "480", backgroundColor="#202020")]
 	public class Preloader extends Sprite
 	{
 		// Change these values
 		private static const mustClick: Boolean = false;
 		private static const mainClassName: String = "Main";
 		
-		private static const BG_COLOR:uint = 0x222222;
+		private static const BG_COLOR:uint = 0x202020;
 		private static const FG_COLOR:uint = 0xff3366;
 		
 		
@@ -77,6 +77,12 @@ package
 			if (mustClick) {
 				stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
 			}
+			
+			stage.quality = StageQuality.HIGH;
+			stage.displayState = StageDisplayState.NORMAL;
+			
+			stage.align = StageAlign.TOP;
+			stage.scaleMode = StageScaleMode.SHOW_ALL;
 		}
 
 		public function onEnterFrame (e:Event): void
