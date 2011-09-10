@@ -70,9 +70,13 @@ package
 		public function sitelock (allowed:*):Boolean
 		{
 			var url:String = FP.stage.loaderInfo.url;
+			
+			if (! url) return true;
+			
 			var startCheck:int = url.indexOf('://' ) + 3;
 			
 			if (url.substr(0, startCheck) == 'file://') return true;
+			if (url.substr(0, startCheck) == 'app://') return true;
 			
 			var domainLen:int = url.indexOf('/', startCheck) - startCheck;
 			var host:String = url.substr(startCheck, domainLen);
