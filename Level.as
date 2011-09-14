@@ -194,6 +194,8 @@ package
 				
 				add(new Heart(x, y, rot));
 			}
+			
+			updateLists();
 		}
 		
 		public function Level (_id:int, _mode:String)
