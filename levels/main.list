@@ -57,22 +57,22 @@ Filled with broken down robots gathering dust
 cross-simple 9
 
 "Please," he said, "so few of these robots are still active"
-cross7 7
-
-"Cannot you fix them all?" he pleaded
-cross7-harder 9
-
-And so they worked to repair the aging robots
 cross2 7
 
-The task took weeks
+"Cannot you fix them all?" he pleaded
 ellipsis 10
+
+And so they worked to repair the aging robots
+placeholder 1
+
+The task took weeks
+cross7 7
 
 And as the boy worked late into the nights, the girl grew lonely
 cross4 9
 
 And then weeks turned to months
-placeholder 1
+cross7-harder 9
 
 The boy's neglect of the girl broke her heart
 heart-break2 5
@@ -96,7 +96,7 @@ Over to the boy she went / And he looked up from his work
 sparse 10
 
 With horror in his eyes he said "My love, what's this you've done?"
-placeholder 1
+face 11
 
 "This I did for you," she said
 placeholder 1
@@ -105,13 +105,15 @@ He reached for her frozen face but she did not even smile
 placeholder 1
 
 He turned around and stalked off mad / Smashing robots who once had been friends
-placeholder 1
+disperse3-easier 16
+
+#disperse3 29
 
 Gutting their wires and gears and springs / His purpose now was clear, his love was the stake
-placeholder 1
+disperse4 35
 
 He worked on for years / Making heart after heart
-placeholder 1
+disperse2 24
 
 But nothing he made could give back what was lost
 placeholder 1
@@ -120,7 +122,9 @@ Now he's an old man with her young by his side
 heart-break 3 4
 
 Without hope for the future / Making hearts to this day
-placeholder 1
+end 0
+
+#impossible
 
 #squareish 13 -- sidelined -- maybe patience-lite?
 #triangle 11 -- sidelined -- too hard for the boy/girl/robot section -- maybe perfection?
@@ -167,3 +171,9 @@ placeholder 1
 #cross9
 #forced
 #quad
+#v 7
+#question 21
+#disperse
+#gutting
+#gutting2
+#gutting3
