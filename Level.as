@@ -6,6 +6,7 @@ package
 	import net.flashpunk.utils.*;
 	
 	import flash.display.*;
+	import flash.geom.*;
 	import flash.utils.*;
 	
 	import com.adobe.crypto.*;
@@ -524,10 +525,12 @@ package
 						}
 					}
 				} else {
+					hackBool = true;
 					if (Input.check(Key.DOWN)) { makeHeart(0); }
 					if (Input.check(Key.LEFT)) { makeHeart(1); }
 					if (Input.check(Key.UP))   { makeHeart(2); }
 					if (Input.check(Key.RIGHT)) { makeHeart(3); }
+					if (hackBool) { lastHeart = null; }
 				}
 				
 				if (Input.check(Key.SPACE)) { makeCog(); }
@@ -862,10 +865,27 @@ package
 			}
 		}
 		
+		private static var hackBool:Boolean;
+		private static var lastHeart:Point;
+		
 		public function makeHeart (rot:int): void
 		{
+			hackBool = false;
+			
 			var x:int = mouseX - ((mouseX + 2) % 4) + 2;
 			var y:int = mouseY - ((mouseY + 2) % 4) + 2;
+			
+			if (lastHeart) {
+				var dx:int = lastHeart.x - x;
+				var dy:int = lastHeart.y - y;
+				
+				if ((dx % 8 != 0) || (dy % 8 != 0)) return;
+				
+				lastHeart.x = x;
+				lastHeart.y = y;
+			} else {
+				lastHeart = new Point(x, y);
+			}
 			
 			var a:Array = [];
 			
