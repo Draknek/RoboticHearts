@@ -437,6 +437,8 @@ package
 		
 		public override function update (): void
 		{
+			var a:Array;
+			
 			camera.x = -(FP.width - 96)*0.5;
 			camera.y = -(FP.height - 96)*0.5;
 			
@@ -505,10 +507,27 @@ package
 			}
 			
 			if (editing) {
-				if (Input.check(Key.DOWN)) { makeHeart(0); }
-				if (Input.check(Key.LEFT)) { makeHeart(1); }
-				if (Input.check(Key.UP))   { makeHeart(2); }
-				if (Input.check(Key.RIGHT)) { makeHeart(3); }
+				if (Input.check(Key.SHIFT)) {
+					var dx:int = int(Input.pressed(Key.RIGHT)) - int(Input.pressed(Key.LEFT));
+					var dy:int = int(Input.pressed(Key.DOWN)) - int(Input.pressed(Key.UP));
+					
+					if (dx || dy) {
+						a = [];
+						getType("cog", a);
+						getType("heart", a);
+						
+						for each (var entity:Entity in a) {
+							entity.x += dx * 4;
+							entity.y += dy * 4;
+						}
+					}
+				} else {
+					if (Input.check(Key.DOWN)) { makeHeart(0); }
+					if (Input.check(Key.LEFT)) { makeHeart(1); }
+					if (Input.check(Key.UP))   { makeHeart(2); }
+					if (Input.check(Key.RIGHT)) { makeHeart(3); }
+				}
+				
 				if (Input.check(Key.SPACE)) { makeCog(); }
 				if (Input.check(Key.BACKSPACE)) { removeUnderMouse(); }
 				return;
@@ -521,8 +540,6 @@ package
 			}
 			
 			var cog:Cog;
-			
-			var a:Array;
 			
 			a = [];
 			getType("cog", a);
@@ -665,7 +682,7 @@ package
 			if (editing) {
 				for (var x:int = 4; x < FP.width; x += 8) {
 					for (var y:int = 4; y < FP.width; y += 8) {
-						Draw.rect(x-1, y-1, 2, 2, Main.GREY);
+						Draw.rect(x-1+camera.x, y-1+camera.y, 2, 2, Main.GREY);
 					}
 				}
 				
@@ -676,6 +693,11 @@ package
 			}
 			
 			super.render();
+			
+			if (editing && Input.check(Key.SHIFT)) {
+				Draw.rect(FP.width*0.5 - 1+camera.x, camera.y, 2, FP.height, Main.GREY);
+				Draw.rect(camera.x, FP.height*0.5 - 1+camera.y, FP.width, 2, Main.GREY);
+			}
 		}
 		
 		private function addCompletionUI (previousBest:int): void
