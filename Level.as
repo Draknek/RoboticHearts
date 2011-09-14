@@ -144,7 +144,7 @@ package
 		public override function setWorldData (b: ByteArray): void {
 			resetState();
 			minClicks = 0;
-			hasEdited = false;
+			hasEdited = true;
 			
 			b.position = 0;
 			
@@ -307,6 +307,7 @@ package
 			
 			if (_data) {
 				setWorldData(_data);
+				hasEdited = false;
 				minClicks = levelPacks[mode].minClicksArray[id];
 				return;
 			}
