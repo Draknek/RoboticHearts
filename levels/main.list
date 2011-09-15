@@ -83,14 +83,11 @@ cross8 13
 "Tear out this broken heart of mine / And build for me a heart of metal that will never fail"
 triangle2 12
 
-"His heart is for metal so metal I'll become"
+"Metal's all he cares about so metal I'll become"
 placeholder 1
 
-And so those loyal robots did as they were told
+And so those loyal robots gifted her / A heartless heart / Too hard for human love
 heart-build 17
-
-And gifted her a heartless heart too hard for human love
-diamond-large 5 3
 
 Over to the boy she went / And he looked up from his work
 sparse 10
@@ -98,27 +95,21 @@ sparse 10
 With horror in his eyes he said "My love, what's this you've done?"
 face 11
 
-"This I did for you," she said
+"This I did for you," she said / But her frozen face would not smile
 placeholder 1
 
-He reached for her frozen face but she did not even smile
-placeholder 1
-
-He turned around and stalked off mad / Smashing robots who once had been friends
+He turned around and stalked off mad / Smashing robots who'd once been friends
 disperse3-easier 16
 
 #disperse3 29
 
-Gutting their wires and gears and springs / His purpose now was clear, his love was the stake
+Gutting their wires and gears and springs / His purpose now clear, to save her from her fate
 disperse4 35
 
 He worked on for years / Making heart after heart
 disperse2 24
 
-But nothing he made could give back what was lost
-placeholder 1
-
-Now he's an old man with her young by his side
+But nothing he made could give back what was lost / Now he's an old man with her young by his side
 heart-break 3 4
 
 Without hope for the future / Making hearts to this day
@@ -162,6 +153,9 @@ end 0
 #
 #The boy sent robots to talk to the girl but she would turn them away
 #chain 25 -- too boring?
+
+# Haven't explored this mechanic much
+#diamond-large 5 3
 
 #These might be interesting as perfection levels but they don't actually have to be perfect:
 #line-short 6

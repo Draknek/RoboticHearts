@@ -67,7 +67,7 @@ package
 					return;
 				}
 				
-				image.angle -= 45 / 4.0;
+				image.angle -= 45 / 8.0;
 				return;	
 			}
 			
