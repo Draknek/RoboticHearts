@@ -30,6 +30,10 @@ package
 			
 			Text.font = "7x5";
 			Text.size = 8;
+			Text.defaultColor = WHITE;
+			//Text.defaultAntiAliasType = "advanced";
+			Text.defaultSharpness = 400;
+			Text.defaultThickness = -400;
 			
 			Level.loadLevels();
 			
