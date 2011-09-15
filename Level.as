@@ -66,6 +66,7 @@ package
 		public var mirrorX:Boolean = false;
 		public var mirrorY:Boolean = false;
 		public var stopSpinHack:Boolean = false;
+		public var halfSlowHack:Boolean = false;
 		public var wasUnfocused:Boolean = false;
 		
 		public static function loadLevels ():void
@@ -301,6 +302,7 @@ package
 				if (flags & 1) mirrorX = true;
 				if (flags & 2) mirrorY = true;
 				if (flags & 4) stopSpinHack = true;
+				if (flags & 8) halfSlowHack = true;
 			}
 			
 			var _data:ByteArray = levelPacks[mode].levels[id];

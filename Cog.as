@@ -45,7 +45,7 @@ package
 		
 		public override function update (): void
 		{
-			if (hack || !world) return;
+			if (!world) return;
 			
 			var a:Array;
 			var h:Heart;
@@ -54,6 +54,8 @@ package
 				image.color = Main.WHITE;
 				
 				if (Level(world).stopSpinHack && x < 48) {
+					if (hack) return;
+					
 					a = [];
 			
 					world.collideRectInto("heart", x - 16, y - 16, 32, 32, a);
@@ -164,6 +166,8 @@ package
 			//if (Level(world).hasEdited) change *= -1;
 			
 			if (Level(world).stopSpinHack) speed *= 0.25;
+			
+			if (Level(world).halfSlowHack && x < 48) speed *= 0.25;
 			
 			if (canDelegate) {
 				var other:Cog;
