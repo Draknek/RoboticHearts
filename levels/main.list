@@ -69,7 +69,7 @@ The task took weeks
 cross7 7
 
 And as the boy worked late into the nights, the girl grew lonely
-cross4 9
+cross4-decrossed 9
 
 And then weeks turned to months
 cross7-harder 9
@@ -78,19 +78,19 @@ The boy's neglect of the girl broke her heart
 heart-break2 5
 
 And in her foolish aching rage / She made a demand of the machines
-cross8 13
+cross8-boxed 13
 
 "Tear out this broken heart of mine / And build for me a heart of metal that will never fail"
-triangle2 12
+heart-cross 12
 
 "Metal's all he cares about so metal I'll become"
-placeholder 1
+metal 15
 
 And so those loyal robots gifted her / A heartless heart / Too hard for human love
 heart-build 17
 
 Over to the boy she went / And he looked up from his work
-sparse 10
+look-up 17
 
 With horror in his eyes he said "My love, what's this you've done?"
 face 11
@@ -141,6 +141,7 @@ end 0
 #corner2 13
 #diamond2 9
 #bigsquare 16
+#triangle2 12
 #
 # And grew lonely, as the boy toiled late into the nights, repairing robots
 #
@@ -162,7 +163,6 @@ end 0
 #combo 16
 #
 #New
-#cross9 12
 #forced
 #quad
 #v 7
