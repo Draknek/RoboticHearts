@@ -2,6 +2,7 @@ package
 {
 	import net.flashpunk.*;
 	import net.flashpunk.graphics.*;
+	import net.flashpunk.utils.*;
 	
 	import flash.net.*;
 	import flash.display.*;
@@ -12,6 +13,9 @@ package
 		public static const BLACK:uint = 0x202020;
 		public static const GREY:uint = 0x787878;
 		public static const WHITE:uint = 0xEEEEEE;
+		
+		public static var touchscreen:Boolean = false;
+		public static var expoMode:Boolean = false;
 		
 		public static const SAVEFILE_VERSION:uint = 1;
 		
@@ -62,6 +66,10 @@ package
 			super.update();
 			
 			Audio.update();
+			
+			if (Input.mouseReleased) {
+				ignoreNextAction = false;
+			}
 		}
 		
 		public override function setStageProperties():void
@@ -71,6 +79,44 @@ package
 			stage.scaleMode = StageScaleMode.SHOW_ALL;
 		}
 		
+		public static function get inputHover ():Boolean
+		{
+			if (touchscreen) {
+				if (ignoreNextAction) {
+					return false;
+				}
+				
+				return Input.mouseDown || Input.mouseReleased;
+			} else {
+				return true;
+			}
+		}
+		
+		public static function get inputClick ():Boolean
+		{
+			if (touchscreen) {
+				if (ignoreNextAction) {
+					return false;
+				}
+				
+				return Input.mouseReleased;
+			} else {
+				return Input.mousePressed;
+			}
+		}
+		
+		public static function get anyInput ():Boolean
+		{
+			if (touchscreen) {
+				ignoreNextAction = true;
+				return Input.mousePressed;
+			} else {
+				return Input.mousePressed || Input.pressed(Key.ANY);
+			}
+		}
+		
+		private static var ignoreNextAction:Boolean = false;
+		
 		public function sitelock (allowed:*):Boolean
 		{
 			var url:String = FP.stage.loaderInfo.url;
@@ -79,8 +125,15 @@ package
 			
 			var startCheck:int = url.indexOf('://' ) + 3;
 			
+			if (url.substr(0, 28) == 'file:///accounts/1000/shared') {
+				touchscreen = true;
+			}
+			
 			if (url.substr(0, startCheck) == 'file://') return true;
-			if (url.substr(0, startCheck) == 'app://') return true;
+			if (url.substr(0, startCheck) == 'app://') {
+				touchscreen = true;
+				return true;
+			}
 			
 			var domainLen:int = url.indexOf('/', startCheck) - startCheck;
 			var host:String = url.substr(startCheck, domainLen);

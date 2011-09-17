@@ -478,7 +478,7 @@ package
 			Input.mouseCursor = "auto";
 			
 			if (! levelPacks[mode].levels[id]) {
-				if (Input.mousePressed || Input.pressed(-1)) {
+				if (Main.anyInput) {
 					FP.world = new Menu;
 				}
 				
@@ -512,7 +512,7 @@ package
 			}
 			
 			if (storyText) {
-				if (Input.mousePressed || Input.pressed(-1)) {
+				if (Main.anyInput) {
 					FP.tween(storyText, {alpha: 0}, 30, {ease:Ease.sineOut});
 					storyText = null;
 				}

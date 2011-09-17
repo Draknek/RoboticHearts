@@ -69,7 +69,7 @@ package
 			
 			if (leaving) return;
 			
-			if (Input.mousePressed || Input.pressed(Key.ANY)) {
+			if (Main.anyInput) {
 				leaving = true;
 				FP.tween(overlay, {alpha: 1}, 90, {tweener:this, complete: next});
 			}

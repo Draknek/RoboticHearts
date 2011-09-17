@@ -80,7 +80,7 @@ package
 				_y += FP.camera.y;
 			}
 			
-			var over:Boolean = collidePoint(_x, _y, world.mouseX, world.mouseY);
+			var over:Boolean = Main.inputHover && collidePoint(_x, _y, world.mouseX, world.mouseY);
 			
 			if (over && ! disabled) {
 				Input.mouseCursor = "button";
@@ -107,7 +107,7 @@ package
 			
 			image.color = (over) ? hoverColor : normalColor;
 			
-			if (over && Input.mousePressed && callback != null) {
+			if (over && Main.inputClick && callback != null) {
 				callback();
 			}
 		}

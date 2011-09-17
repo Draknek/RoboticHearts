@@ -73,7 +73,7 @@ package
 				return;	
 			}
 			
-			if (collidePoint(x, y, world.mouseX, world.mouseY)) {
+			if (Main.inputHover && collidePoint(x, y, world.mouseX, world.mouseY)) {
 				over = true;
 			}
 			
@@ -103,7 +103,7 @@ package
 				Level(world).somethingHighlighted = true;
 			}
 			
-			if (collidePoint(x, y, world.mouseX, world.mouseY) && Input.mousePressed) {
+			if (over && Main.inputClick) {
 				Level(world).actions.push(this);
 			}
 		}
