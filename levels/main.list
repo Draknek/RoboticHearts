@@ -63,7 +63,7 @@ cross2 7
 ellipsis 10
 
 And so they worked to repair the aging robots
-square3 9
+square4 7
 
 The task took weeks
 cross7 7
@@ -81,7 +81,7 @@ And in her foolish aching rage / She made a demand of the machines
 cross8-boxed 13
 
 "Tear out this broken heart of mine / And build for me a heart of metal that will never fail"
-heart-cross 12
+heart-cross 11
 
 "Metal's all he cares about so metal I'll become"
 metal 15
@@ -93,18 +93,16 @@ Over to the boy she went / And he looked up from his work
 look-up 17
 
 With horror in his eyes he said "My love, what's this you've done?"
-face 11
+face-easier 5
 
 "This I did for you," she said / But her frozen face would not smile
 face2 12
 
 He turned around and stalked off mad / Smashing robots who'd once been friends
-disperse3-easier 16
-
-#disperse3 29
+dismantle-three 39
 
 Gutting their wires and gears and springs / His purpose now clear, to save her from her fate
-disperse4 35
+disperse3-easier 15
 
 He worked on for years / Making heart after heart
 disperse2 24
@@ -171,3 +169,6 @@ end 0
 #gutting
 #gutting2
 #gutting3
+#face 11
+#disperse4 35
+#disperse3 29
