@@ -123,7 +123,7 @@ package
 			
 			FGL.beginGame();
 			
-			Log.View(Secret.PLAYTOMIC_SWFID, Secret.PLAYTOMIC_GUID, obj.stage.loaderInfo.loaderURL);
+			//Log.View(Secret.PLAYTOMIC_SWFID, Secret.PLAYTOMIC_GUID, obj.stage.loaderInfo.loaderURL);
 		}
 		
 		public static function startLevel (id:int, mode:String): void
