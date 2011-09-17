@@ -47,7 +47,7 @@ package
 		
 		public override function render (): void
 		{
-			var darken:Boolean = Level(world).somethingHighlighted && ! highlight;
+			var darken:Boolean = highlight;
 			
 			if (darken) {
 				var c:uint = image.color;
