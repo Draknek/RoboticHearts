@@ -34,6 +34,8 @@ package
 		
 		public function Menu ()
 		{
+			Audio.startMusic();
+			
 			title = new Text("These Robotic\nHearts of Mine", 0, 0, {align: "center", scrollX:0, scrollY:0, font:"romance", size: 16, color: Main.PINK});
 			addGraphic(title, -12);
 			title.x = (FP.width - title.width)*0.5;

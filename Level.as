@@ -72,6 +72,8 @@ package
 		public var wasUnfocused:Boolean = false;
 		public var somethingHighlighted:Boolean = false;
 		
+		public var black:Image;
+		
 		public static function loadLevels ():void
 		{
 			loadLevels2("normal", new LEVELS, new STORY);
@@ -314,6 +316,12 @@ package
 				removeAll();
 				addGraphic(storyText, -9);
 				addGraphic(oldScreen, -10);
+				
+				black = Image.createRect(FP.width, FP.height, Main.BLACK);
+				black.alpha = 0;
+				black.scrollX = 0;
+				black.scrollY = 0;
+				addGraphic(black, -20);
 			}
 			
 			var _data:ByteArray = levelPacks[mode].levels[id];
@@ -362,6 +370,8 @@ package
 		
 		public function reset ():void
 		{
+			if (endGameHack) return;
+			
 			reseting = true;
 			
 			Logger.restartLevel(id, mode);
@@ -389,6 +399,7 @@ package
 		
 		public override function undo (): void
 		{
+			if (endGameHack) return;
 			actions.push(actuallyUndo);
 		}
 		
@@ -415,6 +426,7 @@ package
 		
 		public override function redo (): void
 		{
+			if (endGameHack) return;
 			actions.push(actuallyRedo);
 		}
 		
@@ -658,6 +670,21 @@ package
 					clicks++;
 					
 					Cog(e).go();
+					
+					if (endGameHack) {
+						actions.length = 0;
+						
+						if (e.x < 50) {
+							FP.tween(black, {alpha: black.alpha + 0.21}, 16, function ():void {
+								if (black.alpha >= 0.99) {
+									gameOver = true;
+									FP.alarm(120, function ():void {
+										FP.world = new Intro(true);
+									});
+								}
+							});
+						}
+					}
 				} else if (e is Function) {
 					e();
 				}

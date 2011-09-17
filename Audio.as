@@ -75,7 +75,7 @@ package
 		{
 			if (_mute) return;
 			
-			music.loop(music.volume);
+			if (! music.playing) music.loop(music.volume);
 			volTween.tween(music, "volume", 1.0, 30);
 		}
 		
@@ -86,9 +86,9 @@ package
 		
 		public static function resumeMusic ():void
 		{
-			if (_mute || FP.world is Intro) return;
+			if (_mute /*|| FP.world is Intro*/) return;
 			
-			if (! music.playing) music.loop(music.volume);
+			//if (! music.playing) music.loop(music.volume);
 			
 			volTween.tween(music, "volume", 1.0, 30);
 		}
@@ -129,7 +129,7 @@ package
 			
 			if (_mute) {
 				stopMusic();
-			} else if (! (FP.world is Menu)) {
+			} else { //if (! (FP.world is Menu)) {
 				resumeMusic();
 			}
 		}
