@@ -70,6 +70,7 @@ package
 		public var endGameHack:Boolean = false;
 		
 		public var wasUnfocused:Boolean = false;
+		public var somethingHighlighted:Boolean = false;
 		
 		public static function loadLevels ():void
 		{
@@ -571,6 +572,8 @@ package
 			getType("heart", a);
 			
 			var incorrectCount:int = 0;
+			
+			somethingHighlighted = false;
 			
 			for each (var h:Heart in a) {
 				h.highlight = false;

@@ -47,14 +47,16 @@ package
 		
 		public override function render (): void
 		{
-			if (highlight) {
+			var darken:Boolean = Level(world).somethingHighlighted && ! highlight;
+			
+			if (darken) {
 				var c:uint = image.color;
 				image.color = (c == Main.PINK) ? 0xA0A0A0 & image.color : Main.GREY;
 			}
 			
 			super.render();
 			
-			if (highlight) {
+			if (darken) {
 				image.color = c;
 			}
 		}

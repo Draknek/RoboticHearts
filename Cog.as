@@ -99,6 +99,8 @@ package
 				for each (h in a) {
 					h.highlight = true;
 				}
+				
+				Level(world).somethingHighlighted = true;
 			}
 			
 			if (collidePoint(x, y, world.mouseX, world.mouseY) && Input.mousePressed) {
