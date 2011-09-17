@@ -70,6 +70,8 @@ package
 			for (var i:int = 0; i < Level.levelPacks["normal"].levels.length; i++) {
 				var b:Button = addLevelButton(i);
 				
+				if (! b) continue;
+				
 				normalLevels.push(b);
 				
 				if (Main.so.data.lastPlayed == Level.levelPacks["normal"].md5[i]) {
@@ -360,6 +362,8 @@ package
 		
 		private function addLevelButton (i:int, mode:String = "normal"):Button
 		{
+			if (Level.levelPacks[mode].special[i] & 16) return null;
+			
 			var b:Button = new Button(0, 0, new Text((i+1)+"", 0, 0, {width: 17, align:"center"}), function ():void {
 				FP.world = new Level(i, mode);
 			});
