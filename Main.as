@@ -6,6 +6,7 @@ package
 	
 	import flash.net.*;
 	import flash.display.*;
+	import flash.utils.*;
 	
 	public class Main extends Engine
 	{
@@ -46,6 +47,15 @@ package
 			FP.screen.scale = 4;
 			
 			//FP.console.enable();
+			//FP.console.toggleKey = Key.SPACE;
+			
+			try {
+				var MultiTouch:Class = getDefinitionByName("flash.ui.Multitouch") as Class;
+				if (MultiTouch.supportsTouchEvents) {
+					touchscreen = true;
+					MultiTouch.inputMode = "none";
+				}
+			} catch (e:Error){}
 		}
 		
 		public override function init (): void
@@ -58,16 +68,25 @@ package
 			
 			Logger.connect(this);
 			
-			FP.world = Logger.isLocal ? new Menu : new Intro;
+			var devMode:Boolean = false;
+			
+			if (Logger.isLocal && ! touchscreen && ! expoMode) devMode = true;
+			
+			FP.world = devMode ? new Menu : new Intro;
 		}
 		
 		public override function update (): void
 		{
+			if (Input.mousePressed) {
+				hadMouseDown = true;
+			}
+			
 			super.update();
 			
 			Audio.update();
 			
 			if (Input.mouseReleased) {
+				hadMouseDown = false;
 				ignoreNextAction = false;
 			}
 		}
@@ -77,6 +96,14 @@ package
 			super.setStageProperties();
 			stage.align = StageAlign.TOP;
 			stage.scaleMode = StageScaleMode.SHOW_ALL;
+			
+			if (touchscreen || expoMode) {
+				try {
+					stage.displayState = StageDisplayState.FULL_SCREEN;
+				} catch (e:Error) {
+				
+				}
+			}
 		}
 		
 		public static function get inputHover ():Boolean
@@ -95,7 +122,7 @@ package
 		public static function get inputClick ():Boolean
 		{
 			if (touchscreen) {
-				if (ignoreNextAction) {
+				if (ignoreNextAction || ! hadMouseDown) {
 					return false;
 				}
 				
@@ -116,6 +143,7 @@ package
 		}
 		
 		private static var ignoreNextAction:Boolean = false;
+		private static var hadMouseDown:Boolean = false;
 		
 		public function sitelock (allowed:*):Boolean
 		{
