@@ -154,6 +154,7 @@ package
 			var startCheck:int = url.indexOf('://' ) + 3;
 			
 			if (url.substr(0, 28) == 'file:///accounts/1000/shared') {
+				Text.defaultAntiAliasType = "advanced";
 				touchscreen = true;
 			}
 			
