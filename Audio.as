@@ -88,7 +88,7 @@ package
 		{
 			if (_mute /*|| FP.world is Intro*/) return;
 			
-			//if (! music.playing) music.loop(music.volume);
+			if (! music.playing) music.loop(music.volume);
 			
 			volTween.tween(music, "volume", 1.0, 30);
 		}
