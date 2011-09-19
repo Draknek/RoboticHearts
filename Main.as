@@ -42,7 +42,7 @@ package
 			Text.defaultThickness = -400;
 			
 			Level.loadLevels();
-			
+
 			var w:int = 120;
 			var h:int = 120;
 			

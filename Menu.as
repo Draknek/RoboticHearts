@@ -545,6 +545,12 @@ package
 		{
 			Input.mouseCursor = "auto";
 			
+			if (Input.keyString.substr(-6) == "qrcode") {
+				Input.keyString = "";
+				FP.world = new QRCodeExport;
+				return;
+			}
+			
 			var step:int = 50;
 			var beatTime:int = 10;
 			var modTime:int = time % step;
