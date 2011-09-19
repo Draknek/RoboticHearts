@@ -303,6 +303,8 @@ package
 		{
 			var h:int = 0;
 			
+			var itemCount:int = 0;
+			
 			for each (var o:* in list) {
 				if (! o) continue;
 				if (o is Number) {
@@ -310,11 +312,13 @@ package
 				} else {
 					h += o.height;
 				}
+				
+				itemCount += 1;
 			}
 			
 			var start:int = title.y + title.height;
 			
-			var padding:int = Number(FP.height - start - h - bottom_padding) / (list.length + 1);
+			var padding:int = Number(FP.height - start - h - bottom_padding) / (itemCount + 1);
 			
 			var y:int = start + padding;
 			
