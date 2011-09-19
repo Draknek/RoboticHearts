@@ -182,7 +182,23 @@ package
 			
 			var moreGames:Button = new Button(0, 0, new Text("More Games"), makeURLFunction("http://www.draknek.org/games/"));
 			
-			addElements([playButton, levelsButton, highScoresButton, creditsButton, moreGames, resetData]);
+			var buttons:Array = [playButton, levelsButton];
+			
+			if (! Main.expoMode) {
+				buttons.push(highScoresButton);
+			}
+			
+			buttons.push(creditsButton);
+			
+			if (false) {
+				buttons.push(moreGames);
+			}
+			
+			if (! Main.expoMode) {
+				buttons.push(resetData);
+			}
+			
+			addElements(buttons);
 			
 			var yourScore:Text = new Text("Your score: #", 0, 0, {color: Main.GREY, leading: 2});
 			var submit:Button = new Button(0, 0, new Text("Submit [todo]"), function():void{});
@@ -230,8 +246,13 @@ package
 			
 			FP.tween(oldScreen, {alpha: 0}, 30, {ease:Ease.sineOut, tweener:this});
 			
-			add(muteButton = new Button(0, 0, Button.AUDIO, Audio.toggleMute, "Mute"));
-			add(muteOverlay = new Button(0, 0, Button.AUDIO_MUTE, null, "Unmute"));
+			muteButton = new Button(0, 0, Button.AUDIO, Audio.toggleMute, "Mute");
+			muteOverlay = new Button(0, 0, Button.AUDIO_MUTE, null, "Unmute");
+			
+			if (! Main.expoMode) {
+				add(muteButton);
+				add(muteOverlay);
+			}
 			
 			add(backButton = new Button(0, 0, Button.MENU, back, "Back"));
 			

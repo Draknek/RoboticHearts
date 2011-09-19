@@ -217,12 +217,22 @@ package
 			add(undoButton = new Button(0, 0, Button.UNDO, undo, "Undo", true, true));
 			add(resetButton = new Button(0, 0, Button.RESET, reset, "Reset", false, true));
 			
-			add(muteButton = new Button(0, 0, Button.AUDIO, Audio.toggleMute, "Mute", false, true));
-			add(muteOverlay = new Button(0, 0, Button.AUDIO_MUTE, null, "Unmute", false, true));
+			muteButton = new Button(0, 0, Button.AUDIO, Audio.toggleMute, "Mute", false, true);
+			muteOverlay = new Button(0, 0, Button.AUDIO_MUTE, null, "Unmute", false, true);
+			
+			if (! Main.expoMode) {
+				add(muteButton);
+				add(muteOverlay);
+			}
 			
 			add(menuButton = new Button(0, 0, Button.MENU, gotoMenu, "Menu", false, true));
 			
 			muteButton.x = menuButton.x + menuButton.width;
+			
+			if (Main.expoMode) {
+				muteButton.x = menuButton.x;
+			}
+			
 			resetButton.x = muteButton.x + muteButton.width;
 			undoButton.x = resetButton.x + resetButton.width;
 			redoButton.x = undoButton.x + undoButton.width;
