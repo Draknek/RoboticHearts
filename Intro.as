@@ -54,13 +54,11 @@ package
 			
 			addGraphic(overlay);
 			
-			if (outro) {
-				overlay.alpha = 1;
-				leaving = true;
-				FP.tween(overlay, {alpha: 0}, 150, {ease: Ease.cubeIn, tweener:this, complete: function ():void {
-					leaving = false;
-				}});
-			}
+			overlay.alpha = 1;
+			leaving = true;
+			FP.tween(overlay, {alpha: 0}, outro ? 150 : 30, {ease: Ease.cubeIn, tweener:this, complete: function ():void {
+				leaving = false;
+			}});
 		}
 		
 		public override function update ():void

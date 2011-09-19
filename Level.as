@@ -776,6 +776,13 @@ package
 				//
 			}, null, true, true);
 			
+			if (Main.expoMode) {
+				submit = new Button(0, 0, new Text("New Player", 0, 0, {size: 8}), function ():void {
+					Main.resetPlayerData();
+					FP.world = new Intro;
+				}, null, false, true);
+			}
+			
 			var menu:Button = new Button(0, 0, new Text("Main menu", 0, 0, {size: 8}), function ():void {
 				FP.world = new Menu;
 			}, null, false, true);

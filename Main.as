@@ -145,6 +145,14 @@ package
 		private static var ignoreNextAction:Boolean = false;
 		private static var hadMouseDown:Boolean = false;
 		
+		public static function resetPlayerData ():void
+		{
+			Main.so.data.levels = {};
+			Main.so.data.lastPlayed = null;
+			Main.so.data.totalScore = 0;
+			Main.so.flush();
+		}
+		
 		public function sitelock (allowed:*):Boolean
 		{
 			var url:String = FP.stage.loaderInfo.url;

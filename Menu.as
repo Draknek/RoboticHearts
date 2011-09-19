@@ -81,10 +81,10 @@ package
 					resumeMode = "normal";
 				}
 				
-				if (resumeLevel < 0 && b.normalColor == Main.WHITE) {
+				/*if (resumeLevel < 0 && b.normalColor == Main.WHITE) {
 					resumeLevel = i;
 					resumeMode = "normal";
-				}
+				}*/
 			}
 			
 			for (i = 0; i < Level.levelPacks["perfection"].levels.length; i++) {
@@ -100,10 +100,13 @@ package
 			
 			perfectionLevels.push(new Entity(FP.width, 0, new Text("Perfection levels:", 1, 36, {width: FP.width, align: "center"})));
 			
-			var playText:String = (resumeLevel == 0) ? "Play" : "Resume";
+			var playText:String = (resumeLevel < 0) ? "Play" : "Resume";
 			
-			if (resumeLevel < 0 || Main.so.data.lastPlayed == "gameover") {
-				playText = "Play again";
+			if (resumeLevel < 0) {
+				if (Main.so.data.lastPlayed == "gameover") {
+					playText = "Play again";
+				}
+				
 				resumeLevel = 0;
 				resumeMode = "normal";
 			}
@@ -167,10 +170,7 @@ package
 			var resetText:String = Main.expoMode ? "New player" : "Delete saved data";
 			
 			var resetData:Button = new Button(0, 0, resetText, function ():void {
-				Main.so.data.levels = {};
-				Main.so.data.lastPlayed = null;
-				Main.so.data.totalScore = 0;
-				Main.so.flush();
+				Main.resetPlayerData();
 				Input.mouseCursor = "auto";
 				FP.world = new Intro;
 			});
@@ -181,6 +181,10 @@ package
 				for each (var l:* in Main.so.data.levels) {
 					resetData = tmp;
 					break;
+				}
+				
+				if (Main.so.data.lastPlayed) {
+					resetData = tmp;
 				}
 				
 				if (Main.expoMode && ! resetData) {
