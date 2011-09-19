@@ -92,10 +92,10 @@ package
 				
 				perfectionLevels.push(b);
 				
-				if (resumeLevel < 0 && b.normalColor == Main.WHITE) {
+				/*if (resumeLevel < 0 && b.normalColor == Main.WHITE) {
 					resumeLevel = i;
 					resumeMode = "perfection";
-				}
+				}*/
 			}
 			
 			perfectionLevels.push(new Entity(FP.width, 0, new Text("Perfection levels:", 1, 36, {width: FP.width, align: "center"})));

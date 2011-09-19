@@ -9,9 +9,12 @@ package
 	{
 		private var leaving:Boolean = false;
 		private var overlay:Image;
+		private var outro:Boolean;
 		
-		public function Intro (outro:Boolean = false)
+		public function Intro (_outro:Boolean = false)
 		{
+			outro = _outro;
+			
 			var lines:Array = [
 				"I've heard it said\n\tbefore today",
 				"That hearts of stone\n\tare cold",
@@ -31,7 +34,7 @@ package
 			var y:int = 1;
 			
 			for (var i:int = 0; i < 4; i++) {
-				addGraphic(new Text(lines[i], 1, y));
+				addGraphic(new Text(lines[i], (FP.width*0.5 - 60 + 1), y));
 				
 				y += 20;
 				
@@ -44,7 +47,7 @@ package
 				t.text = "- Anonymous epitaph";
 			}
 			
-			t.x = FP.width - t.width;
+			t.x = (FP.width*0.5 + 60) - t.width;
 			t.y = FP.height - t.height;
 			
 			addGraphic(t);
@@ -78,7 +81,7 @@ package
 			overlay.alpha = 1;
 			overlay.render(FP.buffer, FP.zero, FP.zero);
 			
-			if (Main.expoMode) {
+			if (Main.expoMode && ! outro) {
 				FP.world = new Level(0, "normal");
 			} else {
 				FP.world = new Menu;
