@@ -808,14 +808,6 @@ package
 			var previousBestText:String;
 			var bestPossibleText:String;
 			
-			/*if (! previousBest || previousBest == clicks) {
-				previousBestText = null;
-			} else if (previousBest < clicks) {
-				previousBestText = "Your best: " + previousBest;
-			} else {
-				previousBestText = "Previous best: " + previousBest;
-			}*/
-			
 			if (clicks <= minClicks) {
 				clickText += "\n(best possible)";
 			} else if (previousBestText && previousBest <= minClicks) {
@@ -893,12 +885,16 @@ package
 			
 			var space:Number = next.y - t.height - t2.height - graphStop;
 			
+			if (Main.expoMode) {
+				space += t2.height;
+			}
+			
 			t.y = graphStop + space / 3.0;
 			
 			t2.y = t.y + t.height + space / 3.0;
 			
 			addGraphic(t, -15);
-			addGraphic(t2, -15);
+			if (! Main.expoMode) addGraphic(t2, -15);
 			add(next);
 			add(retry);
 			add(submit);
