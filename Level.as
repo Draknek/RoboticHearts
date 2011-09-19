@@ -288,8 +288,11 @@ package
 				var text:String = levelPacks[mode].story[id];
 				text = text.split(" / ").join("\n\n");
 				
-				storyText = new Text(text, 1, 0, {width: FP.width, align:"center", wordWrap:true, leading: 3});
+				var storyWidth:int = Math.max(FP.width*0.75, 120);
 				
+				storyText = new Text(text, 1, 0, {width: storyWidth, align:"center", wordWrap:true, leading: 3});
+				
+				storyText.x = (FP.width - storyText.width) * 0.5 + 1;
 				storyText.y = (FP.height - storyText.height) * 0.5;
 				
 				var bitmap:BitmapData = new BitmapData(FP.width, FP.height, false, Main.PINK);
