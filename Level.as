@@ -777,7 +777,7 @@ package
 			}, null, true, true);
 			
 			if (Main.expoMode) {
-				submit = new Button(0, 0, new Text("New Player", 0, 0, {size: 8}), function ():void {
+				submit = new Button(0, 0, new Text("New player", 0, 0, {size: 8}), function ():void {
 					Main.resetPlayerData();
 					FP.world = new Intro;
 				}, null, false, true);
@@ -787,10 +787,12 @@ package
 				FP.world = new Menu;
 			}, null, false, true);
 			
-			next.x = FP.width*0.75 - next.width*0.5;
-			retry.x = FP.width*0.25 - retry.width*0.5;
-			submit.x = FP.width*0.75 - submit.width*0.5;
-			menu.x = FP.width*0.25 - menu.width*0.5;
+			var xButtonOffset:Number = 30;
+			
+			next.x = FP.width*0.5 + xButtonOffset - next.width*0.5;
+			retry.x = FP.width*0.5 - xButtonOffset - retry.width*0.5;
+			submit.x = FP.width*0.5 + xButtonOffset - submit.width*0.5;
+			menu.x = FP.width*0.5 - xButtonOffset - menu.width*0.5;
 			
 			menu.y = submit.y = FP.height - 2 - retry.height;
 			next.y = retry.y = menu.y - 2 - next.height;
