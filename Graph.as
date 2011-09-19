@@ -25,11 +25,6 @@ package
 				data[key] = dataIn[key];
 			}
 			
-			if (yourClicks) {
-				if (data[yourClicks]) data[yourClicks]++;
-				else data[yourClicks] = 1;
-			}
-			
 			var i:int
 			
 			const MAX_WIDTH:int = params.maxX || int.MAX_VALUE;

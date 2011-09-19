@@ -17,6 +17,7 @@ package
 		
 		public static var touchscreen:Boolean = false;
 		public static var expoMode:Boolean = true;
+		public static var offline:Boolean = true;
 		
 		public static const SAVEFILE_VERSION:uint = 1;
 		

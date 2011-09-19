@@ -100,6 +100,10 @@ package
 				clickStats = JSON.decode(new STATS);
 			}
 			
+			if (Main.offline) {
+				return;
+			}
+			
 			if (Main.so.data.uid) {
 				uid = Main.so.data.uid;
 			} else {
@@ -109,10 +113,10 @@ package
 			getScoreStats();
 			
 			var now:Number = (new Date()).getTime();
-			
+		
 			var lastStatsDownload:Number = Main.so.data.lastStatsDownload;
 			if (! lastStatsDownload) lastStatsDownload = 0;
-			
+		
 			if (now - lastStatsDownload > 1000 * 60 * 60 * 24) {			
 				getScores();
 			}
@@ -160,15 +164,26 @@ package
 		
 		public static function submitScore (id:int, mode:String): void
 		{
-			if (! uid) return;
-			
 			var level:Level = Level(FP.world);
 			
 			var levelMD5:String = MD5.hashBytes(level.data);
 			
-			var clicks:int = Level(FP.world).clicks;
+			var clicks:int = level.clicks;
 			
-			var solution:String = Secret.encodeSolution(Level(FP.world).undoStack);
+			if (! clickStats[levelMD5]) {
+				clickStats[levelMD5] = {};
+			}
+			
+			if (clickStats[levelMD5][clicks]) clickStats[levelMD5][clicks]++;
+			else clickStats[levelMD5][clicks] = 1;
+			
+			Main.so.data.stats = clickStats;
+			
+			Main.so.flush();
+			
+			if (! uid) return;
+			
+			var solution:String = Secret.encodeSolution(level.undoStack);
 			
 			magic("submit.php?uid=" + uid + "&lvl=" + levelMD5 + "&clicks=" + clicks + "&cogs=" + solution + "&version=" + VERSION);
 		}
