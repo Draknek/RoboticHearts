@@ -42,9 +42,28 @@ package
 			
 			Level.loadLevels();
 			
-			super(120, 120, 60, true);
+			var w:int = 120;
+			var h:int = 120;
+			
+			var scale:int = 4;
+			
+			if (touchscreen || expoMode) {
+				var sizeX:Number = Preloader.stageWidth / w;
+				var sizeY:Number = Preloader.stageHeight / h;
+			
+				if (sizeX > sizeY) {
+					scale = int(sizeY);
+				} else {
+					scale = int(sizeX);
+				}
+			
+				w = Preloader.stageWidth / scale;
+				h = Preloader.stageHeight / scale;
+			}
+			
+			super(w, h, 60, true);
 			FP.screen.color = 0x202020;
-			FP.screen.scale = 4;
+			FP.screen.scale = scale;
 			
 			//FP.console.enable();
 			//FP.console.toggleKey = Key.SPACE;
@@ -94,15 +113,17 @@ package
 		public override function setStageProperties():void
 		{
 			super.setStageProperties();
-			stage.align = StageAlign.TOP;
-			stage.scaleMode = StageScaleMode.SHOW_ALL;
 			
 			if (touchscreen || expoMode) {
 				try {
 					stage.displayState = StageDisplayState.FULL_SCREEN;
 				} catch (e:Error) {
-				
+					stage.align = StageAlign.TOP;
+					stage.scaleMode = StageScaleMode.SHOW_ALL;
 				}
+			} else {
+				stage.align = StageAlign.TOP;
+				stage.scaleMode = StageScaleMode.SHOW_ALL;
 			}
 		}
 		

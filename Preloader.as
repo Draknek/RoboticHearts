@@ -16,6 +16,9 @@ package
 		private static const BG_COLOR:uint = 0x202020;
 		private static const FG_COLOR:uint = 0xff3366;
 		
+		public static var stageWidth:int;
+		public static var stageHeight:int;
+		
 		
 		
 		// Ignore everything else
@@ -131,6 +134,8 @@ package
 		}
 		
 		private function startup (): void {
+			stageWidth = stage.fullScreenWidth;
+			stageHeight = stage.fullScreenHeight;
 			stage.removeEventListener(Event.ENTER_FRAME, onEnterFrame);
 			
 			var mainClass:Class = getDefinitionByName(mainClassName) as Class;
