@@ -180,7 +180,7 @@ package
 				}
 			}
 			
-			var moreGames:Button = new Button(0, 0, new Text("More Games"), makeURLFunction("http://www.draknek.org/games/"));
+			var moreGames:Button = makeURLButton("More Games", "http://www.draknek.org/games/");
 			
 			var buttons:Array = [playButton, levelsButton];
 			
@@ -347,6 +347,18 @@ package
 			addGraphic(g, layer);
 		}
 		
+		private function makeURLButton (text:String, url:String): Button
+		{
+			var b:Button = new Button(0, 0, text, makeURLFunction(url));
+			
+			if (Main.expoMode) {
+				b.disabled = true;
+				b.disabledColor = Main.WHITE;
+			}
+			
+			return b;
+		}
+		
 		private function makeURLFunction (url:String): Function
 		{
 			return function ():void {
@@ -364,7 +376,7 @@ package
 			t = new Text("Created by", 0, 0, {color: Main.GREY});
 			l.push(t);
 			
-			b = new Button(0, 0, "Alan Hazelden", makeURLFunction("http://www.draknek.org/?ref=trhom"));
+			b = makeURLButton("Alan Hazelden", "http://www.draknek.org/?ref=trhom");
 			l.push(b);
 			
 			l.push(1);
@@ -372,10 +384,10 @@ package
 			t = new Text("Thanks to", 0, 0, {color: Main.GREY});
 			l.push(t);
 			
-			b = new Button(0, 0, "ChevyRay & FlashPunk", makeURLFunction("http://flashpunk.net/"));
+			b = makeURLButton("ChevyRay & FlashPunk", "http://flashpunk.net/");
 			l.push(b);
 			
-			b = new Button(0, 0, "Alistair Aitcheson", makeURLFunction("http://www.alistairaitcheson.com/"));
+			b = makeURLButton("Alistair Aitcheson", "http://www.alistairaitcheson.com/");
 			l.push(b);
 			
 			l.push(1);
