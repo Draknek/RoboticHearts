@@ -187,7 +187,9 @@ package
 		
 		private static function focusLost (e:Event):void
 		{
-			stopMusic();
+			if (FP.stage.displayState != StageDisplayState.FULL_SCREEN) {
+				stopMusic();
+			}
 		}
 	}
 }

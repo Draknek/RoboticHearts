@@ -485,7 +485,7 @@ package
 				return;
 			}
 			
-			if (! FP.focused) {
+			if (! FP.focused && FP.stage.displayState != StageDisplayState.FULL_SCREEN) {
 				wasUnfocused = true;
 				return;
 			}
