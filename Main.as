@@ -70,9 +70,9 @@ package
 			
 			var devMode:Boolean = false;
 			
-			if (Logger.isLocal && ! touchscreen && ! expoMode) devMode = true;
+			if (Logger.isLocal && ! touchscreen) devMode = true;
 			
-			FP.world = devMode ? new Menu : new Intro;
+			FP.world = (devMode || expoMode) ? new Menu : new Intro;
 		}
 		
 		public override function update (): void

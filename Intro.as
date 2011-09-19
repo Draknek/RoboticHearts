@@ -79,7 +79,12 @@ package
 		{
 			overlay.alpha = 1;
 			overlay.render(FP.buffer, FP.zero, FP.zero);
-			FP.world = new Menu;
+			
+			if (Main.expoMode) {
+				FP.world = new Level(0, "normal");
+			} else {
+				FP.world = new Menu;
+			}
 		}
 	}
 }

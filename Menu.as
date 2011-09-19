@@ -164,25 +164,43 @@ package
 				switchScreen();
 			});
 			
-			var resetData:Button = null;
+			var resetText:String = Main.expoMode ? "New player" : "Delete saved data";
+			
+			var resetData:Button = new Button(0, 0, resetText, function ():void {
+				Main.so.data.levels = {};
+				Main.so.data.lastPlayed = null;
+				Main.so.data.totalScore = 0;
+				Main.so.flush();
+				Input.mouseCursor = "auto";
+				FP.world = new Intro;
+			});
 			
 			if (Logger.isLocal) {
+				var tmp:* = resetData;
+				resetData = null;
 				for each (var l:* in Main.so.data.levels) {
-					resetData = new Button(0, 0, new Text("Delete saved data"), function ():void {
-						Main.so.data.levels = {};
-						Main.so.data.lastPlayed = null;
-						Main.so.data.totalScore = 0;
-						Main.so.flush();
-						Input.mouseCursor = "auto";
-						FP.world = new Intro;
-					});
+					resetData = tmp;
 					break;
+				}
+				
+				if (Main.expoMode && ! resetData) {
+					// No user data
+					
+					playButton.callback = tmp.callback;
+					levelsButton = null;
 				}
 			}
 			
 			var moreGames:Button = makeURLButton("More Games", "http://www.draknek.org/games/");
 			
-			var buttons:Array = [playButton, levelsButton];
+			var buttons:Array = [];
+			
+			if (Main.expoMode) {
+				buttons.push(resetData);
+			}
+			
+			buttons.push(playButton);
+			buttons.push(levelsButton);
 			
 			if (! Main.expoMode) {
 				buttons.push(highScoresButton);
@@ -194,7 +212,7 @@ package
 				buttons.push(moreGames);
 			}
 			
-			if (! Main.expoMode) {
+			if (Logger.isLocal && ! Main.expoMode) {
 				buttons.push(resetData);
 			}
 			
