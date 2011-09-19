@@ -809,26 +809,31 @@ package
 			// first score OR same score OR better score OR worse score
 			// optimal score OR non-optimal OR beaten optimal
 			
-			var clickText:String = "Clicks: " + clicks;
+			var clickText:String = "<pink>Clicks: " + clicks + "</pink>";
 			var previousBestText:String;
 			var bestPossibleText:String;
 			
 			if (clicks <= minClicks) {
-				clickText += "\n(best possible)";
+				clickText += "\nBest possible!";
 			} else if (previousBestText && previousBest <= minClicks) {
 				previousBestText += "\n(best possible)";
 			} else {
 				bestPossibleText = "Best possible: " + minClicks;
 			}
 			
-			var t:Text = new Text(clickText, 0, 0, {align:"center", size:8, width: FP.width - 1, leading: 2, color: Main.BLACK});
+			var t:Text = new Text(clickText, 1, 0, {align:"center", size:8, width: FP.width - 1, leading: 2});
 			t.scrollX = t.scrollY = 0;
+			
+			t.setStyle("pink", {color: Main.PINK});
 			
 			if (previousBestText) t.text += "\n" + previousBestText;
 			if (bestPossibleText) t.text += "\n" + bestPossibleText;
 			
+			t.richText = t.text;
+			
 			if (clicks < minClicks) {
 				t.text = "Clicks: " + clicks + "\nNew record!";
+				t.color = Main.PINK;
 				
 				var alert:String = "Completed " + mode + " level " + id + " (" + md5 + ") in " + clicks + " clicks (prev best: " + minClicks + ")";
 				
@@ -841,7 +846,7 @@ package
 			var totalScore:int = Main.so.data.totalScore || 0;
 			var totalScoreIncrease:int = 0;
 			
-			var t2:Text = new Text("", 0, 0, {align:"center", size:8, width: FP.width - 1, leading: 2, color: Main.BLACK});
+			var t2:Text = new Text("", 1, 0, {align:"center", size:8, width: FP.width - 1, leading: 2, color: Main.BLACK});
 			t2.scrollX = t2.scrollY = 0;
 			
 			t2.text = "Score: " + score;
@@ -883,18 +888,22 @@ package
 			var graph:Stamp = addGraph(md5);
 			
 			var graphStop:int = 0;
+			var graphStart:int = 20;
 			
 			if (graph) {
+				graphStart = graph.y;
 				graphStop = graph.y + graph.height;
 			}
 			
 			var space:Number = next.y - t.height - t2.height - graphStop;
 			
 			if (Main.expoMode) {
+				graphStart = graph.y = (next.y - graph.height)*0.5;
+				
 				space += t2.height;
 			}
 			
-			t.y = graphStop + space / 3.0;
+			t.y = graphStart + 2;
 			
 			t2.y = t.y + t.height + space / 3.0;
 			
@@ -999,14 +1008,28 @@ package
 				extraWidth: 1
 			};
 			
-			var bitmap:BitmapData = Graph.makeGraph(data, params);
+			var bitmap1:BitmapData = Graph.makeGraph(data, params);
 			
-			var g:Stamp = new Stamp(bitmap);
+			var bitmap2:BitmapData = new BitmapData(90, bitmap1.height + 24, false, Main.GREY);
+			
+			FP.rect.x = 1;
+			FP.rect.y = 1;
+			FP.rect.width = bitmap2.width - 2;
+			FP.rect.height = bitmap2.height - 2;
+			
+			bitmap2.fillRect(FP.rect, Main.BLACK);
+			
+			FP.point.x = (bitmap2.width - bitmap1.width) * 0.5;
+			FP.point.y = bitmap2.height - bitmap1.height - 1;
+			
+			bitmap2.copyPixels(bitmap1, bitmap1.rect, FP.point);
+			
+			var g:Stamp = new Stamp(bitmap2);
 			g.scrollX = 0;
 			g.scrollY = 0;
 			
-			g.x = (FP.width - bitmap.width)*0.5;
-			g.y = 9;
+			g.x = (FP.width - bitmap2.width)*0.5;
+			g.y = 12;
 			
 			addGraphic(g, -15);
 			

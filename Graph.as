@@ -65,9 +65,9 @@ package
 			
 			if (overMax) FP.rect.width += 4;
 			
-			var bitmap:BitmapData = new BitmapData(FP.rect.width + 2, FP.rect.height + 2, false, Main.GREY);
+			var bitmap:BitmapData = new BitmapData(FP.rect.width + 2, FP.rect.height + 2, false, Main.BLACK);
 			
-			bitmap.fillRect(FP.rect, Main.BLACK);
+			//bitmap.fillRect(FP.rect, Main.BLACK);
 			
 			FP.rect.width = 1;
 			
@@ -79,12 +79,6 @@ package
 				var c:uint = Main.WHITE;
 				
 				if (i == yourClicks) {
-					/*FP.rect.height = height;
-					FP.rect.x = i + 1 + offsetX;
-					FP.rect.y = 2;
-				
-					bitmap.fillRect(FP.rect, Main.GREY);*/
-					
 					c = Main.PINK;
 				}
 				
@@ -106,6 +100,8 @@ package
 			var markerX:int = params.markers || 10;
 			
 			var numbers:Spritemap = new Spritemap(NUMBER_FONT, 3, 5);
+			
+			numbers.color = Main.WHITE;
 			
 			for (i = params.show0 ? 0 : markerX/scaleX; i <= width; i += markerX/scaleX) {
 				bitmap.setPixel32(i + 1 + offsetX, height + 3, Main.GREY);
