@@ -155,7 +155,7 @@ package
 		}
 		
 		public function get disabled ():Boolean {
-			return _disabled;
+			return _disabled || image.alpha < 0.5;
 		}
 		
 		public function set disabled (b:Boolean):void {
@@ -164,6 +164,14 @@ package
 			if (_disabled) image.color = disabledColor;
 			
 			type = b ? null : "button";
+		}
+		
+		public function get alpha ():Number {
+			return image.alpha;
+		}
+		
+		public function set alpha (n:Number):void {
+			image.alpha = n;
 		}
 		
 		public function get helpText ():String {

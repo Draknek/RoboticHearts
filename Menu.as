@@ -161,7 +161,9 @@ package
 				backButton2.y = FP.height*2 - 14;
 				
 				if (tween) tween.cancel();
-				tween = FP.tween(FP.camera, {y: FP.height}, 30, {ease: Ease.sineIn});
+				tween = FP.tween(FP.camera, {y: FP.height}, 30, {ease: Ease.sineIn, complete: function ():void {
+					creditMode = true;
+				}});
 				backButton.disabled = false;
 				backButton.visible = true;
 				switchScreen();
@@ -377,9 +379,10 @@ package
 		{
 			var b:Button = new Button(0, 0, text, makeURLFunction(url));
 			
+			b.disabledColor = Main.WHITE;
+			
 			if (Main.expoMode) {
 				b.disabled = true;
-				b.disabledColor = Main.WHITE;
 			}
 			
 			return b;
@@ -393,32 +396,87 @@ package
 			}
 		}
 		
+		private var creditActions:Array;
+		private var creditTimer:int;
+		private var creditMode:Boolean = false;
+		
 		private function addCredits ():void
 		{
-			var t:Text;
-			var b:Button;
-			var l:Array = [];
+			var items:Array = [
+				[
+					"Created by",
+					["Alan Hazelden", "http://www.draknek.org/?ref=trhom"],
+					"Developed with",
+					["FlashPunk", "http://flashpunk.net/"]
+				],
+				[
+					"Music",
+					["ERH", "http://www.freesound.org/people/ERH/sounds/35898/"],
+					"Sound effects",
+					["Benboncan", "http://www.freesound.org/people/Benboncan/sounds/77718/"],
+					["Timbre", "http://www.freesound.org/people/Timbre/sounds/86888/"]
+				],
+				[
+					"Narrative discussions",
+					["Tanya Pengelly"],
+					["Matthew Hart"],
+					["Stephen Lavelle"],
+					["Terry Cavanagh"]
+				],
+				[
+					"Thanks to",
+					["Alistair Aitcheson", "http://www.alistairaitcheson.com/"],
+					["The FlashPunk community"],
+					["All my testers"]
+				]
+			];
 			
-			t = new Text("Created by", 0, 0, {color: Main.GREY});
-			l.push(t);
+			var actions:Array = [];
 			
-			b = makeURLButton("Alan Hazelden", "http://www.draknek.org/?ref=trhom");
-			l.push(b);
+			for each (var subitems:Array in items) {
+				var list:Array = [];
 			
-			l.push(1);
+				for each (var obj:* in subitems) {
+					if (obj is String) {
+						list.push(1);
+						obj = new Text(obj, 0, 0, {color: Main.GREY});
+					} else if (obj is Array) {
+						if (obj.length == 1) {
+							obj = new Text(obj[0], 0, 0, {color: Main.WHITE});
+						} else {
+							obj = makeURLButton(obj[0], obj[1]);
+						}
+					} else {
+						continue;
+					}
+				
+					list.push(obj);
+				
+					actions.push(obj);
+					
+					obj.alpha = 0;
+				}
+				
+				list.shift();
+				
+				list.push(1);
+				
+				actions.push(150);
+				actions.push(list);
+				
+				addElements(list, 0, FP.height, FP.height * 2 - backButton2.y);
+			}
 			
-			t = new Text("Thanks to", 0, 0, {color: Main.GREY});
-			l.push(t);
+			for (var i:int = 0; i < 2; i++) {
+				obj = actions.shift();
+				
+				obj.alpha = 1;
+				
+				actions.push(obj);
+			}
 			
-			b = makeURLButton("ChevyRay & FlashPunk", "http://flashpunk.net/");
-			l.push(b);
-			
-			b = makeURLButton("Alistair Aitcheson", "http://www.alistairaitcheson.com/");
-			l.push(b);
-			
-			l.push(1);
-			
-			addElements(l, 0, FP.height, FP.height * 2 - backButton2.y);
+			creditActions = actions;
+			creditTimer = 60;
 		}
 		
 		private function addLevelButton (i:int, mode:String = "normal"):Button
@@ -551,6 +609,30 @@ package
 				return;
 			}
 			
+			if (creditMode) {
+				creditTimer--;
+				
+				if (creditTimer <= 0) {
+					var action:* = creditActions.shift();
+					creditActions.push(action);
+					
+					if (action is Array) {
+						for each (var item:* in action) {
+							if (item is Image || item is Button) {
+								FP.tween(item, {alpha: 0}, 30);
+							}
+						}
+						
+						creditTimer = 60;
+					} else if (action is Number) {
+						creditTimer = action;
+					} else {
+						FP.tween(action, {alpha: 1}, 30);
+						creditTimer = 60;
+					}
+				}
+			}
+			
 			var step:int = 50;
 			var beatTime:int = 10;
 			var modTime:int = time % step;
@@ -593,6 +675,8 @@ package
 		
 		private function back ():void
 		{
+			creditMode = false;
+			
 			if (backButton.disabled) {
 				if (Logger.isLocal) {
 					FP.world = new Intro;
