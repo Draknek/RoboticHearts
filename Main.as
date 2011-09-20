@@ -17,7 +17,6 @@ package
 		
 		public static var touchscreen:Boolean = false;
 		public static var expoMode:Boolean = true;
-		public static var offline:Boolean = true;
 		
 		public static const SAVEFILE_VERSION:uint = 1;
 		
@@ -49,17 +48,21 @@ package
 			var scale:int = 4;
 			
 			if (touchscreen || expoMode) {
-				var sizeX:Number = Preloader.stageWidth / w;
-				var sizeY:Number = Preloader.stageHeight / h;
+				try {
+					Preloader.stage.displayState = StageDisplayState.FULL_SCREEN;
+					
+					var sizeX:Number = Preloader.stageWidth / w;
+					var sizeY:Number = Preloader.stageHeight / h;
 			
-				if (sizeX > sizeY) {
-					scale = int(sizeY);
-				} else {
-					scale = int(sizeX);
-				}
+					if (sizeX > sizeY) {
+						scale = int(sizeY);
+					} else {
+						scale = int(sizeX);
+					}
 			
-				w = Preloader.stageWidth / scale;
-				h = Preloader.stageHeight / scale;
+					w = Preloader.stageWidth / scale;
+					h = Preloader.stageHeight / scale;
+				} catch (e:Error) {}
 			}
 			
 			super(w, h, 60, true);
@@ -80,7 +83,7 @@ package
 		
 		public override function init (): void
 		{
-			sitelock(["draknek.org", "flashgamelicense.com"]);
+			sitelock(["draknek.org", "draknek.dev", "flashgamelicense.com"]);
 			
 			super.init();
 			

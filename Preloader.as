@@ -18,6 +18,7 @@ package
 		
 		public static var stageWidth:int;
 		public static var stageHeight:int;
+		public static var stage:Stage;
 		
 		
 		
@@ -134,6 +135,7 @@ package
 		}
 		
 		private function startup (): void {
+			Preloader.stage = this.stage;
 			stageWidth = stage.fullScreenWidth;
 			stageHeight = stage.fullScreenHeight;
 			stage.removeEventListener(Event.ENTER_FRAME, onEnterFrame);

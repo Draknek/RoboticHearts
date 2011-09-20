@@ -90,7 +90,7 @@ package
 		{
 			isLocal = (obj.stage.loaderInfo.loaderURL.substr(0, 7) == 'file://');
 			
-			var host:String = isLocal ? "draknek.dev" : "www.draknek.org";
+			var host:String = /*isLocal ? "draknek.dev" :*/ "www.draknek.org";
 			
 			DB = "http://" + host + "/games/hearts/db/";
 			
@@ -98,10 +98,6 @@ package
 				clickStats = Main.so.data.stats;
 			} else {
 				clickStats = JSON.decode(new STATS);
-			}
-			
-			if (Main.offline) {
-				return;
 			}
 			
 			if (Main.so.data.uid) {
