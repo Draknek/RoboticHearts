@@ -33,12 +33,12 @@ package
 				var l:int = 0;
 				
 				for (var key:String in b[md5]) {
-					{//if (a[md5][key] != b[md5][key]) {
+					if (a[md5][key] != b[md5][key]) {
 						l++;
 						
 						if (! a[md5][key]) a[md5][key] = 0;
 						
-						newClicks[key] = b[md5][key] //- a[md5][key];
+						newClicks[key] = b[md5][key] - a[md5][key];
 					}
 				}
 				
