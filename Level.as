@@ -705,8 +705,8 @@ package
 			
 			var i:int;
 			for (i = 0; i < 4; i++) {
-				var step:int = gameOver ? 76 : 50;
-				var beatTime:int = gameOver ? 25 : 10;
+				var step:int = gameOver ? 25 : 50;
+				var beatTime:int = gameOver ? 10 : 10;
 				var modTime:int = time % (step * 3);
 				
 				if (i == 0) {
