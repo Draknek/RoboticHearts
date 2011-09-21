@@ -208,13 +208,13 @@ package
 			buttons.push(playButton);
 			buttons.push(levelsButton);
 			
-			if (! Main.expoMode) {
+			if (false) {
 				buttons.push(highScoresButton);
 			}
 			
 			buttons.push(creditsButton);
 			
-			if (false) {
+			if (! Main.expoMode && ! Main.touchscreen) {
 				buttons.push(moreGames);
 			}
 			

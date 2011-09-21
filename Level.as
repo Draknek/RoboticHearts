@@ -909,7 +909,7 @@ package
 		
 		public function getScore (n:int):int
 		{
-			var max:int = 50;
+			var max:int = 20;
 			
 			var score:int = max - (n - minClicks);
 			
