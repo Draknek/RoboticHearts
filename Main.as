@@ -206,6 +206,8 @@ package
 				if (host.substr(-d.length, d.length) == d) return true;
 			}
 			
+			if (touchscreen) return true;
+			
 			parent.removeChild(this);
 			throw new Error("Error: this game is sitelocked");
 			
