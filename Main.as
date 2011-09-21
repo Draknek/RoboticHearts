@@ -16,7 +16,7 @@ package
 		public static const WHITE:uint = 0xEEEEEE;
 		
 		public static var touchscreen:Boolean = false;
-		public static var expoMode:Boolean = true;
+		public static var expoMode:Boolean = false;
 		
 		public static const SAVEFILE_VERSION:uint = 1;
 		

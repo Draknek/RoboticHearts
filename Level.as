@@ -887,25 +887,17 @@ package
 			
 			var graph:Stamp = addGraph(md5);
 			
-			var graphStop:int = 0;
-			var graphStart:int = 20;
-			
-			if (graph) {
-				graphStart = graph.y;
-				graphStop = graph.y + graph.height;
-			}
-			
-			var space:Number = next.y - t.height - t2.height - graphStop;
+			var padding:Number = (next.y - 8 - t2.height - graph.height) / 3.0;
 			
 			if (Main.expoMode) {
-				graphStart = graph.y = (next.y - graph.height)*0.5;
-				
-				space += t2.height;
+				padding = (next.y - graph.height) / 2.0;
 			}
 			
-			t.y = graphStart + 2;
+			graph.y = padding + 8;
 			
-			t2.y = t.y + t.height + space / 3.0;
+			t.y = graph.y + 2;
+			
+			t2.y = graph.y + graph.height + padding;
 			
 			addGraphic(t, -15);
 			if (! Main.expoMode) addGraphic(t2, -15);
