@@ -1,0 +1,103 @@
+Group graphs with clicks or score
+
+Timer on story page or "click to continue" text
+
+Clearer score improvements?
+
+
+
+
+
+
+
+
+Double resolution
+	smaller text
+	move hearts
+
+Move narrative to in-level
+
+Have some factory levels with mirroring
+"parts of the factory still ran smoothly"
+
+Highlight reset if player is doing badly?
+
+Have the robot teach the player some tricks?
+
+Try tinting boy/girl separately?
+
+Make perfection levels actually require perfection
+
+Logging:
+	completed unique
+	started unique
+	after skip
+	skipped
+
+Meaning of the game?
+	If you start to go down the wrong path it may not be immediately obvious, but when you do realise it may be impossible to go back
+	I looked back on my choices and found I was not where I wanted to be
+	And I had no way to try again.
+
+Level 26: he was certain there was a solution but he could not see it
+
+
+
+
+Story
+
+Girl is ill, need heart transplant
+Girl gets mechanical heart to make him interested again
+Guy can't emote any more, his robots do that for him
+
+
+
+Improve completion screen
+Cache score stats
+Change score server
+Update credits
+FlashPunk: screen briefly flashes on startup
+Links get blocked: event listener
+
+Eurogamer specific:
+remove some scoring
+make fullscreen
+show intro more often
+include QR code?
+hide icons
+
+
+Samu's feedback:
+
+Couldn't do #31 or #34 (guy's face and two-robot dismantling)
+#35 took lot of work (spread cogs from one to many)
+Slow cog worked well
+#35 can get overlapping hearts
+#13 and #16 worked well
+Improve faces
+
+Phil's feedback:
+
+Couldn't do 21, 23, 24, 26, 28, 31, 32, 34, 35.
+Change #34!
+#33 only has one robot where story has many
+#33 has him stalking off
+
+Steve/James observations:
+
+Level 9 too hard?
+Skip should prompt for confirmation!
+Fix heart beating offset
+Update click data
+Reduce max score from 50
+
+Touchscreen: change help text
+Touchscreen: instantly show button hover text?
+Touchscreen: larger button hitboxes
+
+Add a bit showing the girl stopping being interested in robots
+
+Cog rotation spritemap?
+
+Heartbeat licensing
+
