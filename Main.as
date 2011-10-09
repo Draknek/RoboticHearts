@@ -33,6 +33,14 @@ package
 			if (! so.data.levels) so.data.levels = {};
 			if (! so.data.totalScore) so.data.totalScore = 0;
 			
+			try {
+				var MultiTouch:Class = getDefinitionByName("flash.ui.Multitouch") as Class;
+				if (MultiTouch.supportsTouchEvents) {
+					touchscreen = true;
+					MultiTouch.inputMode = "none";
+				}
+			} catch (e:Error){}
+			
 			Text.font = "7x5";
 			Text.size = 8;
 			Text.defaultColor = WHITE;
@@ -71,14 +79,6 @@ package
 			
 			//FP.console.enable();
 			//FP.console.toggleKey = Key.SPACE;
-			
-			try {
-				var MultiTouch:Class = getDefinitionByName("flash.ui.Multitouch") as Class;
-				if (MultiTouch.supportsTouchEvents) {
-					touchscreen = true;
-					MultiTouch.inputMode = "none";
-				}
-			} catch (e:Error){}
 		}
 		
 		public override function init (): void

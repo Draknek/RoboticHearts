@@ -603,11 +603,11 @@ package
 		{
 			Input.mouseCursor = "auto";
 			
-			if (Input.keyString.substr(-6) == "qrcode") {
+			/*if (Input.keyString.substr(-6) == "qrcode") {
 				Input.keyString = "";
 				FP.world = new QRCodeExport;
 				return;
-			}
+			}*/
 			
 			if (creditMode) {
 				creditTimer--;
