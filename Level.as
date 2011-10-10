@@ -268,18 +268,18 @@ package
 			
 			if (mode == "normal") {
 				if (id == 0) {
-					addGraphic(new Text("Click cogs to\nbrighten hearts", 0, 64, {align:"center", size:8, width: 96, leading: 3}));
+					addGraphic(new Text((Main.touchscreen ? "Tap" : "Click") + " cogs to\nrotate hearts", 0, 64, {align:"center", size:8, width: 96, leading: 3}));
 				}
 				else if (id == 1) {
 					addGraphic(new Text("Make all upright", 0, 74, {align:"center", size:8, width: 96}));
 				}
-				else if (id == 2) {
+				else if (id == 3) {
 					addGraphic(new Text("R to reset", 0, 74, {align:"center", size:8, width: 96}));
 				}
-				else if (id == 3) {
+				else if (id == 4 && ! Main.touchscreen) {
 					addGraphic(new Text("Ctrl+Z to undo", 0, 74, {align:"center", size:8, width: 96}));
 				}
-				/*else if (id == 4) {
+				/*else if (id == 5) {
 					addGraphic(new Text("Hint: try to keep\nsame-aligned\nhearts together", 0, 58, {align:"center", size:8, width: 96}));
 				}*/
 			}

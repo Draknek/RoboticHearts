@@ -95,9 +95,13 @@ Touchscreen: change help text
 Touchscreen: instantly show button hover text?
 Touchscreen: larger button hitboxes
 
-Add a bit showing the girl stopping being interested in robots
-
 Cog rotation spritemap?
+OR render rotating images differently
 
-Heartbeat licensing
+Score over 50 isn't pinkified
 
+Subscores
+
+Offset scores if minimum is high
+
+Extend levels into sides
