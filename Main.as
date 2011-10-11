@@ -87,9 +87,13 @@ package
 			
 			super.init();
 			
-			Audio.init(this);
+			try {
+				Audio.init(this);
+			} catch (e:Error) {}
 			
-			Logger.connect(this);
+			try {
+				Logger.connect(this);
+			} catch (e:Error) {}
 			
 			var devMode:Boolean = false;
 			
@@ -196,6 +200,8 @@ package
 				touchscreen = true;
 				return true;
 			}
+			
+			if (url.substr(0, startCheck) != 'http://') return true;
 			
 			var domainLen:int = url.indexOf('/', startCheck) - startCheck;
 			var host:String = url.substr(startCheck, domainLen);
