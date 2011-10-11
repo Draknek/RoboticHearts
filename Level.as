@@ -220,7 +220,9 @@ package
 			muteButton = new Button(0, 0, Button.AUDIO, Audio.toggleMute, "Mute", false, true);
 			muteOverlay = new Button(0, 0, Button.AUDIO_MUTE, null, "Unmute", false, true);
 			
-			if (! Main.expoMode) {
+			var showMute:Boolean = ! Main.expoMode && ! Main.touchscreen;
+			
+			if (showMute) {
 				add(muteButton);
 				add(muteOverlay);
 			}
@@ -229,7 +231,7 @@ package
 			
 			muteButton.x = menuButton.x + menuButton.width;
 			
-			if (Main.expoMode) {
+			if (! showMute) {
 				muteButton.x = menuButton.x;
 			}
 			

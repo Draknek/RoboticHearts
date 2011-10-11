@@ -105,3 +105,5 @@ Subscores
 Offset scores if minimum is high
 
 Extend levels into sides
+
+Hide mute button on touchscreen
