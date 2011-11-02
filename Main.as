@@ -3,10 +3,15 @@ package
 	import net.flashpunk.*;
 	import net.flashpunk.graphics.*;
 	import net.flashpunk.utils.*;
+	import net.flashpunk.utils.Input;
 	
 	import flash.net.*;
 	import flash.display.*;
+	import flash.events.*;
+	import flash.ui.*;
 	import flash.utils.*;
+	
+	import net.jpauclair.*;
 	
 	public class Main extends Engine
 	{
@@ -17,6 +22,7 @@ package
 		
 		public static var touchscreen:Boolean = false;
 		public static var expoMode:Boolean = false;
+		public static var debug:Boolean = false;
 		
 		public static const SAVEFILE_VERSION:uint = 1;
 		
@@ -77,25 +83,38 @@ package
 			FP.screen.color = 0x202020;
 			FP.screen.scale = scale;
 			
-			//FP.console.enable();
-			//FP.console.toggleKey = Key.SPACE;
+			if (debug) {
+				FP.console.enable();
+				//FP.console.toggleKey = Key.SPACE;
+			}
 		}
 		
 		public override function init (): void
 		{
+			if (debug) {
+				try {
+					var profiler:* = new FlashPreloadProfiler();
+					profiler.y = 32;
+					addChild(profiler);
+				}
+				catch (e:Error) {}
+			}
+			
 			sitelock(["draknek.org", "draknek.dev", "flashgamelicense.com"]);
 			
 			super.init();
 			
 			try {
 				Audio.init(this);
-			} catch (e:Error) {}
+			} catch (e:Error) {FP.log("audio");}
 			
 			try {
 				Logger.connect(this);
-			} catch (e:Error) {}
+			} catch (e:Error) {FP.log("logger");}
 			
 			var devMode:Boolean = false;
+			
+			FP.stage.addEventListener(KeyboardEvent.KEY_DOWN, extraKeyListener);
 			
 			if (Logger.isLocal && ! touchscreen) devMode = true;
 			
@@ -109,6 +128,11 @@ package
 			}
 			
 			super.update();
+			
+			if (Input.mouseDown) {
+				Main.mouseX = FP.screen.mouseX;
+				Main.mouseY = FP.screen.mouseY;
+			}
 			
 			Audio.update();
 			
@@ -174,6 +198,9 @@ package
 		private static var ignoreNextAction:Boolean = false;
 		private static var hadMouseDown:Boolean = false;
 		
+		public static var mouseX:Number = 0;
+		public static var mouseY:Number = 0;
+		
 		public static function resetPlayerData ():void
 		{
 			Main.so.data.levels = {};
@@ -218,6 +245,32 @@ package
 			throw new Error("Error: this game is sitelocked");
 			
 			return false;
+		}
+		
+		private function extraKeyListener(event:KeyboardEvent):void
+		{
+			try {
+			const BACK:uint   = ("BACK" in Keyboard)   ? Keyboard["BACK"]   : 0;
+			const MENU:uint   = ("MENU" in Keyboard)   ? Keyboard["MENU"]   : 0;
+			const SEARCH:uint = ("SEARCH" in Keyboard) ? Keyboard["SEARCH"] : 0;
+			
+			if(event.keyCode == BACK || event.keyCode == MENU) {
+				if (! (FP.world is Menu)) {
+					FP.world = new Menu;
+				} else if (Menu(FP.world).backButton.disabled) {
+					return;
+				} else {
+					Menu(FP.world).back();
+				}
+			} else if(event.keyCode == SEARCH) {
+				
+			} else {
+				return;
+			}
+			
+			event.preventDefault();
+			event.stopImmediatePropagation();
+			} catch (e:Error) { FP.log(e + ": key listener"); }
 		}
 	}
 }

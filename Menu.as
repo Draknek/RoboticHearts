@@ -675,7 +675,7 @@ package
 			super.update();
 		}
 		
-		private function back ():void
+		public function back ():void
 		{
 			creditMode = false;
 			

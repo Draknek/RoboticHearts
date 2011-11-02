@@ -71,6 +71,9 @@
 		 */
 		public static function get mouseX():int
 		{
+			if (Main.touchscreen) {
+				return Main.mouseX;
+			}
 			return FP.screen.mouseX;
 		}
 		
@@ -79,6 +82,9 @@
 		 */
 		public static function get mouseY():int
 		{
+			if (Main.touchscreen) {
+				return Main.mouseY;
+			}
 			return FP.screen.mouseY;
 		}
 		
