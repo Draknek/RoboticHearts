@@ -479,16 +479,12 @@ package
 			}
 		}
 		
+		private var a:Array = [];
+		
 		public override function update (): void
 		{
-			var a:Array;
-			
 			camera.x = -(FP.width - 96)*0.5;
 			camera.y = -(FP.height - 96)*0.5;
-			
-			if (data) {
-				var md5:String = MD5.hashBytes(data);
-			}
 			
 			Input.mouseCursor = "auto";
 			
@@ -539,15 +535,11 @@ package
 				return;
 			}
 			
-			if (Input.pressed(Key.E)) {
+			if (Input.pressed(Key.E) && Logger.isLocal) {
 				editing = !editing;
 				hasEdited = true;
 				minClicks = 0;
 				resetState();
-			}
-			
-			if (Input.pressed(Key.G)) {
-				addGraph(Logger.clickStats[md5]);
 			}
 			
 			if (editing) {
@@ -556,7 +548,7 @@ package
 					var dy:int = int(Input.pressed(Key.DOWN)) - int(Input.pressed(Key.UP));
 					
 					if (dx || dy) {
-						a = [];
+						a.length = 0;
 						getType("cog", a);
 						getType("heart", a);
 						
@@ -587,14 +579,14 @@ package
 			
 			var cog:Cog;
 			
-			a = [];
+			a.length = 0;
 			getType("cog", a);
 			
 			for each (cog in a) {
 				cog.over = false;
 			}
 			
-			a = [];
+			a.length = 0;
 			
 			getType("heart", a);
 			
@@ -610,6 +602,8 @@ package
 			}
 			
 			if (!hasEdited && !gameOver && incorrectCount == 0) {
+				var md5:String = MD5.hashBytes(data);
+				
 				if (! Main.so.data.levels[md5]) Main.so.data.levels[md5] = {};
 				
 				Main.so.data.levels[md5].completed = true;
@@ -661,7 +655,7 @@ package
 				} else if (! Cog.rotating) {
 					reseting = false;
 					
-					a = [];
+					a.length = 0;
 					getType("cog", a);
 				
 					Cog.rotating = a[0];
@@ -925,7 +919,7 @@ package
 			var x:int = mouseX - ((mouseX + 2) % 4) + 2;
 			var y:int = mouseY - ((mouseY + 2) % 4) + 2;
 			
-			var a:Array = [];
+			a.length = 0;
 			
 			collideRectInto("heart", x - 1, y - 1, 2, 2, a);
 			collideRectInto("cog", x - 1, y - 1, 2, 2, a);
@@ -957,7 +951,7 @@ package
 				lastHeart = new Point(x, y);
 			}
 			
-			var a:Array = [];
+			a.length = 0;
 			
 			collideRectInto("heart", x - 3, y - 3, 6, 6, a);
 			collideRectInto("cog", x - 3, y - 3, 6, 6, a);
@@ -974,7 +968,7 @@ package
 			var x:int = mouseX - ((mouseX + 2) % 4) + 2;
 			var y:int = mouseY - ((mouseY + 2) % 4) + 2;
 			
-			var a:Array = [];
+			a.length = 0;
 			
 			collideRectInto("heart", x - 7, y - 7, 14, 14, a);
 			collideRectInto("cog", x - 7, y - 7, 14, 14, a);

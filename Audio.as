@@ -45,7 +45,9 @@ package
 			
 			_mute = so.data.mute;
 			
-			addContextMenu(o);
+			if (! Main.touchscreen && ! Main.expoMode) {
+				addContextMenu(o);
+			}
 			
 			if (o.stage) {
 				addStageListeners(o.stage);
