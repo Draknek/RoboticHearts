@@ -2,7 +2,6 @@ Group graphs with clicks or score
 
 Timer on story page or "click to continue" text
 
-Clearer score improvements?
 
 
 
@@ -53,11 +52,6 @@ Guy can't emote any more, his robots do that for him
 
 
 Improve completion screen
-Cache score stats
-Change score server
-Update credits
-FlashPunk: screen briefly flashes on startup
-Links get blocked: event listener
 
 Eurogamer specific:
 remove some scoring
@@ -86,18 +80,31 @@ Change #34!
 Steve/James observations:
 
 Level 9 too hard?
-Skip should prompt for confirmation!
 Fix heart beating offset
-Update click data
-Reduce max score from 50
+
+
+
+
+
+Cog rotation spritemap?
+OR render rotating images differently
+
+
+
+
+
 
 Touchscreen: change help text
 Touchscreen: instantly show button hover text?
 Touchscreen: larger button hitboxes
 
-Cog rotation spritemap?
-OR render rotating images differently
 
+
+Update click data
+
+Skip should prompt for confirmation!
+
+Reduce max score from 50
 Score over 50 isn't pinkified
 
 Subscores
@@ -109,3 +116,14 @@ Extend levels into sides
 Hide mute button on touchscreen
 
 Quit button on Android?
+
+Get for mobile link
+
+Sponsor integration
+
+
+Cache score stats
+Change score server
+Update credits -- Newgrounds, graphics feedback
+Links get blocked: event listener
+
