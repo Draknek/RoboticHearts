@@ -48,6 +48,8 @@ package
 				if (data[key] > maxHeight) maxHeight = data[key];
 			}
 			
+			if (yourClicks > MAX_WIDTH) yourClicks = MAX_WIDTH;
+			
 			var width:int = Math.ceil(maxClicks/10)*10;
 			if (width < params.minX) width = params.minX;
 			var height:int = params.height;
