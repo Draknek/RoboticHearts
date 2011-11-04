@@ -105,11 +105,8 @@ Update click data
 Skip should prompt for confirmation!
 
 Reduce max score from 50
-Score over 50 isn't pinkified
 
 Subscores
-
-Offset scores if minimum is high
 
 Extend levels into sides
 
