@@ -542,6 +542,10 @@ package
 				resetState();
 			}
 			
+			if (Main.debug && Input.pressed(Key.G)) {
+				addGraph(Logger.clickStats[MD5.hashBytes(data)]);
+			}
+			
 			if (editing) {
 				if (Input.check(Key.SHIFT)) {
 					var dx:int = int(Input.pressed(Key.RIGHT)) - int(Input.pressed(Key.LEFT));
@@ -993,7 +997,8 @@ package
 				minX: 30,
 				maxX: 50,
 				height: 16,
-				extraWidth: 1
+				extraWidth: 1,
+				canShift: true
 			};
 			
 			var bitmap1:BitmapData = Graph.makeGraph(data, params);

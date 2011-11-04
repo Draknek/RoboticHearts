@@ -21,13 +21,25 @@ package
 			
 			var key:String;
 			
+			var minClicks:int = int.MAX_VALUE;
+			
 			for (key in dataIn) {
 				data[key] = dataIn[key];
+				if (int(key) < minClicks) minClicks = int(key);
 			}
 			
 			var i:int
 			
-			const MAX_WIDTH:int = params.maxX || int.MAX_VALUE;
+			var shift:int = 0;
+			
+			if (params.canShift) {
+				shift = Math.ceil((minClicks - 17) / 10) * 10;
+				if (shift < 0) shift = 0;
+			}
+			
+			var MAX_WIDTH:int = params.maxX || int.MAX_VALUE;
+			
+			MAX_WIDTH += shift;
 			
 			var overMax:Boolean = false;
 			
@@ -59,6 +71,8 @@ package
 			if (params.show0) {
 				offsetX = 2;
 			}
+			
+			offsetX -= shift;
 			
 			FP.rect.x = 1;
 			FP.rect.y = 1;
@@ -105,7 +119,12 @@ package
 			
 			numbers.color = Main.WHITE;
 			
-			for (i = params.show0 ? 0 : markerX/scaleX; i <= width; i += markerX/scaleX) {
+			var dx:int = markerX/scaleX;
+			var start:int = params.show0 ? 0 : dx;
+			
+			start += shift;
+			
+			for (i = start; i <= width; i += dx) {
 				bitmap.setPixel32(i + 1 + offsetX, height + 3, Main.GREY);
 				
 				FP.point.x = i + offsetX;
