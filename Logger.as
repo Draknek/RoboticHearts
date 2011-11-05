@@ -90,9 +90,9 @@ package
 		{
 			isLocal = (obj.stage.loaderInfo.loaderURL.substr(0, 7) == 'file://');
 			
-			var host:String = /*isLocal ? "draknek.dev" :*/ "www.draknek.org";
+			var host:String = /*isLocal ? "draknek.dev/games/hearts/db" :*/ "hearts.draknek.org";
 			
-			DB = "http://" + host + "/games/hearts/db/";
+			DB = "http://" + host + "/";
 			
 			if (Main.so.data.stats) {
 				clickStats = Main.so.data.stats;
