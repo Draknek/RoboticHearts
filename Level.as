@@ -213,12 +213,14 @@ package
 			
 			Logger.startLevel(id, mode);
 			
-			add(redoButton = new Button(0, 0, Button.REDO, redo, "Redo", true, true));
-			add(undoButton = new Button(0, 0, Button.UNDO, undo, "Undo", true, true));
-			add(resetButton = new Button(0, 0, Button.RESET, reset, "Reset", false, true));
+			var buttonPadding:int = Main.touchscreen ? 3 : 1;
 			
-			muteButton = new Button(0, 0, Button.AUDIO, Audio.toggleMute, "Mute", false, true);
-			muteOverlay = new Button(0, 0, Button.AUDIO_MUTE, null, "Unmute", false, true);
+			add(redoButton = new Button(0, 0, Button.REDO, redo, "Redo", true, true, buttonPadding));
+			add(undoButton = new Button(0, 0, Button.UNDO, undo, "Undo", true, true, buttonPadding));
+			add(resetButton = new Button(0, 0, Button.RESET, reset, "Reset", false, true, buttonPadding));
+			
+			muteButton = new Button(0, 0, Button.AUDIO, Audio.toggleMute, "Mute", false, true, buttonPadding);
+			muteOverlay = new Button(0, 0, Button.AUDIO_MUTE, null, "Unmute", false, true, buttonPadding);
 			
 			var showMute:Boolean = ! Main.expoMode && ! Main.touchscreen;
 			
@@ -227,7 +229,7 @@ package
 				add(muteOverlay);
 			}
 			
-			add(menuButton = new Button(0, 0, Button.MENU, gotoMenu, "Menu", false, true));
+			add(menuButton = new Button(0, 0, Button.MENU, gotoMenu, "Menu", false, true, buttonPadding));
 			
 			muteButton.x = menuButton.x + menuButton.width;
 			
@@ -252,7 +254,7 @@ package
 			Audio.muteOverlay = muteOverlay;
 			
 			if (levelPacks[mode].levels[id+1]) {
-				add(new Button(FP.width-8, FP.height-10, Button.SKIP, skip, "Skip level", false, true));
+				add(new Button(FP.width-8 - buttonPadding, FP.height-10, Button.SKIP, skip, "Skip level", false, true, buttonPadding));
 			}
 			
 			var modeCode:String = "";

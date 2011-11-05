@@ -270,8 +270,10 @@ package
 			
 			FP.tween(oldScreen, {alpha: 0}, 30, {ease:Ease.sineOut, tweener:this});
 			
-			muteButton = new Button(0, 0, Button.AUDIO, Audio.toggleMute, "Mute");
-			muteOverlay = new Button(0, 0, Button.AUDIO_MUTE, null, "Unmute");
+			var buttonPadding:int = Main.touchscreen ? 3 : 1;
+			
+			muteButton = new Button(0, 0, Button.AUDIO, Audio.toggleMute, "Mute", false, false, buttonPadding);
+			muteOverlay = new Button(0, 0, Button.AUDIO_MUTE, null, "Unmute", false, false, buttonPadding);
 			
 			var showMute:Boolean = ! Main.expoMode && ! Main.touchscreen;
 			
@@ -280,7 +282,7 @@ package
 				add(muteOverlay);
 			}
 			
-			add(backButton = new Button(0, 0, Button.MENU, back, "Back"));
+			add(backButton = new Button(0, 0, Button.MENU, back, "Back", false, false, buttonPadding));
 			
 			backButton.disabled = true;
 			backButton.visible = false;

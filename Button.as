@@ -38,7 +38,7 @@ package
 		public var normalLayer:int = -5;
 		public var hoverLayer:int = -6;
 		
-		public function Button (_x:int, _y:int, _gfx:*, _callback:Function, __helpText:String = null, __disabled:Boolean = false, _noCamera:Boolean = false)
+		public function Button (_x:int, _y:int, _gfx:*, _callback:Function, __helpText:String = null, __disabled:Boolean = false, _noCamera:Boolean = false, padding:int = 0)
 		{
 			x = _x;
 			y = _y;
@@ -55,7 +55,9 @@ package
 			
 			graphic = image;
 			
-			setHitbox(image.width, image.height);
+			image.x = padding;
+			
+			setHitbox(image.width + padding*2, image.height);
 			
 			type = "button";
 			
