@@ -102,7 +102,7 @@ package
 		
 		public override function init (): void
 		{
-			//touchscreen = true; // testing
+			touchscreen = true; // testing
 			
 			if (debug) {
 				try {

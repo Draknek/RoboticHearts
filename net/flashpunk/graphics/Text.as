@@ -130,6 +130,14 @@
 			_form = new TextFormat(_font, _size, 0xFFFFFF);
 			_form.align = _align;
 			_form.leading = _leading;
+			if (options && options.hasOwnProperty("indent")) {
+				_form.indent = options.indent;
+				delete options.indent;
+			}
+			if (options && options.hasOwnProperty("leftMargin")) {
+				_form.leftMargin = options.leftMargin;
+				delete options.leftMargin;
+			}
 			_field.defaultTextFormat = _form;
 			_field.text = _text = text;
 			_field.antiAliasType = Text.defaultAntiAliasType;

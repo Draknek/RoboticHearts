@@ -16,38 +16,38 @@ package
 			outro = _outro;
 			
 			var lines:Array = [
-				"I've heard it said\n\tbefore today",
-				"That hearts of stone\n\tare cold",
-				"But having known\n\tthem both I say",
-				"That metal bites the\n\tcolder"
+				"I've heard it said\nbefore today",
+				"That hearts of stone\nare cold",
+				"But having known\nthem both I say",
+				"That metal bites the\ncolder"
 			];
 			
 			if (outro) {
 				lines = [
 					"What were we thinking",
-					"From our thrones\n\tup above",
-					"To teach creatures\n\tof metal",
-					"To know loss\n\tbut not love?"
+					"From our thrones\nup above",
+					"To teach creatures\nof metal",
+					"To know loss\nbut not love?"
 				];
 			}
 			
 			var y:int = 1;
 			
+			var t:Text;
+			
 			for (var i:int = 0; i < 4; i++) {
-				addGraphic(new Text(lines[i], (FP.width*0.5 - 60 + 1), y));
+				addGraphic(t = new Text(lines[i].replace("\n", " "), 1, y, {wordWrap: true, leading: 0, width: FP.width - 1, indent: -16, leftMargin: 16}));
 				
-				y += 20;
-				
-				if (outro && i == 0) y -= 8;
+				y += t.textHeight + 4;
 			}
 			
-			var t:Text = new Text("- Anonymous", 0, 0, {align: "right"});
+			t = new Text("- Anonymous", 0, 0, {align: "right"});
 			
 			if (outro) {
 				t.text = "- Anonymous epitaph";
 			}
 			
-			t.x = (FP.width*0.5 + 60) - t.width;
+			t.x = FP.width - t.width;
 			t.y = FP.height - t.height;
 			
 			addGraphic(t);
