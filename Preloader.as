@@ -6,7 +6,7 @@ package
 	import flash.events.*;
 	import flash.utils.getDefinitionByName;
 
-	[SWF(width = "480", height = "320", backgroundColor="#202020")]
+	[SWF(width = "600", height = "460", backgroundColor="#202020")]
 	public class Preloader extends Sprite
 	{
 		// Change these values
@@ -16,8 +16,6 @@ package
 		private static const BG_COLOR:uint = 0x202020;
 		private static const FG_COLOR:uint = 0xff3366;
 		
-		public static var stageWidth:int;
-		public static var stageHeight:int;
 		public static var stage:Stage;
 		
 		
@@ -136,8 +134,6 @@ package
 		
 		private function startup (): void {
 			Preloader.stage = this.stage;
-			stageWidth = stage.fullScreenWidth;
-			stageHeight = stage.fullScreenHeight;
 			stage.removeEventListener(Event.ENTER_FRAME, onEnterFrame);
 			
 			var mainClass:Class = getDefinitionByName(mainClassName) as Class;

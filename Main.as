@@ -56,35 +56,39 @@ package
 			
 			Level.loadLevels();
 
-			var w:int = 120;
-			var h:int = 100;
+			var w:int;
+			var h:int;
+			
+			var targetW:int = 120;
+			var targetH:int = 100;
 			
 			var scale:int = 4;
 			
 			if (touchscreen || expoMode) {
 				try {
 					Preloader.stage.displayState = StageDisplayState.FULL_SCREEN;
-					
-					var sizeX:Number = Preloader.stageWidth / w;
-					var sizeY:Number = Preloader.stageHeight / h;
-			
-					if (sizeX > sizeY) {
-						scale = int(sizeY);
-					} else {
-						scale = int(sizeX);
-					}
-			
-					w = Math.ceil(Preloader.stageWidth / scale);
-					h = Math.ceil(Preloader.stageHeight / scale);
 				} catch (e:Error) {}
+				
+				w = Preloader.stage.fullScreenWidth;
+				h = Preloader.stage.fullScreenHeight;
+			} else {
+				w = Preloader.stage.stageWidth;
+				h = Preloader.stage.stageHeight;
 			}
 			
-			{
-				// mimic iphone
-				scale = 320/h;
-				w = Math.ceil(480 / scale);
-				h = Math.ceil(320 / scale);
+			var sizeX:Number = w / targetW;
+			var sizeY:Number = h / targetH;
+		
+			if (sizeX > sizeY) {
+				scale = int(sizeY);
+			} else {
+				scale = int(sizeX);
 			}
+	
+			w = Math.ceil(w / scale);
+			h = Math.ceil(h / scale);
+			
+			trace(w+","+h);
 			
 			super(w, h, 60, true);
 			FP.screen.color = 0x202020;
