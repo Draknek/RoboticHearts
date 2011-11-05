@@ -102,6 +102,8 @@ package
 		
 		public override function init (): void
 		{
+			//touchscreen = true; // testing
+			
 			if (debug) {
 				try {
 					var profiler:* = new FlashPreloadProfiler();

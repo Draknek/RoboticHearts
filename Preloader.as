@@ -6,7 +6,10 @@ package
 	import flash.events.*;
 	import flash.utils.getDefinitionByName;
 
-	[SWF(width = "600", height = "460", backgroundColor="#202020")]
+	// iPhone: 480x320
+	// iPad: 1024x768
+	// Browser: 600x640?
+	[SWF(width = "480", height = "320", backgroundColor="#202020")]
 	public class Preloader extends Sprite
 	{
 		// Change these values
