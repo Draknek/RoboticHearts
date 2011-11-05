@@ -57,7 +57,7 @@ package
 			Level.loadLevels();
 
 			var w:int = 120;
-			var h:int = 120;
+			var h:int = 100;
 			
 			var scale:int = 4;
 			
@@ -74,9 +74,16 @@ package
 						scale = int(sizeX);
 					}
 			
-					w = Preloader.stageWidth / scale;
-					h = Preloader.stageHeight / scale;
+					w = Math.ceil(Preloader.stageWidth / scale);
+					h = Math.ceil(Preloader.stageHeight / scale);
 				} catch (e:Error) {}
+			}
+			
+			{
+				// mimic iphone
+				scale = 320/h;
+				w = Math.ceil(480 / scale);
+				h = Math.ceil(320 / scale);
 			}
 			
 			super(w, h, 60, true);
