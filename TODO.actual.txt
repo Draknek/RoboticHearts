@@ -1,0 +1,36 @@
+Touchscreen:
+
+Quit button on Android?
+Scores
+Return button on level story text doesn't work
+
+
+
+Browser:
+
+Get for mobile link
+Sponsor integration
+Update credits -- Newgrounds, graphics feedback
+Links get blocked: event listener
+
+
+
+Both:
+
+Include logging data about platform/website
+Update click data
+Skip should prompt for confirmation!
+Reduce max score from 50
+Subscores
+Extend levels into sides
+Cache score stats
+
+
+
+Wishlist:
+
+Fix heart beating offset
+Cog rotation spritemap OR render rotating images differently
+Better font
+
+
