@@ -267,12 +267,12 @@ package
 			
 			if (mode == "perfection") modeCode = "P";
 			
-			var levelIDDisplay:Text = new Text("Level " + modeCode+(id+1), 0, -1);
-			levelIDDisplay.x = FP.width + 2 - levelIDDisplay.width;
+			var levelIDDisplay:Text = new Text("Level " + modeCode+(id+1), 0, 0);
+			levelIDDisplay.x = FP.width + 1 - levelIDDisplay.width;
 			levelIDDisplay.scrollX = levelIDDisplay.scrollY = 0;
 			addGraphic(levelIDDisplay, -15);
 			
-			clickCounter = new Text("Clicks: 0", -1, FP.height - 10);
+			clickCounter = new Text("Clicks: 0", 0, FP.height - 11);
 			clickCounter.scrollX = clickCounter.scrollY = 0;
 			addGraphic(clickCounter);
 			
@@ -820,14 +820,20 @@ package
 			}, null, false, true);
 			
 			var xButtonOffset:Number = 30;
+			var yButtonOffset:Number = 2;
 			
 			next.x = FP.width*0.5 + xButtonOffset - next.width*0.5;
 			retry.x = FP.width*0.5 - xButtonOffset - retry.width*0.5;
 			submit.x = FP.width*0.5 + xButtonOffset - submit.width*0.5;
 			menu.x = FP.width*0.5 - xButtonOffset - menu.width*0.5;
 			
-			menu.y = submit.y = FP.height - 2 - retry.height;
-			next.y = retry.y = menu.y - 2 - next.height;
+			menu.y = submit.y = FP.height - yButtonOffset - retry.height;
+			
+			if (Main.touchscreen) {
+				menu.y = submit.y = FP.height;
+			}
+			
+			next.y = retry.y = menu.y - yButtonOffset - next.height;
 			
 			next.hoverColor = retry.hoverColor = submit.hoverColor = menu.hoverColor = Main.BLACK;
 			next.normalColor = retry.normalColor = submit.normalColor = menu.normalColor = Main.WHITE;
@@ -916,13 +922,13 @@ package
 			
 			var graph:Stamp = addGraph(md5);
 			
-			var padding:Number = (next.y - 8 - t2.height - graph.height) / 3.0;
+			graph.y = 11;
+			
+			var padding:Number = (next.y - t2.height - graph.height - graph.y) / 2.0;
 			
 			if (Main.expoMode) {
 				padding = (next.y - graph.height) / 2.0;
 			}
-			
-			graph.y = padding + 8;
 			
 			t.y = graph.y + 2;
 			
@@ -932,8 +938,11 @@ package
 			if (! Main.expoMode) addGraphic(t2, -15);
 			add(next);
 			add(retry);
-			add(submit);
-			add(menu);
+			
+			if (! Main.touchscreen) {
+				add(submit);
+				add(menu);
+			}
 		}
 		
 		public function getScore (n:int):int
@@ -1051,7 +1060,7 @@ package
 			g.scrollY = 0;
 			
 			g.x = (FP.width - bitmap2.width)*0.5;
-			g.y = 12;
+			g.y = 0;
 			
 			addGraphic(g, -15);
 			
