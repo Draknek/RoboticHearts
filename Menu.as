@@ -199,6 +199,8 @@ package
 			
 			var moreGames:Button = makeURLButton("More Games", "http://www.draknek.org/games/");
 			
+			var getOnMobile:Button = makeURLButton("Get mobile version", "http://www.draknek.org/games/hearts/mobile.php");
+			
 			var buttons:Array = [];
 			
 			if (Main.expoMode) {
@@ -220,6 +222,10 @@ package
 			
 			if (Logger.isLocal && ! Main.expoMode) {
 				buttons.push(resetData);
+			}
+			
+			if (! Main.expoMode && ! Main.touchscreen) {
+				buttons.push(getOnMobile);
 			}
 			
 			addElements(buttons);
