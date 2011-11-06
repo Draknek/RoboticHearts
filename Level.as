@@ -55,6 +55,12 @@ package
 		[Embed(source="levels/main.story.txt", mimeType="application/octet-stream")]
 		public static const STORY:Class;
 		
+		[Embed(source="images/r-to-reset.png")]
+		public static const R_RESETS_TEXT:Class;
+		
+		[Embed(source="images/undo-hint.png")]
+		public static const UNDO_HINT_TEXT:Class;
+		
 		public static var levelPacks:Object = {};
 		
 		public var storyText:Image;
@@ -270,6 +276,8 @@ package
 			clickCounter.scrollX = clickCounter.scrollY = 0;
 			addGraphic(clickCounter);
 			
+			var stamp:Stamp;
+			
 			if (mode == "normal") {
 				if (id == 0) {
 					addGraphic(new Text((Main.touchscreen ? "Tap" : "Click") + " cogs to\nrotate hearts", 0, 64, {align:"center", size:8, width: 96, leading: 3}));
@@ -278,10 +286,23 @@ package
 					addGraphic(new Text("Make all upright", 0, 74, {align:"center", size:8, width: 96}));
 				}
 				else if (id == 3) {
-					addGraphic(new Text("R to reset", 0, 74, {align:"center", size:8, width: 96}));
+					stamp = new Stamp(R_RESETS_TEXT);
+					stamp.x = 48 - stamp.width*0.5;
+					stamp.y = 74;
+					addGraphic(stamp);
 				}
-				else if (id == 4 && ! Main.touchscreen) {
-					addGraphic(new Text("Ctrl+Z to undo", 0, 74, {align:"center", size:8, width: 96}));
+				else if (id == 4) {
+					stamp = new Stamp(UNDO_HINT_TEXT);
+					stamp.x = 48 - stamp.width*0.5;
+					stamp.y = 74;
+					addGraphic(stamp);
+					
+					if (! Main.touchscreen && ! Main.expoMode) {
+						t = new Text("(or Ctrl+Z)", 0, 82, {align:"center", size:8, resizable: false, richText: "(or <pink>Ctrl+Z</pink>)"});
+						t.setStyle("pink", {color: Main.PINK});
+						t.x = 48 - t.width*0.5;
+						addGraphic(t);
+					}
 				}
 				/*else if (id == 5) {
 					addGraphic(new Text("Hint: try to keep\nsame-aligned\nhearts together", 0, 58, {align:"center", size:8, width: 96}));
