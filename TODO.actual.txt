@@ -2,7 +2,6 @@ Touchscreen:
 
 Quit button on Android?
 Scores
-Return button on level story text doesn't work
 
 
 

@@ -546,14 +546,15 @@ package
 			}
 			
 			if (storyText) {
-				if (Main.anyInput) {
-					FP.tween(storyText, {alpha: 0}, 30, {ease:Ease.sineOut});
-					storyText = null;
-				}
-				
 				menuButton.update();
 				muteButton.update();
 				muteOverlay.update();
+				
+				// Kinda hacky: used on touchscreens to let menu button work
+				if (Input.mouseCursor != "button" && Main.anyInput) {
+					FP.tween(storyText, {alpha: 0}, 30, {ease:Ease.sineOut});
+					storyText = null;
+				}
 				
 				return;
 			}

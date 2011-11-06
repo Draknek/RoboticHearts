@@ -102,7 +102,7 @@ package
 		
 		public override function init (): void
 		{
-			//touchscreen = true; // testing
+			touchscreen = true; // testing
 			
 			if (debug) {
 				try {
@@ -140,12 +140,12 @@ package
 				hadMouseDown = true;
 			}
 			
-			super.update();
-			
 			if (Input.mouseDown) {
 				Main.mouseX = FP.screen.mouseX;
 				Main.mouseY = FP.screen.mouseY;
 			}
+			
+			super.update();
 			
 			Audio.update();
 			
@@ -201,7 +201,9 @@ package
 		public static function get anyInput ():Boolean
 		{
 			if (touchscreen) {
-				ignoreNextAction = true;
+				if (Input.mousePressed) {
+					ignoreNextAction = true;
+				}
 				return Input.mousePressed;
 			} else {
 				return Input.mousePressed || Input.pressed(Key.ANY);
