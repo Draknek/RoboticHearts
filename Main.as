@@ -64,6 +64,10 @@ package
 			
 			var scale:int = 4;
 			
+			if (Preloader.resTest) {
+				Preloader.stage.scaleMode = StageScaleMode.NO_SCALE;
+			}
+			
 			if (touchscreen || expoMode) {
 				try {
 					Preloader.stage.displayState = StageDisplayState.FULL_SCREEN;
@@ -75,6 +79,8 @@ package
 				w = Preloader.stage.stageWidth;
 				h = Preloader.stage.stageHeight;
 			}
+			
+			trace(w+","+h);
 			
 			var sizeX:Number = w / targetW;
 			var sizeY:Number = h / targetH;
@@ -102,7 +108,7 @@ package
 		
 		public override function init (): void
 		{
-			touchscreen = true; // testing
+			//touchscreen = true; // testing
 			
 			if (debug) {
 				try {
@@ -158,6 +164,8 @@ package
 		public override function setStageProperties():void
 		{
 			super.setStageProperties();
+			
+			if (Preloader.resTest) { return; }
 			
 			if (touchscreen || expoMode) {
 				try {

@@ -12,8 +12,10 @@ package
 	[SWF(width = "480", height = "320", backgroundColor="#202020")]
 	public class Preloader extends Sprite
 	{
+		public static const resTest:Boolean = false;
+		
 		// Change these values
-		private static const mustClick: Boolean = false;
+		private static const mustClick: Boolean = resTest;
 		private static const mainClassName: String = "Main";
 		
 		private static const BG_COLOR:uint = 0x202020;
