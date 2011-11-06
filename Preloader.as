@@ -9,6 +9,8 @@ package
 	// iPhone: 480x320
 	// iPad: 1024x768
 	// Browser: 600x640?
+	// Some Android: 800x480?
+	// Some Android: 320x240?
 	[SWF(width = "480", height = "320", backgroundColor="#202020")]
 	public class Preloader extends Sprite
 	{

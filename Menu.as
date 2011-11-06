@@ -501,7 +501,29 @@ package
 			var ySpacing:int = 0 + b.height;
 			
 			var levelsPerRow:int = 6;
-			var startY:int = title.y + title.height + 8;
+			
+			do {
+				var levelCount:int = Level.levelPacks[mode].levels.length;
+				
+				if (mode == "normal") {
+					levelCount -= 1;
+				}
+				
+				var rows:int = Math.ceil(levelCount / levelsPerRow);
+			
+				var startY:int = title.y + title.height;
+			
+				var padding:int = (FP.height - startY - b.height * rows) * 0.5;
+			
+				startY += padding;
+				
+				if (padding < 0) {
+					levelsPerRow++;
+					continue;
+				} else {
+					break;
+				}
+			} while (true);
 			
 			if (mode == "perfection") {
 				levelsPerRow = 5;
