@@ -260,7 +260,7 @@ package
 			Audio.muteOverlay = muteOverlay;
 			
 			if (levelPacks[mode].levels[id+1]) {
-				add(new Button(FP.width-8 - buttonPadding, FP.height-10, Button.SKIP, skip, "Skip level", false, true, buttonPadding));
+				add(new Button(FP.width-8 - buttonPadding, FP.height-10, Button.SKIP, skipPrompt, "Skip level", false, true, buttonPadding));
 			}
 			
 			var modeCode:String = "";
@@ -404,6 +404,11 @@ package
 		public function skip ():void
 		{
 			FP.world = new Level(id+1, mode);
+		}
+		
+		public function skipPrompt ():void
+		{
+			skip();
 		}
 		
 		public function reset ():void
