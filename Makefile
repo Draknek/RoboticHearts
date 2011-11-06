@@ -15,7 +15,7 @@ all:
 #-compiler.include-libraries ../lib/as3-qrcode-encoder/bin/as3-qrcode-encoder.swc
 
 update-db:
-	fcsh-wrap -optimize=true -output update-db.swf -static-link-runtime-shared-libraries=true -compatibility-version=3.0.0 --target-player=10.0.0 -compiler.debug=true UpdateDB.as
+	fcsh-wrap -optimize=true -output update-db.swf -static-link-runtime-shared-libraries=true -compatibility-version=3.0.0 --target-player=10.0.0 -compiler.debug=true UpdateDB.as -compiler.include-libraries ../lib/FlashPreloadProfiler/FlashPreloadProfiler.swc
 	flash-player-10.2 update-db.swf
 
 

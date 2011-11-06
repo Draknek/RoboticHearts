@@ -25,7 +25,8 @@ package
 		public static var clickStats:Object = {};
 		public static var scoreStats:Object = {};
 		
-		public static const VERSION:String = "g";
+		// h: before redoing levels to match screen size
+		public static const VERSION:String = "h";
 		
 		private static var FGL:GameTracker;
 		
