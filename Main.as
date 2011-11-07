@@ -108,7 +108,7 @@ package
 		
 		public override function init (): void
 		{
-			//touchscreen = true; // testing
+			touchscreen = true; // testing
 			
 			if (debug) {
 				try {
@@ -212,7 +212,7 @@ package
 				if (Input.mousePressed) {
 					ignoreNextAction = true;
 				}
-				return Input.mousePressed;
+				return Input.mousePressed || Input.pressed(Key.ANY);
 			} else {
 				return Input.mousePressed || Input.pressed(Key.ANY);
 			}

@@ -770,9 +770,9 @@ package
 		public override function render (): void
 		{
 			if (editing) {
-				for (var x:int = 4; x < FP.width; x += 8) {
-					for (var y:int = 4; y < FP.width; y += 8) {
-						Draw.rect(x-1+camera.x, y-1+camera.y, 2, 2, Main.GREY);
+				for (var x:int = 4 + Math.floor(camera.x/8)*8; x < FP.width; x += 8) {
+					for (var y:int = 4 + Math.floor(camera.y/8)*8; y < FP.width; y += 8) {
+						Draw.rect(x-1, y-1, 2, 2, Main.GREY);
 					}
 				}
 				

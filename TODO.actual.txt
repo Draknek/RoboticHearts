@@ -31,5 +31,6 @@ Wishlist:
 Fix heart beating offset
 Cog rotation spritemap OR render rotating images differently
 Better font
+Cogs get misaligned by a pixel
 
 
