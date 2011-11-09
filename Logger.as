@@ -26,7 +26,9 @@ package
 		public static var scoreStats:Object = {};
 		
 		// h: before redoing levels to match screen size
-		public static const VERSION:String = "h";
+		// i: after redoing levels, but reserved for pretend stats
+		// j: actual players
+		public static const VERSION:String = "j";
 		
 		private static var FGL:GameTracker;
 		
