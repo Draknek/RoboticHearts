@@ -7,6 +7,7 @@ package
 	import flash.system.Security;
 	import flash.events.*;
 	import flash.net.*;
+	import flash.system.*;
 	
 	import com.adobe.crypto.MD5;
 	import com.adobe.serialization.json.JSON;
@@ -64,7 +65,13 @@ package
 				Main.so.flush();
 			}
 			
-			magic("get.php?newuser=1&version=" + VERSION, setUID);
+			var host:String = FP.stage.loaderInfo.url;
+			
+			if (! host || host.substr(0,4) != 'http') {
+				host = Capabilities.os;
+			}
+			
+			magic("get.php?newuser=1&version=" + VERSION + "&host=" + escape(host), setUID);
 		}
 		
 		public static function getScores (): void
@@ -109,7 +116,7 @@ package
 				getUID();
 			}
 			
-			getScoreStats();
+			//getScoreStats();
 			
 			var now:Number = (new Date()).getTime();
 		
