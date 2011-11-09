@@ -11,7 +11,7 @@ package
 	// Browser: 600x480?
 	// Some Android: 800x480?
 	// Some Android: 320x240?
-	[SWF(width = "600", height = "480", backgroundColor="#202020")]
+	[SWF(width = "512", height = "384", backgroundColor="#202020")]
 	public class Preloader extends Sprite
 	{
 		public static const resTest:Boolean = false;

@@ -19,9 +19,7 @@ Both:
 Include logging data about platform/website
 Update click data
 Skip should prompt for confirmation!
-Reduce max score from 50
 Subscores
-Extend levels into sides
 Cache score stats
 
 

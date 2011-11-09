@@ -190,6 +190,14 @@ package
 					y = y*8 + 8;
 				}
 				
+				if (x % 4 != 0) {
+					x = Math.round(x / 4) * 4;
+				}
+				
+				if (y % 4 != 0) {
+					y = Math.round(y / 4) * 4;
+				}
+				
 				add(new Cog(x, y));
 			}
 			
@@ -203,6 +211,14 @@ package
 				if (version == 0) {
 					x = x*8 + 4;
 					y = y*8 + 4;
+				}
+				
+				if (x % 4 != 0) {
+					x = Math.round(x / 4) * 4;
+				}
+				
+				if (y % 4 != 0) {
+					y = Math.round(y / 4) * 4;
 				}
 				
 				add(new Heart(x, y, rot));
@@ -511,8 +527,8 @@ package
 		
 		public override function update (): void
 		{
-			camera.x = -(FP.width - 96)*0.5;
-			camera.y = -(FP.height - 96)*0.5;
+			camera.x = int(-(FP.width - 96)*0.5);
+			camera.y = int(-(FP.height - 96)*0.5);
 			
 			Input.mouseCursor = "auto";
 			
@@ -776,8 +792,8 @@ package
 					}
 				}
 				
-				x = mouseX - ((mouseX + 2) % 4) + 2;
-				y = mouseY - ((mouseY + 2) % 4) + 2;
+				x = Math.round(mouseX / 4) * 4;
+				y = Math.round(mouseY / 4) * 4;
 				
 				Draw.rect(x-1, y-1, 2, 2, Main.PINK);
 			}
@@ -958,8 +974,8 @@ package
 		
 		public function removeUnderMouse (): void
 		{
-			var x:int = mouseX - ((mouseX + 2) % 4) + 2;
-			var y:int = mouseY - ((mouseY + 2) % 4) + 2;
+			var x:int = Math.round(mouseX / 4) * 4;
+			var y:int = Math.round(mouseY / 4) * 4;
 			
 			a.length = 0;
 			
@@ -978,8 +994,8 @@ package
 		{
 			hackBool = false;
 			
-			var x:int = mouseX - ((mouseX + 2) % 4) + 2;
-			var y:int = mouseY - ((mouseY + 2) % 4) + 2;
+			var x:int = Math.round(mouseX / 4) * 4;
+			var y:int = Math.round(mouseY / 4) * 4;
 			
 			if (lastHeart) {
 				var dx:int = lastHeart.x - x;
@@ -1007,8 +1023,8 @@ package
 		
 		public function makeCog (): void
 		{
-			var x:int = mouseX - ((mouseX + 2) % 4) + 2;
-			var y:int = mouseY - ((mouseY + 2) % 4) + 2;
+			var x:int = Math.round(mouseX / 4) * 4;
+			var y:int = Math.round(mouseY / 4) * 4;
 			
 			a.length = 0;
 			
