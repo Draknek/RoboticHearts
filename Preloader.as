@@ -6,12 +6,12 @@ package
 	import flash.events.*;
 	import flash.utils.getDefinitionByName;
 
-	// iPhone: 480x320
-	// iPad: 1024x768
-	// Browser: 600x480?
-	// Some Android: 800x480?
-	// Some Android: 320x240?
-	[SWF(width = "512", height = "384", backgroundColor="#202020")]
+	// iPhone: 480x320 => 160x107
+	// iPad: 1024x768 => 147x110 (test with 735x550)
+	// Browser: 600x480? => 150x120
+	// Some Android: 800x480 => 200x120
+	// Some Android: 320x240 => 160x120
+	[SWF(width = "735", height = "550", backgroundColor="#202020")]
 	public class Preloader extends Sprite
 	{
 		public static const resTest:Boolean = false;

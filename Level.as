@@ -237,6 +237,8 @@ package
 			
 			var buttonPadding:int = Main.touchscreen ? 3 : 1;
 			
+			if (FP.width < 149 && buttonPadding > 2) buttonPadding = 2;
+			
 			add(redoButton = new Button(0, 0, Button.REDO, redo, "Redo", true, true, buttonPadding));
 			add(undoButton = new Button(0, 0, Button.UNDO, undo, "Undo", true, true, buttonPadding));
 			add(resetButton = new Button(0, 0, Button.RESET, reset, "Reset", false, true, buttonPadding));
