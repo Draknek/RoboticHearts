@@ -7,7 +7,7 @@ Scores
 
 Browser:
 
-Get for mobile link
+Get for mobile webpage
 Sponsor integration
 Update credits -- Newgrounds, graphics feedback
 Links get blocked: event listener
@@ -16,7 +16,7 @@ Links get blocked: event listener
 
 Both:
 
-Include logging data about platform/website
+Do something with logging data about platform/website
 Update click data
 Skip should prompt for confirmation!
 Subscores
