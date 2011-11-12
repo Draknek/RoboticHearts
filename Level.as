@@ -290,7 +290,7 @@ package
 			levelIDDisplay.scrollX = levelIDDisplay.scrollY = 0;
 			addGraphic(levelIDDisplay, -15);
 			
-			clickCounter = new Text("Clicks: 0", 0, FP.height - 11);
+			clickCounter = new Text(Main.clicks_string + ": 0", 0, FP.height - 11);
 			clickCounter.scrollX = clickCounter.scrollY = 0;
 			addGraphic(clickCounter);
 			
@@ -782,7 +782,7 @@ package
 			
 			super.update();
 			
-			clickCounter.text = "Clicks: " + clicks+"/"+minClicks;
+			clickCounter.text = Main.clicks_string + ": " + clicks+"/"+minClicks;
 		}
 		
 		public override function render (): void
@@ -862,7 +862,7 @@ package
 			// first score OR same score OR better score OR worse score
 			// optimal score OR non-optimal OR beaten optimal
 			
-			var clickText:String = "<pink>Clicks: " + clicks + "</pink>";
+			var clickText:String = "<pink>" + Main.clicks_string + ": " + clicks + "</pink>";
 			var previousBestText:String;
 			var bestPossibleText:String;
 			
@@ -885,10 +885,10 @@ package
 			t.richText = t.text;
 			
 			if (clicks < minClicks) {
-				t.text = "Clicks: " + clicks + "\nNew record!";
+				t.text = Main.clicks_string + ": " + clicks + "\nNew record!";
 				t.color = Main.PINK;
 				
-				var alert:String = "Completed " + mode + " level " + id + " (" + md5 + ") in " + clicks + " clicks (prev best: " + minClicks + ")";
+				var alert:String = "Completed " + mode + " level " + id + " (" + md5 + ") in " + clicks + " " + Main.clicks_string_lower + " (prev best: " + minClicks + ")";
 				
 				Logger.alert(alert);
 			}

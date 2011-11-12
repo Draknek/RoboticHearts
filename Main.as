@@ -26,6 +26,9 @@ package
 		
 		public static const SAVEFILE_VERSION:uint = 1;
 		
+		public static var clicks_string:String = "Clicks";
+		public static var clicks_string_lower:String;
+		
 		public static const so:SharedObject = SharedObject.getLocal("hearts", "/");
 		
 		
@@ -109,6 +112,12 @@ package
 		public override function init (): void
 		{
 			touchscreen = true; // testing
+			
+			if (touchscreen) {
+				clicks_string = "Taps";
+			}
+			
+			clicks_string_lower = clicks_string.toLowerCase();
 			
 			if (debug) {
 				try {

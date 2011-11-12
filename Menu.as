@@ -278,6 +278,8 @@ package
 			
 			var buttonPadding:int = Main.touchscreen ? 3 : 1;
 			
+			if (FP.width < 149 && buttonPadding > 2) buttonPadding = 2;
+			
 			muteButton = new Button(0, 0, Button.AUDIO, Audio.toggleMute, "Mute", false, false, buttonPadding);
 			muteOverlay = new Button(0, 0, Button.AUDIO_MUTE, null, "Unmute", false, false, buttonPadding);
 			
@@ -553,7 +555,7 @@ package
 				} else {
 					b.normalColor = 0x00FF00;
 				}
-				b.helpText = "Completed\n" + Main.so.data.levels[md5].leastClicks + "/" + Level.levelPacks[mode].minClicksArray[i] + " clicks";
+				b.helpText = "Completed\n" + Main.so.data.levels[md5].leastClicks + "/" + Level.levelPacks[mode].minClicksArray[i] + " " + Main.clicks_string_lower;
 			} else {
 				b.helpText = "Not completed";
 			}
