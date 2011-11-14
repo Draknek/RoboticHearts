@@ -958,7 +958,12 @@ package
 			add(retry);
 			
 			if (! Main.touchscreen) {
-				add(submit);
+				if (Scores.canSubmit) {
+					add(submit);
+				} else {
+					menu.x = (FP.width - menu.width) * 0.5;
+				}
+				
 				add(menu);
 			}
 		}
