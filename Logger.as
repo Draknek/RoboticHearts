@@ -98,6 +98,8 @@ package
 		
 		public static function connect (obj: DisplayObjectContainer): void
 		{
+			Scores.init();
+			
 			isLocal = (obj.stage.loaderInfo.loaderURL.substr(0, 7) == 'file://');
 			
 			var host:String = /*isLocal ? "draknek.dev/games/hearts/db" :*/ "hearts.draknek.org";

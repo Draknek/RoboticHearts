@@ -148,6 +148,8 @@ package
 				switchScreen();
 			});
 			
+			highScoresButton = new Button(0, 0, new Text("High Scores"), Scores.showScores);
+			
 			var graphicsButton:Button = new Button(0, 0, new Text("Change graphics"), function ():void {
 				if (tween) tween.cancel();
 				tween = FP.tween(FP.camera, {y: FP.height}, 30, {ease: Ease.sineIn});
@@ -210,7 +212,7 @@ package
 			buttons.push(playButton);
 			buttons.push(levelsButton);
 			
-			if (false) {
+			if (! Main.touchscreen) {
 				buttons.push(highScoresButton);
 			}
 			
@@ -220,7 +222,7 @@ package
 				buttons.push(moreGames);
 			}
 			
-			if (Logger.isLocal && ! Main.expoMode) {
+			if (false && Logger.isLocal && ! Main.expoMode) {
 				buttons.push(resetData);
 			}
 			

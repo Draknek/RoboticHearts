@@ -134,7 +134,7 @@ package
 				catch (e:Error) {}
 			}
 			
-			sitelock(["draknek.org", "draknek.dev", "flashgamelicense.com"]);
+			sitelock(["draknek.org", "draknek.dev", "flashgamelicense.com", "newgrounds.com", "ungrounded.net"]);
 			
 			super.init();
 			

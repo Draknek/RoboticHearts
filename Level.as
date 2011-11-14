@@ -823,8 +823,8 @@ package
 			}, null, false, true);
 			
 			var submit:Button = new Button(0, 0, new Text("Submit", 0, 0, {size: 8}), function ():void {
-				//
-			}, null, true, true);
+				Scores.submitScore();
+			}, null, false, true);
 			
 			if (Main.expoMode) {
 				submit = new Button(0, 0, new Text("New player", 0, 0, {size: 8}), function ():void {
