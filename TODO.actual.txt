@@ -1,6 +1,5 @@
 Touchscreen:
 
-Quit button on Android?
 Scores
 
 
@@ -18,7 +17,6 @@ Both:
 
 Do something with logging data about platform/website
 Update click data
-Skip should prompt for confirmation!
 Subscores
 Cache score stats
 
@@ -26,6 +24,7 @@ Cache score stats
 
 Wishlist:
 
+Skip should prompt for confirmation!
 Fix heart beating offset
 Cog rotation spritemap OR render rotating images differently
 Better font

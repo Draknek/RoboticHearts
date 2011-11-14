@@ -10,6 +10,7 @@ package
 	import flash.events.*;
 	import flash.ui.*;
 	import flash.utils.*;
+	import flash.system.*;
 	
 	import net.jpauclair.*;
 	
@@ -23,6 +24,7 @@ package
 		public static var touchscreen:Boolean = false;
 		public static var expoMode:Boolean = false;
 		public static var debug:Boolean = false;
+		public static var isAndroid:Boolean = false;
 		
 		public static const SAVEFILE_VERSION:uint = 1;
 		
@@ -49,6 +51,10 @@ package
 					MultiTouch.inputMode = "none";
 				}
 			} catch (e:Error){}
+			
+			if (Capabilities.manufacturer.toLowerCase().indexOf("android") >= 0) {
+				isAndroid = true;
+			}
 			
 			Text.font = "7x5";
 			Text.size = 8;
@@ -111,7 +117,7 @@ package
 		
 		public override function init (): void
 		{
-			touchscreen = true; // testing
+			//touchscreen = true; // testing
 			
 			if (touchscreen) {
 				clicks_string = "Taps";

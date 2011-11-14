@@ -228,6 +228,15 @@ package
 				buttons.push(getOnMobile);
 			}
 			
+			if (Main.isAndroid) {
+				buttons.push(new Button(0, 0, "Quit", function ():void {
+					try {
+						var NativeApplication:Class = getDefinitionByName("flash.desktop.NativeApplication") as Class;
+						NativeApplication.nativeApplication.exit();
+					} catch (e:Error) {}
+				}));
+			}
+			
 			addElements(buttons);
 			
 			var yourScore:Text = new Text("Your score: #", 0, 0, {color: Main.GREY, leading: 2});
