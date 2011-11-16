@@ -199,7 +199,7 @@ package
 				}
 			}
 			
-			var moreGames:Button = makeURLButton("More Games", "http://www.draknek.org/games/");
+			var moreGames:Button = makeURLButton("More Games", "http://www.newgrounds.com/");
 			
 			var getOnMobile:Button = makeURLButton("Get mobile version", "http://www.draknek.org/games/hearts/mobile.php");
 			
@@ -212,7 +212,7 @@ package
 			buttons.push(playButton);
 			buttons.push(levelsButton);
 			
-			if (! Main.touchscreen) {
+			if (Scores.hasScoreboard && ! Main.touchscreen) {
 				buttons.push(highScoresButton);
 			}
 			
