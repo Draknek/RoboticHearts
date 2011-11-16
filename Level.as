@@ -589,9 +589,9 @@ package
 				resetState();
 			}
 			
-			if (Main.debug && Input.pressed(Key.G)) {
+			/*if (Main.debug && Input.pressed(Key.G)) {
 				addGraph(Logger.clickStats[MD5.hashBytes(data)]);
-			}
+			}*/
 			
 			if (editing) {
 				if (Input.check(Key.SHIFT)) {
@@ -868,10 +868,19 @@ package
 			
 			if (clicks <= minClicks) {
 				clickText += "\nBest possible!";
-			} else if (previousBestText && previousBest <= minClicks) {
-				previousBestText += "\n(best possible)";
 			} else {
 				bestPossibleText = "Best possible: " + minClicks;
+				
+				if (Main.touchscreen) {
+					if (previousBest != clicks) {
+						previousBestText = "Previous best: " + previousBest;
+					}
+				
+					if (minClicks == previousBest) {
+						previousBestText = "Previous best: " + previousBest;
+						bestPossibleText = "(Best possible)";
+					}
+				}
 			}
 			
 			var t:Text = new Text(clickText, 1, 0, {align:"center", size:8, width: FP.width - 1, leading: 2});
@@ -882,8 +891,6 @@ package
 			if (previousBestText) t.text += "\n" + previousBestText;
 			if (bestPossibleText) t.text += "\n" + bestPossibleText;
 			
-			t.richText = t.text;
-			
 			if (clicks < minClicks) {
 				t.text = Main.clicks_string + ": " + clicks + "\nNew record!";
 				t.color = Main.PINK;
@@ -892,6 +899,8 @@ package
 				
 				Logger.alert(alert);
 			}
+			
+			t.richText = t.text;
 			
 			var score:int = getScore(clicks);
 			var prevBestScore:int = (previousBest) ? getScore(previousBest) : 0;
@@ -938,9 +947,13 @@ package
 			
 			FP.tween(numberString, {value:totalScore}, 30);
 			
-			var graph:Stamp = addGraph(md5);
+			var graph:Stamp = addGraph(md5, t);
 			
 			graph.y = 11;
+			
+			if (Main.touchscreen) {
+				graph.y = (FP.height - graph.height) * 0.5;
+			}
 			
 			var padding:Number = (next.y - t2.height - graph.height - graph.y) / 2.0;
 			
@@ -953,7 +966,7 @@ package
 			t2.y = graph.y + graph.height + padding;
 			
 			addGraphic(t, -15);
-			if (! Main.expoMode) addGraphic(t2, -15);
+			if (! Main.touchscreen && ! Main.expoMode) addGraphic(t2, -15);
 			add(next);
 			add(retry);
 			
@@ -1045,7 +1058,7 @@ package
 			add(new Cog(x, y));
 		}
 		
-		public function addGraph (data:Object): Stamp
+		public function addGraph (data:Object, text:Text): Stamp
 		{
 			if (data is String) {
 				data = Logger.clickStats[data];
@@ -1064,7 +1077,9 @@ package
 			
 			var bitmap1:BitmapData = Graph.makeGraph(data, params);
 			
-			var bitmap2:BitmapData = new BitmapData(90, bitmap1.height + 24, false, Main.GREY);
+			var extraHeight:int = text.height;
+			
+			var bitmap2:BitmapData = new BitmapData(90, bitmap1.height + extraHeight, false, Main.GREY);
 			
 			FP.rect.x = 1;
 			FP.rect.y = 1;

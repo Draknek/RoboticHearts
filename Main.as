@@ -117,7 +117,7 @@ package
 		
 		public override function init (): void
 		{
-			//touchscreen = true; // testing
+			touchscreen = true; // testing
 			
 			if (touchscreen) {
 				clicks_string = "Taps";
