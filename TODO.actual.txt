@@ -1,6 +1,6 @@
 Touchscreen:
 
-Scores
+Nothing?!
 
 
 
@@ -10,6 +10,8 @@ Get for mobile webpage
 Sponsor integration
 Update credits -- Newgrounds, graphics feedback
 Links get blocked: event listener
+Subscores
+Cache score stats
 
 
 
@@ -17,8 +19,6 @@ Both:
 
 Do something with logging data about platform/website
 Update click data
-Subscores
-Cache score stats
 
 
 

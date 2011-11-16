@@ -68,7 +68,7 @@ package
 			var host:String = FP.stage.loaderInfo.url;
 			
 			if (! host || host.substr(0,4) != 'http') {
-				host = Capabilities.os;
+				host = Capabilities.manufacturer + " -- " + Capabilities.os;
 			}
 			
 			magic("get.php?newuser=1&version=" + VERSION + "&host=" + escape(host), setUID);
