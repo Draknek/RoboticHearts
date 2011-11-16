@@ -871,7 +871,7 @@ package
 			} else {
 				bestPossibleText = "Best possible: " + minClicks;
 				
-				if (Main.touchscreen) {
+				if (Main.touchscreen && previousBest) {
 					if (previousBest != clicks) {
 						previousBestText = "Previous best: " + previousBest;
 					}
