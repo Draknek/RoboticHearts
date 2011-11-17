@@ -1,6 +1,9 @@
 Touchscreen:
 
-Nothing?!
+Put link to website in
+More icon resolutions
+App display name?
+Queue score-submits when no internet
 
 
 
@@ -29,5 +32,6 @@ Fix heart beating offset
 Cog rotation spritemap OR render rotating images differently
 Better font
 Cogs get misaligned by a pixel
+orientation-switching
 
 
