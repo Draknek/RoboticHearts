@@ -8,6 +8,7 @@ package
 	import flash.display.*;
 	import flash.net.*;
 	import flash.utils.*;
+	import flash.system.*;
 	
 	import com.adobe.crypto.*;
 	
@@ -158,7 +159,9 @@ package
 				switchScreen();
 			});
 			
-			var creditsButton:Button = new Button(0, 0, new Text("Credits"), function ():void {
+			var creditsText:String = Main.touchscreen ? "Full credits" : "Credits";
+			
+			var creditsButton:Button = new Button(0, 0, new Text(creditsText), function ():void {
 				backButton2.x = (FP.width - backButton2.width) * 0.5;
 				backButton2.y = FP.height*2 - 14;
 				
@@ -201,6 +204,10 @@ package
 			
 			var moreGames:Button = makeURLButton("More Games", "http://www.newgrounds.com/");
 			
+			if (Main.touchscreen) {
+				moreGames = makeURLButton("By Alan Hazelden", "http://www.draknek.org/?ref=throm&platform=" + escape(Capabilities.manufacturer));
+			}
+			
 			var getOnMobile:Button = makeURLButton("Get mobile version", "http://www.draknek.org/games/hearts/mobile.php");
 			
 			var buttons:Array = [];
@@ -216,9 +223,13 @@ package
 				buttons.push(highScoresButton);
 			}
 			
+			if (Main.touchscreen) {
+				buttons.push(moreGames);
+			}
+			
 			buttons.push(creditsButton);
 			
-			if (! Main.expoMode && ! Main.touchscreen) {
+			if (! Main.touchscreen && ! Main.expoMode) {
 				buttons.push(moreGames);
 			}
 			
