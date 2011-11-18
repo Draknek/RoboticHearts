@@ -33,26 +33,67 @@ package
 		
 		private static var FGL:GameTracker;
 		
+		private static var queueA:Array = [];
+		private static var httpActive:Boolean = false;
+		
 		public static function magic (query:String, f:Function = null): void
 		{
+			if (f != null) {
+				queueA.push({q: query, f: f});
+			} else {
+				Main.so.data.httpQueue.push(query);
+			}
+			
+			if (! httpActive) {
+				doQueuedMagic();
+			}
+		}
+		
+		private static function doQueuedMagic (): void
+		{
+			var query:String;
+			var f:Function;
+			
+			var queue:Array;
+			
+			if (queueA.length) {
+				queue = queueA;
+				query = queue[0].q;
+				f = queue[0].f;
+			} else if (Main.so.data.httpQueue.length) {
+				queue = Main.so.data.httpQueue;
+				query = queue[0];
+			} else {
+				httpActive = false;
+				return;
+			}
+			
+			httpActive = true;
+			
 			var request:URLRequest = new URLRequest(DB + query);
 			
 			function doComplete ():void
 			{
-				f(loader.data);
+				if (f != null) {
+					f(loader.data);
+				}
+				
+				queue.shift();
+				
+				doQueuedMagic();
 			}
 			
-			function nullErrorHandler ():void {}
+			function errorHandler ():void {
+				httpActive = false;
+				
+				trace("Query failed: " + query);
+			}
 
 			var loader:URLLoader = new URLLoader();
 			
-			if (f != null) {
-				loader.addEventListener(Event.COMPLETE, doComplete);
-			}
+			loader.addEventListener(Event.COMPLETE, doComplete);
 			
-			if (! isLocal) {
-				loader.addEventListener(IOErrorEvent.IO_ERROR, nullErrorHandler);
-			}
+			loader.addEventListener(IOErrorEvent.IO_ERROR, errorHandler);
 			
 			loader.load(request);
 		}

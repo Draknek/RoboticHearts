@@ -43,6 +43,7 @@ package
 		{
 			if (! so.data.levels) so.data.levels = {};
 			if (! so.data.totalScore) so.data.totalScore = 0;
+			if (! so.data.httpQueue) so.data.httpQueue = [];
 			
 			try {
 				var MultiTouch:Class = getDefinitionByName("flash.ui.Multitouch") as Class;

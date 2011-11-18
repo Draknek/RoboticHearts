@@ -1,9 +1,6 @@
 Touchscreen:
 
-Put link to website in
 More icon resolutions
-App display name?
-Queue score-submits when no internet
 
 
 
@@ -11,7 +8,6 @@ Browser:
 
 Get for mobile webpage
 Sponsor integration
-Update credits -- Newgrounds, graphics feedback
 Links get blocked: event listener
 Subscores
 Cache score stats
@@ -21,7 +17,7 @@ Cache score stats
 Both:
 
 Do something with logging data about platform/website
-Update click data
+Update credits -- Newgrounds, graphics feedback
 
 
 
