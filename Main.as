@@ -118,6 +118,22 @@ package
 		
 		public override function init (): void
 		{
+			try {
+				var StageOrientation:Class = getDefinitionByName("flash.display.StageOrientation") as Class;
+				var StageOrientationEvent:Class = getDefinitionByName("flash.events.StageOrientationEvent") as Class;
+				var startOrientation:String = FP.stage["orientation"];
+				if (startOrientation == StageOrientation.DEFAULT || startOrientation == StageOrientation.UPSIDE_DOWN)
+				{
+					FP.stage["setOrientation"](StageOrientation.ROTATED_RIGHT);
+				}
+				else
+				{
+					FP.stage["setOrientation"](startOrientation);
+				}                    
+
+				FP.stage.addEventListener(StageOrientationEvent.ORIENTATION_CHANGING, orientationChangeListener);
+			} catch (e:Error){}
+
 			touchscreen = true; // testing
 			
 			if (touchscreen) {
@@ -311,6 +327,15 @@ package
 			event.stopImmediatePropagation();
 			} catch (e:Error) { FP.log(e + ": key listener"); }
 		}
+		
+		private function orientationChangeListener(e:*): void
+		{
+			if (e.afterOrientation == "default" || e.afterOrientation ==  "upsideDown")
+			{
+				e.preventDefault();
+			}
+		}
+
 	}
 }
 
