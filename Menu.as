@@ -159,7 +159,7 @@ package
 				switchScreen();
 			});
 			
-			var creditsText:String = Main.touchscreen ? "Full credits" : "Credits";
+			var creditsText:String = Main.touchscreen ? "Credits" : "Credits";
 			
 			var creditsButton:Button = new Button(0, 0, new Text(creditsText), function ():void {
 				backButton2.x = (FP.width - backButton2.width) * 0.5;
@@ -224,7 +224,7 @@ package
 			}
 			
 			if (Main.touchscreen) {
-				buttons.push(moreGames);
+			//	buttons.push(moreGames);
 			}
 			
 			buttons.push(creditsButton);
