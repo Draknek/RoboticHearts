@@ -6,7 +6,7 @@ else
 DEBUG_FLAG := false
 endif
 
-LIBS=-compiler.include-libraries ../lib/FlashPreloadProfiler/FlashPreloadProfiler.swc -compiler.include-libraries ../lib/Newgrounds/NewgroundsAPI.swc
+LIBS=-compiler.include-libraries lib/FlashPreloadProfiler.swc -compiler.include-libraries lib/NewgroundsAPI.swc
 
 all:
 	cd levels && python build.py
