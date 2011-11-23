@@ -301,6 +301,8 @@ package
 			var buttonPadding:int = Main.touchscreen ? 3 : 1;
 			
 			if (FP.width < 149 && buttonPadding > 2) buttonPadding = 2;
+			if (FP.width > 170) buttonPadding = 4;
+			if (FP.width > 180) buttonPadding = 5;
 			
 			muteButton = new Button(0, 0, Button.AUDIO, Audio.toggleMute, "Mute", false, false, buttonPadding);
 			muteOverlay = new Button(0, 0, Button.AUDIO_MUTE, null, "Unmute", false, false, buttonPadding);
