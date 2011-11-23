@@ -41,6 +41,10 @@ package
 		
 		public function Main ()
 		{
+			if (Capabilities.manufacturer.toLowerCase().indexOf("android") >= 0) {
+				isAndroid = true;
+			}
+			
 			if (! so.data.levels) so.data.levels = {};
 			if (! so.data.totalScore) so.data.totalScore = 0;
 			if (! so.data.httpQueue) so.data.httpQueue = [];
@@ -52,10 +56,6 @@ package
 					MultiTouch.inputMode = "none";
 				}
 			} catch (e:Error){}
-			
-			if (Capabilities.manufacturer.toLowerCase().indexOf("android") >= 0) {
-				isAndroid = true;
-			}
 			
 			Text.font = "7x5";
 			Text.size = 8;
@@ -85,6 +85,12 @@ package
 				
 				w = Preloader.stage.fullScreenWidth;
 				h = Preloader.stage.fullScreenHeight;
+				
+				if (isAndroid && w < h) {
+					var tmp:int = w;
+					w = h;
+					h = tmp;
+				}
 			} else {
 				w = Preloader.stage.stageWidth;
 				h = Preloader.stage.stageHeight;
@@ -118,21 +124,23 @@ package
 		
 		public override function init (): void
 		{
-			try {
-				var StageOrientation:Class = getDefinitionByName("flash.display.StageOrientation") as Class;
-				var StageOrientationEvent:Class = getDefinitionByName("flash.events.StageOrientationEvent") as Class;
-				var startOrientation:String = FP.stage["orientation"];
-				if (startOrientation == StageOrientation.DEFAULT || startOrientation == StageOrientation.UPSIDE_DOWN)
-				{
-					FP.stage["setOrientation"](StageOrientation.ROTATED_RIGHT);
-				}
-				else
-				{
-					FP.stage["setOrientation"](startOrientation);
-				}                    
+			if (! isAndroid) {
+				try {
+					var StageOrientation:Class = getDefinitionByName("flash.display.StageOrientation") as Class;
+					var StageOrientationEvent:Class = getDefinitionByName("flash.events.StageOrientationEvent") as Class;
+					var startOrientation:String = FP.stage["orientation"];
+					if (startOrientation == StageOrientation.DEFAULT || startOrientation == StageOrientation.UPSIDE_DOWN)
+					{
+						FP.stage["setOrientation"](StageOrientation.ROTATED_RIGHT);
+					}
+					else
+					{
+						FP.stage["setOrientation"](startOrientation);
+					}
 
-				FP.stage.addEventListener(StageOrientationEvent.ORIENTATION_CHANGING, orientationChangeListener);
-			} catch (e:Error){}
+					FP.stage.addEventListener(StageOrientationEvent.ORIENTATION_CHANGING, orientationChangeListener);
+				} catch (e:Error){}
+			}
 
 			touchscreen = true; // testing
 			
