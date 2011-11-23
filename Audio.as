@@ -83,6 +83,12 @@ package
 		
 		public static function stopMusic ():void
 		{
+			if (Main.isAndroid) {
+				music.stop();
+				channels["rotate"].stop();
+				channels["rotate"] = null;
+			}
+			
 			volTween.tween(music, "volume", 0.0, 30);
 		}
 		
