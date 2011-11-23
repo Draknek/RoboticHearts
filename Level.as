@@ -542,7 +542,7 @@ package
 				return;
 			}
 			
-			if (! FP.focused && FP.stage.displayState != StageDisplayState.FULL_SCREEN) {
+			if (! FP.focused && (Main.touchscreen || FP.stage.displayState != StageDisplayState.FULL_SCREEN)) {
 				wasUnfocused = true;
 				return;
 			}
