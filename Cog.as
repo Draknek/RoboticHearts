@@ -7,7 +7,7 @@ package
 	
 	public class Cog extends Entity
 	{
-		[Embed(source="cog.png")]
+		[Embed(source="images/cog.png")]
 		public static const COG: Class;
 		
 		public var image:Image;

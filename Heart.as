@@ -7,7 +7,7 @@ package
 	
 	public class Heart extends Entity
 	{
-		[Embed(source="heart.png")]
+		[Embed(source="images/heart.png")]
 		public static const HEART: Class;
 		
 		public var sprite:Spritemap;

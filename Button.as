@@ -7,19 +7,19 @@ package
 	
 	public class Button extends Entity
 	{
-		[Embed(source="r.png")]
+		[Embed(source="images/r.png")]
 		public static const RESET: Class;
-		[Embed(source="undo.png")]
+		[Embed(source="images/undo.png")]
 		public static const UNDO: Class;
-		[Embed(source="redo.png")]
+		[Embed(source="images/redo.png")]
 		public static const REDO: Class;
-		[Embed(source="audio.png")]
+		[Embed(source="images/audio.png")]
 		public static const AUDIO: Class;
-		[Embed(source="audio-mute.png")]
+		[Embed(source="images/audio-mute.png")]
 		public static const AUDIO_MUTE: Class;
-		[Embed(source="menu.png")]
+		[Embed(source="images/menu.png")]
 		public static const MENU: Class;
-		[Embed(source="skip.png")]
+		[Embed(source="images/skip.png")]
 		public static const SKIP: Class;
 		
 		public var image:Image;
