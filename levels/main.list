@@ -10,8 +10,8 @@ two 5
 But they were the best of friends
 reckoner 4
 
-And everything they had was shared between them
-gift 7
+#And everything they had was shared between them
+#gift 7
 
 #sides 8
 #gift 7
@@ -20,155 +20,27 @@ gift 7
 They were always playing together, dancing through the trees
 outsider-trees 7
 
-Their friendship filling a hole that neither knew existed
-hole 8
+#Their friendship filling a hole that neither knew existed
+#hole 8
 
 One day they found a broken robot in the woods
 line-simpler 3
 
-They worked hard to fix the robot
-line 8
+#They worked hard to fix the robot
+#line 8
 
-Swapping its old rusty parts with gleaming new replacements
+They worked hard to fix the robot / Swapping its old rusty parts with gleaming new replacements
 diagonals 12
 
 And when he was fixed the trio played together for a time
 triangle4 6
 
-And the robot marvelled at the love he saw blossom between the boy and the girl
-bond 10
+#And the robot marvelled at the love he saw blossom between the boy and the girl
+#bond 10
 
-And watched the boy give his heart to the girl / As she gave hers to him
+And the robot watched as the boy gave his heart to the girl / And she gave hers to him
 heart-swap 7
 
 If only their story could have been so simple...
 triangle3 7
 
-But the robot grew lonely, and one day the boy and the girl woke to find him gone
-eyes3 9
-
-They searched for any tracks he might have made
-string-short 9
-
-And followed him to the entrance of an abandoned factory
-opensesame 11
-
-Filled with broken down robots gathering dust
-cross-simple 9
-
-They ventured into the depths of the place
-cross2 7
-
-And the boy came to a decision: / "I shall fix them all!"
-ellipsis 10
-
-And so the boy worked to repair the aging robots
-square4 7
-
-The task took weeks
-cross7 7
-
-And as the boy worked late into the nights, the girl grew lonely
-cross4-decrossed 9
-
-And then weeks turned to months
-cross7-harder 9
-
-The boy's neglect of the girl broke her heart
-heart-break2 5
-
-And in her foolish aching rage / She made a demand of the machines
-cross8-boxed 13
-
-"Tear out this broken heart of mine / And build for me a heart of metal that will never fail"
-heart-cross 11
-
-"Metal's all he cares about so metal I'll become"
-metal 15
-
-And so those loyal robots gifted her / A heartless heart / Too hard for human love
-heart-build 17
-
-Over to the boy she went / And he looked up from his work
-look-up 14
-
-With horror in his eyes he said "My love, what's this you've done?"
-face-easier 6
-
-"This I did for you," she said / But her frozen face would not smile
-face2 12
-
-He turned around and stalked off mad / Smashing robots who'd once been friends
-dismantle-three 39
-
-Gutting their wires and gears and springs / His purpose now clear, to save her from her fate
-disperse3-easier 15
-
-He worked on for years / Making heart after heart
-disperse2 24
-
-But nothing he made could give back what was lost / Now he's an old man with her young by his side
-old-young 6 8
-
-Without hope for the future / Making hearts to this day
-end 0 16
-
-#impossible
-
-#squareish 13 -- sidelined -- maybe patience-lite?
-#triangle 11 -- sidelined -- too hard for the boy/girl/robot section -- maybe perfection?
-#lonely 2 -- story end?
-#funk 14 -- funky connections
-#sharing2 7 -- same end as sides
-#line-short2 12 -- boring solution?
-#gap 16 -- boring solution?
-#spirals 18 -- cool but hard to place
-#simple2-horizontal 3 -- too easy to do by accident
-#sizes 6 -- wants a more interesting puzzle
-#
-#line2-simpler 8
-#
-#line3 6
-#
-#eyes3 9
-#eyes2 8
-#heart-simpler 6 -- not interesting
-#eyes 11 -- too much too soon?
-#simple3-simpler 8
-#string 11
-#corner2 13
-#diamond2 9
-#bigsquare 16
-#triangle2 12
-#
-# And grew lonely, as the boy toiled late into the nights, repairing robots
-#
-#corners 42 -- hard! 42 is my best but that's clearly not optimal
-#diamond 18 -- hard
-#cross 52 -- hard
-#cross3 32 -- hard
-#square2 12 -- hard!!!
-#interesting 23 -- not aesthetically pleasing
-#
-#The boy sent robots to talk to the girl but she would turn them away
-#chain 25 -- too boring?
-
-# Haven't explored this mechanic much
-#diamond-large 5 3
-
-#These might be interesting as perfection levels but they don't actually have to be perfect:
-#line-short 6
-#combo 16
-#
-#New
-#forced
-#quad
-#v 7
-#question 21
-#disperse
-#gutting
-#gutting2
-#gutting3
-#face 11
-#disperse4 35
-#disperse3 29

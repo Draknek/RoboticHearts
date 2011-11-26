@@ -110,7 +110,7 @@ package
 			w = Math.ceil(w / scale);
 			h = Math.ceil(h / scale);
 			
-			trace(w+","+h);
+			trace(w+","+h + " (x" + scale + ")");
 			
 			super(w, h, 60, true);
 			FP.screen.color = 0x202020;
@@ -142,7 +142,7 @@ package
 				} catch (e:Error){}
 			}
 
-			touchscreen = true; // testing
+			//touchscreen = true; // testing
 			
 			if (touchscreen) {
 				clicks_string = "Taps";
@@ -177,7 +177,9 @@ package
 			
 			if (Logger.isLocal && ! touchscreen) devMode = true;
 			
-			FP.world = (devMode || expoMode) ? new Menu : new Intro;
+			FP.world = new Intro;
+			
+			Audio.startMusic();
 		}
 		
 		public override function update (): void

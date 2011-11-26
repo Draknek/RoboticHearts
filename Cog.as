@@ -110,7 +110,7 @@ package
 		
 		public override function render (): void
 		{
-			image.color = (over) ? Main.PINK : Main.WHITE;
+			//image.color = (over) ? Main.PINK : Main.WHITE;
 			//sprite.frame = (over) ? 1 : 0;
 			super.render();
 		}

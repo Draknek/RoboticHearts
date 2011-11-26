@@ -329,6 +329,10 @@ package
 				}*/
 			}
 			
+			updateLists();
+			
+			removeAll();
+			
 			if (levelPacks[mode].story && levelPacks[mode].story[id] && levelPacks[mode].story[id].length) {
 				var text:String = levelPacks[mode].story[id];
 				text = text.split(" / ").join("\n\n");
@@ -577,8 +581,12 @@ package
 				
 				// Kinda hacky: used on touchscreens to let menu button work
 				if (Input.mouseCursor != "button" && Main.anyInput) {
-					FP.tween(storyText, {alpha: 0}, 30, {ease:Ease.sineOut});
-					storyText = null;
+					if (levelPacks[mode].levels[id+1]) {
+						FP.tween(storyText, {alpha: 0}, 30, {ease:Ease.sineOut});
+						storyText = null;
+					} else {
+						FP.world = new Menu;
+					}
 				}
 				
 				return;
@@ -686,7 +694,7 @@ package
 				var world:World = this;
 				
 				FP.alarm(149, function ():void {
-					FP.alarm(50, function ():void {
+					FP.alarm(61, function ():void {
 						addCompletionUI(previousBest);
 						
 						clickThrough = true;
@@ -812,6 +820,8 @@ package
 		
 		private function addCompletionUI (previousBest:int): void
 		{
+			skip();
+			return;
 			var md5:String = MD5.hashBytes(data);
 			
 			Main.so.data.lastPlayed = levelPacks[mode].md5[id+1];

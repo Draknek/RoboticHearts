@@ -35,8 +35,6 @@ package
 		
 		public function Menu ()
 		{
-			Audio.startMusic();
-			
 			title = new Text("These Robotic\nHearts of Mine", 0, 0, {align: "center", scrollX:0, scrollY:0, font:"romance", size: 16, color: Main.PINK});
 			addGraphic(title, -12);
 			title.x = (FP.width - title.width)*0.5;
@@ -250,7 +248,7 @@ package
 				}));
 			}
 			
-			addElements(buttons);
+			//addElements(buttons);
 			
 			var yourScore:Text = new Text("Your score: #", 0, 0, {color: Main.GREY, leading: 2});
 			var submit:Button = new Button(0, 0, new Text("Submit [todo]"), function():void{});
@@ -296,7 +294,7 @@ package
 			
 			addGraphic(oldScreen, -20);
 			
-			FP.tween(oldScreen, {alpha: 0}, 30, {ease:Ease.sineOut, tweener:this});
+			FP.tween(oldScreen, {alpha: 0}, 90, {ease:Ease.sineOut, tweener:this});
 			
 			var buttonPadding:int = Main.touchscreen ? 3 : 1;
 			
@@ -307,7 +305,7 @@ package
 			muteButton = new Button(0, 0, Button.AUDIO, Audio.toggleMute, "Mute", false, false, buttonPadding);
 			muteOverlay = new Button(0, 0, Button.AUDIO_MUTE, null, "Unmute", false, false, buttonPadding);
 			
-			var showMute:Boolean = ! Main.expoMode && ! Main.touchscreen;
+			var showMute:Boolean = false;
 			
 			if (showMute) {
 				add(muteButton);
@@ -339,7 +337,48 @@ package
 			
 			//addGraphicChoices();
 			addCredits();
+			
+			var byAlan:Text = new Text("By Alan Hazelden", 0, 0, {color:Main.GREY});
+			
+			byAlan.x = (FP.width - byAlan.width) * 0.5;
+			byAlan.y = 30;
+			
+			addGraphic(byAlan);
+			
+			var playNow:Text = new Text("Available now on\niOS and Android", 0, 0, {align:"center", leading:1});
+			
+			playNow.x = (FP.width - playNow.width) * 0.5;
+			playNow.y = 45;
+			
+			addGraphic(playNow);
+			
+			var ios:DisplayObject = new IOS;
+			
+			FP.engine.addChild(ios);
+			
+			var android:DisplayObject = new ANDROID;
+			
+			var w:int = FP.stage.stageWidth - ios.width - android.width;
+			
+			ios.x = w/3;
+			ios.y = 70 * FP.screen.scale;
+			
+			android.x = FP.stage.stageWidth - w/3 - android.width;
+			android.y = 70 * FP.screen.scale + (ios.height - android.height)*0.5;
+			
+			FP.engine.addChild(android);
+			
+			android.alpha = ios.alpha = 0;
+			
+			FP.tween(ios, {alpha: 1}, 60, {delay: 30, tweener:this});
+			FP.tween(android, {alpha: 1}, 60, {delay: 30, tweener:this});
 		}
+		
+		[Embed(source="ios.png")]
+		public static const IOS:Class;
+		
+		[Embed(source="android.png")]
+		public static const ANDROID:Class;
 		
 		private function addElements(list:Array, offsetX:int = 0, offsetY:int = 0, bottom_padding:Number = 0):void
 		{
