@@ -352,11 +352,10 @@ package
 			
 			addGraphic(playNow);
 			
-			var ios:DisplayObject = new IOS;
+			var ios:Bitmap = new IOS;
+			var android:Bitmap = new ANDROID;
 			
-			FP.engine.addChild(ios);
-			
-			var android:DisplayObject = new ANDROID;
+			ios.scaleX = ios.scaleY = android.scaleX = android.scaleY = 0.5;
 			
 			var w:int = FP.stage.stageWidth - ios.width - android.width;
 			
@@ -366,6 +365,7 @@ package
 			android.x = FP.stage.stageWidth - w/3 - android.width;
 			android.y = 70 * FP.screen.scale + (ios.height - android.height)*0.5;
 			
+			FP.engine.addChild(ios);
 			FP.engine.addChild(android);
 			
 			android.alpha = ios.alpha = 0;
