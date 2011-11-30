@@ -16,7 +16,6 @@ Cache score stats
 
 Both:
 
-Do something with logging data about platform/website
 Update credits -- Newgrounds, graphics feedback
 
 
