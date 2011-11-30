@@ -6,6 +6,7 @@ package
 	import net.flashpunk.utils.*;
 	
 	import flash.display.*;
+	import flash.events.*;
 	import flash.net.*;
 	import flash.utils.*;
 	import flash.system.*;
@@ -32,6 +33,14 @@ package
 		public var muteOverlay:Button;
 		
 		private var tween:Tween;
+		
+		public var tank:Sprite;
+		
+		[Embed(source="images/newgrounds.png")]
+		public static const TANK_LOGO: Class;
+		
+		[Embed(source="images/newgrounds-hover.png")]
+		public static const TANK_LOGO_HOVER: Class;
 		
 		public function Menu ()
 		{
@@ -220,7 +229,7 @@ package
 			buttons.push(levelsButton);
 			
 			if (Scores.hasScoreboard && ! Main.touchscreen) {
-				buttons.push(highScoresButton);
+				//buttons.push(highScoresButton);
 			}
 			
 			if (Main.touchscreen) {
@@ -339,6 +348,43 @@ package
 			
 			//addGraphicChoices();
 			addCredits();
+			
+			tank = new Sprite;
+			
+			var tank1:Bitmap = new TANK_LOGO;
+			var tank2:Bitmap = new TANK_LOGO_HOVER;
+			
+			//tank.scaleX = tank.scaleY = 2;
+			
+			tank.addChild(tank1);
+			tank.addChild(tank2);
+			
+			tank1.y = -tank1.height;
+			tank2.y = -tank2.height;
+			
+			tank2.visible = false;
+			
+			tank.x = 3;
+			tank.y = FP.stage.stageHeight - 3;
+			
+			tank.buttonMode = true;
+			
+			FP.engine.addChild(tank);
+			
+			tank.addEventListener(MouseEvent.CLICK, makeURLFunction("http://www.newgrounds.com/"));
+			tank.addEventListener(MouseEvent.MOUSE_OVER, function (e:Event):void { tank2.visible = true; tank.scaleX = tank.scaleY = 1; });
+			tank.addEventListener(MouseEvent.MOUSE_OUT, function (e:Event):void { tank2.visible = false; tank.scaleX = tank.scaleY = 1; });
+			
+			tank.alpha = 0;
+			
+			FP.tween(tank, {alpha: 1}, 30);
+		}
+		
+		public override function end ():void
+		{
+			FP.tween(tank, {alpha: 0}, 30, function ():void {
+				FP.engine.removeChild(tank);
+			});
 		}
 		
 		private function addElements(list:Array, offsetX:int = 0, offsetY:int = 0, bottom_padding:Number = 0):void
@@ -426,7 +472,7 @@ package
 		
 		private function makeURLFunction (url:String): Function
 		{
-			return function ():void {
+			return function (param:* = null):void {
 				var request:URLRequest = new URLRequest(url);
 				navigateToURL(request, "_blank");
 			}
