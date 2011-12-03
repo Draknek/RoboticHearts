@@ -126,7 +126,9 @@ package
 			
 			_mute = newValue;
 			
-			menuItem.caption = _mute ? "Unmute" : "Mute";
+			if (menuItem) {
+				menuItem.caption = _mute ? "Unmute" : "Mute";
+			}
 			
 			so.data.mute = _mute;
 			so.flush();
