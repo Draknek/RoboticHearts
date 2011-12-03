@@ -139,7 +139,7 @@ package
 		
 		public static function connect (obj: DisplayObjectContainer): void
 		{
-			Scores.init();
+			Sponsor.init();
 			
 			isLocal = (obj.stage.loaderInfo.loaderURL.substr(0, 7) == 'file://');
 			

@@ -199,6 +199,10 @@ package
 				hadMouseDown = false;
 				ignoreNextAction = false;
 			}
+			
+			if (Input.pressed(Key.SPACE)) {
+				Sponsor.testMedals();
+			}
 		}
 		
 		public override function setStageProperties():void
