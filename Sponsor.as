@@ -9,9 +9,14 @@ package
 	
 	public class Sponsor
 	{
-		public static function init ():void
+		public static var container:DisplayObjectContainer;
+		
+		public static var stageHeight:Number;
+		
+		public static function init (stage:Stage):void
 		{
-			API.connect(FP.stage, Secret.NG_API_ID, Secret.NG_KEY);
+			API.connect(stage, Secret.NG_API_ID, Secret.NG_KEY);
+			stageHeight = stage.stageHeight;
 		}
 		
 		public static function testMedals ():void
@@ -36,18 +41,18 @@ package
 			sprite.alpha = 0;
 			
 			sprite.x = border;
-			sprite.y = FP.stage.stageHeight - border;
+			sprite.y = stageHeight - border;
 			
 			var medalImage: Sprite = medal.attachIcon(sprite);
 			
 			medalImage.x = border;
 			medalImage.y = -size + border;
 			
-			FP.engine.addChild(sprite);
+			container.addChild(sprite);
 			
 			FP.tween(sprite, {alpha: 1}, 30);
 			FP.tween(sprite, {alpha: 0}, 30, {delay: 120, complete: function ():void {
-				FP.engine.removeChild(sprite);
+				container.removeChild(sprite);
 			}});
 			
 		}
@@ -62,6 +67,12 @@ package
 		private static function testCompletion (i:int) {
 			
 		}*/
+		
+		public static function createAd():DisplayObject {
+			//if (! API.connected) return null;
+			
+			return new FlashAd();
+		}
 	}
 }
 

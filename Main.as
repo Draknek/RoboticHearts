@@ -120,6 +120,8 @@ package
 				FP.console.enable();
 				//FP.console.toggleKey = Key.SPACE;
 			}
+			
+			Sponsor.container = this;
 		}
 		
 		public override function init (): void
@@ -201,7 +203,7 @@ package
 			}
 			
 			if (Input.pressed(Key.SPACE)) {
-				Sponsor.testMedals();
+				//Sponsor.addAd();
 			}
 		}
 		

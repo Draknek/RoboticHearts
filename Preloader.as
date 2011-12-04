@@ -25,7 +25,7 @@ package
 		
 		public static var stage:Stage;
 		
-		
+		public static var ad:DisplayObject;
 		
 		// Ignore everything else
 		
@@ -53,17 +53,15 @@ package
 			h = 20;
 			
 			px = (sw - w) * 0.5;
-			py = (sh - h) * 0.5;
+			py = h*-0.5;
 			
 			graphics.beginFill(BG_COLOR);
 			graphics.drawRect(0, 0, sw, sh);
 			graphics.endFill();
 			
-			graphics.beginFill(FG_COLOR);
-			graphics.drawRect(px - 2, py - 2, w + 4, h + 4);
-			graphics.endFill();
-			
 			progressBar = new Shape();
+			
+			progressBar.y = sh * 0.5;
 			
 			addChild(progressBar);
 			
@@ -92,6 +90,9 @@ package
 			
 			stage.align = StageAlign.TOP;
 			stage.scaleMode = StageScaleMode.SHOW_ALL;
+			
+			Sponsor.container = this;
+			Sponsor.init(stage);
 		}
 
 		public function onEnterFrame (e:Event): void
@@ -117,6 +118,11 @@ package
 				var p:Number = (loaderInfo.bytesLoaded / loaderInfo.bytesTotal);
 				
 				progressBar.graphics.clear();
+				
+				progressBar.graphics.beginFill(FG_COLOR);
+				progressBar.graphics.drawRect(px - 2, py - 2, w + 4, h + 4);
+				progressBar.graphics.endFill();
+			
 				progressBar.graphics.beginFill(BG_COLOR);
 				progressBar.graphics.drawRect(px, py, p * w, h);
 				progressBar.graphics.endFill();
@@ -125,6 +131,19 @@ package
 			}
 			
 			text.x = (sw - text.width) * 0.5;
+			
+			if (! ad) {
+				ad = Sponsor.createAd();
+				
+				if (ad) {
+					ad.x = (width - ad.width)*0.5;
+					ad.y = (height - ad.height)*0.5;
+					addChild(ad);
+					
+					progressBar.y = ad.y + ad.height + progressBar.height;
+					text.y = progressBar.y + progressBar.height;
+				}
+			}
 		}
 		
 		private function onMouseDown(e:MouseEvent):void {
