@@ -323,6 +323,8 @@ package
 		
 		private function extraMouseListener(event:MouseEvent):void
 		{
+			if (! FP.world.active) return;
+			
 			var a:Array = [];
 			
 			FP.world.getType("button", a);

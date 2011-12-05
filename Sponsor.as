@@ -17,6 +17,7 @@ package
 		{
 			API.connect(stage, Secret.NG_API_ID, Secret.NG_KEY);
 			stageHeight = stage.stageHeight;
+			Scores.init();
 		}
 		
 		public static function testMedals ():void

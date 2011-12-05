@@ -816,51 +816,6 @@ package
 			
 			Main.so.data.lastPlayed = levelPacks[mode].md5[id+1];
 			
-			var next:Button = new Button(0, 0, new Text("Next level", 0, 0, {size: 8}), function ():void {
-				FP.world = new Level(id+1, mode);
-			}, null, false, true);
-			
-			var retry:Button = new Button(0, 0, new Text("Retry", 0, 0, {size: 8}), function ():void {
-				FP.world = new Level(id, mode);
-			}, null, false, true);
-			
-			var submit:Button = new Button(0, 0, new Text("Submit", 0, 0, {size: 8}), function ():void {
-				Scores.submitScore();
-			}, null, false, true);
-			
-			if (Main.expoMode) {
-				submit = new Button(0, 0, new Text("New player", 0, 0, {size: 8}), function ():void {
-					Main.resetPlayerData();
-					FP.world = new Intro;
-				}, null, false, true);
-			}
-			
-			var menu:Button = new Button(0, 0, new Text("Main menu", 0, 0, {size: 8}), function ():void {
-				FP.world = new Menu;
-			}, null, false, true);
-			
-			var xButtonOffset:Number = 30;
-			var yButtonOffset:Number = 2;
-			
-			next.x = FP.width*0.5 + xButtonOffset - next.width*0.5;
-			retry.x = FP.width*0.5 - xButtonOffset - retry.width*0.5;
-			submit.x = FP.width*0.5 + xButtonOffset - submit.width*0.5;
-			menu.x = FP.width*0.5 - xButtonOffset - menu.width*0.5;
-			
-			menu.y = submit.y = FP.height - yButtonOffset - retry.height;
-			
-			if (Main.touchscreen) {
-				menu.y = submit.y = FP.height;
-			}
-			
-			next.y = retry.y = menu.y - yButtonOffset - next.height;
-			
-			next.hoverColor = retry.hoverColor = submit.hoverColor = menu.hoverColor = Main.BLACK;
-			next.normalColor = retry.normalColor = submit.normalColor = menu.normalColor = Main.WHITE;
-			
-			next.normalLayer = next.hoverLayer = next.layer = retry.normalLayer = retry.hoverLayer = retry.layer = -15;
-			submit.normalLayer = submit.hoverLayer = submit.layer = menu.normalLayer = menu.hoverLayer = menu.layer = -15;
-			
 			// first score OR same score OR better score OR worse score
 			// optimal score OR non-optimal OR beaten optimal
 			
@@ -934,6 +889,53 @@ package
 				Main.so.data.totalScore = totalScore;
 				Main.so.flush();
 			}
+			
+			var next:Button = new Button(0, 0, new Text("Next level", 0, 0, {size: 8}), function ():void {
+				FP.world = new Level(id+1, mode);
+			}, null, false, true);
+			
+			var retry:Button = new Button(0, 0, new Text("Retry", 0, 0, {size: 8}), function ():void {
+				FP.world = new Level(id, mode);
+			}, null, false, true);
+			
+			var submitText:String = (Main.so.data.scoreSubmitted == totalScore) ? "High scores" : "Submit";
+			
+			var submit:Button = new Button(0, 0, new Text(submitText, 0, 0, {size: 8}), function ():void {
+				Scores.submitScore();
+			}, null, false, true);
+			
+			if (Main.expoMode) {
+				submit = new Button(0, 0, new Text("New player", 0, 0, {size: 8}), function ():void {
+					Main.resetPlayerData();
+					FP.world = new Intro;
+				}, null, false, true);
+			}
+			
+			var menu:Button = new Button(0, 0, new Text("Main menu", 0, 0, {size: 8}), function ():void {
+				FP.world = new Menu;
+			}, null, false, true);
+			
+			var xButtonOffset:Number = 30;
+			var yButtonOffset:Number = 2;
+			
+			next.x = FP.width*0.5 + xButtonOffset - next.width*0.5;
+			retry.x = FP.width*0.5 - xButtonOffset - retry.width*0.5;
+			submit.x = FP.width*0.5 + xButtonOffset - submit.width*0.5;
+			menu.x = FP.width*0.5 - xButtonOffset - menu.width*0.5;
+			
+			menu.y = submit.y = FP.height - yButtonOffset - retry.height;
+			
+			if (Main.touchscreen) {
+				menu.y = submit.y = FP.height;
+			}
+			
+			next.y = retry.y = menu.y - yButtonOffset - next.height;
+			
+			next.hoverColor = retry.hoverColor = submit.hoverColor = menu.hoverColor = Main.BLACK;
+			next.normalColor = retry.normalColor = submit.normalColor = menu.normalColor = Main.WHITE;
+			
+			next.normalLayer = next.hoverLayer = next.layer = retry.normalLayer = retry.hoverLayer = retry.layer = -15;
+			submit.normalLayer = submit.hoverLayer = submit.layer = menu.normalLayer = menu.hoverLayer = menu.layer = -15;
 			
 			t2.text += "\n";
 			
