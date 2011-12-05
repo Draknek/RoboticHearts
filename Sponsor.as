@@ -13,6 +13,8 @@ package
 		
 		public static var stageHeight:Number;
 		
+		public static var medalPopup:DisplayObject;
+		
 		private static var medalNames:Array = [null, "Young love", "Heartbreak", "Those Robotic Hearts of His", "Robotic efficiency", "Perfectionist"];
 		
 		public static function init (stage:Stage):void
@@ -24,6 +26,15 @@ package
 		
 		public static function testMedals (final:Boolean = false):void
 		{
+			if (! medalPopup) {
+				medalPopup = new MedalPopup;
+				
+				medalPopup.x = 8;
+				medalPopup.y = FP.stage.stageHeight - medalPopup.height - 8;
+				
+				container.addChild(medalPopup);
+			}
+			
 			for (var i:int = 1; i < medalNames.length; i++) {
 				var name:String = medalNames[i];
 				
@@ -40,7 +51,7 @@ package
 					
 					if (! medal.unlocked) {
 						medal.unlock();
-						showMedal(medal);
+						//showMedal(medal);
 					}
 				}
 			}
