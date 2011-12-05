@@ -168,6 +168,8 @@ package
 				getScores();
 			}
 			
+			Scores.init();
+			
 			if (isLocal) return;
 			
 			FGL = new GameTracker();
@@ -230,7 +232,7 @@ package
 			
 			if (! uid) return;
 			
-			var solution:String = Secret.encodeSolution(level.undoStack);
+			var solution:String = Secret2.encodeSolution(level.undoStack);
 			
 			magic("submit.php?uid=" + uid + "&lvl=" + levelMD5 + "&clicks=" + clicks + "&cogs=" + solution + "&version=" + VERSION);
 		}

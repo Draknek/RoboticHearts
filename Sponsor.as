@@ -4,8 +4,7 @@ package
 	import com.newgrounds.components.*;
 	
 	import flash.display.*;
-	
-	import net.flashpunk.*;
+	import flash.utils.*;
 	
 	public class Sponsor
 	{
@@ -21,7 +20,6 @@ package
 		{
 			API.connect(stage, Secret.NG_API_ID, Secret.NG_KEY);
 			stageHeight = stage.stageHeight;
-			Scores.init();
 		}
 		
 		public static function testMedals (final:Boolean = false):void
@@ -30,7 +28,7 @@ package
 				medalPopup = new MedalPopup;
 				
 				medalPopup.x = 8;
-				medalPopup.y = FP.stage.stageHeight - medalPopup.height - 8;
+				medalPopup.y = container.stage.stageHeight - medalPopup.height - 8;
 				
 				container.addChild(medalPopup);
 			}
@@ -57,7 +55,7 @@ package
 			}
 		}
 		
-		private static function showMedal (medal:Medal):void
+		/*private static function showMedal (medal:Medal):void
 		{
 			var size:int = 50;
 			var border:int = 4;
@@ -86,7 +84,7 @@ package
 				container.removeChild(sprite);
 			}});
 			
-		}
+		}*/
 		
 		private static function testMedal1 ():Boolean
 		{
@@ -114,22 +112,30 @@ package
 		}
 		
 		private static function testCompletion (last:int):Boolean {
+			var Level2:Class = getDefinitionByName("Level") as Class;
+			var Main2:Class = getDefinitionByName("Main") as Class;
+			
 			for (var i:int = 0; i < last; i++) {
-				var md5:String = Level.levelPacks["normal"].md5[i];
+				var md5:String = Level2.levelPacks["normal"].md5[i];
 				
-				if (! Main.so.data.levels[md5] || ! Main.so.data.levels[md5].completed) return false;
+				if (! Main2.so.data.levels[md5] || ! Main2.so.data.levels[md5].completed) return false;
 			}
 			
 			return true;
 		}
 		
 		private static function testPerfection (last:int):Boolean {
+			var Level2:Class = getDefinitionByName("Level") as Class;
+			var Main2:Class = getDefinitionByName("Main") as Class;
+			
 			for (var i:int = 0; i < last; i++) {
-				var md5:String = Level.levelPacks["normal"].md5[i];
+				var md5:String = Level2.levelPacks["normal"].md5[i];
 				
-				var minClicksMine:int = Level.levelPacks["normal"].minClicksArray[i];
+				var minClicksMine:int = Level2.levelPacks["normal"].minClicksArray[i];
 				
-				var minClicksTheirs:int = Main.so.data.levels[md5].leastClicks;
+				if (! Main2.so.data.levels[md5]) return false;
+				
+				var minClicksTheirs:int = Main2.so.data.levels[md5].leastClicks;
 				
 				if (minClicksTheirs > minClicksMine) return false;
 			}
