@@ -985,11 +985,15 @@ package
 		
 		public function getScore (n:int):int
 		{
-			var max:int = 20;
+			var max:int = 10;
 			
 			var score:int = max - (n - minClicks);
 			
 			if (score < 0) score = 0;
+			
+			if (score >= 10) score += 5;
+			
+			score += 10;
 			
 			return score;
 		}

@@ -8,7 +8,6 @@ Browser:
 
 Medals
 Highscore tables
-Subscores
 
 
 
