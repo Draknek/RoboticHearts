@@ -890,6 +890,8 @@ package
 				Main.so.flush();
 			}
 			
+			Sponsor.testMedals();
+			
 			var next:Button = new Button(0, 0, new Text("Next level", 0, 0, {size: 8}), function ():void {
 				FP.world = new Level(id+1, mode);
 			}, null, false, true);

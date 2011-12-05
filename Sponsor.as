@@ -13,6 +13,8 @@ package
 		
 		public static var stageHeight:Number;
 		
+		private static var medalNames:Array = [null, "Young love", "Heartbreak", "Those Robotic Hearts of His", "Robotic efficiency", "Perfectionist"];
+		
 		public static function init (stage:Stage):void
 		{
 			API.connect(stage, Secret.NG_API_ID, Secret.NG_KEY);
@@ -20,11 +22,28 @@ package
 			Scores.init();
 		}
 		
-		public static function testMedals ():void
+		public static function testMedals (final:Boolean = false):void
 		{
-			var medal:Medal = API.getMedal("Young love");
-			
-			showMedal(medal);
+			for (var i:int = 1; i < medalNames.length; i++) {
+				var name:String = medalNames[i];
+				
+				var f:Function = Sponsor["testMedal"+i];
+				
+				var unlocked:Boolean = f();
+				
+				if (name == "Those Robotic Hearts of His" && ! final) unlocked = false;
+				
+				if (unlocked) {
+					var medal:Medal = API.getMedal(name);
+					
+					if (! medal) continue;
+					
+					if (! medal.unlocked) {
+						medal.unlock();
+						showMedal(medal);
+					}
+				}
+			}
 		}
 		
 		private static function showMedal (medal:Medal):void
@@ -58,16 +77,54 @@ package
 			
 		}
 		
-		/*private static function testMedal1 ():Boolean
+		private static function testMedal1 ():Boolean
 		{
-			for (var i:int = 0; i < 13; i++) {
-				
-			}
+			return testCompletion(13);
 		}
 		
-		private static function testCompletion (i:int) {
+		private static function testMedal2 ():Boolean
+		{
+			return testCompletion(25);
+		}
+		
+		private static function testMedal3 ():Boolean
+		{
+			return testCompletion(36);
+		}
+		
+		private static function testMedal4 ():Boolean
+		{
+			return testPerfection(18);
+		}
+		
+		private static function testMedal5 ():Boolean
+		{
+			return testPerfection(36);
+		}
+		
+		private static function testCompletion (last:int):Boolean {
+			for (var i:int = 0; i < last; i++) {
+				var md5:String = Level.levelPacks["normal"].md5[i];
+				
+				if (! Main.so.data.levels[md5] || ! Main.so.data.levels[md5].completed) return false;
+			}
 			
-		}*/
+			return true;
+		}
+		
+		private static function testPerfection (last:int):Boolean {
+			for (var i:int = 0; i < last; i++) {
+				var md5:String = Level.levelPacks["normal"].md5[i];
+				
+				var minClicksMine:int = Level.levelPacks["normal"].minClicksArray[i];
+				
+				var minClicksTheirs:int = Main.so.data.levels[md5].leastClicks;
+				
+				if (minClicksTheirs > minClicksMine) return false;
+			}
+			
+			return true;
+		}
 		
 		public static function createAd():DisplayObject {
 			//if (! API.connected) return null;

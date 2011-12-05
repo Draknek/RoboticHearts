@@ -29,6 +29,8 @@ package
 					"To teach creatures\nof metal",
 					"To know loss\nbut not love?"
 				];
+				
+				Sponsor.testMedals(true);
 			}
 			
 			var y:int = 1;
