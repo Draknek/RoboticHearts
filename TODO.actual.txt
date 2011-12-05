@@ -6,11 +6,9 @@ Nothing?!
 
 Browser:
 
-Get for mobile webpage
-Sponsor integration
-Links get blocked: event listener
+Medals
+Highscore tables
 Subscores
-Cache score stats
 
 
 

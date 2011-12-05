@@ -116,7 +116,7 @@ package
 			
 			image.color = (over) ? hoverColor : normalColor;
 			
-			if (over && Main.inputClick && callback != null) {
+			if (over && Main.inputClick && callback != null && ! Main.buttonTweak) {
 				callback();
 			}
 		}

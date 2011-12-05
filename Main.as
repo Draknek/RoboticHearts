@@ -25,6 +25,7 @@ package
 		public static var expoMode:Boolean = false;
 		public static var debug:Boolean = false;
 		public static var isAndroid:Boolean = false;
+		public static var buttonTweak:Boolean = true;
 		
 		public static const SAVEFILE_VERSION:uint = 1;
 		
@@ -177,6 +178,10 @@ package
 			
 			FP.stage.addEventListener(KeyboardEvent.KEY_DOWN, extraKeyListener);
 			
+			if (buttonTweak) {
+				FP.stage.addEventListener(MouseEvent.MOUSE_DOWN, extraMouseListener);
+			}
+			
 			if (Logger.isLocal && ! touchscreen) devMode = true;
 			
 			FP.world = (devMode || expoMode) ? new Menu : new Intro;
@@ -314,6 +319,31 @@ package
 			throw new Error("Error: this game is sitelocked");
 			
 			return false;
+		}
+		
+		private function extraMouseListener(event:MouseEvent):void
+		{
+			var a:Array = [];
+			
+			FP.world.getType("button", a);
+			
+			for each (var b:Button in a) {
+				if (b.callback == null || b.disabled) continue;
+				
+				var _x:Number = b.x;
+				var _y:Number = b.y;
+			
+				if (b.noCamera) {
+					_x += FP.camera.x;
+					_y += FP.camera.y;
+				}
+			
+				var over:Boolean = b.collidePoint(_x, _y, FP.world.mouseX, FP.world.mouseY);
+				
+				if (over) {
+					b.callback();
+				}
+			}
 		}
 		
 		private function extraKeyListener(event:KeyboardEvent):void

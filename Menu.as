@@ -507,6 +507,7 @@ package
 				],
 				[
 					"Thanks to",
+					["Newgrounds", "http://www.newgrounds.com/"],
 					["Alistair Aitcheson", "http://www.alistairaitcheson.com/"],
 					["The FlashPunk community"],
 					["All my testers"]
