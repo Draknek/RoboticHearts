@@ -184,7 +184,7 @@ package
 			
 			if (Logger.isLocal && ! touchscreen) devMode = true;
 			
-			FP.world = (devMode || expoMode) ? new Menu : new Intro;
+			FP.world = (expoMode) ? new Menu : new Intro;
 		}
 		
 		public override function update (): void

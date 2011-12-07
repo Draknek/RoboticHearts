@@ -17,7 +17,7 @@ package
 		public static const resTest:Boolean = false;
 		
 		// Change these values
-		private static const mustClick: Boolean = resTest;
+		public static var mustClick: Boolean = false;
 		private static const mainClassName: String = "Main";
 		
 		private static const BG_COLOR:uint = 0x202020;
@@ -26,6 +26,8 @@ package
 		public static var stage:Stage;
 		
 		public static var ad:DisplayObject;
+		
+		private static var play:SimpleButton;
 		
 		// Ignore everything else
 		
@@ -81,10 +83,6 @@ package
 			
 			stage.addEventListener(Event.ENTER_FRAME, onEnterFrame);
 			
-			if (mustClick) {
-				stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
-			}
-			
 			stage.quality = StageQuality.HIGH;
 			stage.displayState = StageDisplayState.NORMAL;
 			
@@ -107,12 +105,41 @@ package
 				if (! mustClick) {
 					startup();
 				} else {
-					text.scaleX = 2.0;
-					text.scaleY = 2.0;
+					if (! play) {
+						text.scaleX = 2.0;
+						text.scaleY = 2.0;
+						
+						text.textColor = 0xEEEEEE;
 				
-					text.text = "Click to start";
+						text.text = "Play";
+						
+						var text2:TextField = new TextField();
+						
+						text2.textColor = FG_COLOR;
+						text2.selectable = false;
+						text2.mouseEnabled = false;
+						text2.defaultTextFormat = new TextFormat("default", 16);
+						text2.embedFonts = true;
+						text2.autoSize = "left";
+						text2.text = "Play";
+						text2.x = (sw - text2.width) * 0.5;
+						text2.y = text.y;
+						text2.scaleX = 2.0;
+						text2.scaleY = 2.0;
 			
-					text.y = (sh - text.height) * 0.5;
+						removeChild(text);
+						
+						
+						play = new SimpleButton(text, text2, text2, text);
+						
+						play.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+						
+						play.y = 16;
+						
+						addChild(play);
+					}
+			
+					//text.y = (sh - text.height) * 0.5;
 				}
 			} else {
 				var p:Number = (loaderInfo.bytesLoaded / loaderInfo.bytesTotal);
@@ -131,6 +158,7 @@ package
 			}
 			
 			text.x = (sw - text.width) * 0.5;
+			if (text2) text2.x = (sw - text2.width) * 0.5;
 			
 			if (! ad) {
 				ad = Sponsor.createAd();
@@ -142,14 +170,17 @@ package
 					
 					progressBar.y = ad.y + ad.height + progressBar.height;
 					text.y = progressBar.y + progressBar.height;
+					
+					if (text2) text2.y = text.y;
 				}
 			}
+			
+			Sponsor.update();
 		}
 		
 		private function onMouseDown(e:MouseEvent):void {
 			if (hasLoaded())
 			{
-				stage.removeEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
 				startup();
 			}
 		}

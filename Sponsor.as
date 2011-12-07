@@ -1,7 +1,8 @@
 package
 {
 	import com.newgrounds.*;
-	import com.newgrounds.components.*;
+	import com.newgrounds.components.MedalPopup;
+	import com.newgrounds.components.FlashAd;
 	
 	import flash.display.*;
 	import flash.utils.*;
@@ -147,6 +148,12 @@ package
 			//if (! API.connected) return null;
 			
 			return new FlashAd();
+		}
+		
+		public static function update():void {
+			if (! API.connected) return;
+			if (API.isNewgrounds) return;
+			Preloader.mustClick = true;
 		}
 	}
 }
