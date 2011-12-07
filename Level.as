@@ -900,7 +900,7 @@ package
 				FP.world = new Level(id, mode);
 			}, null, false, true);
 			
-			var submitText:String = (Main.so.data.scoreSubmitted == totalScore) ? "High scores" : "Submit";
+			var submitText:String = (Main.so.data.scoreSubmitted >= totalScore || (! Scores.canSubmit)) ? "High scores" : "Submit";
 			
 			var submit:Button = new Button(0, 0, new Text(submitText, 0, 0, {size: 8}), function ():void {
 				Scores.submitScore();
@@ -977,7 +977,7 @@ package
 			add(retry);
 			
 			if (! Main.touchscreen) {
-				if (Scores.canSubmit) {
+				if (Scores.hasScoreboard) {
 					add(submit);
 				} else {
 					menu.x = (FP.width - menu.width) * 0.5;

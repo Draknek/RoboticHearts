@@ -17,7 +17,7 @@ package
 		
 		public static function get hasScoreboard ():Boolean
 		{
-			return (API.sessionId && API.sessionId != "0");
+			return API.isNewgrounds;
 		}
 		
 		public static function get canSubmit ():Boolean
@@ -27,10 +27,14 @@ package
 		
 		public static function submitScore ():void
 		{
-			Main.so.data.scoreSubmitted = Main.so.data.totalScore || 0;
-			API.postScore("Total_score", Main.so.data.scoreSubmitted);
-			
 			showScores();
+			
+			if (canSubmit) {
+				Main.so.data.scoreSubmitted = Main.so.data.totalScore || 0;
+				API.postScore("Total_score", Main.so.data.scoreSubmitted);
+			} else {
+				updateScoreBoard();
+			}
 		}
 		
 		public static function updateScoreBoard (param:* = null):void
