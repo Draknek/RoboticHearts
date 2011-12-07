@@ -122,9 +122,11 @@ package
 				clickStats = JSON.decode(dataString);
 				Main.so.data.stats = clickStats;
 				Main.so.data.lastStatsDownload = (new Date()).getTime();
+				
+				updateBest();
 			}
 			
-			magic("get.php?version=" + VERSION, unJSON);
+			magic("get.php?getbest=1&version=" + VERSION, unJSON);
 		}
 		
 		public static function getScoreStats (): void
@@ -135,6 +137,19 @@ package
 			}
 			
 			magic("get.php?scorestats=1&version=" + VERSION, unJSON);
+		}
+		
+		private static function updateBest ():void
+		{
+			if (! clickStats['best']) return;
+			
+			for (var i:int = 0; i < Level.levelPacks["normal"].md5.length; i++) {
+				var md5:String = Level.levelPacks["normal"].md5[i];
+				
+				if (clickStats['best'].hasOwnProperty(md5)) {
+					Level.levelPacks["normal"].minClicksArray[i] = int(clickStats['best'][md5]);
+				}
+			}
 		}
 		
 		public static function connect (obj: DisplayObjectContainer): void
@@ -150,6 +165,8 @@ package
 			} else {
 				clickStats = JSON.decode(new STATS);
 			}
+			
+			updateBest();
 			
 			if (Main.so.data.uid) {
 				uid = Main.so.data.uid;
