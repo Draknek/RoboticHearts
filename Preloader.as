@@ -102,6 +102,8 @@ package
 				graphics.drawRect(0, 0, sw, sh);
 				graphics.endFill();
 				
+				progressBar.graphics.clear();
+				
 				if (! mustClick) {
 					startup();
 				} else {
@@ -134,7 +136,7 @@ package
 						
 						play.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
 						
-						play.y = 16;
+						play.y = -16;
 						
 						addChild(play);
 					}
@@ -190,6 +192,7 @@ package
 		}
 		
 		private function startup (): void {
+			if (ad) removeChild(ad);
 			Preloader.stage = this.stage;
 			stage.removeEventListener(Event.ENTER_FRAME, onEnterFrame);
 			
