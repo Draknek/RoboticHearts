@@ -6,14 +6,14 @@ Nothing?!
 
 Browser:
 
-Score list when logged out
+Nothing
 
 
 
 Both:
 
-Update credits -- Newgrounds, graphics feedback
-auto-update of min clicks
+Nothing
+
 
 
 
@@ -24,6 +24,8 @@ Fix heart beating offset
 Cog rotation spritemap OR render rotating images differently
 Better font
 Cogs get misaligned by a pixel
-orientation-switching
+orientation-switching on Android
+Physical buttons on Android
+Update credits -- graphics feedback
 
 
