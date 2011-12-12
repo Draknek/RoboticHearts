@@ -50,13 +50,13 @@ package
 			if (! so.data.totalScore) so.data.totalScore = 0;
 			if (! so.data.httpQueue) so.data.httpQueue = [];
 			
-			try {
+			/*try {
 				var MultiTouch:Class = getDefinitionByName("flash.ui.Multitouch") as Class;
 				if (MultiTouch.supportsTouchEvents) {
 					touchscreen = true;
 					MultiTouch.inputMode = "none";
 				}
-			} catch (e:Error){}
+			} catch (e:Error){}*/
 			
 			Text.font = "7x5";
 			Text.size = 8;
