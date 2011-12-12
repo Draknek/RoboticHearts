@@ -25,6 +25,8 @@ package
 		
 		public static function testMedals (final:Boolean = false):void
 		{
+			if (! (API.sessionId && API.sessionId != "0")) return;
+			
 			if (! medalPopup) {
 				medalPopup = new MedalPopup;
 				
