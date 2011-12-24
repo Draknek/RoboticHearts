@@ -189,27 +189,27 @@ package
 			
 			if (isLocal) return;
 			
-			FGL = new GameTracker();
+			/*FGL = new GameTracker();
 			
 			FGL.beginGame();
 			
-			//Log.View(Secret.PLAYTOMIC_SWFID, Secret.PLAYTOMIC_GUID, obj.stage.loaderInfo.loaderURL);
+			//Log.View(Secret.PLAYTOMIC_SWFID, Secret.PLAYTOMIC_GUID, obj.stage.loaderInfo.loaderURL);*/
 		}
 		
 		public static function startLevel (id:int, mode:String): void
 		{
 			if (isLocal) return;
 			
-			Log.LevelCounterMetric("started", l(id, mode));
+			/*Log.LevelCounterMetric("started", l(id, mode));
 			
-			FGL.beginLevel(id, Main.so.data.totalScore);
+			FGL.beginLevel(id, Main.so.data.totalScore);*/
 		}
 
 		public static function restartLevel (id:int, mode:String): void
 		{
 			if (isLocal) return;
 			
-			Log.LevelCounterMetric("restarted", l(id, mode));
+			//Log.LevelCounterMetric("restarted", l(id, mode));
 		}
 
 		public static function endLevel (id:int, mode:String): void
@@ -218,14 +218,14 @@ package
 			
 			if (isLocal) return;
 			
-			Log.LevelCounterMetric("completed", l(id, mode));
+			/*Log.LevelCounterMetric("completed", l(id, mode));
 			
 			Log.LevelAverageMetric("time", l(id, mode), Level(FP.world).time);
 			Log.LevelAverageMetric("clicks", l(id, mode), Level(FP.world).clicks);
 			
 			FGL.endLevel(Main.so.data.totalScore, null, Level(FP.world).clicks + " clicks (" + Level(FP.world).minClicks + " min)");
 			
-			FGL.alert(Main.so.data.totalScore, null, "Completed level " + (id + 1) + ": " + Level(FP.world).clicks + " clicks (" + Level(FP.world).minClicks + " min)");
+			FGL.alert(Main.so.data.totalScore, null, "Completed level " + (id + 1) + ": " + Level(FP.world).clicks + " clicks (" + Level(FP.world).minClicks + " min)");*/
 		}
 		
 		public static function submitScore (id:int, mode:String): void
@@ -268,7 +268,7 @@ package
 			
 			if (isLocal) return;
 			
-			FGL.alert(Main.so.data.totalScore, null, message);
+			//FGL.alert(Main.so.data.totalScore, null, message);
 		}
 		
 		private static function l (id:int, mode:String):String
