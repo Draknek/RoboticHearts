@@ -109,6 +109,12 @@ package
 		public static function getUID (): void
 		{
 			function setUID (data:*):void {
+				var i:int = data;
+				
+				if (! i) {
+					throw new Error("UID not set");
+				}
+				
 				uid = data;
 				Main.so.data.uid = uid;
 				Main.so.flush();
