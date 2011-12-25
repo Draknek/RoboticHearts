@@ -75,7 +75,15 @@ package
 			function doComplete ():void
 			{
 				if (f != null) {
-					f(loader.data);
+					try {
+						f(loader.data);
+					} catch (e:Error) {
+						httpActive = false;
+				
+						trace("Callback raised exception: " + e + " (Query: " + query + ")");
+						
+						return;
+					}
 				}
 				
 				queue.shift();

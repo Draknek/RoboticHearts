@@ -12,4 +12,3 @@ Investigate touchscreen detection code backfiring
 Security error if crossdomain.xml doesn't exist
 Skip button works when it shouldn't
 Show 8/10/11 subscores on that level
-handle malformed or empty response from server
