@@ -996,8 +996,12 @@ package
 			
 			graph.y = 11;
 			
+			var showScore:Boolean = (! Main.touchscreen && ! Main.expoMode && Scores.hasScoreboard);
+			
 			if (Main.touchscreen) {
 				graph.y = (FP.height - graph.height) * 0.5;
+			} else if (! showScore) {
+				graph.y = (next.y - 8 - graph.height) * 0.5 + 8;
 			}
 			
 			var padding:Number = (next.y - t2.height - graph.height - graph.y) / 2.0;
@@ -1011,7 +1015,7 @@ package
 			t2.y = graph.y + graph.height + padding;
 			
 			addGraphic(t, -15);
-			if (! Main.touchscreen && ! Main.expoMode) addGraphic(t2, -15);
+			if (showScore) addGraphic(t2, -15);
 			add(next);
 			add(retry);
 			
