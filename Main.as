@@ -6,6 +6,7 @@ package
 	import net.flashpunk.utils.Input;
 	
 	import flash.net.*;
+	import flash.text.*;
 	import flash.display.*;
 	import flash.events.*;
 	import flash.ui.*;
@@ -315,6 +316,13 @@ package
 			
 			if (touchscreen) return true;
 			
+			var link:TextField = makeHTMLText('This game is not authorised\nto play on this website.\n\n<a href="http://www.newgrounds.com/portal/view/585599">Play on Newgrounds here</a>\n\n<a href="http://www.draknek.org/games/hearts/?ref=2">Or buy for iOS or Android</a>', 32, WHITE, "a {color: #ff3366} a:hover {text-decoration:underline;}");
+			
+			link.x = (width - link.width) * 0.5;
+			link.y = (height - link.height) * 0.5;
+			
+			parent.addChild(link);
+			
 			parent.removeChild(this);
 			throw new Error("Error: this game is sitelocked");
 			
@@ -380,6 +388,36 @@ package
 			{
 				e.preventDefault();
 			}
+		}
+		
+		public static function makeHTMLText (html:String, size:Number, color:uint, css:String): TextField
+		{
+			var ss:StyleSheet = new StyleSheet();
+			ss.parseCSS(css);
+			
+			var textField:TextField = new TextField;
+			
+			textField.selectable = false;
+			textField.mouseEnabled = true;
+			
+			textField.embedFonts = true;
+			
+			textField.multiline = true;
+			
+			textField.autoSize = "center";
+			
+			textField.textColor = color;
+			
+			var format:TextFormat = new TextFormat("7x5", size);
+			format.align = "center";
+			
+			textField.defaultTextFormat = format;
+			
+			textField.htmlText = html;
+			
+			textField.styleSheet = ss;
+			
+			return textField;
 		}
 
 	}
