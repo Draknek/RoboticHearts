@@ -102,6 +102,7 @@ package
 			loader.addEventListener(Event.COMPLETE, doComplete);
 			
 			loader.addEventListener(IOErrorEvent.IO_ERROR, errorHandler);
+			loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, errorHandler);
 			
 			loader.load(request);
 		}
