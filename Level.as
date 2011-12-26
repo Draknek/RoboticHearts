@@ -587,7 +587,7 @@ package
 				return;
 			}
 			
-			if (skipButton) {
+			if (skipButton && ! gameOver) {
 				skipButton.disabled = false;
 			}
 			
@@ -689,6 +689,7 @@ package
 				redoButton.disabled = true;
 				undoButton.disabled = true;
 				resetButton.disabled = true;
+				skipButton.disabled = true;
 				
 				var world:World = this;
 				
