@@ -794,6 +794,36 @@ package
 			super.update();
 			
 			clickCounter.text = Main.clicks_string + ": " + clicks+"/"+minClicks;
+			
+			if (id == 32 && minClicks == 29) {
+				cog = collidePoint("cog", mouseX, mouseY) as Cog;
+				
+				if (cog) {
+					var hint:String = "";
+					
+					if (cog.x < 32) {
+						hint = "10";
+					} else if (cog.y < 60) {
+						hint = "11";
+					} else {
+						hint = "8";
+					}
+					
+					var subgroupClicks:int = 0;
+					
+					for each (cog in undoStack) {
+						if (cog.x < 32) {
+							if (hint == "10") subgroupClicks++;
+						} else if (cog.y < 60) {
+							if (hint == "11") subgroupClicks++;
+						} else {
+							if (hint == "8") subgroupClicks++;
+						}
+					}
+					
+					clickCounter.text += " (" + subgroupClicks + "/" + hint + ")";
+				}
+			}
 		}
 		
 		public override function render (): void

@@ -9,4 +9,3 @@ orientation-switching on Android
 Physical buttons on Android
 Update credits -- graphics feedback
 Investigate touchscreen detection code backfiring
-Show 8/10/11 subscores on that level
