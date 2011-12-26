@@ -12,29 +12,29 @@ package
 	{
 		public static function init ():void
 		{
-			API.addEventListener(APIEvent.SCORE_POSTED, updateScoreBoard, 1, false);
+			//API.addEventListener(APIEvent.SCORE_POSTED, updateScoreBoard, 1, false);
 		}
 		
 		public static function get hasScoreboard ():Boolean
 		{
-			return API.isNewgrounds;
+			return false;//API.isNewgrounds;
 		}
 		
 		public static function get canSubmit ():Boolean
 		{
-			return (API.sessionId && API.sessionId != "0");
+			return false;//(API.sessionId && API.sessionId != "0");
 		}
 		
 		public static function submitScore ():void
 		{
-			showScores();
+			/*showScores();
 			
 			if (canSubmit) {
 				Main.so.data.scoreSubmitted = Main.so.data.totalScore || 0;
 				API.postScore("Total_score", Main.so.data.scoreSubmitted);
 			} else {
 				updateScoreBoard();
-			}
+			}*/
 		}
 		
 		public static function updateScoreBoard (param:* = null):void
@@ -46,6 +46,8 @@ package
 		
 		public static function showScores ():void
 		{
+			return;
+			
 			if (! scoreBrowser) {
 				scoreBrowser = new ScoreBrowser();
 				scoreBrowser.scoreBoardName = "Total_score";

@@ -25,6 +25,8 @@ package
 		
 		public static function testMedals (final:Boolean = false):void
 		{
+			return;
+			
 			if (! (API.sessionId && API.sessionId != "0")) return;
 			
 			if (! medalPopup) {
@@ -57,37 +59,6 @@ package
 				}
 			}
 		}
-		
-		/*private static function showMedal (medal:Medal):void
-		{
-			var size:int = 50;
-			var border:int = 4;
-			size += border*2;
-			
-			var sprite:Sprite = new Sprite;
-			
-			sprite.graphics.beginFill(Main.GREY);
-			sprite.graphics.drawRect(0, -size, size, size);
-			sprite.graphics.endFill();
-			
-			sprite.alpha = 0;
-			
-			sprite.x = border;
-			sprite.y = stageHeight - border;
-			
-			var medalImage: Sprite = medal.attachIcon(sprite);
-			
-			medalImage.x = border;
-			medalImage.y = -size + border;
-			
-			container.addChild(sprite);
-			
-			FP.tween(sprite, {alpha: 1}, 30);
-			FP.tween(sprite, {alpha: 0}, 30, {delay: 120, complete: function ():void {
-				container.removeChild(sprite);
-			}});
-			
-		}*/
 		
 		private static function testMedal1 ():Boolean
 		{
