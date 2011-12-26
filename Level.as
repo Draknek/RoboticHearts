@@ -43,6 +43,7 @@ package
 		public var resetButton:Button;
 		public var undoButton:Button;
 		public var redoButton:Button;
+		public var skipButton:Button;
 		
 		public var reseting:Boolean = false;
 		
@@ -280,7 +281,9 @@ package
 			Audio.muteOverlay = muteOverlay;
 			
 			if (levelPacks[mode].levels[id+1]) {
-				add(new Button(FP.width-8 - buttonPadding, FP.height-10, Button.SKIP, skipPrompt, "Skip level", false, true, buttonPadding));
+				skipButton = new Button(FP.width-8 - buttonPadding, FP.height-10, Button.SKIP, skipPrompt, "Skip level", false, true, buttonPadding);
+				skipButton.disabled = true;
+				add(skipButton);
 			}
 			
 			var modeCode:String = "";
@@ -582,6 +585,10 @@ package
 				}
 				
 				return;
+			}
+			
+			if (skipButton) {
+				skipButton.disabled = false;
 			}
 			
 			if (Input.pressed(Key.E) && Logger.isLocal) {
