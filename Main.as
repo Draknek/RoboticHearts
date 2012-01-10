@@ -163,7 +163,7 @@ package
 				catch (e:Error) {}
 			}
 			
-			sitelock(["draknek.org", "draknek.dev", "flashgamelicense.com", "newgrounds.com", "ungrounded.net", "jayisgames.com"]);
+			sitelock(["andkon.com"]);
 			
 			super.init();
 			
