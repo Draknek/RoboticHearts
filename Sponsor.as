@@ -1,8 +1,8 @@
 package
 {
-	import com.newgrounds.*;
+	/*import com.newgrounds.*;
 	import com.newgrounds.components.MedalPopup;
-	import com.newgrounds.components.FlashAd;
+	import com.newgrounds.components.FlashAd;*/
 	
 	import flash.display.*;
 	import flash.utils.*;
@@ -19,45 +19,12 @@ package
 		
 		public static function init (stage:Stage):void
 		{
-			API.connect(stage, Secret.NG_API_ID, Secret.NG_KEY);
-			stageHeight = stage.stageHeight;
+			
 		}
 		
 		public static function testMedals (final:Boolean = false):void
 		{
-			return;
 			
-			if (! (API.sessionId && API.sessionId != "0")) return;
-			
-			if (! medalPopup) {
-				medalPopup = new MedalPopup;
-				
-				medalPopup.x = 8;
-				medalPopup.y = container.stage.stageHeight - medalPopup.height - 8;
-				
-				container.addChild(medalPopup);
-			}
-			
-			for (var i:int = 1; i < medalNames.length; i++) {
-				var name:String = medalNames[i];
-				
-				var f:Function = Sponsor["testMedal"+i];
-				
-				var unlocked:Boolean = f();
-				
-				if (name == "Those Robotic Hearts of His" && ! final) unlocked = false;
-				
-				if (unlocked) {
-					var medal:Medal = API.getMedal(name);
-					
-					if (! medal) continue;
-					
-					if (! medal.unlocked) {
-						medal.unlock();
-						//showMedal(medal);
-					}
-				}
-			}
 		}
 		
 		private static function testMedal1 ():Boolean
@@ -118,15 +85,11 @@ package
 		}
 		
 		public static function createAd():DisplayObject {
-			//if (! API.connected) return null;
-			
-			return new FlashAd();
+			return null;
 		}
 		
 		public static function update():void {
-			if (! API.connected) return;
-			if (API.isNewgrounds) return;
-			Preloader.mustClick = true;
+			
 		}
 	}
 }

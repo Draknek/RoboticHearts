@@ -211,7 +211,7 @@ package
 				}
 			}
 			
-			var moreGames:Button = makeURLButton("More Games", "http://www.newgrounds.com/");
+			var moreGames:Button = makeURLButton("Andkon Arcade", "http://www.andkon.com/arcade/");
 			
 			if (Main.touchscreen) {
 				moreGames = makeURLButton("By Alan Hazelden", "http://www.draknek.org/?ref=throm&platform=" + escape(Capabilities.manufacturer));
@@ -369,7 +369,7 @@ package
 			
 			tank.buttonMode = true;
 			
-			FP.engine.addChild(tank);
+			//FP.engine.addChild(tank);
 			
 			tank.addEventListener(MouseEvent.CLICK, makeURLFunction("http://www.newgrounds.com/"));
 			tank.addEventListener(MouseEvent.MOUSE_OVER, function (e:Event):void { tank2.visible = true; tank.scaleX = tank.scaleY = 1; });
@@ -470,7 +470,7 @@ package
 			return b;
 		}
 		
-		private function makeURLFunction (url:String): Function
+		public static function makeURLFunction (url:String): Function
 		{
 			return function (param:* = null):void {
 				var request:URLRequest = new URLRequest(url);
@@ -507,7 +507,6 @@ package
 				],
 				[
 					"Thanks to",
-					["Newgrounds", "http://www.newgrounds.com/"],
 					["Alistair Aitcheson", "http://www.alistairaitcheson.com/"],
 					["The FlashPunk community"],
 					["All my testers"]

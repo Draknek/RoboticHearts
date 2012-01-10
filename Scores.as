@@ -1,7 +1,7 @@
 package
 {
-	import com.newgrounds.*;
-	import com.newgrounds.components.*;
+	/*import com.newgrounds.*;
+	import com.newgrounds.components.*;*/
 	
 	import net.flashpunk.*;
 	import net.flashpunk.utils.*;
@@ -39,39 +39,14 @@ package
 		
 		public static function updateScoreBoard (param:* = null):void
 		{
-			scoreBrowser.loadScores();
+			//scoreBrowser.loadScores();
 		}
 		
-		private static var scoreBrowser:ScoreBrowser;
+		//private static var scoreBrowser:ScoreBrowser;
 		
 		public static function showScores ():void
 		{
-			return;
 			
-			if (! scoreBrowser) {
-				scoreBrowser = new ScoreBrowser();
-				scoreBrowser.scoreBoardName = "Total_score";
-				scoreBrowser.period = ScoreBoard.ALL_TIME;
-			}
-			
-			if (scoreBrowser.parent) return;
-			
-			//scoreBrowser.loadScores();
-			FP.engine.addChild(scoreBrowser);
-			
-			scoreBrowser.x = (FP.stage.stageWidth - scoreBrowser.width)*0.5
-			scoreBrowser.y = 8;//(FP.stage.stageHeight - scoreBrowser.height)*0.5
-			
-			function removal ():void {
-				if (! scoreBrowser.parent) return;
-				
-				if (scoreBrowser.mouseX < 0 || scoreBrowser.mouseY < 0 || scoreBrowser.mouseX > scoreBrowser.width || scoreBrowser.mouseY > scoreBrowser.height) {
-					FP.engine.removeChild(scoreBrowser);
-					FP.stage.removeEventListener(MouseEvent.MOUSE_DOWN, removal);
-				}
-			}
-			
-			FP.stage.addEventListener(MouseEvent.MOUSE_DOWN, removal);
 		}
 	}
 }
