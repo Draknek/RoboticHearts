@@ -382,9 +382,11 @@ package
 		
 		public override function end ():void
 		{
-			FP.tween(tank, {alpha: 0}, 30, function ():void {
-				FP.engine.removeChild(tank);
-			});
+			if (tank && tank.parent) {
+				FP.tween(tank, {alpha: 0}, 30, function ():void {
+					FP.engine.removeChild(tank);
+				});
+			}
 		}
 		
 		private function addElements(list:Array, offsetX:int = 0, offsetY:int = 0, bottom_padding:Number = 0):void

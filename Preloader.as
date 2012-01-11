@@ -5,6 +5,7 @@ package
 	import flash.text.*;
 	import flash.events.*;
 	import flash.utils.getDefinitionByName;
+	import flash.net.*;
 
 	// iPhone: 480x320 => 160x107
 	// iPad: 1024x768 => 147x110 (test with 735x550)
@@ -183,7 +184,7 @@ package
 				
 				ad.buttonMode = true;
 		
-				ad.addEventListener(MouseEvent.CLICK, Menu.makeURLFunction("http://www.andkon.com/arcade/"));
+				ad.addEventListener(MouseEvent.CLICK, makeURLFunction("http://www.andkon.com/arcade/"));
 				
 				progressBar.y = ad.y + ad.height + progressBar.height*2;
 				text.y = progressBar.y + progressBar.height;
@@ -214,6 +215,14 @@ package
 			parent.addChild(new mainClass as DisplayObject);
 			
 			parent.removeChild(this);
+		}
+		
+		public static function makeURLFunction (url:String): Function
+		{
+			return function (param:* = null):void {
+				var request:URLRequest = new URLRequest(url);
+				navigateToURL(request, "_blank");
+			}
 		}
 	}
 }
