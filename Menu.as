@@ -211,7 +211,7 @@ package
 				}
 			}
 			
-			var moreGames:Button = makeURLButton("Andkon Arcade", "http://www.andkon.com/arcade/");
+			var moreGames:Button = makeURLButton("More games", "http://www.draknek.org/games/");
 			
 			if (Main.touchscreen) {
 				moreGames = makeURLButton("By Alan Hazelden", "http://www.draknek.org/?ref=throm&platform=" + escape(Capabilities.manufacturer));

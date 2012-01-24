@@ -163,7 +163,7 @@ package
 				catch (e:Error) {}
 			}
 			
-			sitelock(["andkon.com"]);
+			sitelock(["draknek.org", "draknek.dev"]);
 			
 			super.init();
 			

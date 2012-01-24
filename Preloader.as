@@ -47,9 +47,6 @@ package
 		[Embed(source = 'net/flashpunk/graphics/04B_03__.TTF', fontFamily = 'default')]
 		private static const FONT:Class;
 		
-		[Embed(source = 'images/andkon.png')]
-		private static const ANDKON_LOGO:Class;
-		
 		public function Preloader ()
 		{
 			sw = stage.stageWidth;
@@ -165,34 +162,6 @@ package
 			
 			text.x = (sw - text.width) * 0.5;
 			if (text2) text2.x = (sw - text2.width) * 0.5;
-			
-			if (! ad) {
-				var img:Bitmap = new ANDKON_LOGO;
-				
-				ad = new Sprite;
-				
-				ad.addChild(img);
-				
-				img.smoothing = true;
-				
-				ad.scaleX = ad.scaleY = 0.25;
-				
-				ad.x = (width - ad.width)*0.5;
-				ad.y = (height - ad.height)*0.3;
-				
-				addChild(ad);
-				
-				ad.buttonMode = true;
-		
-				ad.addEventListener(MouseEvent.CLICK, makeURLFunction("http://www.andkon.com/arcade/"));
-				
-				progressBar.y = ad.y + ad.height + progressBar.height*2;
-				text.y = progressBar.y + progressBar.height;
-				
-				if (text2) text2.y = text.y;
-			}
-			
-			Sponsor.update();
 		}
 		
 		private function onMouseDown(e:MouseEvent):void {
