@@ -5,8 +5,8 @@ www
 levels/*.lvls
 levels/*.story.txt
 Secret.as
+Secret2.as
 obj
-ios
 sponsors
 db
 UpdateDB.as
