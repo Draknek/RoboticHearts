@@ -43,8 +43,12 @@ package
 		
 		public function Main ()
 		{
-			if (Capabilities.manufacturer.toLowerCase().indexOf("android") >= 0) {
+			if (Capabilities.manufacturer.toLowerCase().indexOf("ios") != -1) {
+				touchscreen = true;
+			}
+			else if (Capabilities.manufacturer.toLowerCase().indexOf("android") >= 0) {
 				isAndroid = true;
+				touchscreen = true;
 			}
 			
 			if (! so.data.levels) so.data.levels = {};
