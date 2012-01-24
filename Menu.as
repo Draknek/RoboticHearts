@@ -211,11 +211,7 @@ package
 				}
 			}
 			
-			var moreGames:Button = makeURLButton("More games", "http://www.draknek.org/games/");
-			
-			if (Main.touchscreen) {
-				moreGames = makeURLButton("By Alan Hazelden", "http://www.draknek.org/?ref=throm&platform=" + escape(Capabilities.manufacturer));
-			}
+			var moreGames:Button = makeURLButton("More games", "http://www.toystudio.com/xpromo/?game=robotichearts&store=nook");
 			
 			var getOnMobile:Button = makeURLButton("Get mobile version", "http://www.draknek.org/games/hearts/mobile.php");
 			
@@ -491,7 +487,11 @@ package
 					"Created by",
 					["Alan Hazelden", "http://www.draknek.org/?ref=trhom"],
 					"Developed with",
-					["FlashPunk", "http://flashpunk.net/"]
+					["FlashPunk", "http://flashpunk.net/"],
+				],
+				[
+					"Published for Nook\nby",
+					["Toy Studio", "http://www.toystudio.com/"]
 				],
 				[
 					"Music",
@@ -523,7 +523,7 @@ package
 				for each (var obj:* in subitems) {
 					if (obj is String) {
 						list.push(1);
-						obj = new Text(obj, 0, 0, {color: Main.GREY});
+						obj = new Text(obj, 0, 0, {color: Main.GREY, align: "center"});
 					} else if (obj is Array) {
 						if (obj.length == 1) {
 							obj = new Text(obj[0], 0, 0, {color: Main.WHITE});
