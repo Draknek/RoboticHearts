@@ -1,0 +1,323 @@
+00010000-00110000 rw-p 00000000 00:00 0 
+00110000-00140000 rwxp 00000000 00:00 0 
+00140000-00220000 ---p 00000000 00:00 0 
+00220000-00223000 rwxp 00000000 00:00 0 
+00223000-00224000 ---p 00000000 00:00 0 
+00224000-00230000 ---p 00000000 00:00 0 
+00230000-00232000 ---p 00000000 00:00 0 
+00232000-00330000 rwxp 00000000 00:00 0 
+00330000-00331000 r-xp 00000000 00:00 0 
+00331000-00340000 ---p 00000000 00:00 0 
+00340000-00341000 rwxp 00000000 00:00 0 
+00341000-00350000 ---p 00000000 00:00 0 
+00350000-00362000 rwxp 00000000 00:00 0 
+00362000-003e0000 ---p 00000000 00:00 0 
+003e0000-003f0000 rwxp 00000000 00:00 0 
+003f0000-00400000 ---p 00000000 00:00 0 
+00400000-00418000 r-xp 00000000 08:07 3123       /home/alan/.wine/drive_c/windows/system32/java.exe
+00418000-0041a000 rwxp 00018000 08:07 3123       /home/alan/.wine/drive_c/windows/system32/java.exe
+0041a000-0041c000 rwxp 00000000 00:00 0 
+0041c000-00424000 r-xp 0001a000 08:07 3123       /home/alan/.wine/drive_c/windows/system32/java.exe
+00424000-00444000 rwxp 00000000 00:00 0 
+00444000-00534000 ---p 00000000 00:00 0 
+00534000-00644000 rwxp 00000000 00:00 0 
+00644000-00654000 rwxp 00000000 00:00 0 
+00654000-00754000 ---p 00000000 00:00 0 
+00754000-00760000 ---p 00000000 00:00 0 
+00760000-00763000 ---p 00000000 00:00 0 
+00763000-008d8000 rwxp 00000000 00:00 0 
+008d8000-02860000 ---p 00000000 00:00 0 
+02860000-05460000 rwxp 00000000 00:00 0 
+05460000-0a660000 ---p 00000000 00:00 0 
+0a660000-0a676000 rwxp 00000000 00:00 0 
+0a676000-0a69b000 ---p 00000000 00:00 0 
+0a69b000-0a69c000 rwxp 00000000 00:00 0 
+0a69c000-0a6a0000 ---p 00000000 00:00 0 
+0a6a0000-0a6b0000 rwxp 00000000 00:00 0 
+0a6b0000-0a6d0000 ---p 00000000 00:00 0 
+0a6d0000-0a6d2000 ---p 00000000 00:00 0 
+0a6d2000-0a7d0000 rwxp 00000000 00:00 0 
+0a7d0000-0a7d3000 ---p 00000000 00:00 0 
+0a7d3000-0a8d0000 rwxp 00000000 00:00 0 
+0a8d0000-0a8d3000 ---p 00000000 00:00 0 
+0a8d3000-0a9d0000 rwxp 00000000 00:00 0 
+0a9d0000-0a9d3000 ---p 00000000 00:00 0 
+0a9d3000-0aad0000 rwxp 00000000 00:00 0 
+0aad0000-0aad3000 ---p 00000000 00:00 0 
+0aad3000-0abd0000 rwxp 00000000 00:00 0 
+0abd0000-0abd3000 ---p 00000000 00:00 0 
+0abd3000-0acd0000 rwxp 00000000 00:00 0 
+0acd0000-0acd3000 ---p 00000000 00:00 0 
+0acd3000-0add0000 rwxp 00000000 00:00 0 
+0add0000-0add2000 ---p 00000000 00:00 0 
+0add2000-0af20000 rwxp 00000000 00:00 0 
+0af20000-0afe0000 ---p 00000000 00:00 0 
+0afe0000-20000000 ---p 00000000 00:00 0 
+20000000-20010000 r-xp 00000000 08:06 310590     /usr/lib/wine/user32.dll.so
+20010000-20011000 rw-p 00000000 00:00 0 
+20011000-200d3000 r-xp 00011000 08:06 310590     /usr/lib/wine/user32.dll.so
+200d3000-200d7000 r--p 000d3000 08:06 310590     /usr/lib/wine/user32.dll.so
+200d7000-200db000 rw-p 000d7000 08:06 310590     /usr/lib/wine/user32.dll.so
+200db000-200dd000 rwxp 000db000 08:06 310590     /usr/lib/wine/user32.dll.so
+200dd000-2011c000 rw-p 000dd000 08:06 310590     /usr/lib/wine/user32.dll.so
+2011c000-2013c000 rw-p 00000000 00:00 0 
+2013c000-20140000 r-xp 00000000 08:06 309456     /usr/lib/wine/winmm.dll.so
+20140000-20141000 rw-p 00000000 00:00 0 
+20141000-20177000 r-xp 00005000 08:06 309456     /usr/lib/wine/winmm.dll.so
+20177000-20178000 r--p 0003a000 08:06 309456     /usr/lib/wine/winmm.dll.so
+20178000-20179000 rw-p 0003b000 08:06 309456     /usr/lib/wine/winmm.dll.so
+20179000-2017a000 rwxp 0003c000 08:06 309456     /usr/lib/wine/winmm.dll.so
+2017a000-201dd000 rw-p 0003d000 08:06 309456     /usr/lib/wine/winmm.dll.so
+201dd000-201de000 rw-p 00000000 00:00 0 
+201de000-20200000 r-xp 00000000 08:06 308878     /usr/lib/wine/ole32.dll.so
+20200000-20201000 rw-p 00000000 00:00 0 
+20201000-202d7000 r-xp 00023000 08:06 308878     /usr/lib/wine/ole32.dll.so
+202d7000-202d8000 ---p 000f9000 08:06 308878     /usr/lib/wine/ole32.dll.so
+202d8000-202dc000 r--p 000f9000 08:06 308878     /usr/lib/wine/ole32.dll.so
+202dc000-202de000 rw-p 000fd000 08:06 308878     /usr/lib/wine/ole32.dll.so
+202de000-202df000 rwxp 000ff000 08:06 308878     /usr/lib/wine/ole32.dll.so
+202df000-202e5000 rw-p 00100000 08:06 308878     /usr/lib/wine/ole32.dll.so
+202e5000-202f0000 r-xp 00000000 08:06 308847     /usr/lib/wine/rpcrt4.dll.so
+202f0000-202f1000 rw-p 00000000 00:00 0 
+202f1000-20353000 r-xp 0000c000 08:06 308847     /usr/lib/wine/rpcrt4.dll.so
+20353000-20354000 ---p 0006e000 08:06 308847     /usr/lib/wine/rpcrt4.dll.so
+20354000-20355000 r--p 0006e000 08:06 308847     /usr/lib/wine/rpcrt4.dll.so
+20355000-20359000 rw-p 0006f000 08:06 308847     /usr/lib/wine/rpcrt4.dll.so
+20359000-2035a000 rwxp 00073000 08:06 308847     /usr/lib/wine/rpcrt4.dll.so
+2035a000-2035b000 rw-p 00074000 08:06 308847     /usr/lib/wine/rpcrt4.dll.so
+2035b000-2037f000 r-xp 00000000 08:06 130384     /lib/libexpat.so.1.5.2
+2037f000-20381000 r--p 00024000 08:06 130384     /lib/libexpat.so.1.5.2
+20381000-20382000 rw-p 00026000 08:06 130384     /lib/libexpat.so.1.5.2
+20382000-20397000 r-xp 00000000 08:06 263679     /usr/lib/libICE.so.6.3.0
+20397000-20398000 r--p 00014000 08:06 263679     /usr/lib/libICE.so.6.3.0
+20398000-20399000 rw-p 00015000 08:06 263679     /usr/lib/libICE.so.6.3.0
+20399000-2039b000 rw-p 00000000 00:00 0 
+2039b000-203a9000 r-xp 00000000 08:06 263727     /usr/lib/libXext.so.6.4.0
+203a9000-203aa000 r--p 0000d000 08:06 263727     /usr/lib/libXext.so.6.4.0
+203aa000-203ab000 rw-p 0000e000 08:06 263727     /usr/lib/libXext.so.6.4.0
+203ab000-203c3000 r-xp 00000000 08:06 264721     /usr/lib/libxcb.so.1.1.0
+203c3000-203c4000 r--p 00017000 08:06 264721     /usr/lib/libxcb.so.1.1.0
+203c4000-203c5000 rw-p 00018000 08:06 264721     /usr/lib/libxcb.so.1.1.0
+203c5000-203c9000 r-xp 00000000 08:06 263725     /usr/lib/libXdmcp.so.6.0.0
+203c9000-203ca000 r--p 00003000 08:06 263725     /usr/lib/libXdmcp.so.6.0.0
+203ca000-203cb000 rw-p 00004000 08:06 263725     /usr/lib/libXdmcp.so.6.0.0
+203cb000-203d3000 r-xp 00000000 08:06 263749     /usr/lib/libXrender.so.1.3.0
+203d3000-203d4000 r--p 00007000 08:06 263749     /usr/lib/libXrender.so.1.3.0
+203d4000-203d5000 rw-p 00008000 08:06 263749     /usr/lib/libXrender.so.1.3.0
+203d5000-203db000 r-xp 00000000 08:06 263747     /usr/lib/libXrandr.so.2.2.0
+203db000-203dc000 r--p 00005000 08:06 263747     /usr/lib/libXrandr.so.2.2.0
+203dc000-203dd000 rw-p 00006000 08:06 263747     /usr/lib/libXrandr.so.2.2.0
+203dd000-203e9000 r-xp 00000000 08:06 263735     /usr/lib/libXi.so.6.1.0
+203e9000-203ea000 r--p 0000c000 08:06 263735     /usr/lib/libXi.so.6.1.0
+203ea000-203eb000 rw-p 0000d000 08:06 263735     /usr/lib/libXi.so.6.1.0
+20b6f000-20b80000 r-xp 00000000 08:06 308836     /usr/lib/wine/gdi32.dll.so
+20b80000-20b81000 rw-p 00000000 00:00 0 
+20b81000-20bfc000 r-xp 00012000 08:06 308836     /usr/lib/wine/gdi32.dll.so
+20bfc000-20bfe000 r--p 0008c000 08:06 308836     /usr/lib/wine/gdi32.dll.so
+20bfe000-20c01000 rw-p 0008e000 08:06 308836     /usr/lib/wine/gdi32.dll.so
+20c01000-20c02000 rwxp 00091000 08:06 308836     /usr/lib/wine/gdi32.dll.so
+20c02000-20c13000 rw-p 00000000 00:00 0 
+25916000-2591a000 r-xp 00000000 08:06 263767     /usr/lib/libXxf86vm.so.1.0.0
+2591a000-2591b000 r--p 00003000 08:06 263767     /usr/lib/libXxf86vm.so.1.0.0
+2591b000-2591c000 rw-p 00004000 08:06 263767     /usr/lib/libXxf86vm.so.1.0.0
+2a2a8000-2a3c1000 r-xp 00000000 08:06 263710     /usr/lib/libX11.so.6.3.0
+2a3c1000-2a3c2000 r--p 00118000 08:06 263710     /usr/lib/libX11.so.6.3.0
+2a3c2000-2a3c4000 rw-p 00119000 08:06 263710     /usr/lib/libX11.so.6.3.0
+2a3c4000-2a3c5000 rw-p 00000000 00:00 0 
+2f46e000-2f470000 r-xp 00000000 08:06 263714     /usr/lib/libXau.so.6.0.0
+2f470000-2f471000 r--p 00001000 08:06 263714     /usr/lib/libXau.so.6.0.0
+2f471000-2f472000 rw-p 00002000 08:06 263714     /usr/lib/libXau.so.6.0.0
+2f62f000-2f65d000 r-xp 00000000 08:06 264006     /usr/lib/libfontconfig.so.1.4.4
+2f65d000-2f65e000 r--p 0002d000 08:06 264006     /usr/lib/libfontconfig.so.1.4.4
+2f65e000-2f65f000 rw-p 0002e000 08:06 264006     /usr/lib/libfontconfig.so.1.4.4
+3697d000-36980000 r-xp 00000000 08:06 314715     /usr/lib/wine/imm32.dll.so
+36980000-36981000 rw-p 00000000 00:00 0 
+36981000-3699c000 r-xp 00004000 08:06 314715     /usr/lib/wine/imm32.dll.so
+3699c000-3699d000 r--p 0001e000 08:06 314715     /usr/lib/wine/imm32.dll.so
+3699d000-3699e000 rwxp 0001f000 08:06 314715     /usr/lib/wine/imm32.dll.so
+3699e000-3699f000 rw-p 00020000 08:06 314715     /usr/lib/wine/imm32.dll.so
+48bcb000-48bd0000 r-xp 00000000 08:06 314719     /usr/lib/wine/msacm32.dll.so
+48bd0000-48bd1000 rw-p 00000000 00:00 0 
+48bd1000-48bec000 r-xp 00006000 08:06 314719     /usr/lib/wine/msacm32.dll.so
+48bec000-48bed000 r--p 00021000 08:06 314719     /usr/lib/wine/msacm32.dll.so
+48bed000-48bee000 rwxp 00022000 08:06 314719     /usr/lib/wine/msacm32.dll.so
+48bee000-48bf4000 rw-p 00023000 08:06 314719     /usr/lib/wine/msacm32.dll.so
+4cb8f000-4cb96000 r-xp 00000000 08:06 263708     /usr/lib/libSM.so.6.0.1
+4cb96000-4cb97000 r--p 00006000 08:06 263708     /usr/lib/libSM.so.6.0.1
+4cb97000-4cb98000 rw-p 00007000 08:06 263708     /usr/lib/libSM.so.6.0.1
+50d12000-50d14000 r-xp 00000000 08:06 263737     /usr/lib/libXinerama.so.1.0.0
+50d14000-50d15000 r--p 00001000 08:06 263737     /usr/lib/libXinerama.so.1.0.0
+50d15000-50d16000 rw-p 00002000 08:06 263737     /usr/lib/libXinerama.so.1.0.0
+5a152000-5a154000 r-xp 00000000 08:06 263719     /usr/lib/libXcomposite.so.1.0.0
+5a154000-5a155000 r--p 00001000 08:06 263719     /usr/lib/libXcomposite.so.1.0.0
+5a155000-5a156000 rw-p 00002000 08:06 263719     /usr/lib/libXcomposite.so.1.0.0
+5a78c000-5a790000 r-xp 00000000 08:06 263729     /usr/lib/libXfixes.so.3.1.0
+5a790000-5a791000 r--p 00003000 08:06 263729     /usr/lib/libXfixes.so.3.1.0
+5a791000-5a792000 rw-p 00004000 08:06 263729     /usr/lib/libXfixes.so.3.1.0
+5aac7000-5aacf000 r-xp 00000000 08:06 263721     /usr/lib/libXcursor.so.1.0.2
+5aacf000-5aad0000 r--p 00007000 08:06 263721     /usr/lib/libXcursor.so.1.0.2
+5aad0000-5aad1000 rw-p 00008000 08:06 263721     /usr/lib/libXcursor.so.1.0.2
+63fb7000-64028000 r-xp 00000000 08:06 295384     /usr/lib/libfreetype.so.6.3.22
+64028000-6402c000 r--p 00070000 08:06 295384     /usr/lib/libfreetype.so.6.3.22
+6402c000-6402d000 rw-p 00074000 08:06 295384     /usr/lib/libfreetype.so.6.3.22
+68000000-6801b000 r-xp 00000000 08:06 140212     /lib/ld-2.11.1.so
+6801b000-6801c000 r--p 0001a000 08:06 140212     /lib/ld-2.11.1.so
+6801c000-6801d000 rw-p 0001b000 08:06 140212     /lib/ld-2.11.1.so
+6801d000-68149000 r-xp 00000000 08:06 307894     /usr/lib/libwine.so.1.0
+68149000-6814a000 r--p 0012b000 08:06 307894     /usr/lib/libwine.so.1.0
+6814a000-6814b000 rw-p 0012c000 08:06 307894     /usr/lib/libwine.so.1.0
+6814b000-6815e000 rw-p 00000000 00:00 0 
+6815e000-68173000 r-xp 00000000 08:06 137601     /lib/tls/i686/cmov/libpthread-2.11.1.so
+68173000-68174000 r--p 00014000 08:06 137601     /lib/tls/i686/cmov/libpthread-2.11.1.so
+68174000-68175000 rw-p 00015000 08:06 137601     /lib/tls/i686/cmov/libpthread-2.11.1.so
+68175000-68177000 rw-p 00000000 00:00 0 
+68177000-682ca000 r-xp 00000000 08:06 137002     /lib/tls/i686/cmov/libc-2.11.1.so
+682ca000-682cb000 ---p 00153000 08:06 137002     /lib/tls/i686/cmov/libc-2.11.1.so
+682cb000-682cd000 r--p 00153000 08:06 137002     /lib/tls/i686/cmov/libc-2.11.1.so
+682cd000-682ce000 rw-p 00155000 08:06 137002     /lib/tls/i686/cmov/libc-2.11.1.so
+682ce000-682d1000 rw-p 00000000 00:00 0 
+682d1000-682d3000 r-xp 00000000 08:06 137007     /lib/tls/i686/cmov/libdl-2.11.1.so
+682d3000-682d4000 r--p 00001000 08:06 137007     /lib/tls/i686/cmov/libdl-2.11.1.so
+682d4000-682d5000 rw-p 00002000 08:06 137007     /lib/tls/i686/cmov/libdl-2.11.1.so
+682d5000-682f9000 r-xp 00000000 08:06 137023     /lib/tls/i686/cmov/libm-2.11.1.so
+682f9000-682fa000 r--p 00023000 08:06 137023     /lib/tls/i686/cmov/libm-2.11.1.so
+682fa000-682fb000 rw-p 00024000 08:06 137023     /lib/tls/i686/cmov/libm-2.11.1.so
+682fb000-68301000 r-xp 00000000 08:06 137256     /lib/tls/i686/cmov/libnss_compat-2.11.1.so
+68301000-68302000 r--p 00006000 08:06 137256     /lib/tls/i686/cmov/libnss_compat-2.11.1.so
+68302000-68303000 rw-p 00007000 08:06 137256     /lib/tls/i686/cmov/libnss_compat-2.11.1.so
+68303000-68316000 r-xp 00000000 08:06 137035     /lib/tls/i686/cmov/libnsl-2.11.1.so
+68316000-68317000 r--p 00012000 08:06 137035     /lib/tls/i686/cmov/libnsl-2.11.1.so
+68317000-68318000 rw-p 00013000 08:06 137035     /lib/tls/i686/cmov/libnsl-2.11.1.so
+68318000-6831a000 rw-p 00000000 00:00 0 
+6831a000-68324000 r-xp 00000000 08:06 137258     /lib/tls/i686/cmov/libnss_files-2.11.1.so
+68324000-68325000 r--p 00009000 08:06 137258     /lib/tls/i686/cmov/libnss_files-2.11.1.so
+68325000-68326000 rw-p 0000a000 08:06 137258     /lib/tls/i686/cmov/libnss_files-2.11.1.so
+68326000-68330000 r-xp 00000000 08:06 307953     /usr/lib/wine/advapi32.dll.so
+68330000-68331000 rw-p 00000000 00:00 0 
+68331000-68380000 r-xp 0000b000 08:06 307953     /usr/lib/wine/advapi32.dll.so
+68380000-68381000 r--p 0005a000 08:06 307953     /usr/lib/wine/advapi32.dll.so
+68381000-68384000 rw-p 0005b000 08:06 307953     /usr/lib/wine/advapi32.dll.so
+68384000-68385000 rwxp 0005e000 08:06 307953     /usr/lib/wine/advapi32.dll.so
+68385000-68387000 rw-p 0005f000 08:06 307953     /usr/lib/wine/advapi32.dll.so
+68387000-683bb000 r-xp 00000000 08:06 130410     /lib/libncurses.so.5.7
+683bb000-683bc000 ---p 00034000 08:06 130410     /lib/libncurses.so.5.7
+683bc000-683be000 r--p 00034000 08:06 130410     /lib/libncurses.so.5.7
+683be000-683bf000 rw-p 00036000 08:06 130410     /lib/libncurses.so.5.7
+6980e000-69811000 r-xp 00000000 08:06 176383     /lib/libuuid.so.1.3.0
+69811000-69812000 r--p 00002000 08:06 176383     /lib/libuuid.so.1.3.0
+69812000-69813000 rw-p 00003000 08:06 176383     /lib/libuuid.so.1.3.0
+6d320000-6d33a000 r-xp 00000000 08:07 2468       /home/alan/.wine/drive_c/Program Files/Java/jre6/bin/java.dll
+6d33a000-6d33c000 rwxp 0001a000 08:07 2468       /home/alan/.wine/drive_c/Program Files/Java/jre6/bin/java.dll
+6d33c000-6d33f000 r-xp 0001c000 08:07 2468       /home/alan/.wine/drive_c/Program Files/Java/jre6/bin/java.dll
+6d550000-6d551000 r-xp 00000000 08:07 2499       /home/alan/.wine/drive_c/Program Files/Java/jre6/bin/management.dll
+6d551000-6d556000 r-xp 00000000 00:00 0 
+6d556000-6d557000 rwxp 00004000 08:07 2499       /home/alan/.wine/drive_c/Program Files/Java/jre6/bin/management.dll
+6d557000-6d559000 r-xp 00000000 00:00 0 
+6d7a0000-6d7a1000 r-xp 00000000 08:07 2532       /home/alan/.wine/drive_c/Program Files/Java/jre6/bin/verify.dll
+6d7a1000-6d7a9000 r-xp 00000000 00:00 0 
+6d7a9000-6d7aa000 rwxp 00000000 00:00 0 
+6d7aa000-6d7ab000 r-xp 00007000 08:07 2532       /home/alan/.wine/drive_c/Program Files/Java/jre6/bin/verify.dll
+6d7ab000-6d7ac000 r-xp 00000000 00:00 0 
+6d7e0000-6d7e1000 r-xp 00000000 08:07 2535       /home/alan/.wine/drive_c/Program Files/Java/jre6/bin/zip.dll
+6d7e1000-6d7eb000 r-xp 00000000 00:00 0 
+6d7eb000-6d7ed000 rwxp 00000000 00:00 0 
+6d7ed000-6d7ee000 r-xp 00000000 00:00 0 
+6d7ee000-6d7ef000 r-xp 0000b000 08:07 2535       /home/alan/.wine/drive_c/Program Files/Java/jre6/bin/zip.dll
+6d7f0000-6da54000 r-xp 00000000 08:07 2450       /home/alan/.wine/drive_c/Program Files/Java/jre6/bin/client/jvm.dll
+6da54000-6da62000 rwxp 00264000 08:07 2450       /home/alan/.wine/drive_c/Program Files/Java/jre6/bin/client/jvm.dll
+6da62000-6da76000 rwxp 00000000 00:00 0 
+6da76000-6da9f000 r-xp 00272000 08:07 2450       /home/alan/.wine/drive_c/Program Files/Java/jre6/bin/client/jvm.dll
+76d8c000-76da0000 r-xp 00000000 08:06 308726     /usr/lib/wine/winex11.drv.so
+76da0000-76da1000 rw-p 00000000 00:00 0 
+76da1000-76e2a000 r-xp 00015000 08:06 308726     /usr/lib/wine/winex11.drv.so
+76e2a000-76e2c000 r--p 0009e000 08:06 308726     /usr/lib/wine/winex11.drv.so
+76e2c000-76e2d000 rw-p 000a0000 08:06 308726     /usr/lib/wine/winex11.drv.so
+76e2d000-76e2e000 rwxp 000a1000 08:06 308726     /usr/lib/wine/winex11.drv.so
+76e2e000-76e30000 rw-p 000a2000 08:06 308726     /usr/lib/wine/winex11.drv.so
+76e30000-76e34000 rw-p 00000000 00:00 0 
+7a57c000-7a580000 r-xp 00000000 08:06 309403     /usr/lib/wine/version.dll.so
+7a580000-7a581000 rw-p 00000000 00:00 0 
+7a581000-7a593000 r-xp 00005000 08:06 309403     /usr/lib/wine/version.dll.so
+7a593000-7a594000 r--p 00016000 08:06 309403     /usr/lib/wine/version.dll.so
+7a594000-7a595000 rwxp 00017000 08:06 309403     /usr/lib/wine/version.dll.so
+7abd7000-7abea000 r-xp 00000000 08:06 130506     /lib/libz.so.1.2.3.3
+7abea000-7abeb000 r--p 00012000 08:06 130506     /lib/libz.so.1.2.3.3
+7abeb000-7abec000 rw-p 00013000 08:06 130506     /lib/libz.so.1.2.3.3
+7b800000-7b810000 r-xp 00000000 08:06 314648     /usr/lib/wine/kernel32.dll.so
+7b810000-7b811000 r-xp 00000000 00:00 0 
+7b811000-7b894000 r-xp 00011000 08:06 314648     /usr/lib/wine/kernel32.dll.so
+7b894000-7b895000 ---p 00094000 08:06 314648     /usr/lib/wine/kernel32.dll.so
+7b895000-7b896000 r--p 00094000 08:06 314648     /usr/lib/wine/kernel32.dll.so
+7b896000-7b9a9000 rwxp 00095000 08:06 314648     /usr/lib/wine/kernel32.dll.so
+7b9a9000-7b9aa000 rwxp 00000000 00:00 0 
+7bc00000-7bc10000 r-xp 00000000 08:06 310542     /usr/lib/wine/ntdll.dll.so
+7bc10000-7bc11000 r-xp 00000000 00:00 0 
+7bc11000-7bca4000 r-xp 00011000 08:06 310542     /usr/lib/wine/ntdll.dll.so
+7bca4000-7bca5000 r--p 000a3000 08:06 310542     /usr/lib/wine/ntdll.dll.so
+7bca5000-7bcae000 rwxp 000a4000 08:06 310542     /usr/lib/wine/ntdll.dll.so
+7bcae000-7bcc1000 rwxp 00000000 00:00 0 
+7bf00000-7bf02000 r-xp 00000000 08:06 314801     /usr/bin/wine
+7bf02000-7bf03000 r--p 00001000 08:06 314801     /usr/bin/wine
+7bf03000-7bf04000 rw-p 00002000 08:06 314801     /usr/bin/wine
+7c340000-7c38b000 r-xp 00000000 08:07 2501       /home/alan/.wine/drive_c/Program Files/Java/jre6/bin/msvcr71.dll
+7c38b000-7c391000 rwxp 0004b000 08:07 2501       /home/alan/.wine/drive_c/Program Files/Java/jre6/bin/msvcr71.dll
+7c391000-7c392000 rwxp 00000000 00:00 0 
+7c392000-7c396000 r-xp 00051000 08:07 2501       /home/alan/.wine/drive_c/Program Files/Java/jre6/bin/msvcr71.dll
+7c400000-7c402000 r-xp 00001000 08:06 314818     /usr/bin/wine-preloader
+7c402000-7c403000 rw-p 00003000 08:06 314818     /usr/bin/wine-preloader
+7c601000-7c609000 r-xp 00000000 08:06 137491     /lib/tls/i686/cmov/libnss_nis-2.11.1.so
+7c609000-7c60a000 r--p 00007000 08:06 137491     /lib/tls/i686/cmov/libnss_nis-2.11.1.so
+7c60a000-7c60b000 rw-p 00008000 08:06 137491     /lib/tls/i686/cmov/libnss_nis-2.11.1.so
+7cb0f000-7cb94000 rw-p 00000000 00:00 0          [heap]
+7ee0e000-7ee10000 r--p 00000000 08:06 826212     /usr/share/wine/fonts/vgasys.fon
+7ee10000-7ee11000 r--s 00000000 08:06 169578     /var/cache/fontconfig/26de28bc8622bbc1fb67fd234c21975f-le32d4.cache-3
+7ee11000-7ee12000 r--s 00000000 08:06 146326     /var/cache/fontconfig/c05880de57d1f5e948fdfacc138775d9-le32d4.cache-3
+7ee12000-7ee18000 r--s 00000000 08:06 146128     /var/cache/fontconfig/945677eb7aeaf62f1d50efc3fb3ec7d8-le32d4.cache-3
+7ee18000-7ee1b000 r--s 00000000 08:06 141438     /var/cache/fontconfig/99e8ed0e538f840c565b6ed5dad60d56-le32d4.cache-3
+7ee1b000-7ee1e000 r--s 00000000 08:06 141404     /var/cache/fontconfig/e383d7ea5fbe662a33d9b44caf393297-le32d4.cache-3
+7ee1e000-7ee24000 r--s 00000000 08:06 141274     /var/cache/fontconfig/401a5dd6b567794a1d18dd9342dfa604-le32d4.cache-3
+7ee24000-7ee25000 r--s 00000000 08:06 141089     /var/cache/fontconfig/e7071f4a29fa870f4323321c154eba04-le32d4.cache-3
+7ee25000-7ee28000 r--s 00000000 08:06 141035     /var/cache/fontconfig/6eb3985aa4124903f6ff08ba781cd364-le32d4.cache-3
+7ee28000-7ee29000 r--s 00000000 08:06 140946     /var/cache/fontconfig/4c73fe0c47614734b17d736dbde7580a-le32d4.cache-3
+7ee29000-7ee2a000 r--s 00000000 08:06 140945     /var/cache/fontconfig/0d8c3b2ac0904cb8a57a757ad11a4a08-le32d4.cache-3
+7ee2a000-7ee2b000 r--s 00000000 08:06 140708     /var/cache/fontconfig/6a53c69dea097a2d716e069445527da8-le32d4.cache-3
+7ee2b000-7ee2f000 r--s 00000000 08:06 140520     /var/cache/fontconfig/a755afe4a08bf5b97852ceb7400b47bc-le32d4.cache-3
+7ee2f000-7ee33000 r--s 00000000 08:06 140444     /var/cache/fontconfig/515ca1ebc4b18308bea979be5704f9db-le32d4.cache-3
+7ee33000-7ee3a000 r--s 00000000 08:06 140389     /var/cache/fontconfig/6d41288fd70b0be22e8c3a91e032eec0-le32d4.cache-3
+7ee3a000-7ee45000 r--s 00000000 08:06 140177     /var/cache/fontconfig/0f34bcd4b6ee430af32735b75db7f02b-le32d4.cache-3
+7ee45000-7ee48000 r--s 00000000 08:06 140165     /var/cache/fontconfig/d60319d88cac85ba9e1a07bd06cfbb8c-le32d4.cache-3
+7ee48000-7ee49000 r--s 00000000 08:06 140142     /var/cache/fontconfig/4794a0821666d79190d59a36cb4f44b5-le32d4.cache-3
+7ee49000-7ee6b000 r--s 00000000 08:06 140141     /var/cache/fontconfig/365b55f210c0a22e9a19e35191240f32-le32d4.cache-3
+7ee6b000-7ee73000 r--s 00000000 08:06 138511     /var/cache/fontconfig/d52a8644073d54c13679302ca1180695-le32d4.cache-3
+7ee73000-7ee81000 r--s 00000000 08:06 134850     /var/cache/fontconfig/e13b20fdb08344e0e664864cc2ede53d-le32d4.cache-3
+7ee81000-7ee82000 r--s 00000000 08:06 146575     /var/cache/fontconfig/cd9f78304b98e55ca77a492122eada48-le32d4.cache-3
+7ee82000-7ee85000 r--s 00000000 08:06 169572     /var/cache/fontconfig/7ef2298fde41cc6eeb7af42e48b7d293-le32d4.cache-3
+7ee85000-7ee93000 r--s 00000000 08:06 146822     /var/cache/fontconfig/865f88548240fee46819705c6468c165-le32d4.cache-3
+7ee93000-7eea0000 r--s 00000000 08:06 146621     /var/cache/fontconfig/5e6f7b68ae172fea64263aa66bac4bed-le32d4.cache-3
+7eea0000-7eea1000 r--p 00000000 08:06 585498     /usr/share/locale-langpack/en_GB/LC_MESSAGES/libc.mo
+7eea1000-7eee0000 r--p 00000000 08:06 268780     /usr/lib/locale/en_GB.utf8/LC_CTYPE
+7eee0000-7eee1000 r--p 00000000 08:06 268785     /usr/lib/locale/en_GB.utf8/LC_NUMERIC
+7eee1000-7eee2000 r--p 00000000 08:06 268619     /usr/lib/locale/en_GB.utf8/LC_TIME
+7eee2000-7f000000 r--p 00000000 08:06 268779     /usr/lib/locale/en_GB.utf8/LC_COLLATE
+7f000000-7ffb4000 ---p 00000000 00:00 0 
+7ffb4000-7ffdc000 rwxp 00000000 00:00 0 
+7ffdc000-7ffdf000 ---p 00000000 00:00 0 
+7ffdf000-7fff0000 rwxp 00000000 00:00 0 
+7fff0000-7ffff000 ---p 00000000 00:00 0 
+7ffff000-80000000 r-xp 00000000 00:00 0 
+80000000-b77f0000 ---p 00000000 00:00 0 
+b77f4000-b77f6000 rw-p 00000000 00:00 0 
+b77fc000-b77fd000 r--p 00000000 08:06 268636     /usr/lib/locale/en_GB.utf8/LC_MONETARY
+b77fd000-b77fe000 r--p 00000000 08:06 268750     /usr/lib/locale/en_GB.utf8/LC_MESSAGES/SYS_LC_MESSAGES
+b77fe000-b77ff000 r--p 00000000 08:06 268812     /usr/lib/locale/en_GB.utf8/LC_PAPER
+b77ff000-b7800000 r--p 00000000 08:06 268784     /usr/lib/locale/en_GB.utf8/LC_NAME
+b7800000-b7801000 r--p 00000000 08:06 268637     /usr/lib/locale/en_GB.utf8/LC_ADDRESS
+b7801000-b7802000 r--p 00000000 08:06 268638     /usr/lib/locale/en_GB.utf8/LC_TELEPHONE
+b7802000-b7803000 r--p 00000000 08:06 268808     /usr/lib/locale/en_GB.utf8/LC_MEASUREMENT
+b7803000-b780a000 r--s 00000000 08:06 299051     /usr/lib/gconv/gconv-modules.cache
+b780a000-b780b000 r--p 00000000 08:06 268639     /usr/lib/locale/en_GB.utf8/LC_IDENTIFICATION
+b780b000-b780d000 rw-p 00000000 00:00 0 
+b7810000-bf990000 ---p 00000000 00:00 0 
+bf990000-bfd90000 rwxp 00000000 00:00 0 
+bfd91000-bfda6000 rw-p 00000000 00:00 0          [stack]
+bfdb0000-c0000000 ---p 00000000 00:00 0 

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+    <application xmlns="http://ns.adobe.com/air/application/2.6">
+
+    <id>org.draknek.hearts</id>
+    <versionNumber>1.0</versionNumber>
+    <filename>RoboticHearts</filename>
+    <name>RoboticHearts</name>
+    <description>Narrative-based puzzle game</description>
+    <copyright>Alan Hazelden</copyright>
+
+    <initialWindow>
+    <title>Robotic Hearts</title>
+    <content>hearts.swf</content>
+    <systemChrome>standard</systemChrome>
+    <transparent>false</transparent>
+    <visible>true</visible>
+    <minimizable>true</minimizable>
+    <autoOrients>true</autoOrients>
+    <resizable>false</resizable>
+    <renderMode>cpu</renderMode>
+    <fullScreen>true</fullScreen>
+    <aspectRatio>landscape</aspectRatio>
+    </initialWindow>
+
+    <icon>
+    <image29x29>thumb29.png</image29x29>
+    <image48x48>thumb48.png</image48x48>
+    <image57x57>thumb57.png</image57x57>
+    <image72x72>thumb72.png</image72x72>
+    <image114x114>thumb114.png</image114x114>
+    <image512x512>iTunesArtwork.png</image512x512>
+    </icon>
+
+    <supportedProfiles>mobileDevice desktop</supportedProfiles>
+
+    <iPhone>
+    <InfoAdditions>
+    <![CDATA[
+    <key>CFBundleName</key>
+    <string>These Robotic Hearts of Mine</string>
+    <key>UIPrerenderedIcon</key>
+    <true/>
+    <key>UIStatusBarStyle</key>
+    <string>UIStatusBarStyleBlackOpaque</string>
+    <key>UIRequiresPersistentWiFi</key>
+    <string>NO</string>
+    <key>UIDeviceFamily</key>
+    <array>
+    <string>1</string>
+    <string>2</string>
+    </array>
+    ]]>
+    </InfoAdditions>
+    </iPhone>
+
+    </application>

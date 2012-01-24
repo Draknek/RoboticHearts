@@ -10,3 +10,10 @@ obj
 sponsors
 db
 UpdateDB.as
+*.key
+*.p12
+*.pem
+*.csr
+*.ipa
+*.cer
+*.mobileprovision
