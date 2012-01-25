@@ -150,7 +150,7 @@ package
 				} catch (e:Error){}
 			}
 
-			//touchscreen = true; // testing
+			touchscreen = true; // testing
 			
 			if (touchscreen) {
 				clicks_string = "Taps";
@@ -182,6 +182,10 @@ package
 			var devMode:Boolean = false;
 			
 			FP.stage.addEventListener(KeyboardEvent.KEY_DOWN, extraKeyListener);
+			
+			if (touchscreen) {
+				buttonTweak = false;
+			}
 			
 			if (buttonTweak) {
 				FP.stage.addEventListener(MouseEvent.MOUSE_DOWN, extraMouseListener);

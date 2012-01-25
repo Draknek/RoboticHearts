@@ -89,7 +89,6 @@ package
 			
 			stage.align = StageAlign.TOP;
 			stage.scaleMode = StageScaleMode.SHOW_ALL;
-			stage.displayState = StageDisplayState.FULL_SCREEN;
 			
 			Sponsor.container = this;
 			Sponsor.init(stage);

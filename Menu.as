@@ -229,7 +229,7 @@ package
 			}
 			
 			if (Main.touchscreen) {
-			//	buttons.push(moreGames);
+				buttons.push(moreGames);
 			}
 			
 			buttons.push(creditsButton);
