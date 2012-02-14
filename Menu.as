@@ -211,7 +211,7 @@ package
 				}
 			}
 			
-			var moreGames:Button = makeURLButton("More games", "http://www.toystudio.com/xpromo/?game=robotichearts&store=nook");
+			var moreGames:Button = null;
 			
 			var getOnMobile:Button = makeURLButton("Get mobile version", "http://www.draknek.org/games/hearts/mobile.php");
 			
@@ -228,7 +228,7 @@ package
 				//buttons.push(highScoresButton);
 			}
 			
-			if (Main.touchscreen) {
+			if (false && moreGames) {
 				buttons.push(moreGames);
 			}
 			
@@ -488,10 +488,6 @@ package
 					["Alan Hazelden", "http://www.draknek.org/?ref=trhom"],
 					"Developed with",
 					["FlashPunk", "http://flashpunk.net/"],
-				],
-				[
-					"Published for Nook\nby",
-					["Toy Studio", "http://www.toystudio.com/"]
 				],
 				[
 					"Music",

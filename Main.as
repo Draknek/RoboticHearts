@@ -26,6 +26,8 @@ package
 		public static var expoMode:Boolean = false;
 		public static var debug:Boolean = false;
 		public static var isAndroid:Boolean = false;
+		public static var isIOS:Boolean = false;
+		public static var isPlaybook:Boolean = false;
 		public static var buttonTweak:Boolean = true;
 		
 		public static const SAVEFILE_VERSION:uint = 1;
@@ -44,10 +46,14 @@ package
 		public function Main ()
 		{
 			if (Capabilities.manufacturer.toLowerCase().indexOf("ios") != -1) {
+				isIOS = true;
 				touchscreen = true;
 			}
 			else if (Capabilities.manufacturer.toLowerCase().indexOf("android") >= 0) {
 				isAndroid = true;
+				touchscreen = true;
+			} else if (Capabilities.os.indexOf("QNX") >= 0) {
+				isPlaybook = true;
 				touchscreen = true;
 			}
 			
@@ -132,7 +138,7 @@ package
 		
 		public override function init (): void
 		{
-			if (! isAndroid) {
+			if (isIOS) {
 				try {
 					var StageOrientation:Class = getDefinitionByName("flash.display.StageOrientation") as Class;
 					var StageOrientationEvent:Class = getDefinitionByName("flash.events.StageOrientationEvent") as Class;
