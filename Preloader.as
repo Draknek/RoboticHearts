@@ -6,6 +6,7 @@ package
 	import flash.events.*;
 	import flash.utils.getDefinitionByName;
 	import flash.net.*;
+	import flash.system.*;
 
 	// iPhone: 480x320 => 160x107
 	// iPad: 1024x768 => 147x110 (test with 735x550)
@@ -21,8 +22,8 @@ package
 		public static var mustClick: Boolean = false;
 		private static const mainClassName: String = "Main";
 		
-		private static const BG_COLOR:uint = 0x202020;
-		private static const FG_COLOR:uint = 0xff3366;
+		private static var BG_COLOR:uint = 0x202020;
+		private static var FG_COLOR:uint = 0xff3366;
 		
 		public static var stage:Stage;
 		
@@ -49,6 +50,16 @@ package
 		
 		public function Preloader ()
 		{
+			if (
+				(Capabilities.manufacturer.toLowerCase().indexOf("ios") != -1)
+				||
+				(Capabilities.manufacturer.toLowerCase().indexOf("android") >= 0)
+				||
+				(Capabilities.os.indexOf("QNX") >= 0)
+			) {
+				FG_COLOR = BG_COLOR;
+			}
+			
 			sw = stage.stageWidth;
 			sh = stage.stageHeight;
 			
