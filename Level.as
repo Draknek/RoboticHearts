@@ -129,7 +129,11 @@ package
 		{
 			var b:ByteArray = new ByteArray;
 			
-			b.writeShort(Main.SAVEFILE_VERSION);
+			var version:int = Main.SAVEFILE_VERSION;
+			
+			b.writeShort(version);
+			
+			var write:Function = b.writeByte;
 			
 			var cogs:Array = [];
 			var hearts:Array = [];
@@ -139,19 +143,19 @@ package
 			getType("cog", cogs);
 			getType("heart", hearts);
 			
-			b.writeInt(cogs.length);
+			write(cogs.length);
 			
 			for each (e in cogs) {
-				b.writeInt(e.x);
-				b.writeInt(e.y);
+				write(e.x / 4);
+				write(e.y / 4);
 			}
 			
-			b.writeInt(hearts.length);
+			write(hearts.length);
 			
 			for each (e in hearts) {
-				b.writeInt(e.x);
-				b.writeInt(e.y);
-				b.writeInt(Heart(e).rot);
+				write(e.x / 4);
+				write(e.y / 4);
+				write(Heart(e).rot);
 			}
 			
 			return b;
@@ -170,6 +174,14 @@ package
 				b.position = 0;
 			}
 			
+			var read:Function;
+			
+			if (version == 2) {
+				read = b.readByte;
+			} else {
+				read = read;
+			}
+			
 			data = b;
 			
 			var a:Array = [];
@@ -179,19 +191,22 @@ package
 			
 			removeList(a);
 			
-			var l:int = b.readInt();
+			var l:int = read();
 			var i:int;
 			var x:int;
 			var y:int;
 			var rot:int;
 			
 			for (i = 0; i < l; i++) {
-				x = b.readInt();
-				y = b.readInt();
+				x = read();
+				y = read();
 				
 				if (version == 0) {
 					x = x*8 + 8;
 					y = y*8 + 8;
+				} else if (version == 2) {
+					x *= 4;
+					y *= 4;
 				}
 				
 				if (x % 4 != 0) {
@@ -205,16 +220,19 @@ package
 				add(new Cog(x, y));
 			}
 			
-			l = b.readInt();
+			l = read();
 			
 			for (i = 0; i < l; i++) {
-				x = b.readInt();
-				y = b.readInt();
-				rot = b.readInt();
+				x = read();
+				y = read();
+				rot = read();
 				
 				if (version == 0) {
 					x = x*8 + 4;
 					y = y*8 + 4;
+				} else if (version == 2) {
+					x *= 4;
+					y *= 4;
 				}
 				
 				if (x % 4 != 0) {
@@ -413,8 +431,6 @@ package
 			
 			undoButton.disabled = (undoStackEditor.length > 1);
 			redoButton.disabled = true;
-			
-			trace(Base64.encode(data));
 		}
 		
 		public override function undo (): void

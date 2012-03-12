@@ -30,7 +30,7 @@ package
 		public static var isPlaybook:Boolean = false;
 		public static var buttonTweak:Boolean = true;
 		
-		public static const SAVEFILE_VERSION:uint = 1;
+		public static const SAVEFILE_VERSION:uint = 2;
 		
 		public static var clicks_string:String = "Clicks";
 		public static var clicks_string_lower:String;
