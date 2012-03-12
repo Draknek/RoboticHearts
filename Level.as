@@ -569,6 +569,7 @@ package
 				editing = !editing;
 				hasEdited = true;
 				minClicks = 0;
+				editorSnapshot();
 				resetState();
 			}
 			
