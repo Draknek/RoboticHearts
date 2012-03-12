@@ -178,7 +178,7 @@ package
 			
 			if (_disabled) image.color = disabledColor;
 			
-			type = b ? null : "button";
+			//type = b ? null : "button";
 		}
 		
 		public function get alpha ():Number {

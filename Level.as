@@ -35,6 +35,9 @@ package
 		public var undoStack:Array = [];
 		public var redoStack:Array = [];
 		
+		public var undoStackEditor:Array = [];
+		public var redoStackEditor:Array = [];
+		
 		public var actions:Array = [];
 		
 		public var menuButton:Button;
@@ -325,6 +328,8 @@ package
 				return;
 			}
 			
+			editorSnapshot();
+			
 		}
 		
 		public static function index (i:int, j:int):int {
@@ -359,6 +364,8 @@ package
 				
 				removeList(a);
 				
+				editorSnapshot();
+				
 				return;
 			}
 			
@@ -389,8 +396,44 @@ package
 			redoButton.disabled = true;
 		}
 		
+		public function editorSnapshot ():void
+		{
+			updateLists();
+			
+			var data:ByteArray = getWorldData();
+			
+			var l:int = undoStackEditor.length;
+			
+			if (l > 0 && undoStackEditor[l - 1].toString() == data.toString()) {
+				return;
+			}
+			
+			undoStackEditor.push(data);
+			redoStackEditor.length = 0;
+			
+			undoButton.disabled = (undoStackEditor.length > 1);
+			redoButton.disabled = true;
+			
+			trace(Base64.encode(data));
+		}
+		
 		public override function undo (): void
 		{
+			if (editing) {
+				if (undoStackEditor.length <= 1) { return; }
+				
+				redoStackEditor.push(getWorldData());
+			
+				undoStackEditor.pop(); // top of the undo stack is the current state
+			
+				setWorldData(undoStackEditor[undoStackEditor.length - 1]);
+			
+				undoButton.disabled = (undoStackEditor.length <= 1);
+				redoButton.disabled = (redoStackEditor.length == 0);
+				
+				return;
+			}
+			
 			if (endGameHack) return;
 			actions.push(actuallyUndo);
 		}
@@ -418,6 +461,19 @@ package
 		
 		public override function redo (): void
 		{
+			if (editing) {
+				if (redoStackEditor.length == 0) { return; }
+			
+				setWorldData(redoStackEditor.pop());
+				
+				undoStackEditor.push(getWorldData());
+			
+				undoButton.disabled = (undoStackEditor.length <= 1);
+				redoButton.disabled = (redoStackEditor.length == 0);
+				
+				return;
+			}
+			
 			if (endGameHack) return;
 			actions.push(actuallyRedo);
 		}
@@ -521,13 +577,15 @@ package
 			}*/
 			
 			clickCounter.visible = true;
-			undoButton.visible = true;
-			redoButton.visible = true;
+			
+			undoButton.disabled = (undoStack.length == 0);
+			redoButton.disabled = (redoStack.length == 0);
 			
 			if (editing) {
 				clickCounter.visible = false;
-				undoButton.visible = false;
-				redoButton.visible = false;
+				
+				undoButton.disabled = (undoStackEditor.length <= 1);
+				redoButton.disabled = (redoStackEditor.length == 0);
 				
 				if (Input.check(Key.SHIFT)) {
 					var dx:int = int(Input.pressed(Key.RIGHT)) - int(Input.pressed(Key.LEFT));
@@ -546,9 +604,9 @@ package
 				} else {
 					hackBool = true;
 					if (Input.check(Key.DOWN)) { makeHeart(0); }
-					if (Input.check(Key.LEFT)) { makeHeart(1); }
-					if (Input.check(Key.UP))   { makeHeart(2); }
-					if (Input.check(Key.RIGHT)) { makeHeart(3); }
+					else if (Input.check(Key.LEFT)) { makeHeart(1); }
+					else if (Input.check(Key.UP))   { makeHeart(2); }
+					else if (Input.check(Key.RIGHT)) { makeHeart(3); }
 					if (hackBool) { lastHeart = null; }
 				}
 				
@@ -772,7 +830,7 @@ package
 					}
 				}
 				
-				if (Input.mouseCursor == "auto") {
+				if (collidePoint("button", Input.mouseX, Input.mouseY) == null) {
 					x = Math.round(mouseX / 4) * 4;
 					y = Math.round(mouseY / 4) * 4;
 				
@@ -1031,6 +1089,8 @@ package
 			}
 			
 			add(new Heart(x, y, rot));
+			
+			editorSnapshot();
 		}
 		
 		public function makeCog (): void
@@ -1048,6 +1108,8 @@ package
 			}
 			
 			add(new Cog(x, y));
+			
+			editorSnapshot();
 		}
 		
 		public function addGraph (data:Object, text:Text): Stamp
