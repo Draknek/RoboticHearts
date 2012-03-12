@@ -156,7 +156,7 @@ package
 				} catch (e:Error){}
 			}
 
-			touchscreen = true; // testing
+			//touchscreen = true; // testing
 			
 			if (touchscreen) {
 				clicks_string = "Taps";
@@ -199,7 +199,9 @@ package
 			
 			if (Logger.isLocal && ! touchscreen) devMode = true;
 			
-			FP.world = (expoMode) ? new Menu : new Intro;
+			FP.world = new Level();
+			
+			Audio.startMusic();
 		}
 		
 		public override function update (): void

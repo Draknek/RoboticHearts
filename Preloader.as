@@ -13,13 +13,13 @@ package
 	// Browser: 600x480? => 150x120
 	// Some Android: 800x480 => 200x120
 	// Some Android: 320x240 => 160x120
-	[SWF(width = "800", height = "480", backgroundColor="#202020")]
+	[SWF(width = "600", height = "480", backgroundColor="#202020")]
 	public class Preloader extends Sprite
 	{
 		public static const resTest:Boolean = false;
 		
 		// Change these values
-		public static var mustClick: Boolean = false;
+		public static var mustClick: Boolean = true;
 		private static const mainClassName: String = "Main";
 		
 		private static var BG_COLOR:uint = 0x202020;
@@ -95,6 +95,10 @@ package
 			
 			stage.addEventListener(Event.ENTER_FRAME, onEnterFrame);
 			
+			if (mustClick) {
+				stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+			}
+			
 			stage.quality = StageQuality.HIGH;
 			stage.displayState = StageDisplayState.NORMAL;
 			
@@ -119,41 +123,12 @@ package
 				if (! mustClick) {
 					startup();
 				} else {
-					if (! play) {
-						text.scaleX = 2.0;
-						text.scaleY = 2.0;
-						
-						text.textColor = 0xEEEEEE;
-				
-						text.text = "Play";
-						
-						var text2:TextField = new TextField();
-						
-						text2.textColor = FG_COLOR;
-						text2.selectable = false;
-						text2.mouseEnabled = false;
-						text2.defaultTextFormat = new TextFormat("default", 16);
-						text2.embedFonts = true;
-						text2.autoSize = "left";
-						text2.text = "Play";
-						text2.x = (sw - text2.width) * 0.5;
-						text2.y = text.y;
-						text2.scaleX = 2.0;
-						text2.scaleY = 2.0;
-			
-						removeChild(text);
-						
-						
-						play = new SimpleButton(text, text2, text2, text);
-						
-						play.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
-						
-						play.y = -16;
-						
-						addChild(play);
-					}
-			
-					//text.y = (sh - text.height) * 0.5;
+					text.scaleX = 2.0;
+					text.scaleY = 2.0;
+					
+					text.text = "Click to create";
+					
+					text.y = (sh - text.height) * 0.5;
 				}
 			} else {
 				var p:Number = (loaderInfo.bytesLoaded / loaderInfo.bytesTotal);
@@ -172,12 +147,13 @@ package
 			}
 			
 			text.x = (sw - text.width) * 0.5;
-			if (text2) text2.x = (sw - text2.width) * 0.5;
+			//if (text2) text2.x = (sw - text2.width) * 0.5;
 		}
 		
 		private function onMouseDown(e:MouseEvent):void {
 			if (hasLoaded())
 			{
+				stage.removeEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
 				startup();
 			}
 		}

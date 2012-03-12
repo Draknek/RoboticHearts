@@ -20,7 +20,7 @@ package
 		
 		public var data:ByteArray;
 		
-		public var editing:Boolean = false;
+		public var editing:Boolean = true;
 		public var gameOver:Boolean = false;
 		public var clickThrough:Boolean = false;
 		public var hasEdited:Boolean = false;
@@ -228,14 +228,8 @@ package
 			updateLists();
 		}
 		
-		public function Level (_id:int, _mode:String)
+		public function Level (_id:int = 0, _mode:String = null, _data:ByteArray = null)
 		{
-			mode = _mode;
-			
-			id = _id;
-			
-			Logger.startLevel(id, mode);
-			
 			var buttonPadding:int = Main.touchscreen ? 3 : 1;
 			
 			if (FP.width < 149 && buttonPadding > 2) buttonPadding = 2;
@@ -256,9 +250,11 @@ package
 				add(muteOverlay);
 			}
 			
-			add(menuButton = new Button(0, 0, Button.MENU, gotoMenu, "Menu", false, true, buttonPadding));
+			menuButton = new Button(0, 0, Button.MENU, gotoMenu, "Menu", false, true, buttonPadding);
 			
-			muteButton.x = menuButton.x + menuButton.width;
+			//add(menuButton);
+			
+			muteButton.x = menuButton.x;// + menuButton.width;
 			
 			if (! showMute) {
 				muteButton.x = menuButton.x;
@@ -280,79 +276,26 @@ package
 			
 			Audio.muteOverlay = muteOverlay;
 			
-			if (levelPacks[mode].levels[id+1]) {
+			/*if (levelPacks[mode].levels[id+1]) {
 				skipButton = new Button(FP.width-8 - buttonPadding, FP.height-10, Button.SKIP, skipPrompt, "Skip level", false, true, buttonPadding);
 				skipButton.disabled = true;
 				add(skipButton);
-			}
+			}*/
 			
-			var modeCode:String = "";
+			/*var modeCode:String = "";
 			
 			if (mode == "perfection") modeCode = "P";
 			
 			var levelIDDisplay:Text = new Text("Level " + modeCode+(id+1), 0, 0);
 			levelIDDisplay.x = FP.width + 1 - levelIDDisplay.width;
 			levelIDDisplay.scrollX = levelIDDisplay.scrollY = 0;
-			addGraphic(levelIDDisplay, -15);
+			addGraphic(levelIDDisplay, -15);*/
 			
 			clickCounter = new Text(Main.clicks_string + ": 0", 0, FP.height - 11);
 			clickCounter.scrollX = clickCounter.scrollY = 0;
 			addGraphic(clickCounter);
 			
 			var stamp:Stamp;
-			
-			if (mode == "normal") {
-				if (id == 0) {
-					addGraphic(new Text((Main.touchscreen ? "Tap" : "Click") + " cogs to\nrotate hearts", 0, 64, {align:"center", size:8, width: 96, leading: 3}));
-				}
-				else if (id == 1) {
-					addGraphic(new Text("Make all upright", 0, 74, {align:"center", size:8, width: 96}));
-				}
-				else if (id == 3) {
-					stamp = new Stamp(R_RESETS_TEXT);
-					stamp.x = 48 - stamp.width*0.5;
-					stamp.y = 74;
-					addGraphic(stamp);
-				}
-				else if (id == 4) {
-					stamp = new Stamp(UNDO_HINT_TEXT);
-					stamp.x = 48 - stamp.width*0.5;
-					stamp.y = 74;
-					addGraphic(stamp);
-					
-					if (! Main.touchscreen && ! Main.expoMode) {
-						t = new Text("(or Ctrl+Z)", 0, 82, {align:"center", size:8, resizable: false, richText: "(or <pink>Ctrl+Z</pink>)"});
-						t.setStyle("pink", {color: Main.PINK});
-						t.x = 48 - t.width*0.5;
-						addGraphic(t);
-					}
-				}
-				/*else if (id == 5) {
-					addGraphic(new Text("Hint: try to keep\nsame-aligned\nhearts together", 0, 58, {align:"center", size:8, width: 96}));
-				}*/
-			}
-			
-			if (levelPacks[mode].story && levelPacks[mode].story[id] && levelPacks[mode].story[id].length) {
-				var text:String = levelPacks[mode].story[id];
-				text = text.split(" / ").join("\n\n");
-				
-				var storyWidth:int = Math.max(FP.width*0.75, 120);
-				
-				storyText = new Text(text, 1, 0, {width: storyWidth, align:"center", wordWrap:true, leading: 3});
-				
-				storyText.x = (FP.width - storyText.width) * 0.5 + 1;
-				storyText.y = (FP.height - storyText.height) * 0.5;
-				
-				var bitmap:BitmapData = new BitmapData(FP.width, FP.height, false, Main.PINK);
-				
-				storyText.render(bitmap, FP.zero, camera);
-				
-				storyText = new Image(bitmap);
-				
-				storyText.scrollX = storyText.scrollY = 0;
-				
-				addGraphic(storyText, -9);
-			}
 			
 			var oldScreen:Image = new Image(FP.buffer.clone());
 			
@@ -361,16 +304,6 @@ package
 			addGraphic(oldScreen, -10);
 			
 			FP.tween(oldScreen, {alpha: 0}, 30, {ease:Ease.sineOut, tweener:this});
-			
-			if (levelPacks[mode].special[id]) {
-				var flags:int = levelPacks[mode].special[id];
-				
-				if (flags & 1) mirrorX = true;
-				if (flags & 2) mirrorY = true;
-				if (flags & 4) stopSpinHack = true;
-				if (flags & 8) halfSlowHack = true;
-				if (flags & 16) endGameHack = true;
-			}
 			
 			if (endGameHack) {
 				updateLists();
@@ -385,30 +318,13 @@ package
 				addGraphic(black, -20);
 			}
 			
-			var _data:ByteArray = levelPacks[mode].levels[id];
-			
 			if (_data) {
 				setWorldData(_data);
 				hasEdited = false;
-				minClicks = levelPacks[mode].minClicksArray[id];
+				//minClicks = levelPacks[mode].minClicksArray[id];
 				return;
 			}
 			
-			updateLists();
-			
-			removeAll();
-			
-			var bg:Image = Image.createRect(FP.width, FP.height, Main.PINK);
-			bg.scrollX = 0;
-			bg.scrollY = 0;
-			
-			addGraphic(bg);
-			
-			var t:Text = new Text("And that is the story\n\nOf these robotic hearts of mine\n\n\nThanks for playing!", 0, 0, {width: FP.width, wordWrap: true, align: "center", leading: 3, scrollX:0, scrollY:0});
-			
-			t.y = (FP.height - t.height)*0.5;
-			
-			addGraphic(t);
 		}
 		
 		public static function index (i:int, j:int):int {
@@ -539,14 +455,6 @@ package
 			
 			Input.mouseCursor = "auto";
 			
-			if (! levelPacks[mode].levels[id]) {
-				if (Main.anyInput) {
-					FP.world = new Menu;
-				}
-				
-				return;
-			}
-			
 			if (! FP.focused && (Main.touchscreen || FP.stage.displayState != StageDisplayState.FULL_SCREEN)) {
 				wasUnfocused = true;
 				return;
@@ -558,10 +466,10 @@ package
 				return;
 			}
 			
-			if (Input.pressed(Key.ESCAPE)) {
+			/*if (Input.pressed(Key.ESCAPE)) {
 				gotoMenu();
 				return;
-			}
+			}*/
 			
 			if (storyText || (gameOver && clickThrough)) {
 				menuButton.hoverColor = Main.BLACK;
@@ -602,7 +510,15 @@ package
 				addGraph(Logger.clickStats[MD5.hashBytes(data)]);
 			}*/
 			
+			clickCounter.visible = true;
+			undoButton.visible = true;
+			redoButton.visible = true;
+			
 			if (editing) {
+				clickCounter.visible = false;
+				undoButton.visible = false;
+				redoButton.visible = false;
+				
 				if (Input.check(Key.SHIFT)) {
 					var dx:int = int(Input.pressed(Key.RIGHT)) - int(Input.pressed(Key.LEFT));
 					var dy:int = int(Input.pressed(Key.DOWN)) - int(Input.pressed(Key.UP));
@@ -628,6 +544,14 @@ package
 				
 				if (Input.check(Key.SPACE)) { makeCog(); }
 				if (Input.check(Key.BACKSPACE)) { removeUnderMouse(); }
+				
+				a.length = 0;
+				getType("button", a);
+			
+				for each (e in a) {
+					e.update();
+				}
+				
 				return;
 			}
 			
@@ -794,7 +718,9 @@ package
 			
 			super.update();
 			
-			clickCounter.text = Main.clicks_string + ": " + clicks+"/"+minClicks;
+			clickCounter.text = Main.clicks_string + ": " + clicks;
+			
+			if (minClicks > 0) clickCounter.text += "/"+minClicks;
 			
 			if (id == 32 && minClicks == 29) {
 				cog = collidePoint("cog", mouseX, mouseY) as Cog;
