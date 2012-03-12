@@ -352,6 +352,16 @@ package
 		
 		public function reset ():void
 		{
+			if (editing) {
+				a.length = 0;
+				getType("cog", a);
+				getType("heart", a);
+				
+				removeList(a);
+				
+				return;
+			}
+			
 			if (endGameHack) return;
 			
 			reseting = true;
@@ -499,7 +509,7 @@ package
 				skipButton.disabled = false;
 			}
 			
-			if (Input.pressed(Key.E) && Logger.isLocal) {
+			if (Input.pressed(Key.E)) {
 				editing = !editing;
 				hasEdited = true;
 				minClicks = 0;
@@ -757,15 +767,17 @@ package
 		{
 			if (editing) {
 				for (var x:int = 4 + Math.floor(camera.x/8)*8; x < FP.width; x += 8) {
-					for (var y:int = 4 + Math.floor(camera.y/8)*8; y < FP.width; y += 8) {
+					for (var y:int = Math.floor(camera.y/8)*8; y < FP.width; y += 8) {
 						Draw.rect(x-1, y-1, 2, 2, Main.GREY);
 					}
 				}
 				
-				x = Math.round(mouseX / 4) * 4;
-				y = Math.round(mouseY / 4) * 4;
+				if (Input.mouseCursor == "auto") {
+					x = Math.round(mouseX / 4) * 4;
+					y = Math.round(mouseY / 4) * 4;
 				
-				Draw.rect(x-1, y-1, 2, 2, Main.PINK);
+					Draw.rect(x-1, y-1, 2, 2, Main.PINK);
+				}
 			}
 			
 			super.render();
