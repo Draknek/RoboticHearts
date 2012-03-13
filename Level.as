@@ -251,6 +251,10 @@ package
 		
 		public function Level (_id:int = 0, _mode:String = null, _data:ByteArray = null)
 		{
+			if (_data) {
+				editing = false;
+			}
+			
 			var buttonPadding:int = Main.touchscreen ? 3 : 1;
 			
 			if (FP.width < 149 && buttonPadding > 2) buttonPadding = 2;

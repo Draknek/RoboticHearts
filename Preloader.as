@@ -126,7 +126,11 @@ package
 					text.scaleX = 2.0;
 					text.scaleY = 2.0;
 					
-					text.text = "Click to create";
+					if (stage.loaderInfo.parameters && stage.loaderInfo.parameters.leveldata) {
+						text.text = "Click to play";
+					} else {
+						text.text = "Click to create";
+					}
 					
 					text.y = (sh - text.height) * 0.5;
 				}

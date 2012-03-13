@@ -49,6 +49,10 @@ package
 		{
 			var darken:Boolean = highlight && (! Level(world).editing);
 			
+			if (Level(world).editing) {
+				sprite.frame = rot + heartChoice*8;
+			}
+			
 			if (darken) {
 				var c:uint = image.color;
 				image.color = (c == Main.PINK) ? 0xA0A0A0 & image.color : Main.GREY;

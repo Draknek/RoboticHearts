@@ -12,6 +12,7 @@ package
 	import flash.ui.*;
 	import flash.utils.*;
 	import flash.system.*;
+	import flash.desktop.*;
 	
 	import net.jpauclair.*;
 	
@@ -199,9 +200,74 @@ package
 			
 			if (Logger.isLocal && ! touchscreen) devMode = true;
 			
-			FP.world = new Level();
+			contextMenu.clipboardMenu = true;
+			contextMenu.clipboardItems.copy = true;
+			contextMenu.clipboardItems.paste = true;
+			contextMenu.clipboardItems.clear = true;
+
+			addEventListener(Event.COPY, copyHandler);
+			addEventListener(Event.PASTE, pasteHandler);
+			addEventListener(Event.CLEAR, clearHandler);
+			
+			if (stage.loaderInfo.parameters && stage.loaderInfo.parameters.leveldata) {
+				var dataString:String = stage.loaderInfo.parameters.leveldata;
+			}
+			
+			var data:ByteArray = null;
+			
+			try {
+				data = Base64.decode(dataString);
+			} catch (e:Error) {}
+			
+			FP.world = new Level(0, null, data);
 			
 			Audio.startMusic();
+		}
+		
+		private static function copyHandler(event:Event):void 
+		{
+			var level:Level = FP.world as Level;
+			
+			if (level) {
+				var data:String = Base64.encode(level.getWorldData());
+				System.setClipboard("http://hearts.draknek.org/editor/?level=" + data);
+			}
+		}
+		
+		private static function pasteHandler(event:Event):void 
+		{
+			var clipboard:String = Clipboard.generalClipboard.getData(ClipboardFormats.TEXT_FORMAT) as String;
+			
+			var level:Level = FP.world as Level;
+			
+			if (level) {
+				var index:int = clipboard.indexOf('?');
+				
+				if (index == -1) {
+					index = 0;
+				} else {
+					var index2:int = clipboard.indexOf('=', index);
+					
+					if (index2 == -1) {
+						index += 1;
+					} else {
+						index = index2 + 1;
+					}
+				}
+				
+				var data:ByteArray = Base64.decode(clipboard.substring(index));
+				level.setWorldData(data);
+			}
+		}
+		
+		private static function clearHandler(event:Event):void 
+		{
+			var level:Level = FP.world as Level;
+			
+			if (level) {
+				level.editing = true;
+				level.reset();
+			}
 		}
 		
 		public override function update (): void
