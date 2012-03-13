@@ -213,6 +213,8 @@ package
 				var dataString:String = stage.loaderInfo.parameters.leveldata;
 			}
 			
+			dataString = dataString.split(" ").join("+");
+			
 			var data:ByteArray = null;
 			
 			try {
