@@ -211,9 +211,8 @@ package
 			
 			if (stage.loaderInfo.parameters && stage.loaderInfo.parameters.leveldata) {
 				var dataString:String = stage.loaderInfo.parameters.leveldata;
+				dataString = dataString.split(" ").join("+");
 			}
-			
-			dataString = dataString.split(" ").join("+");
 			
 			var data:ByteArray = null;
 			
