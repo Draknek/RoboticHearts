@@ -311,8 +311,8 @@ package
 				touchscreen = true;
 			}
 			
-			if (url.substr(0, startCheck) == 'file://') return true;
-			if (url.substr(0, startCheck) == 'app://') {
+			if (url.substr(0, 7) == 'file://') return true;
+			if (url.substr(0, 5) == 'app:/') {
 				touchscreen = true;
 				return true;
 			}
