@@ -211,7 +211,7 @@ package
 				}
 			}
 			
-			var moreGames:Button = null;
+			var moreGames:Button = makeURLButton("More games", "http://www.draknek.org/games/" + Main.platform + "/?from=hearts");
 			
 			var getOnMobile:Button = makeURLButton("Get mobile version", "http://www.draknek.org/games/hearts/mobile.php");
 			
@@ -228,13 +228,9 @@ package
 				//buttons.push(highScoresButton);
 			}
 			
-			if (false && moreGames) {
-				buttons.push(moreGames);
-			}
-			
 			buttons.push(creditsButton);
 			
-			if (! Main.touchscreen && ! Main.expoMode) {
+			if (Main.touchscreen) {
 				buttons.push(moreGames);
 			}
 			
@@ -246,14 +242,14 @@ package
 				buttons.push(getOnMobile);
 			}
 			
-			if (Main.isAndroid) {
+			/*if (Main.isAndroid) {
 				buttons.push(new Button(0, 0, "Quit", function ():void {
 					try {
 						var NativeApplication:Class = getDefinitionByName("flash.desktop.NativeApplication") as Class;
 						NativeApplication.nativeApplication.exit();
 					} catch (e:Error) {}
 				}));
-			}
+			}*/
 			
 			addElements(buttons);
 			

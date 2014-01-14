@@ -28,6 +28,7 @@ package
 		public static var isAndroid:Boolean = false;
 		public static var isIOS:Boolean = false;
 		public static var isPlaybook:Boolean = false;
+		public static var platform:String = "";
 		public static var buttonTweak:Boolean = true;
 		
 		public static const SAVEFILE_VERSION:uint = 1;
@@ -48,13 +49,16 @@ package
 			if (Capabilities.manufacturer.toLowerCase().indexOf("ios") != -1) {
 				isIOS = true;
 				touchscreen = true;
+				platform = "ios";
 			}
 			else if (Capabilities.manufacturer.toLowerCase().indexOf("android") >= 0) {
 				isAndroid = true;
 				touchscreen = true;
+				platform = "android";
 			} else if (Capabilities.os.indexOf("QNX") >= 0) {
 				isPlaybook = true;
 				touchscreen = true;
+				platform = "blackberry";
 			}
 			
 			if (! so.data.levels) so.data.levels = {};
