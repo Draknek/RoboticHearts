@@ -6,6 +6,8 @@ else
 DEBUG_FLAG := false
 endif
 
+export FCSH=/media/data/downloads/flex-4.5.1/bin/fcsh
+
 LIBS=-compiler.include-libraries lib/FlashPreloadProfiler.swc -compiler.include-libraries lib/NewgroundsAPI.swc
 
 all:
