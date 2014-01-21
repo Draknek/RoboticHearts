@@ -13,7 +13,7 @@ package
 	import flash.utils.*;
 	import flash.system.*;
 	
-	import net.jpauclair.*;
+	//import net.jpauclair.*;
 	
 	public class Main extends Engine
 	{
@@ -168,14 +168,14 @@ package
 			
 			clicks_string_lower = clicks_string.toLowerCase();
 			
-			if (debug) {
+			/*if (debug) {
 				try {
 					var profiler:* = new FlashPreloadProfiler();
 					profiler.y = 32;
 					addChild(profiler);
 				}
 				catch (e:Error) {}
-			}
+			}*/
 			
 			sitelock(["draknek.org", "draknek.dev"]);
 			
