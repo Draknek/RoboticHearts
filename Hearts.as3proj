@@ -36,7 +36,7 @@
     <option linkReport="" />
     <option loadExterns="" />
     <option staticLinkRSL="True" />
-    <option additional="-frame start Main" />
+    <option additional="-frame start Main -swf-version=17" />
     <option compilerConstants="" />
     <option customSDK="" />
   </build>

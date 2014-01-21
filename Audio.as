@@ -40,6 +40,15 @@ package
 		public static function init (o:InteractiveObject):void
 		{
 			// Setup
+
+			if (Main.isIOS) {
+				try {
+					var SoundMixer:Class = getDefinitionByName("flash.media.SoundMixer") as Class;
+					var AudioPlaybackMode:Class = getDefinitionByName("flash.media.AudioPlaybackMode") as Class;
+					
+					SoundMixer.audioPlaybackMode = AudioPlaybackMode.AMBIENT;
+				} catch (e:Error) {}
+			}
 			
 			so = SharedObject.getLocal("audio", "/");
 			
