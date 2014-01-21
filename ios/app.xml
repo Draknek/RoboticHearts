@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
-    <application xmlns="http://ns.adobe.com/air/application/2.6">
+    <application xmlns="http://ns.adobe.com/air/application/3.9">
 
     <id>org.draknek.hearts</id>
-    <versionNumber>1.0</versionNumber>
+    <versionNumber>1.1</versionNumber>
     <filename>RoboticHearts</filename>
     <name>RoboticHearts</name>
     <description>Narrative-based puzzle game</description>
@@ -36,8 +36,6 @@
     <iPhone>
     <InfoAdditions>
     <![CDATA[
-    <key>CFBundleName</key>
-    <string>These Robotic Hearts of Mine</string>
     <key>UIPrerenderedIcon</key>
     <true/>
     <key>UIStatusBarStyle</key>

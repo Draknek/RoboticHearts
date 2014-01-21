@@ -1,5 +1,9 @@
 #!/bin/sh
 
+/cygdrive/e/dev/air/ipa/mkipa app.xml hearts.ipa "$1" ../hearts.swf thumb*.png iTunesArtwork.png Default*
+
+exit
+
 #adt=/cygdrive/e/downloads/air-2.7-win/bin/adt.bat
 #adt='sh /data/downloads/flex-4.5.1/bin/adt'
 
