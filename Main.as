@@ -160,7 +160,7 @@ package
 				} catch (e:Error){}
 			}
 
-			touchscreen = true; // testing
+			//touchscreen = true; // testing
 			
 			if (touchscreen) {
 				clicks_string = "Taps";
