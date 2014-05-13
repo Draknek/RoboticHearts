@@ -13,6 +13,8 @@ package
 	import flash.utils.*;
 	import flash.system.*;
 	
+	import com.adobe.images.*;
+	
 	//import net.jpauclair.*;
 	
 	public class Main extends Engine
@@ -35,6 +37,9 @@ package
 		
 		public static var clicks_string:String = "Clicks";
 		public static var clicks_string_lower:String;
+		
+		public static var screenshotting:Boolean = false;
+		public static var screenshotID:int = 0;
 		
 		public static const so:SharedObject = SharedObject.getLocal("hearts", "/");
 		
@@ -208,6 +213,42 @@ package
 		
 		public override function update (): void
 		{
+			/*if (Input.pressed(Key.F12)) {
+				screenshotID = 0;
+				screenshotting = ! screenshotting;
+			}
+			
+			if (screenshotting) {
+				var filename:String = screenshotID+".png";
+				
+				if (screenshotID < 10) {
+					filename = "0" + filename;
+				}
+				if (screenshotID < 100) {
+					filename = "0" + filename;
+				}
+				if (screenshotID < 1000) {
+					filename = "0" + filename;
+				}
+				if (screenshotID < 10000) {
+					filename = "0" + filename;
+				}
+				
+				var File:Class = getDefinitionByName("flash.filesystem.File") as Class;
+				var FileStream:Class = getDefinitionByName("flash.filesystem.FileStream") as Class;
+				var FileMode:Class = getDefinitionByName("flash.filesystem.FileMode") as Class;
+				
+				var file:* = new File("/tmp/screenshots/" + filename);
+				
+				var stream:* = new FileStream();
+				
+				stream.open(file, FileMode.WRITE);
+				stream.writeBytes(PNGEncoder.encode(FP.buffer));
+				stream.close();
+				
+				screenshotID++;
+			}*/
+			
 			if (Input.mousePressed) {
 				hadMouseDown = true;
 			}
