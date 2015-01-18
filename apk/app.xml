@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
-    <application xmlns="http://ns.adobe.com/air/application/2.6">
+    <application xmlns="http://ns.adobe.com/air/application/15.0">
 
     <id>org.draknek.hearts</id>
-    <versionNumber>1.0.5</versionNumber>
+    <versionNumber>1.0.6</versionNumber>
     <filename>RoboticHearts</filename>
     <name>RoboticHearts</name>
     <description>Narrative-based puzzle game</description>
@@ -23,9 +23,11 @@
     </initialWindow>
 
     <icon>
-    <image36x36>thumb36.png</image36x36>
-    <image48x48>thumb48.png</image48x48>
-    <image72x72>thumb72.png</image72x72>
+    <image36x36>apk/thumb36.png</image36x36>
+    <image48x48>apk/thumb48.png</image48x48>
+    <image72x72>apk/thumb72.png</image72x72>
+    <image96x96>apk/thumb96.png</image96x96>
+    <image144x144>apk/thumb144.png</image144x144>
     </icon>
 
     <supportedProfiles>mobileDevice desktop</supportedProfiles>
