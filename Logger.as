@@ -3,7 +3,6 @@ package
 	import flash.display.*;
 	import net.flashpunk.*;
 	import FGL.GameTracker.*;
-	import Playtomic.*;
 	import flash.system.Security;
 	import flash.events.*;
 	import flash.net.*;
