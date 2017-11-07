@@ -1,6 +1,6 @@
 #!/bin/sh
 
-/cygdrive/e/dev/air/ipa/mkipa app.xml hearts.ipa "$1" ../hearts.swf thumb*.png iTunesArtwork.png Default*
+mkipa app.xml hearts.ipa "$1" ../hearts.swf thumb*.png iTunesArtwork.png Default*
 
 exit
 
