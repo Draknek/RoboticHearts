@@ -1,6 +1,6 @@
 #!/bin/sh
 
-mkipa app.xml hearts.ipa "$1" ../hearts.swf thumb*.png iTunesArtwork.png Default*
+mkipa app.xml hearts.ipa release ../hearts.swf thumb*.png iTunesArtwork.png Default*
 
 exit
 
