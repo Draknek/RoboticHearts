@@ -2,7 +2,7 @@
     <application xmlns="http://ns.adobe.com/air/application/3.9">
 
     <id>org.draknek.hearts</id>
-    <versionNumber>1.1</versionNumber>
+    <versionNumber>1.2</versionNumber>
     <filename>RoboticHearts</filename>
     <name>RoboticHearts</name>
     <description>Narrative-based puzzle game</description>
@@ -27,7 +27,11 @@
     <image48x48>thumb48.png</image48x48>
     <image57x57>thumb57.png</image57x57>
     <image72x72>thumb72.png</image72x72>
+    <image76x76>thumb76.png</image76x76>
     <image114x114>thumb114.png</image114x114>
+    <image120x120>thumb120.png</image120x120>
+    <image144x144>thumb144.png</image144x144>
+    <image152x152>thumb152.png</image152x152>
     <image512x512>iTunesArtwork.png</image512x512>
     </icon>
 
