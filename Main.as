@@ -113,6 +113,7 @@ package
 					h = tmp;
 				}
 			} else {
+				Preloader.stage.scaleMode = StageScaleMode.NO_SCALE;
 				w = Preloader.stage.stageWidth;
 				h = Preloader.stage.stageHeight;
 			}
@@ -282,12 +283,12 @@ package
 				try {
 					stage.displayState = StageDisplayState["FULL_SCREEN_INTERACTIVE"];
 				} catch (e:Error) {
-					stage.align = StageAlign.TOP;
-					stage.scaleMode = StageScaleMode.SHOW_ALL;
+					stage.align = StageAlign.TOP_LEFT;
+					stage.scaleMode = StageScaleMode.NO_SCALE;
 				}
 			} else {
-				stage.align = StageAlign.TOP;
-				stage.scaleMode = StageScaleMode.SHOW_ALL;
+				stage.align = StageAlign.TOP_LEFT;
+				stage.scaleMode = StageScaleMode.NO_SCALE;
 			}
 		}
 		
